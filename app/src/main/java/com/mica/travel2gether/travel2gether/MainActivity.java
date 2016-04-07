@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    // TODO: use TODOs for ToDos
+    // TODO: use TODOs
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
