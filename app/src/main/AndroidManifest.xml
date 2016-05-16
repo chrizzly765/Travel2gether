@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mica.travel2gether.travel2gether">
+    package="www.traveltogether.de.traveltogether">
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".triplist.TripListActivity" />
+        <activity android:name=".packinglist.PackingListActivity" />
+        <activity android:name=".mainmenu.MainActivity" />
+        <activity android:name=".tasks.TaskListActivity" />
+        <activity android:name=".expense.ExpenseActivity" />
+        <activity android:name=".expense.newexpense.NewExpenseActivity" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".packinglist.newpackingitem.NewPackingItem" />
+        <activity android:name=".tasks.newtask.NewTaskActivity" />
+        <activity android:name=".triplist.newtrip.NewTripActivity" />
+        <activity android:name=".participantlist.ParticipantListActivity" />
+        <activity android:name=".settings.SettingsActivity" />
+        <activity android:name=".info.InfoActivity" />
+        <activity android:name=".packinglist.newpackingitem.NewPackingItemActivity" />
     </application>
 
 </manifest>
