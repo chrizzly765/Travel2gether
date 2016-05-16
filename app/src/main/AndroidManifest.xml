@@ -23,6 +23,7 @@
         <activity android:name=".settings.SettingsActivity" />
         <activity android:name=".info.InfoActivity" />
         <activity android:name=".packinglist.newpackingitem.NewPackingItemActivity" />
+        <activity android:name=".notification.NotificationActivity"></activity>
     </application>
 
 </manifest>
