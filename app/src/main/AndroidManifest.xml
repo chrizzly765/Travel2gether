@@ -16,7 +16,7 @@
         <activity android:name=".expense.ExpenseActivity" />
         <activity android:name=".expense.newexpense.NewExpenseActivity" />
         <activity android:name=".login.LoginActivity" />
-        <activity android:name=".packinglist.newpackingitem.NewPackingItem" />
+        <activity android:name=".packinglist.newpackingitem.NewPackingItemActivity" />
         <activity android:name=".tasks.newtask.NewTaskActivity" />
         <activity android:name=".triplist.newtrip.NewTripActivity" />
         <activity android:name=".participantlist.ParticipantListActivity" />
