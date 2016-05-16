@@ -10,6 +10,15 @@ public class Comment {
     private String text;
     private SimpleDateFormat date = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
 
+    public Participant getAuthor(){
+        return author;
+    }
+    public String getText(){
+        return text;
+    }
+    public SimpleDateFormat getDate(){
+        return date;
+    }
     public Comment(Participant _author, String _text, SimpleDateFormat _date){
         author= _author;
         text = _text;

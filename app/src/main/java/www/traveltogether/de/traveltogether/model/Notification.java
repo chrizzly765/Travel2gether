@@ -12,6 +12,16 @@ public class Notification {
     private DataType type;
     private SimpleDateFormat receiveDate = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
 
+    public String getText(){
+        return text;
+    }
+
+    public DataType getType(){
+        return type;
+    }
+    public SimpleDateFormat getReceiveDate(){
+        return receiveDate;
+    }
     public Notification(String _text, DataType _type, SimpleDateFormat _receiveDate){
         text = _text;
         type = _type;
