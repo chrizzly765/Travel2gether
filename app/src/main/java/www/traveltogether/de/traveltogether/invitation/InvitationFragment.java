@@ -1,4 +1,4 @@
-package www.traveltogether.de.traveltogether.comments;
+package www.traveltogether.de.traveltogether.invitation;
 
 import android.app.Fragment;
 import android.content.Context;
