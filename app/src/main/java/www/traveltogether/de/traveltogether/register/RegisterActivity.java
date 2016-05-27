@@ -3,6 +3,7 @@ package www.traveltogether.de.traveltogether.register;
 import android.app.Dialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +12,9 @@ import www.traveltogether.de.traveltogether.R;
 import android.app.AlertDialog;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+
+    //private static final String TAG = RegisterActivity.class.getSimpleName();
+
     private IRegisterPresenter presenter;
     protected Button registerBtn;
     protected EditText name;
@@ -29,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void onClick(View v){
+        Log.d("dsdsd", "onClick: ");
         presenter.onRegister(name.getText().toString(), email.getText().toString(), password.getText().toString());
     }
 
@@ -37,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         builder.setMessage(message);
         builder.setTitle("Erfolgreich registriert");
         AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void onViewErrorMessage(String message){
@@ -44,5 +50,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         builder.setMessage(message);
         builder.setTitle("Error");
         AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

@@ -1,5 +1,7 @@
 package www.traveltogether.de.traveltogether.register;
 
+import android.util.Log;
+
 import www.traveltogether.de.traveltogether.model.Activity;
 
 /**
@@ -16,6 +18,7 @@ public class RegisterPresenter implements IRegisterPresenter {
 
     @Override
     public void onRegister(String name, String email, String password) {
+        Log.d("Presenter", "register");
         registerInteractor.register(name, email, password, this);
 
     }

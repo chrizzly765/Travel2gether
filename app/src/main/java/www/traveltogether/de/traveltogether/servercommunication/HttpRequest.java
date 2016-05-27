@@ -1,5 +1,7 @@
 package www.traveltogether.de.traveltogether.servercommunication;
 
+import android.util.Log;
+
 import www.traveltogether.de.traveltogether.ActionType;
 import www.traveltogether.de.traveltogether.DataType;
 
@@ -15,7 +17,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
  */
 public class HttpRequest implements IHttpRequest {
 
-    HttpClient client = HttpClientBuilder.create().build();
+    HttpClient client;
     Response responseObject;
     public String getUrl(){
         String url = "http://www.imagik.de/traveltogether/main.php";
@@ -23,13 +25,19 @@ public class HttpRequest implements IHttpRequest {
     }
 
     public HttpRequest(DataType dataType, ActionType actionType, String json){
+        try{
+            client = HttpClientBuilder.create().build();
+        }
+        catch(Exception e){
+            Log.d("httpRequest", "Error in builder");
+        }
         HttpPost post = new HttpPost(getUrl());
         try {
             StringEntity params = new StringEntity(json);
             post.addHeader("content-type", "application/json");
             post.setEntity(params);
-            HttpResponse response= client.execute(post);
-            responseObject = (Response)JsonDecode.getInstance().jsonToClass(response.getEntity().toString(), DataType.HTTPRESPONSE);
+            //HttpResponse response= client.execute(post);
+            //responseObject = (Response)JsonDecode.getInstance().jsonToClass(response.getEntity().toString(), DataType.HTTPRESPONSE);
         }
         catch(Exception e) {
         }
