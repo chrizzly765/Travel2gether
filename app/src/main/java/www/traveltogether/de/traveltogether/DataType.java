@@ -4,6 +4,12 @@ package www.traveltogether.de.traveltogether;
  * Created by Anna-Lena on 16.05.2016.
  */
 public enum DataType {
+    HTTPRESPONSE{
+        @Override
+        public String toString(){
+            return "Response";
+        }
+    },
     TRIP{
         @Override
         public String toString(){

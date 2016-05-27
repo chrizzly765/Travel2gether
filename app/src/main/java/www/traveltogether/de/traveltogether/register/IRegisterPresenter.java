@@ -5,4 +5,6 @@ package www.traveltogether.de.traveltogether.register;
  */
 public interface IRegisterPresenter {
     public void onRegister(String name, String email, String password);
+    public void onError(String message);
+    public void onSuccess(String message);
 }

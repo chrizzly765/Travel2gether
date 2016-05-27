@@ -16,7 +16,15 @@ public class RegisterPresenter implements IRegisterPresenter {
 
     @Override
     public void onRegister(String name, String email, String password) {
-        registerInteractor.register(name, email, password);
+        registerInteractor.register(name, email, password, this);
 
+    }
+
+    public void onError(String message){
+        registerActivity.onViewErrorMessage(message);
+    }
+
+    public void onSuccess(String message){
+        registerActivity.onViewSuccessMessage(message);
     }
 }
