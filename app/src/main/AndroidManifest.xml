@@ -24,7 +24,10 @@
         <activity android:name=".info.InfoActivity" />
         <activity android:name=".notification.NotificationActivity" />
         <activity android:name=".register.RegisterActivity">
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
