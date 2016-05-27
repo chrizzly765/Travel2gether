@@ -15,6 +15,17 @@ public class Activity extends AbstractListObject {
         return icon;
     }
 
+    public String getDestination(){
+        return destination;
+    }
+
+    public SimpleDateFormat getDate(){
+        return date;
+    }
+    public SimpleDateFormat getTime(){
+        return time;
+    }
+
     //TODO: implement description, icon, destination, time and date as optional
     public Activity(String _title, int _id, String _description, Participant _author, String _icon, String _destination, SimpleDateFormat _time, SimpleDateFormat _date) {
         super(_title, _id, _description, _author);
