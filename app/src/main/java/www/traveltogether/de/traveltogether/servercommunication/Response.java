@@ -4,12 +4,12 @@ package www.traveltogether.de.traveltogether.servercommunication;
  * Created by Anna-Lena on 27.05.2016.
  */
 public class Response {
-    String status;
+    String error;
     String message;
     String data;
 
-    public String getStatus(){
-        return status;
+    public String getError(){
+        return error;
     }
 
     public String getMessage(){
@@ -20,9 +20,9 @@ public class Response {
         return data;
     }
 
-    public Response(String _status, String _msg, String _data){
-        status = _status;
+    public Response(String _error, String _msg, String _data){
+        error = _error;
         message = _msg;
-        data = data;
+        data = _data;
     }
 }

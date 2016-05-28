@@ -33,7 +33,4 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:support-v4:23.3.0'
-    compile files('libs/gson-2.3.1.jar')
-    //compile files('libs/httpclient-4.5.jar')
-    compile files('libs/httpcore.jar')
 }

@@ -1,53 +1,58 @@
 package www.traveltogether.de.traveltogether.servercommunication;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
+
+import org.json.JSONObject;
 
 import www.traveltogether.de.traveltogether.ActionType;
 import www.traveltogether.de.traveltogether.DataType;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
-
+import www.traveltogether.de.traveltogether.IInteractor;
 
 /**
  * Created by Anna-Lena on 16.05.2016.
  */
-public class HttpRequest implements IHttpRequest {
+public class HttpRequest  implements IHttpRequest{
 
-    HttpClient client;
     Response responseObject;
-    public String getUrl(){
+    DataType dataType;
+    ActionType actionType;
+    String jsonString;
+    IInteractor listener;
+
+    public String getUrl() {
         String url = "http://www.imagik.de/traveltogether/main.php";
         return url;
     }
 
-    public HttpRequest(DataType dataType, ActionType actionType, String json){
-        try{
-            client = HttpClientBuilder.create().build();
-        }
-        catch(Exception e){
-            Log.d("httpRequest", "Error in builder");
-        }
-        HttpPost post = new HttpPost(getUrl());
-        try {
-            StringEntity params = new StringEntity(json);
-            post.addHeader("content-type", "application/json");
-            post.setEntity(params);
-            //HttpResponse response= client.execute(post);
-            //responseObject = (Response)JsonDecode.getInstance().jsonToClass(response.getEntity().toString(), DataType.HTTPRESPONSE);
-        }
-        catch(Exception e) {
-        }
+    public HttpRequest(DataType _dataType, ActionType _actionType, String json, IInteractor _listener) {
+        dataType = _dataType;
+        actionType = _actionType;
+        jsonString = json;
+        listener = _listener;
+        Request request = new Request(_dataType, _actionType, json);
+        String string = JsonDecode.getInstance().classToJson(request);
+        AsyncHttpTask task = new AsyncHttpTask(this);
+        task.execute(getUrl(), string);
+
     }
 
-    public Response getResponse(){
-        if(responseObject!=null) {
-            return responseObject;
+
+    public void setResponse(String response){
+
+            try {
+
+                JSONObject obj = new JSONObject(response);
+                responseObject = new Response(obj.get("error").toString(), obj.get("message").toString(), obj.get("data").toString());
+                listener.onFinished(responseObject);
+            }
+            catch(Exception e){
+
+            listener.onFinished(new Response("true", "Error", ""));
         }
-        return new Response("", "", "");
     }
 
 }
+

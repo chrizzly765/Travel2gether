@@ -46,10 +46,10 @@ public enum DataType {
             return "Participant";
         }
     },
-    REGISTER {
+    REGISTRATION {
         @Override
         public String toString() {
-            return "Register";
+            return "Registration";
         }
     },
     LOGIN {
