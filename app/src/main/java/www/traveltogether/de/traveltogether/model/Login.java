@@ -6,4 +6,9 @@ package www.traveltogether.de.traveltogether.model;
 public class Login {
     String email;
     String password;
+
+    public Login(String _email, String _password){
+        email = _email;
+        password = _password;
+    }
 }

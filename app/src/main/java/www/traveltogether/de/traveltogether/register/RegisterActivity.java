@@ -2,7 +2,9 @@ package www.traveltogether.de.traveltogether.register;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import www.traveltogether.de.traveltogether.R;
+import www.traveltogether.de.traveltogether.servercommunication.HashFactory;
+
 import android.app.AlertDialog;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -22,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected EditText name;
     protected EditText email;
     protected EditText password;
+    protected byte[] salt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,15 +40,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void onClick(View v){
-        Log.d("dsdsd", "onClick: ");
-        presenter.onRegister(name.getText().toString(), email.getText().toString(), password.getText().toString());
+        salt = HashFactory.getNextSalt();
+        String hash = HashFactory.hashPassword(password.getText().toString().toCharArray(), salt);
+        presenter.onRegister(name.getText().toString(), email.getText().toString(), hash);
     }
 
     public void onViewSuccessMessage(String message){
+        //save salt in shared preferences
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.saved_salt), salt.toString());
+        editor.commit();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle("Erfolgreich registriert");
-        builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
@@ -57,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle("Error");
-        builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
