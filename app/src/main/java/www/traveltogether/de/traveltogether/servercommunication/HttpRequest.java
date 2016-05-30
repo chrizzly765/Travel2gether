@@ -1,10 +1,5 @@
 package www.traveltogether.de.traveltogether.servercommunication;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.util.Log;
-
 import org.json.JSONObject;
 
 import www.traveltogether.de.traveltogether.ActionType;
@@ -46,11 +41,11 @@ public class HttpRequest  implements IHttpRequest{
 
                 JSONObject obj = new JSONObject(response);
                 responseObject = new Response(obj.get("error").toString(), obj.get("message").toString(), obj.get("data").toString());
-                listener.onFinished(responseObject);
+                listener.onRequestFinished(responseObject);
             }
             catch(Exception e){
 
-            listener.onFinished(new Response("true", "Error", ""));
+            listener.onRequestFinished(new Response("true", "Error", ""));
         }
     }
 

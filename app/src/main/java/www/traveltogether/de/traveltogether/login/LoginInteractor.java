@@ -3,6 +3,8 @@ package www.traveltogether.de.traveltogether.login;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import org.json.JSONObject;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -15,6 +17,7 @@ import javax.crypto.spec.PBEKeySpec;
 import www.traveltogether.de.traveltogether.ActionType;
 import www.traveltogether.de.traveltogether.DataType;
 import www.traveltogether.de.traveltogether.R;
+import www.traveltogether.de.traveltogether.StaticData;
 import www.traveltogether.de.traveltogether.model.Login;
 import www.traveltogether.de.traveltogether.servercommunication.HashFactory;
 import www.traveltogether.de.traveltogether.servercommunication.HttpRequest;
@@ -39,15 +42,29 @@ public class LoginInteractor implements ILoginInteractor {
         HttpRequest request = new HttpRequest(DataType.LOGIN, ActionType.LOGIN, jsonString, this);
     }
 
-    public void onFinished(Response response){
+    public void onRequestFinished(Response response){
         if(response.getError()=="true"){
             listener.onError(response.getMessage());
         }
         else {
             //save hash in shared prefs
+            String userId= "";
+
+            try {
+                JSONObject json = new JSONObject(response.getData());
+                userId = json.get("personId").toString();
+            }
+            catch(Exception e){
+                //TODO:ask explicitly for personId?
+            }
+
             SharedPreferences sharedPref = listener.getView().getPreferences(Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString(listener.getView().getString(R.string.saved_hash), hash.toString());
+            if(userId!="") {
+                editor.putString(listener.getView().getString(R.string.saved_user_id), userId);
+                StaticData.setUserId(userId);
+            }
             editor.commit();
 
             listener.onSuccess(response.getMessage());

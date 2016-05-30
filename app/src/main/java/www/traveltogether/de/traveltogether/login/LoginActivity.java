@@ -49,7 +49,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             sharedPref.getString(getString(R.string.saved_salt), salt);
             if(salt != "") {
                 String hash = hashPassword(password.getText().toString().toCharArray(), salt.getBytes());
-
                 presenter.onLogin(email.getText().toString(), hash);
             }
             else{

@@ -38,6 +38,25 @@ public class JsonDecode implements IJsonParser {
         return null;
     }
 
+    public Object[] jsonToArray(String str, DataType type){
+        //TODO: split string and convert
+        try {
+            String[] array = str.split("");
+
+            if (array.length > 0) {
+                Object[] objArray = new Object[array.length];
+                for (int i = 0; i < array.length; i++) {
+                    objArray[i] = jsonToClass(array[i], type);
+                }
+                return objArray;
+            }
+        }
+        catch(Exception e){
+
+        }
+        return new Object[0];
+    }
+
     public String classToJson(Object obj){
         String str = gson.toJson(obj);
         Log.d("class to json", str);
