@@ -28,7 +28,7 @@ public class HttpRequest  implements IHttpRequest{
         jsonString = json;
         listener = _listener;
         Request request = new Request(_dataType, _actionType, json);
-        String string = JsonDecode.getInstance().classToJson(request);
+        String string = (JsonDecode.getInstance().classToJson(request)).replace("\\\"", "\"");
         AsyncHttpTask task = new AsyncHttpTask(this);
         task.execute(getUrl(), string);
 

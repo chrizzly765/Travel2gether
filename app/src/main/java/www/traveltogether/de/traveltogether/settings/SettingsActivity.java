@@ -25,7 +25,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.remove(getString(R.string.saved_hash));
-            editor.remove(getString(R.string.saved_personId));
+            editor.remove(getString(R.string.saved_user_id));
             editor.commit();
         }
     }
