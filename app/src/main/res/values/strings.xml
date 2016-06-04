@@ -3,4 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="saved_hash">Saved Hash</string>
+    <string name="saved_salt">Saved Salt</string>
+    <string name="saved_user_id">Saved UserId</string>
+
 </resources>
