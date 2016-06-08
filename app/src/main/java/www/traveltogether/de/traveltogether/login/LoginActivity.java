@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import www.traveltogether.de.traveltogether.R;
 import www.traveltogether.de.traveltogether.register.RegisterActivity;
@@ -22,7 +23,7 @@ import static www.traveltogether.de.traveltogether.servercommunication.HashFacto
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     protected Button loginBtn;
-    protected Button registerBtn;
+    protected TextView registerBtn;
     protected EditText email;
     protected EditText password;
     protected ILoginPresenter presenter;
@@ -31,15 +32,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         loginBtn = (Button)findViewById(R.id.login_button);
         loginBtn.setOnClickListener(this);
-        registerBtn = (Button) findViewById(R.id.register_button);
-        registerBtn.setOnClickListener(this);
+        //registerBtn = (Button) findViewById(R.id.register_text2);
+        //registerBtn.setOnClickListener(this);
         presenter = new LoginPresenter(this);
+
+
     }
 
     public void onClick(View v){
-        if(v.getId() == R.id.register_button){
+        if(v.getId() == R.id.login_button){
             Intent registerIntent = new Intent(this, RegisterActivity.class);
             startActivity(registerIntent);
         }

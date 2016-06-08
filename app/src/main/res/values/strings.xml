@@ -6,5 +6,15 @@
     <string name="saved_hash">Saved Hash</string>
     <string name="saved_salt">Saved Salt</string>
     <string name="saved_user_id">Saved UserId</string>
+    <string name="logoDescription">TravelTogether Logo</string>
+    <string name="email">E-Mail</string>
+    <string name="password">Passwort</string>
+    <string name="login">Anmelden</string>
+    <string name="registerText1">Noch nicht angemeldet?</string>
+    <string name="registerText2">Registrieren.</string>
+    <string name="loginText1">Bereits registriert?</string>
+    <string name="loginText2">Anmelden.</string>
+    <string name="register">Registrieren</string>
+    <string name="name">Name</string>
 
 </resources>
