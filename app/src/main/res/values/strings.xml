@@ -1,9 +1,102 @@
 <resources>
+    <string name="saved_hash">Saved Hash</string>
+    <string name="saved_salt">Saved Salt</string>
+    <string name="saved_user_id">Saved UserId</string>
     <string name="app_name">TravelTogether</string>
+    <string name="logo_description">TravelTogether Logo</string>
+    <!-- LoginActivity -->
+    <string name="login">Anmelden</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="password">Passwort</string>
+    <string name="no_account">Noch kein Account?</string>
+    <string name="account_exists">Bereits registriert?</string>
+    <string name="sign_up">Registrieren</string>
+    <string name="name">Name</string>
+    <string name="repeat_password">Passwort wiederholen</string>
+
+    <!-- RegistrationActivity -->
+    <string name="pw_minimum_length">Das Passwort muss aus mindestens 7 Zeichen bestehen.</string>
+    <string name="error">Etwas ist schiefgelaufen.</string>
+    <string name="mail_was_sent">Eine E-Mail mit dem Bestätigungslink wurde an dich vesendet.</string>
+
+    <!-- TripListActivity-->
+    <string name="my_trips">Meine Reisen</string>
+
+    <!-- OptionsActivity -->
+    <string name="profile">Profil</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="notifications">Benachrichtigungen</string>
+    <string name="on">an</string>
+    <string name="off">aus</string>
+    <string name="delete_account">Account löschen</string>
+    <string name="logout">Abmelden</string>
+    
+    <!-- NewTripActivity -->
+    <string name="new_trip">Neue Reise</string>
+    <string name="title">Titel</string>
+    <string name="add_fellow_passengers">Mitreisende hinzufügen</string>
+    <string name="invite_friends">Freunde einladen</string>
+
+    <!-- InvitationActivity -->
+    <string name="invited_to_trip">%1$s hat dich eingeladen der Reise %2$s beizutreten</string>
+    <string name="join">Beitreten</string>
+    <string name="decline">Ablehnen</string>
+
+    <!-- MainMenuActivity -->
+    <string name="progress">Fortschritt</string>
+    <string name="days_left">noch %1$d Tage</string>
+    <string name="weeks_left">noch %1$d Wochen</string>
+    <string name="months_left">noch %1$d Monate</string>
+
+    <!-- InfoActivity -->
+    <string name="trip_information">Reiseinfo</string>
+    <string name="start_date">Start</string>
+    <string name="end_date">Ende</string>
+    <string name="fellow_passengers">Mitreisende</string>
+    <string name="invited">Ausstehend</string>
+
+    <!-- NewInfoActivity -->
+    <string name="destination">Ort</string>
+    <string name="description">Beschreibung</string>
+    
+    <!-- ExpensesActivity -->
+    <string name="costs">Kosten</string>
+    <string name="new_expense">Neue Ausgabe</string>
+    <string name="account_balances">Kontoübersicht</string>
+    <string name="expenses">Ausgaben</string>
+    <string name="payed">bezahlt von</string>
+    <string name="share_with">teilen mit</string>
+    <string name="add_expense">Klicke hier, um eine neue Ausgabe hinzuzufügen.</string>
+
+    <!-- TasksActivity -->
+    <string name="tasks">Aufgaben</string>
+    <string name="new_task">Neue Aufgabe</string>
+    <string name="add_task">Klicke hier, um eine neue Aufgabe zu erstellen.</string>
+    <string name="add_person">Person zuordnen</string>
+    <string name="status">Status</string>
+    <string name="open">Offen</string>
+    <string name="in_progress">In Bearbeitung</string>
+    <string name="done">Erledigt</string>
+
+    <!-- PackingsListActivity -->
+    <string name="packinglist">Packliste</string>
+    <string name="add_packing_object">Klicke hier, um etwas zur Packliste hinzuzufügen.</string>
+    <string name="new_category">Neue Kategorie</string>
+    <string name="add_to_category">Zu Kategorie hinzufügen</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+    <!--
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="saved_hash">Saved Hash</string>
-    <string name="saved_user_id">Saved UserId</string>
 
+    <string name="logoDescription">TravelTogether Logo</string>
+    <string name="email">E-Mail</string>
+    <string name="password">Passwort</string>
+    <string name="login">Anmelden</string>
+    <string name="registerText1">Noch nicht angemeldet?</string>
+    <string name="registerText2">Registrieren.</string>
+    <string name="loginText1">Bereits registriert?</string>
+    <string name="loginText2">Anmelden.</string>
+    <string name="register">Registrieren</string>
+    <string name="name">Name</string>
+-->
 </resources>
