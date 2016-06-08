@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import www.traveltogether.de.traveltogether.R;
+import www.traveltogether.de.traveltogether.login.LoginActivity;
 import www.traveltogether.de.traveltogether.servercommunication.HashFactory;
 
 import android.app.AlertDialog;
@@ -44,15 +46,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void onClick(View v){
-        Log.d("onclick", "");
-        salt = HashFactory.getNextSalt();
-        Log.e("salt", salt);
-        Log.e("pw", password.getText().toString());
-        int length = password.getText().length();
-        char [] pw = new char[length];
-        password.getText().getChars(0,length, pw, 0);
-        String hash = hashPassword(pw, salt);
-        presenter.onRegister(name.getText().toString(), email.getText().toString(), hash, salt);
+        if(v.getId()==R.id.button_register) {
+            Log.d("onclick", "");
+            salt = HashFactory.getNextSalt();
+            Log.e("salt", salt);
+            Log.e("pw", password.getText().toString());
+            int length = password.getText().length();
+            char[] pw = new char[length];
+            password.getText().getChars(0, length, pw, 0);
+            String hash = hashPassword(pw, salt);
+            presenter.onRegister(name.getText().toString(), email.getText().toString(), hash, salt);
+        }
+        else if (v.getId()==R.id.login_Text2){
+            Intent login = new Intent(this, LoginActivity.class);
+            startActivity(login);
+        }
 
     }
 
