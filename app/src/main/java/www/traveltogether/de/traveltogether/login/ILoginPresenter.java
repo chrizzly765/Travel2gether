@@ -11,4 +11,6 @@ public interface ILoginPresenter {
     public void onSuccess(String message);
     public void onError(String message);
     public AppCompatActivity getView();
+    public void onGetSalt(String email);
+    public void onReturnSalt(String salt);
 }

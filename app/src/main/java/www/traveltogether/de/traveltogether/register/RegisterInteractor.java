@@ -15,26 +15,34 @@ import www.traveltogether.de.traveltogether.servercommunication.Response;
 /**
  * Created by Anna-Lena on 27.05.2016.
  */
-public class RegisterInteractor implements IRegisterInteractor {
+public class RegisterInteractor implements IRegisterInteractor, Runnable{
 
     //private static final String TAG = RegisterInteractor.class.getSimpleName();
     IRegisterPresenter listener;
 
     @Override
-    public void register(String name, String email, String password, IRegisterPresenter _listener) {
+    public void register(String name, String email, String password, String salt, IRegisterPresenter _listener) {
             listener = _listener;
-            Registration reg = new Registration(name, email, password);
-            String jsonString = JsonDecode.getInstance().classToJson(reg);
+            Registration reg = new Registration(name, email, password, salt);
+            String jsonString = JsonDecode.getInstance().classToJson(reg).replace("\\n", "\n");
             HttpRequest request = new HttpRequest(DataType.REGISTRATION, ActionType.REGISTER, jsonString, this);
     }
 
     public void onRequestFinished(Response response){
         if(response.getError()=="true"){
+
+            Log.d("error", "");
             listener.onError(response.getMessage());
         }
         else {
+
+            Log.d("success","");
             listener.onSuccess(response.getMessage());
         }
     }
 
+    @Override
+    public void run() {
+
+    }
 }

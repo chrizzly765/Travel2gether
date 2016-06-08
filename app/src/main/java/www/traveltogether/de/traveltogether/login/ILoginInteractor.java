@@ -9,4 +9,5 @@ import www.traveltogether.de.traveltogether.register.IRegisterPresenter;
 public interface ILoginInteractor extends IInteractor{
 
     public void login(String email, String hash, ILoginPresenter listener);
+    public void getSalt(String email, ILoginPresenter listener);
 }

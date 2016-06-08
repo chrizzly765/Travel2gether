@@ -1,6 +1,7 @@
 package www.traveltogether.de.traveltogether.servercommunication;
 
 import android.util.Base64;
+import android.util.Log;
 
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
@@ -23,17 +24,23 @@ public class HashFactory {
     private static int iterations = 10000;
     private static int keyLength = 256;
 
-    public static byte[] getNextSalt() {
+    public static String getNextSalt() {
         byte[] salt = new byte[16];
         RANDOM.nextBytes(salt);
-        return salt;
+        return convertByteToString(salt);
     }
 
-    public static String hashPassword(char[] password, byte[] salt) {
+    public static String hashPassword(char[] password, String salt) {
 
         try {
+            String s = "";
+            for (char c:password) {
+                s+= c;
+
+            }
             SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, keyLength);
+            byte[] saltBytes = salt.getBytes();
+            PBEKeySpec spec = new PBEKeySpec(password, saltBytes, iterations, keyLength);
             SecretKey key = skf.generateSecret(spec);
             byte[] res = key.getEncoded();
             String str = convertByteToString(res);

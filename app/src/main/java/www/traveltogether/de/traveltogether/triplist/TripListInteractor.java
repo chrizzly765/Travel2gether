@@ -1,9 +1,12 @@
 package www.traveltogether.de.traveltogether.triplist;
 
+import org.json.JSONObject;
+
 import www.traveltogether.de.traveltogether.ActionType;
 import www.traveltogether.de.traveltogether.DataType;
 import www.traveltogether.de.traveltogether.StaticData;
 import www.traveltogether.de.traveltogether.model.Trip;
+import www.traveltogether.de.traveltogether.servercommunication.HttpRequest;
 import www.traveltogether.de.traveltogether.servercommunication.JsonDecode;
 import www.traveltogether.de.traveltogether.servercommunication.Request;
 import www.traveltogether.de.traveltogether.servercommunication.Response;
@@ -17,8 +20,14 @@ public class TripListInteractor implements ITripListInteractor {
     @Override
     public void getTrips(ITripListPresenter _listener) {
         listener = _listener;
-        String json = JsonDecode.getInstance().classToJson(new StaticData());
-        Request request = new Request(DataType.TRIP, ActionType.LIST, json);
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("personId", StaticData.getUserId());
+        }
+        catch(Exception e){
+
+        }
+        HttpRequest req = new HttpRequest(DataType.TRIP, ActionType.LIST, obj.toString(), this);
     }
 
     @Override
@@ -28,6 +37,7 @@ public class TripListInteractor implements ITripListInteractor {
         }
         else{
             Trip[] trips = (Trip[])JsonDecode.getInstance().jsonToArray(response.getData(), DataType.TRIP);
+            listener.onSuccess(trips);
         }
     }
 }

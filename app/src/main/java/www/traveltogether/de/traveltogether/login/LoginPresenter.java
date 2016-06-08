@@ -19,12 +19,14 @@ public class LoginPresenter implements ILoginPresenter {
     }
 
     public void onSuccess(String message){
-
+        view.onViewSuccess(message);
     }
     public void onError(String message){
-
+        view.onViewError(message);
     }
     public AppCompatActivity getView(){
         return view;
     }
+    public void onGetSalt(String email){interactor.getSalt(email, this);}
+    public void onReturnSalt(String salt){view.onGetSaltSuccess(salt);}
 }

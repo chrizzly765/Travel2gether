@@ -17,6 +17,10 @@ import www.traveltogether.de.traveltogether.servercommunication.HashFactory;
 
 import android.app.AlertDialog;
 
+import java.io.Console;
+
+import static www.traveltogether.de.traveltogether.servercommunication.HashFactory.hashPassword;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     //private static final String TAG = RegisterActivity.class.getSimpleName();
@@ -26,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected EditText name;
     protected EditText email;
     protected EditText password;
-    protected byte[] salt;
+    protected String salt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,18 +44,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void onClick(View v){
+        Log.d("onclick", "");
         salt = HashFactory.getNextSalt();
-        String hash = HashFactory.hashPassword(password.getText().toString().toCharArray(), salt);
-        presenter.onRegister(name.getText().toString(), email.getText().toString(), hash);
+        Log.e("salt", salt);
+        Log.e("pw", password.getText().toString());
+        int length = password.getText().length();
+        char [] pw = new char[length];
+        password.getText().getChars(0,length, pw, 0);
+        String hash = hashPassword(pw, salt);
+        presenter.onRegister(name.getText().toString(), email.getText().toString(), hash, salt);
+
     }
 
     public void onViewSuccessMessage(String message){
-        //save salt in shared preferences
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(getString(R.string.saved_salt), salt.toString());
-        editor.commit();
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle("Erfolgreich registriert");

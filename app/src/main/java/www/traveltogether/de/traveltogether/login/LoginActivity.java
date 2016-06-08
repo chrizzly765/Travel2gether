@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,24 +37,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         registerBtn = (Button) findViewById(R.id.register_button);
         registerBtn.setOnClickListener(this);
         presenter = new LoginPresenter(this);
+
+        email = (EditText)findViewById(R.id.editText4);
+        password = (EditText)findViewById(R.id.editText5);
     }
 
-    public void onClick(View v){
-        if(v.getId() == R.id.register_button){
+    public void onClick(View v) {
+        if (v.getId() == R.id.register_button) {
             Intent registerIntent = new Intent(this, RegisterActivity.class);
             startActivity(registerIntent);
-        }
-        else if(v.getId()==R.id.login_button){
-            SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-            String salt = "";
-            sharedPref.getString(getString(R.string.saved_salt), salt);
-            if(salt != "") {
-                String hash = hashPassword(password.getText().toString().toCharArray(), salt.getBytes());
-                presenter.onLogin(email.getText().toString(), hash);
-            }
-            else{
-                //TODO: not registered yet!
-            }
+        } else if (v.getId() == R.id.login_button) {
+            presenter.onGetSalt(email.getText().toString());
         }
     }
 
@@ -78,5 +72,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public Activity getActivity() {
         return this;
+    }
+
+    public void onGetSaltSuccess(String salt){
+        int length = password.getText().length();
+        char [] pw = new char[length];
+        password.getText().getChars(0,length, pw, 0);
+        String hash = hashPassword(pw, salt);
+        Log.e("pw",password.getText().toString());
+        Log.e("salt", salt);
+        presenter.onLogin(email.getText().toString(), hash);
     }
 }

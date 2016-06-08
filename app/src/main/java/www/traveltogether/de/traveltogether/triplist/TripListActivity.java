@@ -14,7 +14,7 @@ import www.traveltogether.de.traveltogether.settings.SettingsActivity;
 import www.traveltogether.de.traveltogether.triplist.newtrip.NewTripActivity;
 
 public class TripListActivity extends AppCompatActivity implements View.OnClickListener {
-
+    ITripListPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +23,8 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         optionsBtn.setOnClickListener(this);
         Button newTripBtn = (Button)findViewById(R.id.new_trip_button);
         newTripBtn.setOnClickListener(this);
-
-
+        presenter = new TripListPresenter(this);
+        presenter.onGetTrips();
     }
 
     @Override

@@ -7,10 +7,12 @@ public class Registration {
     String name;
     String email;
     String password;
+    String salt;
 
-    public Registration(String _name, String _email, String _password){
+    public Registration(String _name, String _email, String _password, String _salt){
         name = _name;
         email=_email;
         password=_password;
+        salt=_salt;
     }
 }

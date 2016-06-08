@@ -23,6 +23,7 @@ public class LauncherActivity extends AppCompatActivity {
         if(hash != ""){
             Intent tl = new Intent(this, TripListActivity.class);
             startActivity(tl);
+            //TODO: get userID from shared Prefs
         }
         else{
             Intent login = new Intent(this, LoginActivity.class);

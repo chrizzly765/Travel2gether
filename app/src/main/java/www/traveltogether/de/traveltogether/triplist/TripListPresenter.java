@@ -21,7 +21,7 @@ public class TripListPresenter implements ITripListPresenter {
 
     @Override
     public void onSuccess(Trip[] trips) {
-
+        view.onViewTrips(trips);
     }
 
     @Override

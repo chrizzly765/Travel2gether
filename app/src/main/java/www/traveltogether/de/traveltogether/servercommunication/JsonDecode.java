@@ -2,17 +2,13 @@ package www.traveltogether.de.traveltogether.servercommunication;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
-
-import org.json.JSONObject;
 
 import www.traveltogether.de.traveltogether.DataType;
 
 /**
  * Created by Anna-Lena on 16.05.2016.
  */
-public class JsonDecode implements IJsonParser {
+public class JsonDecode {
     private static JsonDecode instance;
     Gson gson;
 
