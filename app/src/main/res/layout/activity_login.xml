@@ -26,7 +26,7 @@
             android:layout_weight="1.2"
             android:layout_gravity="center_horizontal"
             android:paddingTop="20pt"
-            android:contentDescription="@string/logoDescription" />
+            android:contentDescription="@string/logo_description" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -50,7 +50,7 @@
                     android:inputType="textEmailAddress"
                     android:ems="10"
                     android:id="@+id/loginEmail"
-                    android:hint="@string/email"
+                    android:hint="@string/e_mail"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff"
                     android:singleLine="false"
@@ -91,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/registerText1"
+                    android:text="@string/no_account"
                     android:id="@+id/register_Text1"
                     android:textAlignment="textEnd"
                     android:textColor="#ffffff"
@@ -102,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/login"
+                    android:text="@string/sign_up"
                     android:id="@+id/register_Text2"
                     android:textAlignment="textStart"
                     android:gravity="center|bottom"

@@ -26,7 +26,7 @@
             android:layout_weight="1.2"
             android:layout_gravity="center_horizontal"
             android:paddingTop="20pt"
-            android:contentDescription="@string/logoDescription" />
+            android:contentDescription="@string/logo_description" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -47,7 +47,7 @@
                     android:layout_width="120pt"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:text="Name"
+                    android:text="@string/name"
                     android:ems="10"
                     android:id="@+id/registerName"
                     android:layout_gravity="center_horizontal"
@@ -62,7 +62,7 @@
                     android:inputType="textEmailAddress"
                     android:ems="10"
                     android:id="@+id/registerEmail"
-                    android:hint="@string/email"
+                    android:hint="@string/e_mail"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff"
                     android:singleLine="false"
@@ -85,7 +85,7 @@
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/register"
+                android:text="@string/sign_up"
                 android:id="@+id/button_register"
                 android:background="#37a9e3"
                 android:textColor="#ffffff" />
@@ -103,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/loginText1"
+                    android:text="@string/account_exists"
                     android:id="@+id/login_Text1"
                     android:textAlignment="textEnd"
                     android:textColor="#ffffff"
@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/loginText2"
+                    android:text="@string/login"
                     android:id="@+id/login_Text2"
                     android:textAlignment="textStart"
                     android:gravity="center|bottom"
