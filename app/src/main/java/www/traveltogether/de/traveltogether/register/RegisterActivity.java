@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -47,15 +48,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     public void onClick(View v){
         if(v.getId()==R.id.button_register) {
-            Log.d("onclick", "");
+            if (!(email.getText().length() > 0 && email.getText().toString().contains("@"))) {
+                onViewErrorMessage(getString(R.string.invalid_mailadress));
+                return;
+            }
+            if(password.getText().length()<7) {
+                onViewErrorMessage(getString(R.string.pw_minimum_length));
+                return;
+            }
+
             salt = HashFactory.getNextSalt();
-            Log.e("salt", salt);
-            Log.e("pw", password.getText().toString());
             int length = password.getText().length();
             char[] pw = new char[length];
             password.getText().getChars(0, length, pw, 0);
             String hash = hashPassword(pw, salt);
             presenter.onRegister(name.getText().toString(), email.getText().toString(), hash, salt);
+
         }
         else if (v.getId()==R.id.login_Text2){
             Intent login = new Intent(this, LoginActivity.class);
@@ -66,11 +74,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     public void onViewSuccessMessage(String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(message);
-        builder.setTitle("Erfolgreich registriert");
-        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.mail_was_sent);
+        builder.setTitle(getString(R.string.register_success));
+        builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
+                Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(login);
             }
         });
 
@@ -81,8 +91,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onViewErrorMessage(String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
-        builder.setTitle("Error");
-        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+        builder.setTitle(getString(R.string.error));
+        builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }

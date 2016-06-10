@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import www.traveltogether.de.traveltogether.R;
 import www.traveltogether.de.traveltogether.register.RegisterActivity;
@@ -48,6 +49,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Intent registerIntent = new Intent(this, RegisterActivity.class);
             startActivity(registerIntent);
         } else if (v.getId() == R.id.login_button) {
+            if (!(email.getText().length() > 0 && email.getText().toString().contains("@"))) {
+                onViewError(getString(R.string.invalid_mailadress));
+                return;
+            }
             presenter.onGetSalt(email.getText().toString());
         }
     }
@@ -56,8 +61,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onViewError(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
-        builder.setTitle("Error");
-        builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+        builder.setTitle(getString(R.string.error));
+        builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
@@ -68,6 +73,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void onViewSuccess(String message){
+        Context context = getApplicationContext();
+        CharSequence text = getString(R.string.login_success);
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
         Intent tLIntent = new Intent(this, TripListActivity.class);
         startActivity(tLIntent);
     }
@@ -81,8 +92,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         char [] pw = new char[length];
         password.getText().getChars(0,length, pw, 0);
         String hash = hashPassword(pw, salt);
-        Log.e("pw",password.getText().toString());
-        Log.e("salt", salt);
         presenter.onLogin(email.getText().toString(), hash);
+    }
+
+    public void onBackPressed(){
+        moveTaskToBack(true);
     }
 }

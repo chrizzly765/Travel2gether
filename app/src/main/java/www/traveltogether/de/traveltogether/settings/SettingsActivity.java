@@ -33,6 +33,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
             Intent login = new Intent(this, LoginActivity.class);
             startActivity(login);
+            finish();
         }
     }
 }

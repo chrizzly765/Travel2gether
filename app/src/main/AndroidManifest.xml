@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="www.traveltogether.de.traveltogether" >
+    package="www.traveltogether.de.traveltogether">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -11,28 +11,40 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity android:name=".triplist.TripListActivity" />
         <activity android:name=".packinglist.PackingListActivity" />
         <activity android:name=".mainmenu.MainActivity" />
         <activity android:name=".tasks.TaskListActivity" />
         <activity android:name=".expense.ExpenseActivity" />
         <activity android:name=".expense.newexpense.NewExpenseActivity" />
-        <activity android:name=".login.LoginActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- android:theme="@android:style/Theme.NoTitleBar android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen""-->
+        <activity
+            android:name=".login.LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- android:theme="@android:style/Theme.NoTitleBar android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"" -->
         <activity android:name=".packinglist.newpackingitem.NewPackingItemActivity" />
         <activity android:name=".tasks.newtask.NewTaskActivity" />
         <activity android:name=".triplist.newtrip.NewTripActivity" />
         <activity android:name=".participantlist.ParticipantListActivity" />
-        <activity android:name=".settings.SettingsActivity" />
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:noHistory="true" />
         <activity android:name=".info.InfoActivity" />
         <activity android:name=".notification.NotificationActivity" />
-        <activity android:name=".register.RegisterActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".launcher.LauncherActivity" >
+        <activity
+            android:name=".register.RegisterActivity"
+            android:noHistory="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".launcher.LauncherActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".invitation.InvitationActivity"></activity>
     </application>
 
 </manifest>

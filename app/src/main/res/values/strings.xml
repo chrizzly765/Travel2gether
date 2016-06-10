@@ -13,14 +13,19 @@
     <string name="sign_up">Registrieren</string>
     <string name="name">Name</string>
     <string name="repeat_password">Passwort wiederholen</string>
+    <string name="login_success">Erfolgreich angemeldet.</string>
 
     <!-- RegistrationActivity -->
     <string name="pw_minimum_length">Das Passwort muss aus mindestens 7 Zeichen bestehen.</string>
+    <string name="invalid_mailadress">Bitte gib eine gültige Mail Adresse ein um dich zu registrieren.</string>
     <string name="error">Etwas ist schiefgelaufen.</string>
+    <string name="ok">OK</string>
+    <string name="register_success">Erfolgreich registriert.</string>
     <string name="mail_was_sent">Eine E-Mail mit dem Bestätigungslink wurde an dich vesendet.</string>
 
     <!-- TripListActivity-->
     <string name="my_trips">Meine Reisen</string>
+    <string name="newtrip_success">Reise wurde erstellt.</string>
 
     <!-- OptionsActivity -->
     <string name="profile">Profil</string>
@@ -30,7 +35,7 @@
     <string name="off">aus</string>
     <string name="delete_account">Account löschen</string>
     <string name="logout">Abmelden</string>
-    
+
     <!-- NewTripActivity -->
     <string name="new_trip">Neue Reise</string>
     <string name="title">Titel</string>
@@ -58,7 +63,7 @@
     <!-- NewInfoActivity -->
     <string name="destination">Ort</string>
     <string name="description">Beschreibung</string>
-    
+
     <!-- ExpensesActivity -->
     <string name="costs">Kosten</string>
     <string name="new_expense">Neue Ausgabe</string>
