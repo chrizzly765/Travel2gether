@@ -53,12 +53,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 onViewError(getString(R.string.invalid_mailadress));
                 return;
             }
+            v.setEnabled(false);
             presenter.onGetSalt(email.getText().toString());
         }
     }
 
 
     public void onViewError(String message) {
+        loginBtn.setEnabled(true);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));
