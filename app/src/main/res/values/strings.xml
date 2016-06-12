@@ -1,4 +1,6 @@
 <resources>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
     <string name="saved_hash">Saved Hash</string>
     <string name="saved_salt">Saved Salt</string>
     <string name="saved_user_id">Saved UserId</string>
@@ -26,6 +28,9 @@
     <!-- TripListActivity-->
     <string name="my_trips">Meine Reisen</string>
     <string name="newtrip_success">Reise wurde erstellt.</string>
+    <string name="trip_delete">Reise löschen</string>
+    <string name="trip_delete_warning">Möchtest du die Reise wirklich löschen?</string>
+    <string name="change_admin">Administrator ändern</string>
 
     <!-- OptionsActivity -->
     <string name="profile">Profil</string>
@@ -54,6 +59,7 @@
     <string name="days_left">noch %1$d Tage</string>
     <string name="weeks_left">noch %1$d Wochen</string>
     <string name="months_left">noch %1$d Monate</string>
+    <string name="delete_trip_success">Die Reise wurde erfolgreich gelöscht.</string>
 
     <!-- InfoActivity -->
     <string name="trip_information">Reiseinfo</string>

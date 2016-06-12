@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import www.traveltogether.de.traveltogether.R;
+import www.traveltogether.de.traveltogether.triplist.TripListActivity;
 
 import static android.content.Intent.createChooser;
 
@@ -49,8 +50,8 @@ public class InvitationActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.invitation_button_continue) {
-            Intent mainmenu = new Intent(this, www.traveltogether.de.traveltogether.mainmenu.MainActivity.class);
-            startActivity(mainmenu);
+            Intent tripList = new Intent(this, TripListActivity.class);
+            startActivity(tripList);
             finish();
         }
 

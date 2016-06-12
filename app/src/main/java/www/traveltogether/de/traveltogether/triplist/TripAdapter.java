@@ -32,12 +32,22 @@ public class TripAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return tripList[position];
+        if(tripList.length>0) {
+            return tripList[position];
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
     public long getItemId(int position) {
-        return tripList[position].getTripId();
+        if(tripList.length>0) {
+            return tripList[position].getTripId();
+        }
+        else{
+            return -1;
+        }
     }
 
     @Override

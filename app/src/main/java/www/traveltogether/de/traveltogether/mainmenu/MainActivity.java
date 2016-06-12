@@ -1,20 +1,106 @@
 package www.traveltogether.de.traveltogether.mainmenu;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import www.traveltogether.de.traveltogether.R;
+import www.traveltogether.de.traveltogether.invitation.InvitationActivity;
+import www.traveltogether.de.traveltogether.triplist.TripListActivity;
 
 public class MainActivity extends AppCompatActivity {
     long tripId;
+    String title;
+    IMainMenuPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new MainMenuPresenter(this);
         setContentView(R.layout.activity_main_menu);
         Bundle b = getIntent().getExtras();
         tripId = -1; // or other values
-        if (b != null)
+        if (b != null) {
             tripId = b.getLong("tripId");
-        
+            title = b.getString("title");
+                setActionBar(title);
+        }
+
     }
+
+    public void setActionBar(String heading) {
+        ActionBar actionBar = getSupportActionBar();
+        //actionBar.setHomeButtonEnabled(true);
+        actionBar.setTitle(heading);
+        actionBar.show();
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.optionsmenu_trip, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.delete_trip:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(getString(R.string.trip_delete_warning));
+                builder.setTitle(getString(R.string.trip_delete));
+                builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+                builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        presenter.onDeleteTrip(tripId);
+                        Intent tripList = new Intent(getApplicationContext(), TripListActivity.class);
+                        startActivity(tripList);
+                        finish();
+
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+
+        }
+    }
+
+    public void onViewError(String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message);
+        builder.setTitle(getString(R.string.error));
+        builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+    }
+
+    public void onSuccessDeletingTrip(){
+        Context context = getApplicationContext();
+        CharSequence text = getString(R.string.delete_trip_success);
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
 }
