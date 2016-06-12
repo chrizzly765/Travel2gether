@@ -3,6 +3,12 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+
 import www.traveltogether.de.traveltogether.DataType;
 
 /**
@@ -23,10 +29,14 @@ public class JsonDecode {
         gson = new Gson();
     }
 
-    public Object jsonToClass(String str, DataType type){
+    public <T> T jsonToClass(String str, DataType type){
+
         try {
-            Object obj = gson.fromJson(str, Class.forName(type.toString()));
+            T obj = (T)gson.fromJson(str, Class.forName("www.traveltogether.de.traveltogether.model." + type.toString()));
             return obj;
+        }
+        catch(ClassNotFoundException e){
+            Log.e("Class not found", e.getMessage());
         }
         catch(Exception e) {
             Log.d("Error in json to class", e.getMessage());
@@ -34,23 +44,47 @@ public class JsonDecode {
         return null;
     }
 
-    public Object[] jsonToArray(String str, DataType type){
-        //TODO: split string and convert
-        try {
-            String[] array = str.split("");
+//    public Object jsonToClass(String str, DataType type){
+//
+//        try {
+//            Object obj = gson.fromJson(str, Class.forName("www.traveltogether.de.traveltogether.model." + type.toString()));
+//            return obj;
+//        }
+//        catch(ClassNotFoundException e){
+//            Log.e("Class not found", e.getMessage());
+//        }
+//        catch(Exception e) {
+//            Log.d("Error in json to class", e.getMessage());
+//        }
+//        return null;
+//    }
 
-            if (array.length > 0) {
-                Object[] objArray = new Object[array.length];
+    public <T> ArrayList<T> jsonToArray(String str, DataType type){
+        try {
+            String string = str.replace("[", "").replace("]","");
+            Log.d("jsonToarray",string);
+            String pattern = Pattern.quote("},{");
+            String [] array = string.split(pattern);
+            if (string != "{}") {
+                ArrayList<T> objList = new ArrayList<T>();
                 for (int i = 0; i < array.length; i++) {
-                    objArray[i] = jsonToClass(array[i], type);
+                    if(!array[i].startsWith("{")) {
+                        array[i] = "{" + array[i];
+                    }
+                    if(!array[i].endsWith("}")){
+                        array[i] = array[i] + "}";
+                    }
+                    Log.d("string", array[i]);
+                    objList.add((T)jsonToClass(array[i], type));
                 }
-                return objArray;
+                Log.d("JsonDecode", "return");
+                return objList;
             }
         }
         catch(Exception e){
-
+            Log.d("Exception jsontoArray: ", e.getMessage());
         }
-        return new Object[0];
+        return new ArrayList<T>();
     }
 
     public String classToJson(Object obj){

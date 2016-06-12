@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void onViewSuccess(String message){
+        loginBtn.setEnabled(true);
         Context context = getApplicationContext();
         CharSequence text = getString(R.string.login_success);
         int duration = Toast.LENGTH_SHORT;

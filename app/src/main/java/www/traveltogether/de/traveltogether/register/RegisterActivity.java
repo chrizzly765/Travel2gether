@@ -19,6 +19,7 @@ import www.traveltogether.de.traveltogether.login.LoginActivity;
 import www.traveltogether.de.traveltogether.servercommunication.HashFactory;
 
 import android.app.AlertDialog;
+import android.widget.TextView;
 
 import java.io.Console;
 
@@ -41,6 +42,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         presenter = new RegisterPresenter(this);
         registerBtn = (Button)findViewById(R.id.button_register);
         registerBtn.setOnClickListener(this);
+        TextView loginBtn = (TextView)findViewById(R.id.login_Text2);
+        loginBtn.setOnClickListener(this);
         name = (EditText)findViewById(R.id.registerName);
         email = (EditText)findViewById(R.id.registerEmail);
         password=(EditText)findViewById(R.id.registerPassword);
@@ -56,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 onViewErrorMessage(getString(R.string.pw_minimum_length));
                 return;
             }
-
+            v.setEnabled(false);
             salt = HashFactory.getNextSalt();
             int length = password.getText().length();
             char[] pw = new char[length];
@@ -65,14 +68,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             presenter.onRegister(name.getText().toString(), email.getText().toString(), hash, salt);
 
         }
-        else if (v.getId()==R.id.login_Text2){
-            Intent login = new Intent(this, LoginActivity.class);
-            startActivity(login);
+        else if (v.getId()== R.id.login_Text2){
+            //Intent login = new Intent(this, LoginActivity.class);
+            //startActivity(login);
+            finish();
         }
 
     }
 
     public void onViewSuccessMessage(String message){
+        registerBtn.setEnabled(true);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.mail_was_sent);
         builder.setTitle(getString(R.string.register_success));
@@ -81,6 +86,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 dialog.cancel();
                 Intent login = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(login);
+                finish();
             }
         });
 
@@ -89,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void onViewErrorMessage(String message){
+        registerBtn.setEnabled(true);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));

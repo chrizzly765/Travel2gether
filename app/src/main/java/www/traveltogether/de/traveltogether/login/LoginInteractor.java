@@ -13,7 +13,7 @@ import www.traveltogether.de.traveltogether.StaticData;
 import www.traveltogether.de.traveltogether.model.Login;
 import www.traveltogether.de.traveltogether.servercommunication.HttpRequest;
 import www.traveltogether.de.traveltogether.servercommunication.JsonDecode;
-import www.traveltogether.de.traveltogether.servercommunication.Response;
+import www.traveltogether.de.traveltogether.model.Response;
 
 /**
  * Created by Anna-Lena on 12.05.2016.

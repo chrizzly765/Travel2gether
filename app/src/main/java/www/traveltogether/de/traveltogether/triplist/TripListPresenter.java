@@ -1,5 +1,7 @@
 package www.traveltogether.de.traveltogether.triplist;
 
+import android.util.Log;
+
 import www.traveltogether.de.traveltogether.model.Trip;
 
 /**
@@ -21,6 +23,8 @@ public class TripListPresenter implements ITripListPresenter {
 
     @Override
     public void onSuccess(Trip[] trips) {
+
+        Log.d("Success in preseneter","");
         view.onViewTrips(trips);
     }
 

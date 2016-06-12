@@ -5,6 +5,8 @@ import org.json.JSONObject;
 import www.traveltogether.de.traveltogether.ActionType;
 import www.traveltogether.de.traveltogether.DataType;
 import www.traveltogether.de.traveltogether.IInteractor;
+import www.traveltogether.de.traveltogether.model.Request;
+import www.traveltogether.de.traveltogether.model.Response;
 
 /**
  * Created by Anna-Lena on 16.05.2016.

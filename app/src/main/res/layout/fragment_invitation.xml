@@ -1,14 +1,30 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="www.traveltogether.de.traveltogether.invitation.InvitationFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:id="@+id/fragment_button_invite"
+        android:src="@android:drawable/ic_menu_share"
+        android:backgroundTint="@color/abc_background_cache_hint_selector_material_light" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Andere einladen"
+        android:id="@+id/fragment_text_invite"
+        android:autoText="true"
+        android:layout_marginTop="10dp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
         <!--
         android:text="@string/hello_blank_fragment" -->
 
-</FrameLayout>
+</LinearLayout>

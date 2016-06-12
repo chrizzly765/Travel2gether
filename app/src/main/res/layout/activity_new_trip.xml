@@ -81,4 +81,25 @@
         android:layout_alignBottom="@+id/newTrip_button_cancel"
         android:layout_alignParentEnd="true" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_datepicker_start"
+        android:layout_alignTop="@+id/newTrip_startDate"
+        android:layout_alignStart="@+id/newTrip_button_save"
+        android:backgroundTint="@color/abc_background_cache_hint_selector_material_light"
+        android:src="@android:drawable/ic_menu_today"
+        android:layout_toStartOf="@+id/button_datepicker_end"
+        android:layout_above="@+id/button_datepicker_end"
+        android:layout_alignEnd="@+id/button_datepicker_end" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_datepicker_end"
+        android:src="@android:drawable/ic_menu_today"
+        android:backgroundTint="@color/abc_background_cache_hint_selector_material_light"
+        android:layout_above="@+id/newTrip_place"
+        android:layout_alignStart="@+id/newTrip_button_save" />
+
 </RelativeLayout>

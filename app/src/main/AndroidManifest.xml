@@ -12,39 +12,88 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".triplist.TripListActivity" />
-        <activity android:name=".packinglist.PackingListActivity" />
-        <activity android:name=".mainmenu.MainActivity" />
-        <activity android:name=".tasks.TaskListActivity" />
-        <activity android:name=".expense.ExpenseActivity" />
-        <activity android:name=".expense.newexpense.NewExpenseActivity" />
+        <activity
+            android:name=".triplist.TripListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".packinglist.PackingListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mainmenu.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tasks.TaskListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".expense.ExpenseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".expense.newexpense.NewExpenseActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".login.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+        <intent-filter android:autoVerify="true">
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="http" android:host="http://www.imagik.de/traveltogether" />
+            <data android:scheme="https" android:host="http://www.imagik.de/traveltogether" />
+        </intent-filter>
+
+        </activity>
         <!-- android:theme="@android:style/Theme.NoTitleBar android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"" -->
-        <activity android:name=".packinglist.newpackingitem.NewPackingItemActivity" />
-        <activity android:name=".tasks.newtask.NewTaskActivity" />
-        <activity android:name=".triplist.newtrip.NewTripActivity" />
-        <activity android:name=".participantlist.ParticipantListActivity" />
+        <activity
+            android:name=".packinglist.newpackingitem.NewPackingItemActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tasks.newtask.NewTaskActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".triplist.newtrip.NewTripActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".participantlist.ParticipantListActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".settings.SettingsActivity"
-            android:noHistory="true" />
-        <activity android:name=".info.InfoActivity" />
-        <activity android:name=".notification.NotificationActivity" />
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".info.InfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".notification.NotificationActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".register.RegisterActivity"
             android:noHistory="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".launcher.LauncherActivity"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".invitation.InvitationActivity"></activity>
+        <activity
+            android:name=".invitation.InvitationActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="*/*"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -2,15 +2,12 @@ package www.traveltogether.de.traveltogether.register;
 
 import android.util.Log;
 
-import java.io.UnsupportedEncodingException;
-
 import www.traveltogether.de.traveltogether.ActionType;
 import www.traveltogether.de.traveltogether.DataType;
 import www.traveltogether.de.traveltogether.model.Registration;
-import www.traveltogether.de.traveltogether.servercommunication.HashFactory;
 import www.traveltogether.de.traveltogether.servercommunication.HttpRequest;
 import www.traveltogether.de.traveltogether.servercommunication.JsonDecode;
-import www.traveltogether.de.traveltogether.servercommunication.Response;
+import www.traveltogether.de.traveltogether.model.Response;
 
 /**
  * Created by Anna-Lena on 27.05.2016.

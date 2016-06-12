@@ -1,6 +1,11 @@
 package www.traveltogether.de.traveltogether.triplist;
 
+import android.util.Log;
+import android.view.ViewDebug;
+
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import www.traveltogether.de.traveltogether.ActionType;
 import www.traveltogether.de.traveltogether.DataType;
@@ -8,8 +13,7 @@ import www.traveltogether.de.traveltogether.StaticData;
 import www.traveltogether.de.traveltogether.model.Trip;
 import www.traveltogether.de.traveltogether.servercommunication.HttpRequest;
 import www.traveltogether.de.traveltogether.servercommunication.JsonDecode;
-import www.traveltogether.de.traveltogether.servercommunication.Request;
-import www.traveltogether.de.traveltogether.servercommunication.Response;
+import www.traveltogether.de.traveltogether.model.Response;
 
 /**
  * Created by Anna-Lena on 12.05.2016.
@@ -36,8 +40,25 @@ public class TripListInteractor implements ITripListInteractor {
             listener.onError(response.getMessage());
         }
         else{
-            Trip[] trips = (Trip[])JsonDecode.getInstance().jsonToArray(response.getData(), DataType.TRIP);
-            listener.onSuccess(trips);
+            try {
+                ArrayList<Trip> trips;
+                trips = JsonDecode.getInstance().jsonToArray(response.getData(), DataType.TRIP);
+
+                Trip[] tripArray = new Trip[trips.size()];
+                if(trips.size()>0) {
+                    int i = 0;
+                    for (Trip t : trips) {
+                        tripArray[i] = t;
+                        i++;
+                    }
+                }
+                listener.onSuccess(tripArray);
+                return;
+            }
+            catch(Exception e){
+                Log.e(e.getClass().toString(), e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 }

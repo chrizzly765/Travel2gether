@@ -5,6 +5,7 @@ package www.traveltogether.de.traveltogether;
  */
 public class StaticData {
     static String UserId;
+    //static Long CurrentTripId;
 
     static public String getUserId() {
         return UserId;
@@ -12,4 +13,11 @@ public class StaticData {
     static public void setUserId(String id){
         UserId = id;
     }
+
+//    static public Long getCurrentTripId() {
+//        return CurrentTripId;
+//    }
+//    static public void setCurrentTripId(Long id){
+//        CurrentTripId = id;
+//    }
 }

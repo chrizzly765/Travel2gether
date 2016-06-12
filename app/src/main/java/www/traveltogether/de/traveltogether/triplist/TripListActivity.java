@@ -1,20 +1,28 @@
 package www.traveltogether.de.traveltogether.triplist;
 
 import android.app.AlertDialog;
+import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 import www.traveltogether.de.traveltogether.R;
+import www.traveltogether.de.traveltogether.mainmenu.MainActivity;
 import www.traveltogether.de.traveltogether.model.Trip;
 import www.traveltogether.de.traveltogether.settings.SettingsActivity;
 import www.traveltogether.de.traveltogether.triplist.newtrip.NewTripActivity;
 
-public class TripListActivity extends AppCompatActivity implements View.OnClickListener {
+public class TripListActivity extends ListActivity implements View.OnClickListener,AdapterView.OnItemClickListener {
     ITripListPresenter presenter;
+    private TripAdapter adapter;
+    private Trip[] trips;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +32,12 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         Button newTripBtn = (Button)findViewById(R.id.new_trip_button);
         newTripBtn.setOnClickListener(this);
         presenter = new TripListPresenter(this);
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
         presenter.onGetTrips();
     }
 
@@ -39,17 +53,26 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    public void onViewTrips(Trip[] trips){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Anzahl Trips: " + trips.length);
-        builder.setTitle("Error");
-        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
+    public void onViewTrips(Trip[] _trips){
+        Log.d("TripListActivity", "got trips: "+_trips.length);
+        trips= _trips;
+        if(trips.length==0 ||trips==null){
+            //TODO: show new trip listitem
+        }
+        else {
+            adapter = new TripAdapter(this, trips);
+            setListAdapter(adapter);
+            getListView().setOnItemClickListener(this);
+        }
+    }
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Trip trip = (Trip) adapter.getItem(position);
+        Intent mainMenu = new Intent(this, MainActivity.class);
+        Bundle b = new Bundle();
+        b.putLong("tripId", trips[position].getTripId()); //Your id
+        mainMenu.putExtras(b); //Put your id to your next Intent
+        startActivity(mainMenu);
     }
 }
