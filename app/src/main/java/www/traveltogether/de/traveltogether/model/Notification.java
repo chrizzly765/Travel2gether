@@ -8,23 +8,25 @@ import www.traveltogether.de.traveltogether.DataType;
  * Created by Anna-Lena on 12.05.2016.
  */
 public class Notification {
-    private String text;
+    private String message;
     private DataType type;
-    private SimpleDateFormat receiveDate = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
+    private String id;
+    private String /*SimpleDateFormat*/ receiveDate;// = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
 
-    public String getText(){
-        return text;
+    public String getMessage(){
+        return message;
     }
 
     public DataType getType(){
         return type;
     }
-    public SimpleDateFormat getReceiveDate(){
+    public String getReceiveDate(){
         return receiveDate;
     }
-    public Notification(String _text, DataType _type, SimpleDateFormat _receiveDate){
-        text = _text;
+    public Notification(String _text, DataType _type, String _receiveDate, String _id){
+        message = _text;
         type = _type;
         receiveDate = _receiveDate;
+        id =_id;
     }
 }

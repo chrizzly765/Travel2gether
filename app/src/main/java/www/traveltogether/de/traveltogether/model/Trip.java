@@ -12,6 +12,7 @@ public class Trip {
     private String title;
     private String destination;
     private String description;
+    private String adminId;
     private String authorId;
     //private SimpleDateFormat startDate = new SimpleDateFormat("dd.MM.yyyy");
     private String startDate;
@@ -46,6 +47,10 @@ public class Trip {
         return endDate;
     }
 
+    public String getAdminId(){
+        return adminId;
+    }
+
     public Trip(String _title, String _description, String _destination, String _startDate, String _endDate){
         title = _title;
         description = _description;
@@ -53,6 +58,7 @@ public class Trip {
         startDate = _startDate;
         endDate = _endDate;
         authorId = StaticData.getUserId();
+        adminId = authorId;
     }
 
 }

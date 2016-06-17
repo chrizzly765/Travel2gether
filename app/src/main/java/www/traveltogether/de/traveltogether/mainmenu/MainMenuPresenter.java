@@ -26,4 +26,14 @@ public class MainMenuPresenter implements IMainMenuPresenter {
     public void onSuccessDeletingTrip() {
         view.onSuccessDeletingTrip();
     }
+
+    @Override
+    public void onLeaveTrip(long tripId, String userId) {
+        interactor.leaveTrip(tripId,userId, this);
+    }
+
+    @Override
+    public void onSuccessLeavingTrip() {
+        view.onSuccessLeavingTrip();
+    }
 }

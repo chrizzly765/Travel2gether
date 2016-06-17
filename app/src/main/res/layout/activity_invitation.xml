@@ -10,13 +10,19 @@
     tools:context="www.traveltogether.de.traveltogether.invitation.InvitationActivity">
 
     <!--fragment
-        android:id="@+id/invitation_fragment"
+        android:id="@+id/fragment_invitation"
         android:name="www.traveltogether.de.traveltogether.invitation.InvitationFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:layout="@layout/abc_activity_chooser_view" /-->
 
-    <ImageButton
+    <FrameLayout
+        android:id = "@+id/fragment_container"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+
+            />
+    <!--ImageButton
         android:layout_width="wrap_content"
         android:layout_height="43dp"
         android:id="@+id/button_invite"
@@ -30,7 +36,7 @@
         android:text="Andere einladen"
         android:id="@+id/text_invite"
         android:autoText="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp" /-->
 
     <Button
         android:layout_width="wrap_content"

@@ -7,4 +7,8 @@ import www.traveltogether.de.traveltogether.IInteractor;
  */
 public interface IMainMenuInteractor extends IInteractor {
     public void deleteTrip(IMainMenuPresenter listener, Long tripId);
+
+    public void leaveTrip(long tripId, String userId, IMainMenuPresenter listener);
+
+
 }

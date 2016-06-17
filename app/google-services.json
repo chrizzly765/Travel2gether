@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "122657997706",
+    "project_id": "traveltogether-42765"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122657997706:android:89e5b21b40e35fbb",
+        "android_client_info": {
+          "package_name": "www.traveltogether.de.traveltogether"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV6w5jOn1ikj3KUiibOuytpC-7XcQbCps"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -18,13 +18,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Andere einladen"
         android:id="@+id/fragment_text_invite"
-        android:autoText="true"
         android:layout_marginTop="10dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-        <!--
-        android:text="@string/hello_blank_fragment" -->
 
 </LinearLayout>

@@ -17,9 +17,9 @@ public class RegisterPresenter implements IRegisterPresenter {
     }
 
     @Override
-    public void onRegister(String name, String email, String password, String salt) {
+    public void onRegister(String name, String email, String password, String salt, String token) {
         Log.d("Presenter", "register");
-        registerInteractor.register(name, email, password, salt, this);
+        registerInteractor.register(name, email, password, salt, token, this);
 
     }
 

@@ -73,6 +73,7 @@ public class TripListActivity extends ListActivity implements View.OnClickListen
         Bundle b = new Bundle();
         b.putLong("tripId", trips[position].getTripId()); //Your id
         b.putString("title", trips[position].getTitle());
+        b.putString("adminId", trips[position].getAdminId());
         mainMenu.putExtras(b); //Put your id to your next Intent
         startActivity(mainMenu);
     }

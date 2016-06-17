@@ -1,5 +1,7 @@
 package www.traveltogether.de.traveltogether.invitation;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ public class InvitationActivity extends AppCompatActivity implements View.OnClic
         continueButton.setOnClickListener(this);
 
         //This code should be in fragment not here!
+        /*
         ImageButton button = (ImageButton) findViewById(R.id.button_invite);
         TextView text = (TextView)findViewById(R.id.text_invite);
         button.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +47,13 @@ public class InvitationActivity extends AppCompatActivity implements View.OnClic
                 startActivity(createChooser(invite, getString(R.string.title_invititation_choose)));
             }
         });
-        //
+        */
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        InvitationFragment fragment = new InvitationFragment();
+        fragmentTransaction.add(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
+
     }
 
     @Override

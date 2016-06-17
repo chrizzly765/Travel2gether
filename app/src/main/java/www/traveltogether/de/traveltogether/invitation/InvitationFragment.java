@@ -18,7 +18,10 @@ import www.traveltogether.de.traveltogether.R;
 
 import static android.content.Intent.createChooser;
 
-public class InvitationFragment extends Fragment {
+public class InvitationFragment extends Fragment implements View.OnClickListener {
+
+    IInvitePresenter presenter;
+    View view;
 
     public InvitationFragment() {
         // Required empty public constructor
@@ -27,33 +30,21 @@ public class InvitationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ImageButton button = (ImageButton) getView().findViewById(R.id.button_invite);
-        TextView text = (TextView)getView().findViewById(R.id.text_invite);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent invite = new Intent(Intent.ACTION_SEND);
-                invite.putExtra(Intent.EXTRA_TEXT, getString(R.string.invitation_text));
-                invite.setType("text/plain");
-                startActivity(createChooser(invite, getString(R.string.title_invititation_choose)));
-            }
-        });
-        text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent invite = new Intent(Intent.ACTION_SEND);
-                invite.putExtra(Intent.EXTRA_TEXT, getString(R.string.invitation_text));
-                invite.setType("text/plain");
-                startActivity(createChooser(invite, getString(R.string.title_invititation_choose)));
-            }
-        });
+        presenter = new InvitePresenter(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_invitation, container, false);
+
+        super.onCreateView(inflater, container,savedInstanceState);
+        view = inflater.inflate(R.layout.fragment_invitation, container, false);
+        ImageButton button = (ImageButton)view.findViewById(R.id.fragment_button_invite);
+        TextView text = (TextView)view.findViewById(R.id.fragment_text_invite);
+        button.setOnClickListener(this);
+        text.setOnClickListener(this);
+        return view;
     }
 
     @Override
@@ -64,5 +55,21 @@ public class InvitationFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    public void onClick(View v) {
+        if(v.getId() == R.id.fragment_button_invite) {
+            Intent invite = new Intent(Intent.ACTION_SEND);
+            invite.putExtra(Intent.EXTRA_TEXT, getString(R.string.invitation_text));
+            invite.setType("text/plain");
+            startActivity(createChooser(invite, getString(R.string.title_invititation_choose)));
+        }
+         else if (v.getId() == R.id.fragment_text_invite) {
+            Intent invite = new Intent(Intent.ACTION_SEND);
+            invite.putExtra(Intent.EXTRA_TEXT, getString(R.string.invitation_text));
+            invite.setType("text/plain");
+            startActivity(createChooser(invite, getString(R.string.title_invititation_choose)));
+        }
+
     }
 }

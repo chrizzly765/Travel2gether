@@ -31,6 +31,9 @@
     <string name="trip_delete">Reise löschen</string>
     <string name="trip_delete_warning">Möchtest du die Reise wirklich löschen?</string>
     <string name="change_admin">Administrator ändern</string>
+    <string name="leave_trip">Reise verlassen</string>
+    <string name="leave_trip_warning">Möchtest du die Reise wirklich verlassen?</string>
+    <string name="leave_trip_success">Du hast die Reise erfolgreich verlassen.</string>
 
     <!-- OptionsActivity -->
     <string name="profile">Profil</string>

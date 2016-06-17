@@ -3,8 +3,12 @@
     package="www.traveltogether.de.traveltogether">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <permission android:name="www.traveltogether.de.traveltogether.permission.C2D_MESSAGE"
+        android:protectionLevel="signature"/>
+    <uses-permission android:name="www.traveltogether.de.traveltogether.permission.C2D_MESSAGE"/>
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
@@ -94,6 +98,25 @@
                 <data android:mimeType="*/*"/>
             </intent-filter>
         </activity>
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <category android:name="www.traveltogether.de.traveltogether"/>
+            </intent-filter>
+        </receiver>
+        <service android:name="www.traveltogether.de.traveltogether.gcm.GCMPushReceiverService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+        </service>
+        <service android:name=".gcm.GCMRegistrationIntentService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

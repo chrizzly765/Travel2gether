@@ -9,4 +9,8 @@ public interface IMainMenuPresenter {
     void onError(String message);
 
     void onSuccessDeletingTrip();
+
+    void onLeaveTrip(long tripId, String userId);
+
+    void onSuccessLeavingTrip();
 }

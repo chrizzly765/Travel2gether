@@ -22,7 +22,8 @@ public enum DataType {
         public String toString(){
         return "Expense";
     }
-    }, PACKING {
+    },
+    PACKING {
         @Override
         public String toString() {
             return "PackingObject";
@@ -50,6 +51,18 @@ public enum DataType {
         @Override
         public String toString() {
             return "Login";
+        }
+    },
+    COMMENT {
+        @Override
+        public String toString() {
+            return "Comment";
+        }
+    },
+    INVITATION{
+        @Override
+        public String toString() {
+            return "Invitation";
         }
     }
 }
