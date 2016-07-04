@@ -36,6 +36,7 @@
     <string name="leave_trip_success">Du hast die Reise erfolgreich verlassen.</string>
 
     <!-- OptionsActivity -->
+    <string name="options">Optionen</string>
     <string name="profile">Profil</string>
     <string name="edit">Bearbeiten</string>
     <string name="notifications">Benachrichtigungen</string>

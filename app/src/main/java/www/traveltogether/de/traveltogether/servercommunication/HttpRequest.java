@@ -2,6 +2,8 @@ package www.traveltogether.de.traveltogether.servercommunication;
 
 import org.json.JSONObject;
 
+import java.util.concurrent.ExecutionException;
+
 import www.traveltogether.de.traveltogether.ActionType;
 import www.traveltogether.de.traveltogether.DataType;
 import www.traveltogether.de.traveltogether.IInteractor;
@@ -33,9 +35,7 @@ public class HttpRequest  implements IHttpRequest{
         String string = (JsonDecode.getInstance().classToJson(request)).replace("\\\"", "\"").replace("\"{", "{").replace("}\"", "}");
         AsyncHttpTask task = new AsyncHttpTask(this);
         task.execute(getUrl(), string);
-
     }
-
 
     public void setResponse(String response){
 
@@ -43,11 +43,11 @@ public class HttpRequest  implements IHttpRequest{
 
                 JSONObject obj = new JSONObject(response);
                 responseObject = new Response(obj.get("error").toString(), obj.get("message").toString(), obj.get("data").toString());
-                listener.onRequestFinished(responseObject);
+                listener.onRequestFinished(responseObject, dataType, actionType);
             }
             catch(Exception e){
 
-            listener.onRequestFinished(new Response("true", "Error", ""));
+            listener.onRequestFinished(new Response("true", "Error", ""), dataType, actionType);
         }
     }
 

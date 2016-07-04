@@ -21,7 +21,6 @@ import www.traveltogether.de.traveltogether.model.Response;
 public class LoginInteractor implements ILoginInteractor, Runnable {
     ILoginPresenter listener;
     String hash;
-    Boolean requestForSalt = true;
 
     public void login(String _email, String _hash, ILoginPresenter _listener){
         listener = _listener;
@@ -45,13 +44,12 @@ public class LoginInteractor implements ILoginInteractor, Runnable {
 
     }
 
-    public void onRequestFinished(Response response){
+    public void onRequestFinished(Response response, DataType dataType, ActionType actionType){
         if(response.getError()=="true"){
             listener.onError(response.getMessage());
-            requestForSalt = true;
         }
         else {
-            if(requestForSalt) {
+            if(dataType == DataType.LOGIN && actionType == ActionType.GETSALT) {
                 String salt = "";
                 try {
                     JSONObject json = new JSONObject(response.getData());
@@ -63,12 +61,11 @@ public class LoginInteractor implements ILoginInteractor, Runnable {
                 }
                 if(salt!="") {
                     listener.onReturnSalt(salt);
-                    requestForSalt = false;
                 }else{
                     listener.onError("Error in getting salt");
                 }
             }
-            else {
+            else if(dataType ==DataType.LOGIN && actionType == ActionType.LOGIN){
                 //save hash in shared prefs
                 String userId = "";
 
@@ -78,7 +75,6 @@ public class LoginInteractor implements ILoginInteractor, Runnable {
                 } catch (Exception e) {
                     //TODO:ask explicitly for personId?
                     Log.d("Error: ", "Error in response");
-                    requestForSalt = true;
                 }
 
                 SharedPreferences sharedPref = listener.getView().getPreferences(Context.MODE_PRIVATE);
@@ -91,7 +87,6 @@ public class LoginInteractor implements ILoginInteractor, Runnable {
                 editor.commit();
 
                 listener.onSuccess(response.getMessage());
-                requestForSalt = true;
             }
         }
     }

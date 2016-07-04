@@ -1,12 +1,17 @@
 package www.traveltogether.de.traveltogether.triplist;
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -14,15 +19,18 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 import www.traveltogether.de.traveltogether.R;
+import www.traveltogether.de.traveltogether.StaticData;
+import www.traveltogether.de.traveltogether.invitation.InvitationFragment;
 import www.traveltogether.de.traveltogether.mainmenu.MainActivity;
 import www.traveltogether.de.traveltogether.model.Trip;
 import www.traveltogether.de.traveltogether.settings.SettingsActivity;
 import www.traveltogether.de.traveltogether.triplist.newtrip.NewTripActivity;
 
-public class TripListActivity extends ListActivity implements View.OnClickListener,AdapterView.OnItemClickListener {
+public class TripListActivity extends AppCompatActivity implements View.OnClickListener {
     ITripListPresenter presenter;
-    private TripAdapter adapter;
     private Trip[] trips;
+    TripListFragment fragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,25 +64,31 @@ public class TripListActivity extends ListActivity implements View.OnClickListen
     public void onViewTrips(Trip[] _trips){
         Log.d("TripListActivity", "got trips: "+_trips.length);
         trips= _trips;
-        if(trips.length==0 ||trips==null){
-            //TODO: show new trip listitem
-        }
-        else {
-            adapter = new TripAdapter(this, trips);
-            setListAdapter(adapter);
-            getListView().setOnItemClickListener(this);
-        }
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TripListFragment fragment = TripListFragment.newInstance(_trips);
+        fragmentTransaction.add(R.id.fragment_trip_list_container, fragment);
+        fragmentTransaction.commit();
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Trip trip = (Trip) adapter.getItem(position);
-        Intent mainMenu = new Intent(this, MainActivity.class);
-        Bundle b = new Bundle();
-        b.putLong("tripId", trips[position].getTripId()); //Your id
-        b.putString("title", trips[position].getTitle());
-        b.putString("adminId", trips[position].getAdminId());
-        mainMenu.putExtras(b); //Put your id to your next Intent
-        startActivity(mainMenu);
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.optionsmenu_triplist, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.open_options:
+                Intent options = new Intent(this, SettingsActivity.class);
+                startActivity(options);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

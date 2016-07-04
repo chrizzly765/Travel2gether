@@ -25,7 +25,7 @@ public class RegisterInteractor implements IRegisterInteractor, Runnable{
             HttpRequest request = new HttpRequest(DataType.REGISTRATION, ActionType.REGISTER, jsonString, this);
     }
 
-    public void onRequestFinished(Response response){
+    public void onRequestFinished(Response response, DataType dataType, ActionType actionType){
         if(response.getError()=="true"){
             Log.d("error", "");
             listener.onError(response.getMessage());

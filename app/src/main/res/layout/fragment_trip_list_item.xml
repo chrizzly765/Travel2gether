@@ -3,38 +3,35 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="140dp">
 
-    <TextView android:id="@+id/trip_list_item_title"
+    <TextView android:id="@+id/fragment_trip_list_item_title"
         android:textAppearance="?android:textAppearanceMedium"
         android:layout_marginTop="4dp"
         android:layout_height="28dp"
         android:layout_width="match_parent"
         />
-    <TextView android:id="@+id/trip_list_item_description"
+    <TextView android:id="@+id/fragment_trip_list_item_description"
         android:textAppearance="?android:textAppearanceSmall"
         android:layout_marginTop="4dp"
         android:layout_height="20dp"
         android:layout_width="match_parent"
         />
-    <TextView android:id="@+id/trip_list_item_destination"
+    <TextView android:id="@+id/fragment_trip_list_item_destination"
         android:textAppearance="?android:textAppearanceSmall"
         android:layout_marginTop="4dp"
         android:layout_height="20dp"
         android:layout_width="match_parent"
         />
-    <TextView android:id="@+id/trip_list_item_startdate"
+    <TextView android:id="@+id/fragment_trip_list_item_startdate"
         android:textAppearance="?android:textAppearanceSmall"
         android:layout_marginTop="4dp"
         android:layout_height="20dp"
         android:layout_width="match_parent"
         />
-    <TextView android:id="@+id/trip_list_item_enddate"
+    <TextView android:id="@+id/fragment_trip_list_item_enddate"
         android:textAppearance="?android:textAppearanceSmall"
         android:layout_marginTop="4dp"
         android:layout_height="20dp"
         android:layout_width="match_parent"
         />
-
-
-
 
 </LinearLayout>

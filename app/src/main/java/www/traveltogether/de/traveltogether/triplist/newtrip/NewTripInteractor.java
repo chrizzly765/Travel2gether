@@ -22,7 +22,7 @@ public class NewTripInteractor implements INewTripInteractor {
     }
 
     @Override
-    public void onRequestFinished(Response response) {
+    public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if(response.getError()=="false"){
             listener.onSuccess(response.getMessage());
         }

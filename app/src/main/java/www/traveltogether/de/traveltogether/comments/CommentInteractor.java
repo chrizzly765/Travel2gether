@@ -16,7 +16,7 @@ import www.traveltogether.de.traveltogether.servercommunication.HttpRequest;
 public class CommentInteractor implements ICommentInteractor {
     ICommentPresenter listener;
     @Override
-    public void onRequestFinished(Response response) {
+    public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         //TODO
     }
 

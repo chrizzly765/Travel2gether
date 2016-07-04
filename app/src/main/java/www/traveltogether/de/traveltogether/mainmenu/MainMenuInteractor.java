@@ -14,12 +14,10 @@ import www.traveltogether.de.traveltogether.servercommunication.HttpRequest;
  */
 public class MainMenuInteractor implements IMainMenuInteractor {
     IMainMenuPresenter listener;
-    ActionType lastRequested;
 
     @Override
     public void deleteTrip(IMainMenuPresenter _listener, Long tripId) {
         listener = _listener;
-        lastRequested = ActionType.DELETE;
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("tripId", tripId);
@@ -34,7 +32,6 @@ public class MainMenuInteractor implements IMainMenuInteractor {
     @Override
     public void leaveTrip(long tripId, String userId, IMainMenuPresenter _listener) {
         listener = _listener;
-        lastRequested = ActionType.RESIGN;
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("tripId", tripId);
@@ -47,17 +44,16 @@ public class MainMenuInteractor implements IMainMenuInteractor {
     }
 
     @Override
-    public void onRequestFinished(Response response) {
+    public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if(response.getError() == "false"){
-            if(lastRequested == ActionType.DELETE) {
+            if(dataType== DataType.TRIP && actionType == ActionType.DELETE) {
                 listener.onSuccessDeletingTrip();
                 return;
             }
-            if(lastRequested== ActionType.RESIGN){
+            if(dataType== DataType.TRIP && actionType== ActionType.RESIGN){
                 listener.onSuccessLeavingTrip();
                 return;
             }
-
         }
         else{
             listener.onError(response.getMessage());
