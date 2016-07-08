@@ -30,6 +30,6 @@ public class TripListPresenter implements ITripListPresenter {
 
     @Override
     public void onError(String message) {
-
+        view.onViewError(message);
     }
 }

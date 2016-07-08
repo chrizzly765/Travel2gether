@@ -60,6 +60,11 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_trip_list, container, false);
 
+        return view;
+    }
+
+    public void onStart(){
+        super.onStart();
         if(trips.length==0 ||trips==null){
             //TODO: show new trip listitem
         }
@@ -68,9 +73,8 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);
         }
-        return view;
-    }
 
+    }
 
     /**
      * This interface must be implemented by activities that contain this

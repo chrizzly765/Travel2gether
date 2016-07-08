@@ -1,6 +1,7 @@
 package www.traveltogether.de.traveltogether.invitation;
 
 import android.app.Fragment;
+import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
@@ -9,28 +10,38 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
 import www.traveltogether.de.traveltogether.R;
+import www.traveltogether.de.traveltogether.model.Person;
+import www.traveltogether.de.traveltogether.model.Trip;
+import www.traveltogether.de.traveltogether.triplist.TripAdapter;
 
 import static android.content.Intent.createChooser;
 
-public class InvitationFragment extends Fragment implements View.OnClickListener {
+public class InvitationFragment extends ListFragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
-    IInvitePresenter presenter;
+    Person[] formerParticipants;
+    InvitationAdapter adapter;
     View view;
 
     public InvitationFragment() {
         // Required empty public constructor
     }
 
+    public static InvitationFragment newInstance(Person[] persons) {
+        InvitationFragment fragment = new InvitationFragment();
+        fragment.formerParticipants = persons;
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new InvitePresenter(this);
     }
 
     @Override
@@ -47,14 +58,16 @@ public class InvitationFragment extends Fragment implements View.OnClickListener
         return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onStart(){
+        super.onStart();
+        if(formerParticipants.length==0 ||formerParticipants==null){
+            //TODO: show new trip listitem
+        }
+        else {
+            adapter = new InvitationAdapter(getActivity(), formerParticipants);
+            setListAdapter(adapter);
+            getListView().setOnItemClickListener(this);
+        }
     }
 
     public void onClick(View v) {
@@ -71,5 +84,12 @@ public class InvitationFragment extends Fragment implements View.OnClickListener
             startActivity(createChooser(invite, getString(R.string.title_invititation_choose)));
         }
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Person person = (Person) adapter.getItem(position);
+        int personId = person.getPersonId();
+        //ToDo: Send invitation to person
     }
 }

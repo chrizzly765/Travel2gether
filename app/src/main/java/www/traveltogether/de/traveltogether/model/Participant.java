@@ -8,6 +8,7 @@ import android.graphics.Color;
 public class Participant extends Person {
     private String argbColor = "0xffffffff";
     private double accountBalance = 0.0;
+    private String status;
 
     public String getColor(){
         return argbColor;

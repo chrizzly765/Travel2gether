@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import www.traveltogether.de.traveltogether.DataType;
+import www.traveltogether.de.traveltogether.model.Trip;
 
 /**
  * Created by Anna-Lena on 16.05.2016.
@@ -59,7 +60,7 @@ public class JsonDecode {
 //        return null;
 //    }
 
-    public <T> ArrayList<T> jsonToArray(String str, DataType type){
+    /*public <T> ArrayList<T> jsonToArray(String str, DataType type){
         try {
             String string = str.replace("[", "").replace("]","");
             Log.d("jsonToarray",string);
@@ -85,6 +86,11 @@ public class JsonDecode {
             Log.d("Exception jsontoArray: ", e.getMessage());
         }
         return new ArrayList<T>();
+    }*/
+    public <T> Object jsonToArray(String str, Class<T> cl){
+        //Class<T> arrayclass = (Class<T>)ObjectArray.class;
+
+       return gson.fromJson(str,cl);
     }
 
     public String classToJson(Object obj){

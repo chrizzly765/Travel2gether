@@ -3,6 +3,8 @@ package www.traveltogether.de.traveltogether.triplist;
 import android.util.Log;
 import android.view.ViewDebug;
 
+import com.google.gson.Gson;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -41,18 +43,9 @@ public class TripListInteractor implements ITripListInteractor {
         }
         else{
             try {
-                ArrayList<Trip> trips;
-                trips = JsonDecode.getInstance().jsonToArray(response.getData(), DataType.TRIP);
+                TripList tripList = (TripList)JsonDecode.getInstance().<TripList>jsonToArray(response.getData(), TripList.class);
 
-                Trip[] tripArray = new Trip[trips.size()];
-                if(trips.size()>0) {
-                    int i = 0;
-                    for (Trip t : trips) {
-                        tripArray[i] = t;
-                        i++;
-                    }
-                }
-                listener.onSuccess(tripArray);
+                listener.onSuccess(tripList.list);
                 return;
             }
             catch(Exception e){
@@ -61,4 +54,9 @@ public class TripListInteractor implements ITripListInteractor {
             }
         }
     }
+
+    class TripList{
+        Trip[] list;
+    }
+
 }

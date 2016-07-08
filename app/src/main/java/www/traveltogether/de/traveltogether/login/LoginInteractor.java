@@ -80,6 +80,7 @@ public class LoginInteractor implements ILoginInteractor, Runnable {
                 SharedPreferences sharedPref = listener.getView().getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString(listener.getView().getString(R.string.saved_hash), hash.toString());
+                Log.d("Write to shared prefs",hash.toString());
                 if (userId != "") {
                     editor.putString(listener.getView().getString(R.string.saved_user_id), userId);
                     StaticData.setUserId(userId);

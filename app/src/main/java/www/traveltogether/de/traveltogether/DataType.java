@@ -64,5 +64,11 @@ public enum DataType {
         public String toString() {
             return "Invitation";
         }
+    },
+    PERSON{
+        @Override
+        public String toString(){
+            return "Person";
+        }
     }
 }
