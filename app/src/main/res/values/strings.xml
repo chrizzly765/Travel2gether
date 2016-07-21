@@ -100,6 +100,7 @@
     <string name="add_packing_object">Klicke hier, um etwas zur Packliste hinzuzufügen.</string>
     <string name="new_category">Neue Kategorie</string>
     <string name="add_to_category">Zu Kategorie hinzufügen</string>
+    <string name="comment">Kommentieren</string>
 
     <!--string name="logoDescription">TravelTogether Logo</string>
     <string name="email">E-Mail</string>

@@ -2,13 +2,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="www.traveltogether.de.traveltogether.comments.CommentFragment">
+    tools:context="de.traveltogether.comments.CommentFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <RelativeLayout
+        android:id = "@+id/fragment_comment_list_container"
+        android:layout_width="wrap_content"
+        android:layout_height="2000dp"
+
+        />
+
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-        <!--
-        android:text="@string/hello_blank_fragment"
-    -->
+        android:layout_height="wrap_content"
+        android:id="@+id/comment_editText"
+        android:layout_gravity="center_horizontal|bottom"
+        android:text="@string/comment" />
+    <!--
+    android:text="@string/hello_blank_fragment"
+-->
 </FrameLayout>

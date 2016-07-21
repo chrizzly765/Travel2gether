@@ -9,7 +9,7 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".triplist.TripListFragment"
+    tools:context="de.traveltogether.triplist.TripListFragment"
     tools:listitem="@layout/fragment_trip_list_item" >
 
     <ListView android:id="@android:id/list"
