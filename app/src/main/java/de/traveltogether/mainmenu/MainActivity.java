@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         //actionBar.setHomeButtonEnabled(true);
         actionBar.setTitle(heading);
         actionBar.show();
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
     }
 

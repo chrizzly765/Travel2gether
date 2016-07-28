@@ -19,7 +19,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="de.traveltogether.triplist.TripListActivity"
-            android:theme="@style/Theme.AppCompat.Light"
             android:screenOrientation="portrait" />
         <activity
             android:name="de.traveltogether.packinglist.PackingListActivity"
