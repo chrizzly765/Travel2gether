@@ -27,6 +27,7 @@
             android:layout_height="70dp"
             android:background="@drawable/circle"
             android:id="@+id/imageButton"
+            android:src="@mipmap/ic_add"
             android:layout_gravity="right|bottom" />
 
 
