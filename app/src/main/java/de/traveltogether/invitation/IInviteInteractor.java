@@ -7,4 +7,5 @@ import de.traveltogether.IInteractor;
  */
 public interface IInviteInteractor extends IInteractor {
     public void getFormerParticipants(IInvitePresenter _presenter);
+    public void invite(int tripId, long personId, IInvitePresenter listener);
 }

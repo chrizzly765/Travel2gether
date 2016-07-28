@@ -22,8 +22,8 @@ public class NewTripPresenter implements INewTripPresenter {
     }
 
     @Override
-    public void onSuccess(String message) {
-        view.onSuccess(message);
+    public void onSuccess(String message, long tripId) {
+        view.onSuccess(message, tripId);
     }
 
 

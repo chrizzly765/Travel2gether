@@ -11,19 +11,16 @@ import android.widget.AdapterView;
 import de.traveltogether.R;
 import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Trip;
-import de.traveltogether.triplist.dummy.DummyContent.DummyItem;
 
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
 public class TripListFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
     private TripAdapter adapter;
     private Trip[] trips;
-    private OnListFragmentInteractionListener mListener;
     View view;
 
     /**
@@ -58,7 +55,7 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
 
     public void onStart(){
         super.onStart();
-        if(trips.length==0 ||trips==null){
+        if(trips==null || trips.length==0 ){
             //TODO: show new trip listitem
         }
         else {
@@ -67,21 +64,6 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
             getListView().setOnItemClickListener(this);
         }
 
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
     }
 
 

@@ -6,5 +6,5 @@ package de.traveltogether.triplist.newtrip;
 public interface INewTripPresenter {
     public void onCreateTrip(String title, String description, String startdate, String enddate, String place);
     public void onError(String message);
-    public void onSuccess(String message);
+    public void onSuccess(String message, long tripId);
 }

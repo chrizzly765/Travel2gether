@@ -8,13 +8,13 @@
         android:layout_marginTop="4dp"
         android:layout_height="28dp"
         android:layout_width="match_parent"
-        />
+        android:text="title" />
     <TextView android:id="@+id/fragment_trip_list_item_description"
         android:textAppearance="?android:textAppearanceSmall"
         android:layout_marginTop="4dp"
         android:layout_height="20dp"
         android:layout_width="match_parent"
-        />
+        android:text="description" />
     <TextView android:id="@+id/fragment_trip_list_item_destination"
         android:textAppearance="?android:textAppearanceSmall"
         android:layout_marginTop="4dp"

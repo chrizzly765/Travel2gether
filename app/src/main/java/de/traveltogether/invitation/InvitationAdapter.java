@@ -13,6 +13,7 @@ import de.traveltogether.model.Person;
 
 /**
  * Created by Anna-Lena on 12.06.2016.
+ * Schnittstelle zwischen UI und Daten des Invitationfrag
  */
 public class InvitationAdapter extends BaseAdapter {
     private final Person[] formerParticipants;

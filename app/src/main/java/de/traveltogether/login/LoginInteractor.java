@@ -72,21 +72,22 @@ public class LoginInteractor implements ILoginInteractor, Runnable {
                 try {
                     JSONObject json = new JSONObject(response.getData());
                     userId = json.get("personId").toString();
+
                 } catch (Exception e) {
                     //TODO:ask explicitly for personId?
                     Log.d("Error: ", "Error in response");
                 }
 
-                SharedPreferences sharedPref = listener.getView().getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences sharedPref =  listener.getView().getSharedPreferences("TravelTogetherPrefs", Context.MODE_WORLD_READABLE);
+                //SharedPreferences sharedPref = listener.getView().getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString(listener.getView().getString(R.string.saved_hash), hash.toString());
-                Log.d("Write to shared prefs",hash.toString());
                 if (userId != "") {
                     editor.putString(listener.getView().getString(R.string.saved_user_id), userId);
                     StaticData.setUserId(userId);
                 }
-                editor.commit();
-
+                //editor.apply();
+                boolean saved = editor.commit();
                 listener.onSuccess(response.getMessage());
             }
         }

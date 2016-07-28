@@ -16,8 +16,8 @@
         android:layout_height="wrap_content"
         tools:layout="@layout/abc_activity_chooser_view" /-->
 
-    <FrameLayout
-        android:id = "@+id/fragment_container"
+    <RelativeLayout
+        android:id = "@+id/fragment_invitation_container"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
 
