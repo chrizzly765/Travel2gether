@@ -34,7 +34,7 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/imageButton"
                 android:layout_weight="1"
-                android:src="@drawable/infobutton"
+                android:src="@mipmap/menu_icon_info"
                 android:background="#00e6b6" />
 
             <ImageButton
@@ -42,7 +42,8 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/imageButton2"
                 android:layout_weight="1"
-                android:background="#1ddbc8" />
+                android:background="#1ddbc8"
+                android:src="@mipmap/menu_icon_expences" />
         </LinearLayout>
 
         <LinearLayout
@@ -56,14 +57,16 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/imageButton3"
                 android:layout_weight="1"
-                android:background="#03c7c6" />
+                android:background="#03c7c6"
+                android:src="@mipmap/menu_icon_tasks" />
 
             <ImageButton
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/imageButton4"
                 android:layout_weight="1"
-                android:background="#2cc0d3" />
+                android:background="#2cc0d3"
+                android:src="@mipmap/menu_icon_activities" />
         </LinearLayout>
 
         <LinearLayout
@@ -77,14 +80,16 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/imageButton5"
                 android:layout_weight="1"
-                android:background="#27b3e2" />
+                android:background="#27b3e2"
+                android:src="@mipmap/menu_icon_packing" />
 
             <ImageButton
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/imageButton6"
                 android:layout_weight="1"
-                android:background="#37a9e3" />
+                android:background="#37a9e3"
+                android:src="@mipmap/menu_icon_chat" />
         </LinearLayout>
     </LinearLayout>
 

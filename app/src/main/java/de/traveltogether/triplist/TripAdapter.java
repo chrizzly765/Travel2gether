@@ -54,7 +54,7 @@ public class TripAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.fragment_trip_list_item, parent, false);
             holder = new TripViewHolder();
             holder.title = (TextView)convertView.findViewById(R.id.fragment_trip_list_item_title);
-            holder.description= (TextView)convertView.findViewById(R.id.fragment_trip_list_item_description);
+            //holder.description= (TextView)convertView.findViewById(R.id.fragment_trip_list_item_description);
             holder.destination=(TextView)convertView.findViewById(R.id.fragment_trip_list_item_destination);
             holder.startDate=(TextView)convertView.findViewById(R.id.fragment_trip_list_item_startdate);
             holder.endDate=(TextView)convertView.findViewById(R.id.fragment_trip_list_item_enddate);
@@ -67,7 +67,7 @@ public class TripAdapter extends BaseAdapter {
         Context context = parent.getContext();
         Trip trip = (Trip)getItem(position);
         holder.title.setText(trip.getTitle());
-        holder.description.setText(trip.getDescription());
+        //holder.description.setText(trip.getDescription());
         holder.destination.setText(trip.getDestination());
         holder.startDate.setText(trip.getStartDate());
         holder.endDate.setText(trip.getEndDate());
@@ -75,7 +75,7 @@ public class TripAdapter extends BaseAdapter {
     }
 
     static class TripViewHolder {
-        TextView title, description, destination, startDate, endDate;
+        TextView title, destination, startDate, endDate; //+ description
 
     }
 }
