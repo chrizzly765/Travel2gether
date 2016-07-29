@@ -50,10 +50,10 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
         super.onCreateView(inflater, container,savedInstanceState);
 
         view = inflater.inflate(de.traveltogether.R.layout.fragment_invitation, container, false);
-        ImageButton button = (ImageButton)view.findViewById(de.traveltogether.R.id.fragment_button_invite);
-        TextView text = (TextView)view.findViewById(de.traveltogether.R.id.fragment_text_invite);
-        button.setOnClickListener(this);
-        text.setOnClickListener(this);
+        //ImageButton button = (ImageButton)view.findViewById(de.traveltogether.R.id.fragment_button_invite);
+        //TextView text = (TextView)view.findViewById(de.traveltogether.R.id.fragment_text_invite);
+        //button.setOnClickListener(this);
+        //text.setOnClickListener(this);
         return view;
     }
 
@@ -71,7 +71,7 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
 
     public void onClick(View v) {
         //Chooser: auswählen womit der Link geöffnet werden soll
-        if(v.getId() == R.id.fragment_button_invite) {
+        /*if(v.getId() == R.id.fragment_button_invite) {
             Intent invite = new Intent(Intent.ACTION_SEND);
             invite.putExtra(Intent.EXTRA_TEXT, getString(R.string.invitation_text));
             invite.setType("text/plain");
@@ -82,7 +82,7 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
             invite.putExtra(Intent.EXTRA_TEXT, getString(R.string.invitation_text));
             invite.setType("text/plain");
             startActivity(createChooser(invite, getString(R.string.title_invititation_choose)));
-        }
+        }*/
     }
 
     @Override

@@ -24,7 +24,7 @@ public class CommentInteractor implements ICommentInteractor {
         else{
             String data = response.getData();
             CommentList commentList = (CommentList)JsonDecode.getInstance().jsonToArray(data, CommentList.class);
-            listener.onSuccess(commentList.list);
+            listener.onSuccessCommentList(commentList.list);
         }
 
     }
@@ -51,6 +51,30 @@ public class CommentInteractor implements ICommentInteractor {
         }
         catch(Exception e){
             Log.e(e.getClass().toString(),e.getMessage());
+        }
+    }
+
+    @Override
+    public void sendCommentForFeature(long id, String text, ICommentPresenter listener) {
+        try {
+            JSONObject json = new JSONObject();
+            json.put("featureId", id);
+            HttpRequest httpRequest = new HttpRequest(DataType.COMMENT, ActionType.ADD, json.toString(), this);
+        }
+        catch(Exception e){
+
+        }
+    }
+
+    @Override
+    public void sendCommentForTrip(long id, String text, ICommentPresenter listener) {
+        try {
+            JSONObject json = new JSONObject();
+            json.put("tripId", id);
+            HttpRequest httpRequest = new HttpRequest(DataType.CHAT, ActionType.ADD, json.toString(), this);
+        }
+        catch(Exception e){
+
         }
     }
 

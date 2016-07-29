@@ -10,13 +10,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.activity.ActivitiesActivity;
+import de.traveltogether.chat.ChatActivity;
+import de.traveltogether.expense.ExpenseActivity;
+import de.traveltogether.info.InfoActivity;
+import de.traveltogether.packinglist.PackingListActivity;
+import de.traveltogether.tasks.TaskListActivity;
 import de.traveltogether.triplist.TripListActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     long tripId;
     String title;
     String adminId;
@@ -35,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
                 setActionBar(title);
         }
 
+        ImageButton info = (ImageButton)findViewById(R.id.main_menu_info);
+        ImageButton expences = (ImageButton)findViewById(R.id.main_menu_expences);
+        ImageButton tasks = (ImageButton)findViewById(R.id.main_menu_tasks);
+        ImageButton packing = (ImageButton)findViewById(R.id.main_menu_packing);
+        ImageButton activities = (ImageButton)findViewById(R.id.main_menu_activities);
+        ImageButton chat = (ImageButton)findViewById(R.id.main_menu_chat);
     }
 
     public void setActionBar(String heading) {
@@ -146,5 +161,51 @@ public class MainActivity extends AppCompatActivity {
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.main_menu_info){
+            Intent intent = new Intent(this, InfoActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("tripId", tripId);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        else if(v.getId()==R.id.main_menu_expences){
+            Intent intent = new Intent(this, ExpenseActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("tripId", tripId);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        else if(v.getId()==R.id.main_menu_activities){
+            Intent intent = new Intent(this, ActivitiesActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("tripId", tripId);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        else if(v.getId()==R.id.main_menu_chat){
+            Intent intent = new Intent(this, ChatActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("tripId", tripId);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        else if(v.getId()==R.id.main_menu_tasks){
+            Intent intent = new Intent(this, TaskListActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("tripId", tripId);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        else if(v.getId()==R.id.main_menu_packing){
+            Intent intent = new Intent(this, PackingListActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("tripId", tripId);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
     }
 }

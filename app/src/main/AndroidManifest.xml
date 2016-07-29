@@ -3,13 +3,16 @@
     package="de.traveltogether">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <permission android:name="de.traveltogether.permission.C2D_MESSAGE"
-        android:protectionLevel="signature"/>
-    <uses-permission android:name="de.traveltogether.permission.C2D_MESSAGE"/>
+    <permission
+        android:name="de.traveltogether.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="de.traveltogether.permission.C2D_MESSAGE" />
+
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
@@ -18,70 +21,75 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="de.traveltogether.triplist.TripListActivity"
+            android:name=".triplist.TripListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="de.traveltogether.packinglist.PackingListActivity"
+            android:name=".packinglist.PackingListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="de.traveltogether.mainmenu.MainActivity"
+            android:name=".mainmenu.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="de.traveltogether.tasks.TaskListActivity"
+            android:name=".tasks.TaskListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="de.traveltogether.expense.ExpenseActivity"
+            android:name=".expense.ExpenseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="de.traveltogether.expense.newexpense.NewExpenseActivity"
+            android:name=".expense.newexpense.NewExpenseActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name="de.traveltogether.login.LoginActivity"
+            android:name=".login.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
-        <intent-filter android:autoVerify="true">
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="http" android:host="http://www.imagik.de/traveltogether" />
-            <data android:scheme="https" android:host="http://www.imagik.de/traveltogether" />
-        </intent-filter>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="http://www.imagik.de/traveltogether"
+                    android:scheme="http" />
+                <data
+                    android:host="http://www.imagik.de/traveltogether"
+                    android:scheme="https" />
+            </intent-filter>
         </activity>
         <!-- android:theme="@android:style/Theme.NoTitleBar android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"" -->
         <activity
-            android:name="de.traveltogether.packinglist.newpackingitem.NewPackingItemActivity"
+            android:name=".packinglist.newpackingitem.NewPackingItemActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name="de.traveltogether.tasks.newtask.NewTaskActivity"
+            android:name=".tasks.newtask.NewTaskActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name="de.traveltogether.triplist.newtrip.NewTripActivity"
+            android:name=".triplist.newtrip.NewTripActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name="de.traveltogether.participantlist.ParticipantListActivity"
+            android:name=".participantlist.ParticipantListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="de.traveltogether.settings.SettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name="de.traveltogether.info.InfoActivity"
+            android:name=".info.InfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="de.traveltogether.notification.NotificationActivity"
+            android:name=".notification.NotificationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="de.traveltogether.register.RegisterActivity"
+            android:name=".register.RegisterActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="de.traveltogether.launcher.LauncherActivity"
+            android:name=".launcher.LauncherActivity"
             android:noHistory="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -91,33 +99,45 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="de.traveltogether.invitation.InvitationActivity"
-            android:screenOrientation="portrait" >
+            android:name=".invitation.InvitationActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.SEND"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="*/*"/>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="*/*" />
             </intent-filter>
         </activity>
+
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
-                <category android:name="de.traveltogether"/>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="de.traveltogether" />
             </intent-filter>
         </receiver>
-        <service android:name="de.traveltogether.gcm.GCMPushReceiverService" android:exported="false">
+
+        <service
+            android:name=".gcm.GCMPushReceiverService"
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
-        <service android:name="de.traveltogether.gcm.GCMRegistrationIntentService" android:exported="false">
+        <service
+            android:name=".gcm.GCMRegistrationIntentService"
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
+
+        <activity android:name=".activity.ActivitiesActivity" />
+        <activity android:name=".chat.ChatActivity"></activity>
     </application>
 
 </manifest>

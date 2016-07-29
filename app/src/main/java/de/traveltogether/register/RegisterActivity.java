@@ -37,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected EditText name;
     protected EditText email;
     protected EditText password;
+    protected EditText repeatPassword;
     protected String salt;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
@@ -52,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         name = (EditText)findViewById(R.id.registerName);
         email = (EditText)findViewById(R.id.registerEmail);
         password=(EditText)findViewById(R.id.registerPassword);
+        repeatPassword=(EditText)findViewById(R.id.registerPassword_repeat);
     }
 
     public void onClick(View v){
@@ -63,6 +65,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             if(password.getText().length()<7) {
                 onViewErrorMessage(getString(R.string.pw_minimum_length));
                 return;
+            }
+            if(password.getText() != repeatPassword.getText()){
+                onViewErrorMessage(getString(R.string.pw_repeat_error));
             }
 
             v.setEnabled(false);

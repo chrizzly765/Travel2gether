@@ -14,12 +14,16 @@ import de.traveltogether.model.Trip;
  * Created by Anna-Lena on 12.06.2016.
  */
 public class TripAdapter extends BaseAdapter {
-    private final Trip[] tripList;
+    private Trip[] tripList;
     private final LayoutInflater inflater;
 
     public TripAdapter(Context context, Trip[] _trips) {
         inflater = LayoutInflater.from(context);
         tripList = _trips;
+    }
+
+    public void refresh(Trip[] trips){
+        tripList = trips;
     }
 
     @Override

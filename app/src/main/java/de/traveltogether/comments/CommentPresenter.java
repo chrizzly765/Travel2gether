@@ -22,7 +22,17 @@ public class CommentPresenter implements ICommentPresenter {
         interactor.getCommentsForTrip(id, this);
     }
 
-    public void onSuccess(Comment[] comments){
+    public void onSuccessCommentList(Comment[] comments){
         view.onViewComments(comments);
+    }
+
+    @Override
+    public void onSuccessAddComment() {
+        view.onSuccessAddComment();
+    }
+
+    @Override
+    public void onSendComment(long id, String text) {
+        interactor.sendCommentForFeature(id,text,this);
     }
 }
