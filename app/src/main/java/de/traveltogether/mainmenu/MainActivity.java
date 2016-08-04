@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
+*/
     public void onViewError(String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
