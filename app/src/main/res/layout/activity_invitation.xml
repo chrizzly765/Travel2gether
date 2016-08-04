@@ -16,8 +16,15 @@
         android:layout_height="wrap_content"
         tools:layout="@layout/abc_activity_chooser_view" /-->
 
-    <FrameLayout
-        android:id = "@+id/fragment_container"
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weiter"
+        android:id="@+id/invitation_button_continue"
+        android:layout_gravity="bottom" />
+
+    <RelativeLayout
+        android:id = "@+id/fragment_invitation_container"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
 
@@ -38,10 +45,4 @@
         android:autoText="true"
         android:layout_marginTop="10dp" /-->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Weiter"
-        android:id="@+id/invitation_button_continue"
-        android:layout_gravity="bottom" />
 </LinearLayout>

@@ -19,12 +19,14 @@ public class LauncherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
         Log.d("Launcher","start");
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+
+        SharedPreferences sharedPref = getSharedPreferences("TravelTogetherPrefs",Context.MODE_WORLD_READABLE );
+        //SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         String hash = "";
-        sharedPref.getString(getString(R.string.saved_hash), hash);
+        hash = sharedPref.getString(getString(R.string.saved_hash), "");
         if(hash != ""){
             String userId = "";
-            sharedPref.getString(getString(R.string.saved_user_id), userId);
+            userId = sharedPref.getString(getString(R.string.saved_user_id), "");
             if(userId != ""){
                 Log.d("UserId available", userId);
                 Intent tl = new Intent(this, TripListActivity.class);

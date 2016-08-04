@@ -24,7 +24,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     public void onClick(View v){
         if(v.getId() == R.id.logout_button){
-            SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences sharedPref = this.getSharedPreferences("TravelTogetherPrefs", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.remove(getString(R.string.saved_hash));
             editor.remove(getString(R.string.saved_user_id));

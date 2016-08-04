@@ -19,11 +19,13 @@
 
     <!-- RegistrationActivity -->
     <string name="pw_minimum_length">Das Passwort muss aus mindestens 7 Zeichen bestehen.</string>
+    <string name="pw_repeat_error">Die eingegebenen Passwörter stimmen nicht überein.</string>
     <string name="invalid_mailadress">Bitte gib eine gültige Mail Adresse ein um dich zu registrieren.</string>
     <string name="error">Etwas ist schiefgelaufen.</string>
     <string name="ok">OK</string>
     <string name="register_success">Erfolgreich registriert.</string>
     <string name="mail_was_sent">Eine E-Mail mit dem Bestätigungslink wurde an dich vesendet.</string>
+
 
     <!-- TripListActivity-->
     <string name="my_trips">Meine Reisen</string>
@@ -55,8 +57,9 @@
     <string name="invited_to_trip">%1$s hat dich eingeladen der Reise %2$s beizutreten</string>
     <string name="join">Beitreten</string>
     <string name="decline">Ablehnen</string>
-    <string name = "invitation_text">Du wurdest eingeladen, an einer TravelTogether Reise teilzunehmen. http://www.imagik.de/traveltogether</string>
-    <string name = "title_invititation_choose">Andere zur Reise einladen</string>
+    <string name="invitation_text">Du wurdest eingeladen, an einer TravelTogether Reise teilzunehmen. http://www.imagik.de/traveltogether</string>
+    <string name="title_invititation_choose">Andere zur Reise einladen</string>
+    <string name="invite_success">Erfolgreich eingeladen</string>
 
     <!-- MainMenuActivity -->
     <string name="progress">Fortschritt</string>

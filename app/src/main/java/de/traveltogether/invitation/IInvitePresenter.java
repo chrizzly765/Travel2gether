@@ -8,5 +8,7 @@ import de.traveltogether.model.Person;
 public interface IInvitePresenter {
     public void onGetFormerParticipants();
     public void onError(String message);
-    public void onSuccess(Person[] persons);
+    public void onShowParticipants(Person[] persons);
+    public void onInvite(int personId, long tripId);
+    public void onInviteSuccess();
 }

@@ -41,12 +41,22 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         newTripBtn.setOnClickListener(this);
         presenter = new TripListPresenter(this);
 
+        presenter.onGetTrips();
     }
 
     @Override
     protected void onStart(){
         super.onStart();
-        presenter.onGetTrips();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        /*FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.remove(fragment);
+        fragmentTransaction.commit();*/
+
     }
 
     @Override

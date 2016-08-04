@@ -24,19 +24,13 @@ public class GCMPushReceiverService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
         String type = data.getString("type");
-        if(type.equals("notification")) {
-            String feature_type = data.getString("feature_type");
-            String id = data.getString("id");
-            String date = data.getString("date");
-            String message = data.getString("message");
-            Notification not = new Notification(message, DataType.valueOf(feature_type.toUpperCase()), date, id);
-            NotificationInteractor.addNotification(not);
-            sendNotification(message);
-            //TODO
-        }
-        else if (type == "invitation"){
-            //TODO
-        }
+        String id = data.getString("id");
+        String date = data.getString("date");
+        String message = data.getString("message");
+        //Notification not = new Notification(message, DataType.valueOf(feature_type.toUpperCase()), date, id);
+        //NotificationInteractor.addNotification(not);
+        sendNotification(message);
+        //TODO
     }
     private void sendNotification(String message) {
         Intent intent = new Intent(this, NotificationActivity.class);
@@ -48,8 +42,8 @@ public class GCMPushReceiverService extends GcmListenerService {
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         //Build notification
         NotificationCompat.Builder noBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentText("My GCM message :X:X")
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle("TravelTogether")
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);

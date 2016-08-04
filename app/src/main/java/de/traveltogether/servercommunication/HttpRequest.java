@@ -1,5 +1,7 @@
 package de.traveltogether.servercommunication;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 import de.traveltogether.ActionType;
@@ -44,7 +46,7 @@ public class HttpRequest  implements IHttpRequest{
                 listener.onRequestFinished(responseObject, dataType, actionType);
             }
             catch(Exception e){
-
+            Log.e("Error in httpRequest", e.getMessage());
             listener.onRequestFinished(new Response("true", "Error", ""), dataType, actionType);
         }
     }

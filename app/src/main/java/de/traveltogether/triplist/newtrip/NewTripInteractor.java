@@ -24,7 +24,8 @@ public class NewTripInteractor implements INewTripInteractor {
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if(response.getError()=="false"){
-            listener.onSuccess(response.getMessage());
+            long tripId = ((Trip)JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP)).getTripId();
+            listener.onSuccess(response.getMessage(), tripId);
         }
         else{
             listener.onError(response.getMessage());

@@ -23,6 +23,13 @@ public class JsonDecode {
         gson = new Gson();
     }
 
+    /**
+     * Converts Json String into class
+     * @param str json string
+     * @param type DataType which has same name as class in which it should be converted
+     * @param <T> the resulting object type
+     * @return
+     */
     public <T> T jsonToClass(String str, DataType type){
 
         try {
@@ -80,10 +87,15 @@ public class JsonDecode {
         }
         return new ArrayList<T>();
     }*/
-    public <T> Object jsonToArray(String str, Class<T> cl){
+    public <T> Object jsonToArray(String str, Class<T> cl) {
         //Class<T> arrayclass = (Class<T>)ObjectArray.class;
-
-       return gson.fromJson(str,cl);
+        T t = null;
+        try {
+            t = gson.fromJson(str, cl);
+        } catch (Exception e) {
+            Log.d("Error in json to array", e.getMessage());
+        }
+        return t;
     }
 
     public String classToJson(Object obj){

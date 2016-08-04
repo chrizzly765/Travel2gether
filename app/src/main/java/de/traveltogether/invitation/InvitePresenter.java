@@ -25,7 +25,19 @@ public class InvitePresenter implements IInvitePresenter {
     }
 
     @Override
-    public void onSuccess(Person[] persons) {
+    public void onShowParticipants(Person[] persons) {
         view.onViewFormerParticipants(persons);
     }
+
+    @Override
+    public void onInvite(int personId, long tripId) {
+        interactor.invite(personId, tripId, this);
+    }
+
+    @Override
+    public void onInviteSuccess(){
+        view.onInviteSuccess();
+    }
+
+
 }

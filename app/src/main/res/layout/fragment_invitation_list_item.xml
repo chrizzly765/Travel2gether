@@ -13,6 +13,7 @@
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:text="Name"
+        android:textSize="21dp"
         android:id="@+id/fragment_invitation_list_name"
         android:layout_gravity="left"
         android:layout_weight="0.01" />

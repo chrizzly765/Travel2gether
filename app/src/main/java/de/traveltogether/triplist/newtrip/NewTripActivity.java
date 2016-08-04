@@ -93,14 +93,18 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
         dialog.show();
     }
 
-    public void onSuccess(String message){
+    public void onSuccess(String message, long tripId){
         Context context = getApplicationContext();
         CharSequence text = getString(R.string.newtrip_success);
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+
         Intent invite = new Intent(this, InvitationActivity.class);
+        Bundle b = new Bundle();
+        b.putLong("tripId", tripId); //Your id
+        invite.putExtras(b); //Put your id to your next Intent
         startActivity(invite);
         finish();
     }

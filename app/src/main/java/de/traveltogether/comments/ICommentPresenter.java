@@ -8,5 +8,8 @@ import de.traveltogether.model.Comment;
 public interface ICommentPresenter {
     public void onGetCommentsForFeature(long id);
     public void onGetCommentsForTrip(long id);
-    public void onSuccess(Comment[] comments);
+    public void onSuccessCommentList(Comment[] comments);
+    public void onSuccessAddComment();
+    public void onSendComment(long id, String text);
+
 }

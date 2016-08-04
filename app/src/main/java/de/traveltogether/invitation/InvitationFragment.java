@@ -15,19 +15,26 @@ import de.traveltogether.model.Person;
 
 import static android.content.Intent.createChooser;
 
+/**
+*Fragment, dass die Liste der ehemaligen Mitreisenden anzeigt
+*/
 public class InvitationFragment extends ListFragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     Person[] formerParticipants;
     InvitationAdapter adapter;
     View view;
+    IInvitePresenter presenter;
+    long tripId;
 
     public InvitationFragment() {
         // Required empty public constructor
     }
 
-    public static InvitationFragment newInstance(Person[] persons) {
+    public static InvitationFragment newInstance(Person[] persons, IInvitePresenter _presenter, long _tripId) {
         InvitationFragment fragment = new InvitationFragment();
         fragment.formerParticipants = persons;
+        fragment.presenter=_presenter;
+        fragment.tripId = _tripId;
         return fragment;
     }
 
@@ -40,20 +47,20 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         super.onCreateView(inflater, container,savedInstanceState);
-        view = inflater.inflate(R.layout.fragment_invitation, container, false);
-        ImageButton button = (ImageButton)view.findViewById(R.id.fragment_button_invite);
-        TextView text = (TextView)view.findViewById(R.id.fragment_text_invite);
-        button.setOnClickListener(this);
-        text.setOnClickListener(this);
+
+        view = inflater.inflate(de.traveltogether.R.layout.fragment_invitation, container, false);
+        //ImageButton button = (ImageButton)view.findViewById(de.traveltogether.R.id.fragment_button_invite);
+        //TextView text = (TextView)view.findViewById(de.traveltogether.R.id.fragment_text_invite);
+        //button.setOnClickListener(this);
+        //text.setOnClickListener(this);
         return view;
     }
 
     public void onStart(){
         super.onStart();
-        if(formerParticipants.length==0 ||formerParticipants==null){
-            //TODO: show new trip listitem
+        if(formerParticipants==null || formerParticipants.length==0 ){
+            //TODO: show empty participant list?
         }
         else {
             adapter = new InvitationAdapter(getActivity(), formerParticipants);
@@ -63,7 +70,8 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
     }
 
     public void onClick(View v) {
-        if(v.getId() == R.id.fragment_button_invite) {
+        //Chooser: auswählen womit der Link geöffnet werden soll
+        /*if(v.getId() == R.id.fragment_button_invite) {
             Intent invite = new Intent(Intent.ACTION_SEND);
             invite.putExtra(Intent.EXTRA_TEXT, getString(R.string.invitation_text));
             invite.setType("text/plain");
@@ -74,14 +82,14 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
             invite.putExtra(Intent.EXTRA_TEXT, getString(R.string.invitation_text));
             invite.setType("text/plain");
             startActivity(createChooser(invite, getString(R.string.title_invititation_choose)));
-        }
-
+        }*/
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        //bei click auf eine Person
         Person person = (Person) adapter.getItem(position);
         int personId = person.getPersonId();
-        //ToDo: Send invitation to person
+        presenter.onInvite(personId, tripId);
     }
 }
