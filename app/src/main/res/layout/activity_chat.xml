@@ -10,7 +10,7 @@
     tools:context="de.traveltogether.chat.ChatActivity">
 
     <RelativeLayout
-        android:id = "@+id/fragment_comment_list_container"
+        android:id = "@+id/activity_chat_comment_container"
         android:layout_width="wrap_content"
         android:layout_height="1000dp"
 

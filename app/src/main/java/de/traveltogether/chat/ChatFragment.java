@@ -1,42 +1,42 @@
-package de.traveltogether.comments;
+package de.traveltogether.chat;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.comments.CommentListFragment;
+import de.traveltogether.comments.CommentPresenter;
+import de.traveltogether.comments.ICommentView;
+import de.traveltogether.comments.ICommentPresenter;
 import de.traveltogether.model.Comment;
 
 /**
  * A simple {@link android.app.Fragment} subclass.
  */
-public class CommentFragment extends Fragment implements View.OnClickListener, ICommentView {
+public class ChatFragment extends Fragment implements View.OnClickListener, ICommentView {
     long id;
     ICommentPresenter presenter;
     Comment[] comments;
     EditText inputField;
 
-    public CommentFragment() {
+    public ChatFragment () {
         // Required empty public constructor
 
     }
 
 
-    public static CommentFragment newInstance(long _id){
-        CommentFragment fragment = new CommentFragment();
+    public static ChatFragment newInstance(long _id){
+        ChatFragment fragment = new ChatFragment();
         fragment.id = _id;
         return fragment;
     }
@@ -46,7 +46,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
         super.onCreate(savedInstanceState);
 
         presenter = new CommentPresenter(this);
-        presenter.onGetCommentsForFeature(id);
+        presenter.onGetCommentsForTrip(id);
     }
 
     public void onViewComments(Comment[] _comments){
@@ -74,7 +74,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
     public void onClick(View v) {
         if(v.getId()==R.id.fragment_comment_button_send){
             String text = inputField.getText().toString();
-            presenter.onSendCommentForFeature(id, StaticData.getUserId(), text);
+            presenter.onSendCommentForTrip(id, StaticData.getUserId(), text);
 
             //Text löschen wenn Eingabe fertig
             inputField.setText("");

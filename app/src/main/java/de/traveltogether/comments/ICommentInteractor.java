@@ -8,6 +8,6 @@ import de.traveltogether.IInteractor;
 public interface ICommentInteractor extends IInteractor {
     void getCommentsForFeature(long id, ICommentPresenter commentPresenter);
     void getCommentsForTrip(long id, ICommentPresenter commentPresenter);
-    void sendCommentForFeature(long id, String text, ICommentPresenter listener);
-    void sendCommentForTrip(long id, String text, ICommentPresenter listener);
+    void sendCommentForFeature(long id, int personId, String text, ICommentPresenter listener);
+    void sendCommentForTrip(long id,int personId, String text, ICommentPresenter listener);
 }

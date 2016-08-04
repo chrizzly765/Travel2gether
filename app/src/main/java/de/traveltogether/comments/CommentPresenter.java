@@ -7,8 +7,8 @@ import de.traveltogether.model.Comment;
  */
 public class CommentPresenter implements ICommentPresenter {
     ICommentInteractor interactor;
-    CommentFragment view;
-    public CommentPresenter(CommentFragment commentFragment){
+    ICommentView view;
+    public CommentPresenter(ICommentView commentFragment){
         view = commentFragment;
         interactor = new CommentInteractor();
     }
@@ -32,7 +32,12 @@ public class CommentPresenter implements ICommentPresenter {
     }
 
     @Override
-    public void onSendComment(long id, String text) {
-        interactor.sendCommentForFeature(id,text,this);
+    public void onSendCommentForTrip(long id, int personId, String text) {
+        interactor.sendCommentForTrip(id,personId,text,this);
+    }
+
+    @Override
+    public void onSendCommentForFeature(long id, int personId, String text) {
+        interactor.sendCommentForFeature(id,personId,text, this);
     }
 }

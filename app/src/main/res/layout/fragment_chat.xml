@@ -1,0 +1,31 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="de.traveltogether.chat.ChatFragment">
+
+
+    <RelativeLayout
+        android:id = "@+id/fragment_comment_list_container"
+        android:layout_width="wrap_content"
+        android:layout_height="2000dp"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_comment_editText"
+        android:layout_gravity="center_horizontal|bottom"
+        android:text="@string/comment" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="send"
+        android:id="@+id/fragment_comment_button_send"
+        android:layout_gravity="right|bottom" />
+    <!--
+    android:text="@string/hello_blank_fragment"
+-->
+</FrameLayout>
