@@ -61,6 +61,7 @@
     <string name="invitation_text">Du wurdest eingeladen, an einer TravelTogether Reise teilzunehmen. http://www.imagik.de/traveltogether</string>
     <string name="title_invititation_choose">Andere zur Reise einladen</string>
     <string name="invite_success">Erfolgreich eingeladen</string>
+    <string name="invitation">Einladung</string>
 
     <!-- MainMenuActivity -->
     <string name="progress">Fortschritt</string>

@@ -6,24 +6,21 @@ import java.text.SimpleDateFormat;
  * Created by Anna-Lena on 12.05.2016.
  */
 public class Comment {
-    private long id =-1;
-    private String author;
-    private String text;
-    private SimpleDateFormat date = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
+    private long author =-1;
+    private String content;
+    private String added;
 
-    public long getId(){return id;}
-    public String getAuthor(){
-        return author;
-    }
+    public long getId(){return author;}
     public String getText(){
-        return text;
+        return content;
     }
-    public SimpleDateFormat getDate(){
-        return date;
+    public String getDate(){
+        return added;
     }
-    public Comment(String _author, String _text, SimpleDateFormat _date){
-        author= _author;
-        text = _text;
-        date= _date;
+
+    public Comment(long _author, String _content, String _date){
+        author = _author ;
+        content=_content;
+        added = _date;
     }
 }

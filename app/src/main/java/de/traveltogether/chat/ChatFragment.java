@@ -86,6 +86,6 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
     }
 
     public void onSuccessAddComment(){
-        presenter.onGetCommentsForFeature(id);
+        presenter.onGetCommentsForTrip(id);
     }
 }

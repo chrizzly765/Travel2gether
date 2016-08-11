@@ -15,10 +15,9 @@ public class Task extends AbstractListObject {
     private List<Participant> assignedParticipants = new ArrayList<>();
 
 
-    public Task(String _title, int _id, String _description, Participant _author) {
+    public Task(String _title, int _id, String _description, int _author) {
         super(_title, _id, _description, _author);
         taskId = _id;
-
     }
 
     public int getTaskId() {

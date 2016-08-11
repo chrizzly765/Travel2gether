@@ -8,20 +8,21 @@ import de.traveltogether.DataType;
 public class Notification {
     private String message;
     private DataType type;
-    private String id;
+    private long id;
     private String /*SimpleDateFormat*/ receiveDate;// = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
 
     public String getMessage(){
         return message;
     }
-
     public DataType getType(){
         return type;
     }
     public String getReceiveDate(){
         return receiveDate;
     }
-    public Notification(String _text, DataType _type, String _receiveDate, String _id){
+    public Long getId(){return id;}
+
+    public Notification(String _text, DataType _type, String _receiveDate, long _id){
         message = _text;
         type = _type;
         receiveDate = _receiveDate;

@@ -5,18 +5,18 @@ package de.traveltogether.model;
  */
 public class Person {
     private int personId;
-    private String mailAddress = "";
+    private String email = "";
     private String name;
 
     public Person(int _personId,String _mailAddress, String _userName){
         personId = _personId;
-        mailAddress = _mailAddress;
+        email = _mailAddress;
         name = _userName;
     }
 
     public Person(int _personId, String _userName){
         personId = _personId;
-        mailAddress = "";
+        email = "";
         name = _userName;
     }
 
@@ -29,6 +29,6 @@ public class Person {
     }
 
     public String getMailAddress(){
-        return mailAddress;
+        return email;
     }
 }

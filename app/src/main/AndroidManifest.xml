@@ -136,7 +136,9 @@
         </service>
 
         <activity android:name=".activity.ActivitiesActivity" />
-        <activity android:name=".chat.ChatActivity"></activity>
+        <activity android:name=".chat.ChatActivity"
+        android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
