@@ -10,5 +10,5 @@ public interface IMainMenuInteractor extends IInteractor {
 
     public void leaveTrip(long tripId, String userId, IMainMenuPresenter listener);
 
-
+    public void getParticipantsForTrip(long tripId, IMainMenuPresenter listener);
 }

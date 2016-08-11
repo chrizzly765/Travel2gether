@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         activities.setOnClickListener(this);
         ImageButton chat = (ImageButton)findViewById(R.id.main_menu_chat);
         chat.setOnClickListener(this);
+
+        presenter.onGetParticipantsForTrip(tripId);
     }
 
     public void setActionBar(String heading) {

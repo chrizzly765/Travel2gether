@@ -8,20 +8,20 @@ import java.util.List;
  */
 public class Expense extends AbstractListObject {
     private double amount;
-    private Participant payer;
+    private Participant payedBy;
     private List<Payer> assignedPayers = new ArrayList<Payer>();
 
     public double getAmount(){
         return amount;
     }
     public Participant getPayer(){
-        return payer;
+        return payedBy;
     }
 
     public Expense(String _title, int _id, String _description, Participant _author, double _amount, Participant _payer) {
         super(_title, _id, _description, _author);
         amount = _amount;
-        payer = _payer;
+        payedBy = _payer;
     }
 
     public void addPayer(Participant _person, double _amount){

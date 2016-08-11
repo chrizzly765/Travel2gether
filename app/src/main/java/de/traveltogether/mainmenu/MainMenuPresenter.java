@@ -1,5 +1,7 @@
 package de.traveltogether.mainmenu;
 
+import de.traveltogether.model.Participant;
+
 /**
  * Created by Anna-Lena on 12.05.2016.
  */
@@ -36,4 +38,10 @@ public class MainMenuPresenter implements IMainMenuPresenter {
     public void onSuccessLeavingTrip() {
         view.onSuccessLeavingTrip();
     }
+
+    @Override
+    public void onGetParticipantsForTrip(long tripId) {
+        interactor.getParticipantsForTrip(tripId, this);
+    }
+
 }
