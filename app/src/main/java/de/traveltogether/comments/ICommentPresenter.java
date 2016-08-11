@@ -10,6 +10,6 @@ public interface ICommentPresenter {
     public void onGetCommentsForTrip(long id);
     public void onSuccessCommentList(Comment[] comments);
     public void onSuccessAddComment();
-    public void onSendComment(long id, String text);
-
+    public void onSendCommentForTrip(long id,int personId, String text);
+    public void onSendCommentForFeature(long id,int personId, String text);
 }

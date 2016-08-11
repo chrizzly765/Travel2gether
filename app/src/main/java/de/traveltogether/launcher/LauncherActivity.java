@@ -25,10 +25,9 @@ public class LauncherActivity extends AppCompatActivity {
         String hash = "";
         hash = sharedPref.getString(getString(R.string.saved_hash), "");
         if(hash != ""){
-            String userId = "";
-            userId = sharedPref.getString(getString(R.string.saved_user_id), "");
-            if(userId != ""){
-                Log.d("UserId available", userId);
+            int userId;
+            userId = sharedPref.getInt(getString(R.string.saved_user_id), -1);
+            if(userId != -1){
                 Intent tl = new Intent(this, TripListActivity.class);
                 StaticData.setUserId(userId);
                 startActivity(tl);

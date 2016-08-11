@@ -74,7 +74,7 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
         Bundle b = new Bundle();
         b.putLong("tripId", trips[position].getTripId()); //Your id
         b.putString("title", trips[position].getTitle());
-        b.putString("adminId", trips[position].getAdminId());
+        b.putInt("adminId", trips[position].getAdminId());
         mainMenu.putExtras(b); //Put your id to your next Intent
         startActivity(mainMenu);
     }

@@ -45,11 +45,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         ImageButton info = (ImageButton)findViewById(R.id.main_menu_info);
+        info.setOnClickListener(this);
         ImageButton expences = (ImageButton)findViewById(R.id.main_menu_expences);
+        expences.setOnClickListener(this);
         ImageButton tasks = (ImageButton)findViewById(R.id.main_menu_tasks);
+        tasks.setOnClickListener(this);
         ImageButton packing = (ImageButton)findViewById(R.id.main_menu_packing);
+        packing.setOnClickListener(this);
         ImageButton activities = (ImageButton)findViewById(R.id.main_menu_activities);
+        activities.setOnClickListener(this);
         ImageButton chat = (ImageButton)findViewById(R.id.main_menu_chat);
+        chat.setOnClickListener(this);
     }
 
     public void setActionBar(String heading) {

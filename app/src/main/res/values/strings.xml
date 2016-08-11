@@ -16,6 +16,7 @@
     <string name="name">Name</string>
     <string name="repeat_password">Passwort wiederholen</string>
     <string name="login_success">Erfolgreich angemeldet.</string>
+    <string name="login_error">Fehler beim anmelden. Bitte versuche es erneut.</string>
 
     <!-- RegistrationActivity -->
     <string name="pw_minimum_length">Das Passwort muss aus mindestens 7 Zeichen bestehen.</string>
@@ -104,6 +105,9 @@
     <string name="new_category">Neue Kategorie</string>
     <string name="add_to_category">Zu Kategorie hinzufügen</string>
     <string name="comment">Kommentieren</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--string name="logoDescription">TravelTogether Logo</string>
     <string name="email">E-Mail</string>

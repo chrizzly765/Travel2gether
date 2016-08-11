@@ -18,7 +18,7 @@ import de.traveltogether.model.Response;
 /**
  * Created by Anna-Lena on 12.05.2016.
  */
-public class LoginInteractor implements ILoginInteractor, Runnable {
+public class LoginInteractor implements ILoginInteractor {
     ILoginPresenter listener;
     String hash;
 
@@ -67,24 +67,27 @@ public class LoginInteractor implements ILoginInteractor, Runnable {
             }
             else if(dataType ==DataType.LOGIN && actionType == ActionType.LOGIN){
                 //save hash in shared prefs
-                String userId = "";
+                int userId = -1;
 
                 try {
                     JSONObject json = new JSONObject(response.getData());
-                    userId = json.get("personId").toString();
+                    userId = json.getInt("personId");
 
                 } catch (Exception e) {
                     //TODO:ask explicitly for personId?
-                    Log.d("Error: ", "Error in response");
+                    Log.d("Error: ", e.getMessage());
                 }
 
                 SharedPreferences sharedPref =  listener.getView().getSharedPreferences("TravelTogetherPrefs", Context.MODE_WORLD_READABLE);
                 //SharedPreferences sharedPref = listener.getView().getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString(listener.getView().getString(R.string.saved_hash), hash.toString());
-                if (userId != "") {
-                    editor.putString(listener.getView().getString(R.string.saved_user_id), userId);
+                if (userId != -1) {
+                    editor.putInt(listener.getView().getString(R.string.saved_user_id), userId);
                     StaticData.setUserId(userId);
+                }
+                else{
+                    listener.onError("Fehler beim Anmelden. Bitte versuche es erneut.");//TODO: String Ersetzen
                 }
                 //editor.apply();
                 boolean saved = editor.commit();
@@ -93,8 +96,4 @@ public class LoginInteractor implements ILoginInteractor, Runnable {
         }
     }
 
-    @Override
-    public void run() {
-
-    }
 }

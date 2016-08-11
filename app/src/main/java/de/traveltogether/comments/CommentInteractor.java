@@ -55,10 +55,12 @@ public class CommentInteractor implements ICommentInteractor {
     }
 
     @Override
-    public void sendCommentForFeature(long id, String text, ICommentPresenter listener) {
+    public void sendCommentForFeature(long id, int personId, String text, ICommentPresenter listener) {
         try {
             JSONObject json = new JSONObject();
             json.put("featureId", id);
+            json.put("content",text);
+            json.put("author", personId);
             HttpRequest httpRequest = new HttpRequest(DataType.COMMENT, ActionType.ADD, json.toString(), this);
         }
         catch(Exception e){
@@ -67,10 +69,12 @@ public class CommentInteractor implements ICommentInteractor {
     }
 
     @Override
-    public void sendCommentForTrip(long id, String text, ICommentPresenter listener) {
+    public void sendCommentForTrip(long id, int personId, String text, ICommentPresenter listener) {
         try {
             JSONObject json = new JSONObject();
             json.put("tripId", id);
+            json.put("content",text);
+            json.put("author", personId);
             HttpRequest httpRequest = new HttpRequest(DataType.CHAT, ActionType.ADD, json.toString(), this);
         }
         catch(Exception e){

@@ -68,6 +68,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
             if(password.getText() != repeatPassword.getText()){
                 onViewErrorMessage(getString(R.string.pw_repeat_error));
+                return;
             }
 
             v.setEnabled(false);
@@ -75,8 +76,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             mRegistrationBroadcastReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-
-                    Log.d("onReceive", "start");
                     //Check type of intent filter
                     if(intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_SUCCESS)){
                         //Registration success

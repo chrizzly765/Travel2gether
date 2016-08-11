@@ -10,8 +10,8 @@ public class Trip {
     private String title;
     private String destination;
     private String description;
-    private String adminId;
-    private String authorId;
+    private int adminId;
+    private int authorId;
     //private SimpleDateFormat startDate = new SimpleDateFormat("dd.MM.yyyy");
     private String startDate;
     private String endDate;
@@ -34,7 +34,7 @@ public class Trip {
         return description;
     }
 
-    public String getAuthorId(){
+    public int getAuthorId(){
         return authorId;
     }
 
@@ -46,7 +46,7 @@ public class Trip {
         return endDate;
     }
 
-    public String getAdminId(){
+    public int getAdminId(){
         return adminId;
     }
 
