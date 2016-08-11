@@ -9,4 +9,47 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="de.traveltogether.tasks.TaskListActivity">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="24dp"
+        android:background="#afddf4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="in Bearbeitung"
+            android:id="@+id/textView"
+            android:paddingLeft="16dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="#37a9e3"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id = "@+id/fragment_task_list_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="32dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/frameLayout">
+
+        <ImageButton
+            android:layout_margin="15dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/circle"
+            android:id="@+id/fab_button"
+            android:src="@mipmap/ic_add"
+            android:layout_gravity="right|bottom" />
+    </FrameLayout>
+
 </RelativeLayout>
