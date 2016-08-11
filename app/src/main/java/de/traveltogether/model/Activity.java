@@ -27,7 +27,7 @@ public class Activity extends AbstractListObject {
     }
 
     //TODO: implement description, icon, destination, time and date as optional
-    public Activity(String _title, int _id, String _description, Participant _author, String _icon, String _destination, SimpleDateFormat _time, SimpleDateFormat _date) {
+    public Activity(String _title, int _id, String _description, int _author, String _icon, String _destination, SimpleDateFormat _time, SimpleDateFormat _date) {
         super(_title, _id, _description, _author);
         icon = _icon;
         destination = _destination;

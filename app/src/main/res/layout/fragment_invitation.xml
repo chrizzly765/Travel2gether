@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,28 +6,56 @@
     tools:context="de.traveltogether.invitation.InvitationFragment">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="43dp">
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="43dp"
-        android:id="@+id/fragment_button_invite"
-        android:src="@android:drawable/ic_menu_share"
-        android:backgroundTint="@color/abc_background_cache_hint_selector_material_light" />
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Andere einladen"
-        android:id="@+id/fragment_text_invite"
-        android:layout_marginTop="10dp" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/fragment_button_invite"
+            android:src="@android:drawable/ic_menu_share"
+            android:backgroundTint="@color/abc_background_cache_hint_selector_material_light"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Andere einladen"
+            android:id="@+id/fragment_text_invite"
+            android:autoText="true"
+            android:layout_gravity="center_vertical" />
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="24dp"
+        android:background="#afddf4"
+        android:layout_marginTop="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vorschläge"
+            android:id="@+id/textInvitation"
+            android:paddingLeft="16dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="#37a9e3"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="1500dp"
+        android:layout_marginTop="64dp">
 
     <ListView android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         tools:listitem="@android:layout/simple_expandable_list_item_1" />
-
-
 </LinearLayout>
+
+</RelativeLayout>

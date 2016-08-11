@@ -18,7 +18,7 @@ public class Expense extends AbstractListObject {
         return payedBy;
     }
 
-    public Expense(String _title, int _id, String _description, Participant _author, double _amount, Participant _payer) {
+    public Expense(String _title, int _id, String _description, int _author, double _amount, Participant _payer) {
         super(_title, _id, _description, _author);
         amount = _amount;
         payedBy = _payer;
