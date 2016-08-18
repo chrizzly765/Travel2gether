@@ -23,7 +23,7 @@ public class ChatActivity extends AppCompatActivity {
         }
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        CommentFragment fragment = CommentFragment.newInstance(tripId);
+        ChatFragment fragment = ChatFragment.newInstance(tripId);
         fragmentTransaction.add(R.id.activity_chat_comment_container, fragment);
         fragmentTransaction.commit();
     }

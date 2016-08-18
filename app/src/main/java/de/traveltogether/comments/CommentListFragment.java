@@ -15,6 +15,7 @@ import de.traveltogether.model.Comment;
 public class CommentListFragment extends ListFragment{
 
     Comment[] comments;
+    CommentAdapter adapter;
 
 
     /**
@@ -44,6 +45,17 @@ public class CommentListFragment extends ListFragment{
         View view = inflater.inflate(R.layout.fragment_commentlist_list, container, false);
 
         return view;
+    }
+
+    public void onStart(){
+        super.onStart();
+        if(comments==null || comments.length==0 ){
+            //TODO: show new trip listitem
+        }
+        else {
+            adapter = new CommentAdapter(getActivity(), comments);
+            setListAdapter(adapter);
+        }
     }
 
 }

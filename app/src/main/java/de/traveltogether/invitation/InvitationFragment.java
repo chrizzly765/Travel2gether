@@ -50,10 +50,10 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
         super.onCreateView(inflater, container,savedInstanceState);
 
         view = inflater.inflate(de.traveltogether.R.layout.fragment_invitation, container, false);
-        //ImageButton button = (ImageButton)view.findViewById(de.traveltogether.R.id.fragment_button_invite);
-        //TextView text = (TextView)view.findViewById(de.traveltogether.R.id.fragment_text_invite);
-        //button.setOnClickListener(this);
-        //text.setOnClickListener(this);
+        ImageButton button = (ImageButton)view.findViewById(de.traveltogether.R.id.fragment_button_invite);
+        TextView text = (TextView)view.findViewById(de.traveltogether.R.id.fragment_text_invite);
+        button.setOnClickListener(this);
+        text.setOnClickListener(this);
         return view;
     }
 

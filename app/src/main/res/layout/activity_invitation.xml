@@ -19,12 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_alignParentEnd="true"
-        android:paddingTop="64dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" />
+        android:layout_alignParentEnd="true" />
 
-    <LinearLayout
+    <!--LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="40dp">
@@ -63,15 +60,23 @@
             android:layout_gravity="center_vertical"
             android:textColor="#37a9e3"
             android:textSize="14dp" />
-    </LinearLayout>
+    </LinearLayout-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/frameLayout">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Weiter"
         android:id="@+id/invitation_button_continue"
-        android:layout_gravity="bottom"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="false"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="right|bottom" />/>
+    </FrameLayout>
 
 </RelativeLayout>
