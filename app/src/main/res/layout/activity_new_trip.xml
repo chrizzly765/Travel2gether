@@ -13,13 +13,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/newTrip_title"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:clickable="false"
         android:editable="true"
         android:enabled="true"
-        android:hint="Titel der Reise" />
+        android:hint="Titel der Reise"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/newTrip_button_save" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -30,7 +29,7 @@
         android:enabled="true"
         android:hint="Startdatum"
         android:layout_marginTop="53dp"
-        android:layout_below="@+id/newTrip_description"
+        android:layout_below="@+id/newActivity_description"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -49,9 +48,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/newTrip_description"
         android:hint="Beschreibung"
-        android:layout_below="@+id/newTrip_title"
+        android:layout_below="@+id/newActivity_title"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/newTrip_title" />
+        android:layout_alignEnd="@+id/newActivity_title" />
 
     <EditText
         android:layout_width="wrap_content"

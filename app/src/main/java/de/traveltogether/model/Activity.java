@@ -8,8 +8,10 @@ import java.text.SimpleDateFormat;
 public class Activity extends AbstractListObject {
     private String icon;
     private String destination;
-    private SimpleDateFormat date = new SimpleDateFormat("dd.MM.yyyy");
-    private SimpleDateFormat time = new SimpleDateFormat("HH:mm");
+    private String date;
+    private String time;
+   // private SimpleDateFormat date = new SimpleDateFormat("dd.MM.yyyy");
+    //private SimpleDateFormat time = new SimpleDateFormat("HH:mm");
 
     public String getIcon(){
         return icon;
@@ -19,15 +21,15 @@ public class Activity extends AbstractListObject {
         return destination;
     }
 
-    public SimpleDateFormat getDate(){
+    public String getDate(){
         return date;
     }
-    public SimpleDateFormat getTime(){
+    public String  getTime(){
         return time;
     }
 
     //TODO: implement description, icon, destination, time and date as optional
-    public Activity(String _title, int _id, String _description, Participant _author, String _icon, String _destination, SimpleDateFormat _time, SimpleDateFormat _date) {
+    public Activity(String _title, int _id, String _description, Participant _author, String _icon, String _destination, String _time, String  _date) {
         super(_title, _id, _description, _author);
         icon = _icon;
         destination = _destination;

@@ -36,6 +36,7 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
         presenter = new NewTripPresenter(this);
         datePicker =new DatePickerFragment();
         setContentView(R.layout.activity_new_trip);
+
         title = (EditText) findViewById(R.id.newTrip_title);
         description = (EditText)findViewById(R.id.newTrip_description);
         startDate = (EditText) findViewById(R.id.newTrip_startDate);
