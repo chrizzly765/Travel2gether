@@ -1,31 +1,34 @@
 package de.traveltogether.model;
 
-import de.traveltogether.DataType;
-
 /**
  * Created by Anna-Lena on 12.05.2016.
  */
 public class Notification {
     private String message;
-    private DataType type;
+    private String type;
     private long id;
-    private String /*SimpleDateFormat*/ receiveDate;// = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
+    private long tripOrFeatureId;
+    private String /*SimpleDateFormat*/ added;// = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
+    private Boolean opened = false;
 
     public String getMessage(){
         return message;
     }
-    public DataType getType(){
+    public String getType(){
         return type;
     }
     public String getReceiveDate(){
-        return receiveDate;
+        return added;
     }
-    public Long getId(){return id;}
+    public long getId(){return id;}
+    public long getFeatureOrTripId(){return tripOrFeatureId;}
+    public Boolean getOpened(){return opened;}
 
-    public Notification(String _text, DataType _type, String _receiveDate, long _id){
+    public Notification(String _text, String _type, String _receiveDate, long _id, long _featureId){
         message = _text;
         type = _type;
-        receiveDate = _receiveDate;
+        added = _receiveDate;
         id =_id;
+        tripOrFeatureId =_featureId;
     }
 }

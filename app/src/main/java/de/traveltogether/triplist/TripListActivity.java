@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 
 import de.traveltogether.R;
 import de.traveltogether.model.Trip;
+import de.traveltogether.notification.NotificationActivity;
 import de.traveltogether.settings.SettingsActivity;
 import de.traveltogether.triplist.newtrip.NewTripActivity;
 
@@ -90,6 +91,8 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_notification:
+                Intent noti = new Intent(this, NotificationActivity.class);
+                startActivity(noti);
                 return true;
             case R.id.action_settings:
                 Intent options = new Intent(this, SettingsActivity.class);

@@ -3,10 +3,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="de.traveltogether.expense.newexpense.NewExpenseActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_new_expense_title"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:hint = "@string/title"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_new_expense_description"
+        android:hint = "@string/description"
+        android:layout_below="@+id/activity_new_expense_amount"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/activity_new_expense_amount"
+        android:layout_below="@+id/activity_new_expense_title"
+        android:layout_alignParentStart="true"
+        android:hint = "Betrag"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_currency"
+        android:layout_below="@+id/activity_new_expense_title"
+        android:layout_toEndOf="@+id/activity_new_expense_amount"
+        android:spinnerMode="dropdown"
+        android:layout_above="@+id/activity_new_expense_description" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bezahlt von"
+        android:id="@+id/activity_new_expense_paid_by"
+        android:layout_below="@+id/activity_new_expense_description"
+        android:layout_alignParentStart="true"
+        android:textSize="18dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_paid_by"
+        android:layout_marginStart="80dp"
+        android:layout_below="@+id/activity_new_expense_description"
+        android:layout_toEndOf="@+id/activity_new_expense_paid_by"
+        android:layout_alignBottom="@+id/activity_new_expense_paid_by" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="220dp"
+            android:id= "@+id/activity_new_expense_listcontainer"/>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="24dp"
+        android:background="#afddf4"
+        android:layout_marginTop="200dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teilen mit"
+            android:id="@+id/activity_new_expense_headline_payer"
+            android:paddingLeft="16dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="#37a9e3"
+            android:textSize="14dp" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:text="Gleichmäßig"
+            android:id="@+id/activity_new_expense_switch"
+            android:checked="true"
+            />
+    </LinearLayout>
 </RelativeLayout>

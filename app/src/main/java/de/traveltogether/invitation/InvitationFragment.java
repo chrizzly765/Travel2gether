@@ -71,7 +71,7 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
 
     public void onClick(View v) {
         //Chooser: auswählen womit der Link geöffnet werden soll
-        /*if(v.getId() == R.id.fragment_button_invite) {
+        if(v.getId() == R.id.fragment_button_invite) {
             Intent invite = new Intent(Intent.ACTION_SEND);
             invite.putExtra(Intent.EXTRA_TEXT, getString(R.string.invitation_text));
             invite.setType("text/plain");
@@ -82,14 +82,14 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
             invite.putExtra(Intent.EXTRA_TEXT, getString(R.string.invitation_text));
             invite.setType("text/plain");
             startActivity(createChooser(invite, getString(R.string.title_invititation_choose)));
-        }*/
+        }
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //bei click auf eine Person
         Person person = (Person) adapter.getItem(position);
-        int personId = person.getPersonId();
-        presenter.onInvite(personId, tripId);
+        int receiverId = person.getPersonId();
+        presenter.onInvite(receiverId, tripId);
     }
 }

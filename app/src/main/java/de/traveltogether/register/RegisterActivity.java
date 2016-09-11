@@ -66,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 onViewErrorMessage(getString(R.string.pw_minimum_length));
                 return;
             }
-            if(password.getText() != repeatPassword.getText()){
+            if(password.getText().toString() == repeatPassword.getText().toString()){
                 onViewErrorMessage(getString(R.string.pw_repeat_error));
                 return;
             }
