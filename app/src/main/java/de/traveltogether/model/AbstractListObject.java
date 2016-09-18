@@ -1,7 +1,5 @@
 package de.traveltogether.model;
 
-import java.text.SimpleDateFormat;
-
 import de.traveltogether.DataType;
 
 /**
@@ -11,10 +9,10 @@ public abstract class AbstractListObject {
     protected String title;
     protected long id;
     protected String description;
-    protected String lastChangedDate;// = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
-    protected String addedDate;// = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
-    protected int authorId;
-    protected int lastChangedPersonId;
+    protected String last_update;// = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
+    protected String added;// = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
+    protected int author;
+    protected int last_update_by;
     //protected DataType type; //do we need??
 
     public String getTitle(){
@@ -29,20 +27,20 @@ public abstract class AbstractListObject {
         return description;
     }
 
-    public String getLastChangedDate(){
-        return lastChangedDate;
+    public String getLastUpdate(){
+        return last_update;
     }
 
     public String getAddedDate(){
-        return addedDate;
+        return added;
     }
 
     public int getAuthor(){
-        return authorId;
+        return author;
     }
 
     public int getLastChangedPerson(){
-        return lastChangedPersonId;
+        return last_update_by;
     }
 
 
@@ -51,7 +49,7 @@ public abstract class AbstractListObject {
         title = _title;
         id = _id;
         description = _description;
-        authorId = _author;
+        author = _author;
     }
 
     public DataType getTypeById(int id){

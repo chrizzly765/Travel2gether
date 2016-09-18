@@ -11,8 +11,7 @@
 
     <RelativeLayout
         android:id = "@+id/activity_chat_comment_container"
-        android:layout_width="wrap_content"
-        android:layout_height="1000dp"
-
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         />
 </RelativeLayout>

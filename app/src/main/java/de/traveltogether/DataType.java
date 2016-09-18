@@ -23,10 +23,10 @@ public enum DataType {
         return "Expense";
     }
     },
-    PACKINGOBJECT {
+    PACKING {
         @Override
         public String toString() {
-            return "PackingObject";
+            return "Packing";
         }
     },
     ACTIVITY {
@@ -76,5 +76,9 @@ public enum DataType {
         public String toString(){
             return "Person";
         }
+    },
+    NOTIFICATION{
+        @Override
+        public String toString(){return "Notification";}
     }
 }

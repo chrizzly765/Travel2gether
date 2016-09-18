@@ -31,7 +31,7 @@ public class InvitePresenter implements IInvitePresenter {
 
     @Override
     public void onInvite(int personId, long tripId) {
-        interactor.invite(personId, tripId, this);
+        interactor.invite(tripId, personId, this);
     }
 
     @Override
