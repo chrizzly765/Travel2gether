@@ -10,5 +10,10 @@ public interface INewExpensePresenter {
     public void onGetParticipantsForTrip(long tripId);
     public void onSuccessGetParticipants(Participant[] participants);
     public void onError(String message);
-    public void onCreateExpense(Expense expense);
+    public void onCreateExpense(long tripId, Expense expense);
+    public void onSuccessAddingExpense();
+    public void onUpdateExpense(Expense expense);
+    public void onGetDetailForExpense(long featureId);
+    public void onSuccessGetDetail(Expense expense);
+    public void onSuccessUpdateExpense();
 }

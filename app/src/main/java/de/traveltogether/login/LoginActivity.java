@@ -2,6 +2,7 @@ package de.traveltogether.login;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected EditText email;
     protected EditText password;
     protected ILoginPresenter presenter;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         email = (EditText)findViewById(R.id.loginEmail);
         password = (EditText)findViewById(R.id.loginPassword);
+
     }
 
     public void onClick(View v) {
@@ -51,12 +54,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 return;
             }
             v.setEnabled(false);
+            progressDialog = ProgressDialog.show(this, "",
+                    "Bitte warten...", true);
             presenter.onGetSalt(email.getText().toString());
         }
     }
 
 
     public void onViewError(String message) {
+        progressDialog.cancel();
+        progressDialog.cancel();
         loginBtn.setEnabled(true);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
@@ -72,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void onViewSuccess(String message){
+        progressDialog.cancel();
         loginBtn.setEnabled(true);
         Context context = getApplicationContext();
         CharSequence text = getString(R.string.login_success);

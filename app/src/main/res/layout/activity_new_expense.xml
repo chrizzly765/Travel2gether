@@ -69,11 +69,14 @@
         android:layout_toEndOf="@+id/activity_new_expense_paid_by"
         android:layout_alignBottom="@+id/activity_new_expense_paid_by" />
 
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="220dp"
-            android:id= "@+id/activity_new_expense_listcontainer"/>
+            android:id= "@+id/activity_new_expense_listcontainer">
+
+        </FrameLayout>
 
     </RelativeLayout>
     <LinearLayout
@@ -97,8 +100,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="150dp"
             android:text="Gleichmäßig"
+            android:layout_marginTop="-2dp"
             android:id="@+id/activity_new_expense_switch"
             android:checked="true"
             />
     </LinearLayout>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/activity_new_expense_button_add"
+            android:layout_marginTop="232dp"
+            android:layout_marginLeft="16dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle"
+            android:src="@mipmap/ic_add" />
+    </FrameLayout>
 </RelativeLayout>

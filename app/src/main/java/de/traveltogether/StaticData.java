@@ -33,31 +33,31 @@ public class StaticData {
     static public Participant[] getActiveParticipants(){
         ArrayList<Participant> activeParticipants = new ArrayList<Participant>();
         for(Participant p:participants){
-            if(p.getState()== ParticipantState.JOINED.toString().toLowerCase()){
+            if(p.getState().equals(ParticipantState.JOINED.toString().toLowerCase())){
                 activeParticipants.add(p);
             }
         }
-        return (Participant[]) activeParticipants.toArray();
+        return toArray(activeParticipants);
     }
 
     static public Participant[] getInvitedParticipants(){
         ArrayList<Participant> invitedParticipants = new ArrayList<Participant>();
         for(Participant p:participants){
-            if(p.getState()== ParticipantState.INVITED.toString().toLowerCase()){
+            if(p.getState().equals(ParticipantState.INVITED.toString().toLowerCase())){
                 invitedParticipants.add(p);
             }
         }
-        return (Participant[]) invitedParticipants.toArray();
+        return toArray(invitedParticipants);
     }
 
     static public Participant[] getResignedParticipants(){
         ArrayList<Participant> resignedParticipants = new ArrayList<Participant>();
         for(Participant p:participants){
-            if(p.getState()== ParticipantState.RESIGNED.toString().toLowerCase()){
+            if(p.getState().equals(ParticipantState.RESIGNED.toString().toLowerCase())){
                 resignedParticipants.add(p);
             }
         }
-        return (Participant[]) resignedParticipants.toArray();
+        return (toArray(resignedParticipants));
     }
 
     /**
@@ -72,5 +72,13 @@ public class StaticData {
             }
         }
         return null;
+    }
+
+    static private Participant[] toArray(ArrayList<Participant> list){
+        Participant[] array = new Participant[list.size()];
+        for(int i = 0; i<list.size(); i++){
+            array[i] = list.get(i);
+        }
+        return array;
     }
 }

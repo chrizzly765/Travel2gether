@@ -13,30 +13,32 @@ import android.widget.TextView;
 
 
 import de.traveltogether.R;
+import de.traveltogether.StaticData;
 import de.traveltogether.model.Participant;
+import de.traveltogether.model.Payer;
 
 public class ParticipantSelectionListAdapter extends BaseAdapter {
-    private Participant[] participants;
+    private Payer[] payer;
     private final LayoutInflater inflater;
 
-    public ParticipantSelectionListAdapter(Context context, Participant[] _participants) {
+    public ParticipantSelectionListAdapter(Context context, Payer[] _payer) {
         inflater = LayoutInflater.from(context);
-        participants = _participants;
+        payer = _payer;
     }
 
-    public void refresh(Participant[] _participants){
-        participants = _participants;
+    public void refresh(Payer[] _payer){
+        payer = _payer;
     }
 
     @Override
     public int getCount() {
-        return participants.length;
+        return payer.length;
     }
 
     @Override
     public Object getItem(int position) {
-        if(participants.length>0) {
-            return participants[position];
+        if(payer.length>0) {
+            return payer[position];
         }
         else {
             return null;
@@ -45,8 +47,8 @@ public class ParticipantSelectionListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        if(participants.length>0) {
-            return participants[position].getPersonId();
+        if(payer.length>0) {
+            return payer[position].getId();
         }
         else{
             return -1;
@@ -71,11 +73,11 @@ public class ParticipantSelectionListAdapter extends BaseAdapter {
         }
 
         Context context = parent.getContext();
-        Participant participant = (Participant) getItem(position);
-        holder.name.setText(participant.getUserName());
-        holder.initial.setText(participant.getUserName().substring(0,1));
+        Payer payer = (Payer) getItem(position);
+        holder.name.setText(StaticData.getNameById(payer.getId()));
+        holder.initial.setText(StaticData.getNameById(payer.getId()).substring(0,1));
         //holder.icon.setImageDrawable(trip.getStartDate()); // TODO: set color!
-        //holder.amount.setText(); //TODO: set amount
+        holder.amount.setText(String.valueOf(payer.getAmount())); //TODO: set amount
         return convertView;
     }
 

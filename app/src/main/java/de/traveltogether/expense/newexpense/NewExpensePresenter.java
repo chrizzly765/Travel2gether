@@ -1,5 +1,7 @@
 package de.traveltogether.expense.newexpense;
 
+import de.traveltogether.expense.detailexpense.ExpenseDetailPresenter;
+import de.traveltogether.expense.detailexpense.IExpenseDetailPresenter;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
 
@@ -16,7 +18,7 @@ public class NewExpensePresenter implements INewExpensePresenter {
     }
 
     public void onGetParticipantsForTrip(long tripId){
-
+        interactor.getParticipantsForTrip(tripId, this);
     }
 
     @Override
@@ -24,13 +26,41 @@ public class NewExpensePresenter implements INewExpensePresenter {
         view.onViewParticipants(participants);
     }
 
-        @Override
-        public void onError(String message) {
+    @Override
+    public void onError(String message) {
             view.onViewError(message);
     }
 
     @Override
-    public void onCreateExpense(Expense expense) {
+    public void onCreateExpense(long tripId, Expense expense) {
+        interactor.createExpense(tripId, expense, this);
+    }
 
+    @Override
+    public void onSuccessAddingExpense() {
+        view.onSuccessAddingExpense();
+    }
+
+
+    @Override
+    public void onGetDetailForExpense(long featureId) {
+        interactor.getDetailsForExpense(featureId, this);
+    }
+
+    @Override
+    public void onUpdateExpense(Expense expense){
+        interactor.updateExpense(expense, this);
+    }
+
+
+
+    @Override
+    public void onSuccessGetDetail(Expense expense) {
+        view.setValues(expense);
+    }
+
+    @Override
+    public void onSuccessUpdateExpense() {
+        view.onSuccessUpdateExpense();
     }
 }

@@ -1,5 +1,6 @@
 package de.traveltogether.launcher;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,8 @@ public class LauncherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ProgressDialog progressDialog = ProgressDialog.show(this, "",
+                "Bitte warten...", true);
         setContentView(R.layout.activity_launcher);
         Log.d("Launcher","start");
 
@@ -43,5 +46,6 @@ public class LauncherActivity extends AppCompatActivity {
             Intent login = new Intent(this, LoginActivity.class);
             startActivity(login);
         }
+        progressDialog.cancel();
     }
 }

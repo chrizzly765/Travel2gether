@@ -1,4 +1,4 @@
-package de.traveltogether.expense.newexpense;
+package de.traveltogether.expense;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,41 +7,31 @@ import android.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import de.traveltogether.R;
+import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
-import de.traveltogether.model.Payer;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A fragment representing a list of Items.
- */
-public class ParticipantSelectionListFragment extends ListFragment {
 
-    private ParticipantSelectionListAdapter adapter;
-    private Payer[] payer;
-    View view;
+public class ExpenseParticipantFragment extends ListFragment{
+    Participant[] participants;
+    ExpenseParticipantAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ParticipantSelectionListFragment() {
-
+    public ExpenseParticipantFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ParticipantSelectionListFragment newInstance(ArrayList<Payer> _payer ) {
-        ParticipantSelectionListFragment fragment = new ParticipantSelectionListFragment();
-        Payer[] array = new Payer[_payer.size()];
-
-        for(int i = 0; i<_payer.size(); i++){
-            array[i] = _payer.get(i);
-        }
-        fragment.payer = array;
+    public static ExpenseParticipantFragment newInstance(Participant[] _participants) {
+        ExpenseParticipantFragment fragment = new ExpenseParticipantFragment();
+        fragment.participants = _participants;
         return fragment;
     }
 
@@ -54,18 +44,17 @@ public class ParticipantSelectionListFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_participant_selection_list, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_expense_participant_list, container, false);
         return view;
     }
 
     public void onStart(){
         super.onStart();
-        if(payer==null || payer.length==0 ){
+        if(participants==null || participants.length==0 ){
             //TODO: show new trip listitem
         }
         else {
-            adapter = new ParticipantSelectionListAdapter(getActivity(), payer);
+            adapter = new ExpenseParticipantAdapter(getContext(),participants);
             setListAdapter(adapter);
         }
 

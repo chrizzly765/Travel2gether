@@ -8,23 +8,29 @@ import java.util.List;
  */
 public class Expense extends AbstractListObject {
     private double amount;
-    private String paidBy;
-    private List<Payer> assignedPayers = new ArrayList<Payer>();
+    private int currencyId;
+    private int payedBy;
+    private List<Payer> payers = new ArrayList<Payer>();
 
     public double getAmount(){
         return amount;
     }
-    public String getPayer(){
-        return paidBy;
+    public int getPayer(){
+        return payedBy;
     }
+    public int getCurrencyId(){
+        return currencyId;
+    }
+    public List<Payer> getAssignedPayers(){return payers;}
 
-    public Expense(String _title, int _id, String _description, int _author, double _amount, String _payer) {
+    public Expense(String _title, int _id, String _description, int _author, double _amount, int _currency, int _payer) {
         super(_title, _id, _description, _author);
         amount = _amount;
-        paidBy = _payer;
+        payedBy = _payer;
+        currencyId = _currency;
     }
 
-    public void addPayer(String _personId, double _amount){
-       assignedPayers.add(new Payer(_personId, _amount));
+    public void addPayer(int _personId, double _amount){
+       payers.add(new Payer(_personId, _amount));
     }
 }

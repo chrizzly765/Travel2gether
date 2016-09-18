@@ -9,6 +9,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="24dp"
+        android:id="@+id/box_Overview"
         android:background="#afddf4">
 
         <TextView
@@ -23,10 +24,10 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id = "@+id/fragment_expense_overview_container"
+        android:id = "@+id/activity_expense_participants_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_below="@id/box_Overview"
         android:paddingTop="32dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp" />
@@ -36,7 +37,9 @@
         android:layout_width="fill_parent"
         android:layout_height="24dp"
         android:layout_marginTop="120dp"
-        android:background="#afddf4">
+        android:layout_below="@id/activity_expense_participants_container"
+        android:background="#afddf4"
+        android:id="@+id/box_participants">
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,16 +47,17 @@
             android:text="@string/expenses"
             android:id="@+id/textView_List"
             android:paddingLeft="16dp"
+            android:layout_marginTop="0dp"
             android:layout_gravity="center_vertical"
             android:textColor="#37a9e3"
             android:textSize="14dp" />
     </LinearLayout>
 
     <RelativeLayout
-        android:id = "@+id/fragment_expense_list_container"
+        android:id = "@+id/activity_expense_list_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_below="@id/box_participants"
         android:paddingTop="124dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp" />

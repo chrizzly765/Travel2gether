@@ -1,6 +1,7 @@
 package de.traveltogether.mainmenu;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,8 +29,10 @@ import de.traveltogether.triplist.TripListActivity;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     long tripId;
     String title;
-    String adminId;
+    int adminId;
     IMainMenuPresenter presenter;
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (b != null) {
             tripId = b.getLong("tripId");
             title = b.getString("title");
-            adminId = b.getString("adminId");
+            adminId = b.getInt("adminId");
                 setActionBar(title);
         }
 
@@ -58,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         chat.setOnClickListener(this);
 
         presenter.onGetParticipantsForTrip(tripId);
+        progressDialog = ProgressDialog.show(this, "",
+                "Bitte warten...", true);
     }
 
     public void setActionBar(String heading) {
@@ -69,6 +74,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
+    }
+
+    public void onSuccessGetParticipants(){
+        progressDialog.cancel();
     }
 /*
     @Override
@@ -143,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 */
     public void onViewError(String message){
+        progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));
