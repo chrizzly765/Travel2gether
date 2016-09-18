@@ -72,9 +72,9 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         fragmentTransaction.commit();
 
 
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_expense_participants_container);
-        ViewGroup.LayoutParams params = layout.getLayoutParams();
-        params.height = participants.length * 100;
+        //RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_expense_participants_container);
+        //ViewGroup.LayoutParams params = layout.getLayoutParams();
+        //params.height = participants.length * 50;
     }
 
     public void onViewExpenses(Expense[] expenses){

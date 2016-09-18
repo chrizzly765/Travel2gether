@@ -15,11 +15,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="8dp"
         android:id="@+id/fragment_expense_detail_item_name" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+100,00€"
+
+        android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/fragment_expense_detail_item_name"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="150dp"

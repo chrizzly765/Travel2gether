@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +56,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
     ArrayList<Integer> chosenIds = new ArrayList<Integer>();
     ArrayList<Payer> chosenParticipants;
     ProgressDialog progressDialog;
+    Switch shareEvenlySwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         addButton = (ImageButton)findViewById(R.id.activity_new_expense_button_add);
         addButton.setOnClickListener(this);
 
+        shareEvenlySwitch = (Switch)findViewById(R.id.activity_new_expense_switch);
         if(featureId!=-1){
 
             presenter.onGetDetailForExpense(featureId);

@@ -58,14 +58,13 @@ public class ExpenseDetailAdapter extends BaseAdapter {
         Context context = parent.getContext();
         Payer payer = (Payer) getItem(position);
         holder.name.setText(StaticData.getNameById(payer.getId()));
-        //holder.description.setText(trip.getDescription());
         String amount = "";
         if(payer.getAmount()>=0){
             amount= "+ " + String.valueOf(payer.getAmount());
             holder.amount.setTextColor(Color.BLACK);
         }
         else {
-            amount = "- " + String.valueOf(payer.getAmount());
+            amount = String.valueOf(payer.getAmount());
             holder.amount.setTextColor(Color.RED);
         }
         holder.amount.setText(amount);

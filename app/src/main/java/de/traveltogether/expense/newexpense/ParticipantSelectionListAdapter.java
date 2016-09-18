@@ -12,6 +12,9 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 
+import java.text.DecimalFormat;
+import java.util.Currency;
+
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.model.Participant;
@@ -77,7 +80,8 @@ public class ParticipantSelectionListAdapter extends BaseAdapter {
         holder.name.setText(StaticData.getNameById(payer.getId()));
         holder.initial.setText(StaticData.getNameById(payer.getId()).substring(0,1));
         //holder.icon.setImageDrawable(trip.getStartDate()); // TODO: set color!
-        holder.amount.setText(String.valueOf(payer.getAmount())); //TODO: set amount
+        DecimalFormat df = new DecimalFormat("#0.00");
+        holder.amount.setText(String.valueOf(df.format(payer.getAmount()))); //TODO: set amount
         return convertView;
     }
 
