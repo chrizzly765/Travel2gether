@@ -11,15 +11,10 @@ import android.widget.AdapterView;
 import de.traveltogether.R;
 import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Task;
+import de.traveltogether.tasks.detail.TaskDetailActivity;
 
 import java.util.List;
 
-/**
- * A fragment representing a list of Items.
- * <p>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
 public class TaskListFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
     private TaskAdapter adapter;
@@ -68,14 +63,11 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Task task = (Task) adapter.getItem(position);
-        Intent mainMenu = new Intent(getActivity(), MainActivity.class);
+        Intent detail = new Intent(getActivity(), TaskDetailActivity.class);
         Bundle b = new Bundle();
-        b.putLong("taskId", tasks[position].getTaskId()); //Your id
-        b.putString("title", tasks[position].getTitle());
-        b.putInt("adminId", tasks[position].getAdminId());
-        mainMenu.putExtras(b); //Put your id to your next Intent
-        startActivity(mainMenu);
+        b.putLong("taskId", tasks[position].getId()); //Your id
+        detail.putExtras(b); //Put your id to your next Intent
+        startActivity(detail);
     }
 
 }

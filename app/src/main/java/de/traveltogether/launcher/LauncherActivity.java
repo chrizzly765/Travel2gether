@@ -29,6 +29,9 @@ public class LauncherActivity extends AppCompatActivity {
         hash = sharedPref.getString(getString(R.string.saved_hash), "");
         if(hash != ""){
             int userId;
+            /*SharedPreferences.Editor editor = sharedPref.edit();
+            editor.remove(getString(R.string.saved_user_id));
+            editor.commit();*/
             userId = sharedPref.getInt(getString(R.string.saved_user_id), -1);
             if(userId != -1){
                 Intent tl = new Intent(this, TripListActivity.class);
