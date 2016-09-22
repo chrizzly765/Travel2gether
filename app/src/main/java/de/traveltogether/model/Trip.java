@@ -16,7 +16,7 @@ public class Trip {
     private String startDate;
     private String endDate;
     //private SimpleDateFormat endDate = new SimpleDateFormat("dd.MM.yyyy");
-    private Participant[] participants;
+    private ParticipantShort[] participants;
 
     public Long getTripId(){
         return tripId;
@@ -50,7 +50,7 @@ public class Trip {
         return adminId;
     }
 
-    public Participant[] getParticipants(){return participants;}
+    public ParticipantShort[] getParticipants(){return participants;}
 
     public Trip(String _title, String _description, String _destination, String _startDate, String _endDate){
         title = _title;
@@ -60,7 +60,7 @@ public class Trip {
         endDate = _endDate;
         authorId = StaticData.getUserId();
         adminId = authorId;
-        participants = new Participant[0];
+        participants = new ParticipantShort[0];
     }
 
 }

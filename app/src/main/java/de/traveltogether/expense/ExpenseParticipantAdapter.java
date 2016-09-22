@@ -62,11 +62,11 @@ public class ExpenseParticipantAdapter extends BaseAdapter {
         String amount ="";
         DecimalFormat df = new DecimalFormat("#0.00");
         if(participant.getAccountBalance()>=0){
-            amount = "+ " + String.valueOf(df.format(participant.getAccountBalance())) + "€";//Währung austauschbar?!
+            amount = "+" + String.valueOf(df.format(participant.getAccountBalance())) + "€";//Währung austauschbar?!
             holder.amount.setTextColor(Color.BLACK);
         }
         else{
-            amount = "- "+ String.valueOf(df.format(participant.getAccountBalance())) + "€";
+            amount = String.valueOf(df.format(participant.getAccountBalance())) + "€";
             holder.amount.setTextColor(Color.RED);
         }
         holder.amount.setText(amount);

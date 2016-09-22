@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorFAB">#00c9c5</color>
     <color name="colorFABLight">#cdcdcd</color>
+    <color name = "colorWhite">#ffffff</color>
 </resources>

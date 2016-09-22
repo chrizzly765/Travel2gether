@@ -68,7 +68,7 @@ public class ParticipantSelectionListAdapter extends BaseAdapter {
             //holder.description= (TextView)convertView.findViewById(R.id.fragment_trip_list_item_description);
             holder.initial=(TextView)convertView.findViewById(R.id.fragment_participant_selection_list_item_initial);
             holder.icon=(ImageView)convertView.findViewById(R.id.fragment_participant_selection_list_item_icon);
-            holder.amount=(EditText) convertView.findViewById(R.id.fragment_participant_selection_list_amount);
+            //holder.amount=(EditText) convertView.findViewById(R.id.fragment_participant_selection_list_amount);
             convertView.setTag(holder);
         }
         else{
@@ -81,7 +81,7 @@ public class ParticipantSelectionListAdapter extends BaseAdapter {
         holder.initial.setText(StaticData.getNameById(payer.getId()).substring(0,1));
         //holder.icon.setImageDrawable(trip.getStartDate()); // TODO: set color!
         DecimalFormat df = new DecimalFormat("#0.00");
-        holder.amount.setText(String.valueOf(df.format(payer.getAmount()))); //TODO: set amount
+        //holder.amount.setText(String.valueOf(df.format(payer.getAmount()))); //TODO: set amount
         return convertView;
     }
 
@@ -90,6 +90,6 @@ public class ParticipantSelectionListAdapter extends BaseAdapter {
         public TextView name;
         public TextView initial;
         public ImageView icon;
-        public EditText amount;
+        //public EditText amount;
     }
 }

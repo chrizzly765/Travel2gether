@@ -85,6 +85,7 @@ public class NotificationFragment extends ListFragment implements AdapterView.On
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Notification n = (Notification) adapter.getItem(position);
         activity.presenter.onSetNotificationRead(n.getId());
+        view.setBackgroundResource(R.drawable.rectangle);
         if (n.getType().equals(DataType.TRIP.toString())){
             Intent intent = new Intent(activity, InfoActivity.class);
             intent.putExtra("tripId", n.getFeatureOrTripId());
@@ -110,7 +111,7 @@ public class NotificationFragment extends ListFragment implements AdapterView.On
             intent.putExtra("tripId", n.getFeatureOrTripId());
             startActivity(intent);
         }
-        else if(n.getType().equals(DataType.PACKING.toString())){
+        else if(n.getType().equals(DataType.PACKINGOBJECT.toString())){
             //Intent intent = new Intent(activity, PackingDetailActivity.class);
             //intent.putExtra("id", n.getFeatureOrTripId());
             //startActivity(intent);

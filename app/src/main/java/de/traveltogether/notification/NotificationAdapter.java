@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import de.traveltogether.DataType;
 import de.traveltogether.R;
 import de.traveltogether.model.Notification;
 import de.traveltogether.model.Trip;
@@ -60,6 +62,7 @@ public class NotificationAdapter extends BaseAdapter {
             holder = new NotificationViewHolder();
             holder.title = (TextView)convertView.findViewById(R.id.fragment_notification_list_item_title);
             holder.date = (TextView)convertView.findViewById(R.id.fragment_notification_list_item_date);
+            holder.icon = (ImageView)convertView.findViewById(R.id.fragment_notification_list_item_icon);
             //holder.description= (TextView)convertView.findViewById(R.id.fragment_trip_list_item_description);
             convertView.setTag(holder);
         }
@@ -71,10 +74,39 @@ public class NotificationAdapter extends BaseAdapter {
         Notification not = (Notification) getItem(position);
         holder.title.setText(not.getMessage());
         holder.date.setText(not.getReceiveDate());
+        if( not.getType().equals(DataType.EXPENSE.toString())){
+            holder.icon.setImageResource(R.drawable.ic_expense);
+        }
+        else if(not.getType().equals(DataType.CHAT.toString())){
+            holder.icon.setImageResource(R.drawable.ic_check);
+        }
+        else if (not.getType().equals(DataType.PACKINGOBJECT.toString())){
+            holder.icon.setImageResource(R.drawable.ic_packing);
+        }
+        else if (not.getType().equals(DataType.TASK.toString())){
+            holder.icon.setImageResource(R.mipmap.ic_check);
+        }
+        else if (not.getType().equals(DataType.TRIP.toString())){
+            holder.icon.setImageResource(R.mipmap.ic_info);
+        }
+        else if (not.getType().equals(DataType.ACTIVITY.toString())){
+            holder.icon.setImageResource(R.drawable.ic_activity);
+        }
+        else if (not.getType().equals(DataType.INVITATION.toString())){
+            holder.icon.setImageResource(R.drawable.ic_notification);
+        }
+
+        if(not.getOpened()==true) {
+            convertView.setBackgroundResource(R.drawable.rectangle);
+        }
+        else{
+            convertView.setBackgroundResource(R.drawable.rectangle_light_grey);
+        }
         return convertView;
     }
 
     static class NotificationViewHolder {
         TextView title, date;
+        ImageView icon;
     }
 }

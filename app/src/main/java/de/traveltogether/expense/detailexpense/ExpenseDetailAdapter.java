@@ -59,14 +59,10 @@ public class ExpenseDetailAdapter extends BaseAdapter {
         Payer payer = (Payer) getItem(position);
         holder.name.setText(StaticData.getNameById(payer.getId()));
         String amount = "";
-        if(payer.getAmount()>=0){
-            amount= "+ " + String.valueOf(payer.getAmount());
-            holder.amount.setTextColor(Color.BLACK);
-        }
-        else {
-            amount = String.valueOf(payer.getAmount());
-            holder.amount.setTextColor(Color.RED);
-        }
+        amount= "- " + String.valueOf(payer.getAmount());
+        holder.amount.setTextColor(Color.RED);
+
+
         holder.amount.setText(amount);
         return convertView;
     }

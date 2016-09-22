@@ -52,6 +52,7 @@ public abstract class AbstractListObject {
         id = _id;
         description = _description;
         author = _author;
+        lastUpdateBy = author;
     }
 
     public DataType getTypeById(int id){
