@@ -3,6 +3,7 @@ package de.traveltogether.expense.detailexpense;
         import android.content.Context;
         import android.graphics.Color;
         import android.support.v7.widget.RecyclerView;
+        import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -57,9 +58,10 @@ public class ExpenseDetailAdapter extends BaseAdapter {
 
         Context context = parent.getContext();
         Payer payer = (Payer) getItem(position);
+        Log.d("payer id", String.valueOf(payer.getId()) + " " + StaticData.getNameById(payer.getId()));
         holder.name.setText(StaticData.getNameById(payer.getId()));
         String amount = "";
-        amount= "- " + String.valueOf(payer.getAmount());
+        amount= "- " + String.valueOf(payer.getAmount()) + "€";//get right currency?
         holder.amount.setTextColor(Color.RED);
 
 

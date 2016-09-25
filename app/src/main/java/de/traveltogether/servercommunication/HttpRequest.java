@@ -44,7 +44,6 @@ public class HttpRequest  implements IHttpRequest{
                 JSONObject obj = new JSONObject(response);
                 responseObject = new Response(obj.get("error").toString(), obj.get("message").toString(), obj.get("data").toString());
                 listener.onRequestFinished(responseObject, dataType, actionType);
-                Log.d("response",response);
             }
             catch(Exception e){
             Log.e("Error in httpRequest", e.getMessage());

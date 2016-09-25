@@ -23,6 +23,7 @@ public class InvitationActivity extends AppCompatActivity implements View.OnClic
     IInvitePresenter presenter;
     Person[] formerParticipants;
     long tripId;
+    String formerActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class InvitationActivity extends AppCompatActivity implements View.OnClic
         tripId = -1; // or other values
         if (b != null) {
             tripId = b.getLong("tripId");
+            formerActivity = b.getString("formerActivity", "newTrip");
         }
 
         setContentView(R.layout.activity_invitation);
@@ -52,8 +54,10 @@ public class InvitationActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.invitation_button_continue) {
-            Intent tripList = new Intent(this, TripListActivity.class);
-            startActivity(tripList);
+            if(formerActivity== "newTrip") {
+                Intent tripList = new Intent(this, TripListActivity.class);
+                startActivity(tripList);
+            }
             finish();
         }
 

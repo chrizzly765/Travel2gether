@@ -72,6 +72,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
     public void onViewDetails(Expense _expense){
         expense = _expense;
+        getSupportActionBar().setTitle(expense.getTitle());
         title.setText(expense.getTitle());
         description.setText(expense.getDescription());
         amount.setText(expense.getAmount() + getResources().getStringArray(R.array.currencies)[expense.getCurrencyId()].substring(0,1));

@@ -63,4 +63,15 @@ public class Trip {
         participants = new ParticipantShort[0];
     }
 
+    public Trip(long _tripId, String _title, String _description, String _destination, String _startDate, String _endDate, int _authorId, int _adminId){
+        tripId = _tripId;
+        title = _title;
+        description = _description;
+        destination = _destination;
+        startDate = _startDate;
+        endDate = _endDate;
+        authorId = _authorId;
+        adminId = _adminId;
+    }
+
 }

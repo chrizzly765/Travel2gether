@@ -63,7 +63,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_expense);
-
+        getSupportActionBar().setTitle("Neue Ausgabe");
         Bundle b = getIntent().getExtras();
         if (b != null) {
             tripId = b.getLong("tripId", -1);

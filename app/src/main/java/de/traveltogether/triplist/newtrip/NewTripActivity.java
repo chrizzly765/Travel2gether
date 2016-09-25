@@ -22,6 +22,7 @@ import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.datepicker.DatePickerFragment;
 import de.traveltogether.invitation.InvitationActivity;
+import de.traveltogether.model.Trip;
 
 public class NewTripActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
     INewTripPresenter presenter;
@@ -34,10 +35,15 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     EditText place;
     Button cancel;
     Button save;
+    long tripId;
+    Trip trip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        tripId = getIntent().getLongExtra("tripId", -1);
+
         presenter = new NewTripPresenter(this);
         datePicker =new DatePickerFragment();
         setContentView(R.layout.activity_new_trip);
@@ -46,6 +52,10 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
         startDate = (EditText) findViewById(R.id.newTrip_startDate);
         endDate = (EditText) findViewById(R.id.newTrip_endDate);
         place = (EditText) findViewById(R.id.newTrip_place);
+
+        if(tripId != -1){
+            presenter.onGetDetailsForTrip(tripId);
+        }
 
         ImageButton datePickerStartBtn = (ImageButton) findViewById(R.id.button_datepicker_start);
         datePickerStartBtn.setOnClickListener(this);
@@ -78,12 +88,26 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-                presenter.onCreateTrip(
-                        title.getText().toString(),
-                        description.getText().toString(),
-                        startDate.getText().toString(),
-                        endDate.getText().toString(),
-                        place.getText().toString());
+                if(tripId!=-1){
+                    presenter.onUpdateTrip(
+                            new Trip(
+                                    trip.getTripId(),
+                                    title.getText().toString(),
+                                    description.getText().toString(),
+                                    place.getText().toString(),
+                                    startDate.getText().toString(),
+                                    endDate.getText().toString(),
+                                    trip.getAuthorId(),
+                                    trip.getAdminId() ));
+                }
+                else {
+                    presenter.onCreateTrip(
+                            title.getText().toString(),
+                            description.getText().toString(),
+                            startDate.getText().toString(),
+                            endDate.getText().toString(),
+                            place.getText().toString());
+                }
                 break;
             default:
                 super.onOptionsItemSelected(item);
@@ -133,5 +157,19 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
             int month = monthOfYear + 1;
             endDate.setText(dayOfMonth + "." + monthOfYear +"." + year);
         }
+    }
+
+    public void onFillFields(Trip _trip){
+        trip = _trip;
+        title.setText(trip.getTitle());
+        description.setText(trip.getDescription());
+        place.setText(trip.getDestination());
+        startDate.setText(trip.getStartDate());
+        endDate.setText(trip.getEndDate());
+
+    }
+
+    public void onSuccessUpdateTrip(String message){
+        finish();
     }
 }

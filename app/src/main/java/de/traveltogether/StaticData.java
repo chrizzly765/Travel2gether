@@ -67,11 +67,11 @@ public class StaticData {
      */
     static public String getNameById(int id) {
         for (Participant p : participants) {
-            if (p.getPersonId() == id) {
+            if ((int)p.getPersonId() == id) {
                 return p.getUserName();
             }
         }
-        return null;
+        return "Not found";
     }
 
 

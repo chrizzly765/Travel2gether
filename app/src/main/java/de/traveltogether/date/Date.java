@@ -14,9 +14,7 @@ public class Date {
     String languageCode = "DE";
 
     public Date(String dateString){
-            Log.d("Date", dateString);
             String[] s = dateString.split("\\.", -1);
-            Log.d("Date",s[0]);
             day = Integer.parseInt(s[0]);
             month = Integer.parseInt(s[1]);
             year = Integer.parseInt(s[2]);
