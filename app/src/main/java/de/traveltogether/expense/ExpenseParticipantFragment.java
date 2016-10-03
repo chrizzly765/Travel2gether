@@ -54,7 +54,7 @@ public class ExpenseParticipantFragment extends ListFragment{
             //TODO: show new trip listitem
         }
         else {
-            adapter = new ExpenseParticipantAdapter(getContext(),participants);
+            adapter = new ExpenseParticipantAdapter(getActivity(),participants);
             setListAdapter(adapter);
         }
 

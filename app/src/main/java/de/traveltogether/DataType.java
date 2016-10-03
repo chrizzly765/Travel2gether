@@ -23,10 +23,10 @@ public enum DataType {
         return "Expense";
     }
     },
-    PACKING {
+    PACKINGOBJECT {
         @Override
         public String toString() {
-            return "Packing";
+            return "PackingObject";
         }
     },
     ACTIVITY {

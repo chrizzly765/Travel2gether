@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,12 +56,14 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
     ArrayList<Integer> chosenIds = new ArrayList<Integer>();
     ArrayList<Payer> chosenParticipants;
     ProgressDialog progressDialog;
+    Switch shareEvenlySwitch;
+    ParticipantSelectionListFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_expense);
-
+        getSupportActionBar().setTitle("Neue Ausgabe");
         Bundle b = getIntent().getExtras();
         if (b != null) {
             tripId = b.getLong("tripId", -1);
@@ -68,7 +71,12 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         }
 
         presenter= new NewExpensePresenter(this);
-        presenter.onGetParticipantsForTrip(tripId);
+        if(tripId!=-1) {
+            presenter.onGetParticipantsForTrip(tripId);
+        }
+        else{
+            onViewParticipants(StaticData.getActiveParticipants());
+        }
 
         currencySpinner = (Spinner) findViewById(R.id.spinner_currency);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -83,12 +91,22 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         addButton = (ImageButton)findViewById(R.id.activity_new_expense_button_add);
         addButton.setOnClickListener(this);
 
+        shareEvenlySwitch = (Switch)findViewById(R.id.activity_new_expense_switch);
         if(featureId!=-1){
 
             presenter.onGetDetailForExpense(featureId);
             progressDialog = ProgressDialog.show(this, "",
                     "Bitte warten...", true);
         }
+        if(chosenParticipants == null){
+            chosenParticipants = new ArrayList<Payer>();
+        }
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragment = ParticipantSelectionListFragment.newInstance(chosenParticipants);
+        fragmentTransaction.add(R.id.activity_new_expense_listcontainer, fragment);
+        fragmentTransaction.commit();
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -117,7 +135,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                         currentPayerId);
                 if(chosenParticipants!=null) {
                     for (Payer p : chosenParticipants) {
-                        expense.addPayer(p.getId(), p.getAmount());//TODO: add amount in field
+                        expense.addPayer(p.getId(), Double.parseDouble(amount.getText().toString()) / chosenParticipants.size());//TODO: add amount in field
                     }
                 }
                 if(featureId!=-1){
@@ -188,19 +206,16 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         if(chosenParticipants == null){
             chosenParticipants=new ArrayList<Payer>();
         }
+        chosenParticipants.clear();
         for(Integer i: chosenIds){
             chosenParticipants.add(new Payer(participants[i].getPersonId()));
         }
-
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        ParticipantSelectionListFragment fragment = ParticipantSelectionListFragment.newInstance(chosenParticipants);
-        fragmentTransaction.add(R.id.activity_new_expense_listcontainer, fragment);
+        fragmentTransaction.detach(fragment);
+        fragment.refresh(chosenParticipants);
+        fragmentTransaction.attach(fragment);
         fragmentTransaction.commit();
-
-        //LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        //lp.setMargins(16, 232 + chosenParticipants.size()*40, 0, 0);
-        //addButton.setLayoutParams(lp);
     }
 
 
@@ -208,11 +223,20 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final ArrayList<Integer> mSelectedItems = list;
 
+        boolean[] checkedItems = new boolean[participantNames.length];
+        for(int i = 0; i<checkedItems.length; i++){
+            if(list.contains(i)){
+                checkedItems[i] = true;
+            }
+            else{
+                checkedItems[i] = false;
+            }
+        }
         // Set the dialog title
         builder.setTitle("Wer bezahlt mit?");
                 // Specify the list array, the items to be selected by default (null for none),
                 // and the listener through which to receive callbacks when items are selected
-        builder.setMultiChoiceItems(participantNames, null,
+        builder.setMultiChoiceItems(participantNames, checkedItems,
                 new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which,

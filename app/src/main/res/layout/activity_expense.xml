@@ -25,10 +25,10 @@
 
     <RelativeLayout
         android:id = "@+id/activity_expense_participants_container"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/box_Overview"
-        android:paddingTop="32dp"
+        android:paddingTop="0dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp" />
 
@@ -36,7 +36,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="24dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="8dp"
         android:layout_below="@id/activity_expense_participants_container"
         android:background="#afddf4"
         android:id="@+id/box_participants">
@@ -55,10 +55,10 @@
 
     <RelativeLayout
         android:id = "@+id/activity_expense_list_container"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/box_participants"
-        android:paddingTop="124dp"
+        android:paddingTop="0dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp" />
 

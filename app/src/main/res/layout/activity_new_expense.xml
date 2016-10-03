@@ -70,14 +70,6 @@
         android:layout_alignBottom="@+id/activity_new_expense_paid_by" />
 
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="220dp"
-            android:id= "@+id/activity_new_expense_listcontainer">
-
-        </FrameLayout>
-
     </RelativeLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -104,17 +96,30 @@
             android:id="@+id/activity_new_expense_switch"
             android:checked="true"
             />
+
     </LinearLayout>
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="224dp"
+            android:id= "@+id/activity_new_expense_listcontainer">
+
+        </FrameLayout>
+
         <ImageButton
             android:id="@+id/activity_new_expense_button_add"
-            android:layout_marginTop="232dp"
+            android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/circle"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/activity_new_expense_listcontainer"
+            android:background="@drawable/circle_light_grey"
             android:src="@mipmap/ic_add" />
-    </FrameLayout>
+
+    </RelativeLayout>
+
 </RelativeLayout>

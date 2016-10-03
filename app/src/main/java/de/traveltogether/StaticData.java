@@ -65,10 +65,20 @@ public class StaticData {
      * @param id
      * @return
      */
-    static public String getNameById(long id) {
+    static public String getNameById(int id) {
         for (Participant p : participants) {
-            if (p.getPersonId() == id) {
+            if ((int)p.getPersonId() == id) {
                 return p.getUserName();
+            }
+        }
+        return "Not found";
+    }
+
+
+    static public String getColorById(int id){
+        for (Participant p:participants){
+            if(p.getPersonId() == id){
+                return p.getColor();
             }
         }
         return null;

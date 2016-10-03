@@ -45,6 +45,21 @@ public class ParticipantSelectionListFragment extends ListFragment {
         return fragment;
     }
 
+    public void refresh(ArrayList<Payer> _payer){
+        Payer[] array = new Payer[_payer.size()];
+
+        for(int i = 0; i<_payer.size(); i++){
+            array[i] = _payer.get(i);
+        }
+        payer = array;
+        if(adapter == null){
+            adapter = new ParticipantSelectionListAdapter(getActivity(), payer);
+        }
+        else {
+            adapter.refresh(array);
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

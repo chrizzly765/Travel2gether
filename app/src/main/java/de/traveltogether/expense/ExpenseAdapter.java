@@ -11,6 +11,7 @@ import android.widget.TextView;
 import de.traveltogether.R;
 import de.traveltogether.model.Expense;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ExpenseAdapter extends BaseAdapter {
@@ -56,7 +57,9 @@ public class ExpenseAdapter extends BaseAdapter {
         Expense expense = (Expense) getItem(position);
         holder.title.setText(expense.getTitle());
         //holder.description.setText(trip.getDescription());
-        holder.amount.setText(String.valueOf(expense.getAmount()));
+        DecimalFormat df = new DecimalFormat("#0.00");
+        String amount = String.valueOf(df.format(expense.getAmount())) + " €"; //getRe (R.array.currencies)[expense.getCurrencyId()].substring(0,1))
+                holder.amount.setText(amount);
         return convertView;
     }
 

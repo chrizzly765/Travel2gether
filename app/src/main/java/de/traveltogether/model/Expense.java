@@ -10,7 +10,7 @@ public class Expense extends AbstractListObject {
     private double amount;
     private int currencyId;
     private int payedBy;
-    private List<Payer> payers = new ArrayList<Payer>();
+    private List<Payer> payer = new ArrayList<Payer>();
 
     public double getAmount(){
         return amount;
@@ -21,7 +21,7 @@ public class Expense extends AbstractListObject {
     public int getCurrencyId(){
         return currencyId;
     }
-    public List<Payer> getAssignedPayers(){return payers;}
+    public List<Payer> getAssignedPayers(){return payer;}
 
     public Expense(String _title, int _id, String _description, int _author, double _amount, int _currency, int _payer) {
         super(_title, _id, _description, _author);
@@ -31,6 +31,6 @@ public class Expense extends AbstractListObject {
     }
 
     public void addPayer(int _personId, double _amount){
-       payers.add(new Payer(_personId, _amount));
+       payer.add(new Payer(_personId, _amount));
     }
 }

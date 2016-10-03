@@ -9,10 +9,11 @@ public abstract class AbstractListObject {
     protected String title;
     protected long id;
     protected String description;
-    protected String last_update;// = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
+    protected String lastUpdate;// = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
     protected String added;// = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
     protected int author;
-    protected int last_update_by;
+    protected int lastUpdateBy;
+    protected int commentsNumber;
     //protected DataType type; //do we need??
 
     public String getTitle(){
@@ -28,7 +29,7 @@ public abstract class AbstractListObject {
     }
 
     public String getLastUpdate(){
-        return last_update;
+        return lastUpdate;
     }
 
     public String getAddedDate(){
@@ -40,9 +41,10 @@ public abstract class AbstractListObject {
     }
 
     public int getLastChangedPerson(){
-        return last_update_by;
+        return lastUpdateBy;
     }
 
+    public int getCommentsNumber(){return commentsNumber; }
 
     //TODO: implement description as optional
     public AbstractListObject(String _title, int _id, String _description, int _author){
@@ -50,6 +52,7 @@ public abstract class AbstractListObject {
         id = _id;
         description = _description;
         author = _author;
+        lastUpdateBy = author;
     }
 
     public DataType getTypeById(int id){

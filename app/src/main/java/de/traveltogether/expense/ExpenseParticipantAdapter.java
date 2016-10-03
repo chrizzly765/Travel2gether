@@ -14,6 +14,7 @@ import de.traveltogether.R;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ExpenseParticipantAdapter extends BaseAdapter {
@@ -59,12 +60,13 @@ public class ExpenseParticipantAdapter extends BaseAdapter {
         Participant participant = (Participant) getItem(position);
         holder.name.setText(participant.getUserName());
         String amount ="";
+        DecimalFormat df = new DecimalFormat("#0.00");
         if(participant.getAccountBalance()>=0){
-            amount = "+ " + String.valueOf(participant.getAccountBalance()) + "€";//Währung austauschbar?!
+            amount = "+" + String.valueOf(df.format(participant.getAccountBalance())) + "€";//Währung austauschbar?!
             holder.amount.setTextColor(Color.BLACK);
         }
         else{
-            amount = "- "+ String.valueOf(participant.getAccountBalance()) + "€";
+            amount = String.valueOf(df.format(participant.getAccountBalance())) + "€";
             holder.amount.setTextColor(Color.RED);
         }
         holder.amount.setText(amount);

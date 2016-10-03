@@ -33,8 +33,6 @@ public class ExpenseDetailFragment extends ListFragment {
     public ExpenseDetailFragment() {
     }
 
-
-    @SuppressWarnings("unused")
     public static ExpenseDetailFragment newInstance(List<Payer> _payers) {
         ExpenseDetailFragment fragment = new ExpenseDetailFragment();
         fragment.payers=_payers;

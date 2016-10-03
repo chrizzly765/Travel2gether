@@ -78,11 +78,14 @@
             android:textColor="#37a9e3"
             android:textSize="14dp" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/activity_expense_detail_list_container"></LinearLayout>
+
     </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below = "@id/box_details"
+        android:layout_marginTop="30dp"
+        android:id="@+id/activity_expense_detail_list_container"></LinearLayout>
 
 </RelativeLayout>

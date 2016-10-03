@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="110dp"
-    android:background="@drawable/border"
+    android:background="@drawable/rectangle"
     android:padding="10dp">
 
     <LinearLayout
@@ -35,7 +35,7 @@
                 android:gravity="clip_vertical|right"
                 android:layout_gravity="center_vertical|right">
 
-                <TextView android:id="@+id/fragment_trip_list_item_startdate"
+                <TextView android:id="@+id/fragment_trip_list_item_date"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -44,25 +44,9 @@
                 android:textColor="#000000"
                 android:gravity="center_vertical|right" />
 
-                <TextView android:id="@+id/fragment_trip_list_item_minus"
-                    android:textAppearance="?android:textAppearanceSmall"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:textSize="14dp"
-                    android:text=" - "
-                    android:layout_gravity="center_vertical|right"
-                    android:textColor="#000000"
-                    android:gravity="center_vertical|right" />
 
-                <TextView android:id="@+id/fragment_trip_list_item_enddate"
-                    android:textAppearance="?android:textAppearanceSmall"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:textSize="14dp"
-                    android:layout_gravity="center_vertical|right"
-                    android:textColor="#000000"
-                    android:gravity="center_vertical|right" />
             </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
@@ -79,4 +63,56 @@
         android:layout_height="20dp"
         android:layout_width="match_parent"
         />
+
+    <!--LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:id = "@+id/fragment_trip_list_item_icon"
+        android:visibility="invisible">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/fragment_trip_list_item_icon_circle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/circle"/>
+            <TextView
+                android:id="@+id/fragment_trip_list_item_icon_initial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text = "A"
+                android:textSize="18dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="center_horizontal|center"/>
+        </RelativeLayout>
+    </LinearLayout-->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id = "@+id/fragment_trip_list_item_icon">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/fragment_trip_list_item_icon_circle"
+        android:background="@drawable/circle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="N"
+            android:layout_gravity="center_horizontal|center"
+            android:textColor = "#FFFFFF"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="4dp"
+            android:textSize="18dp"
+            android:id="@+id/fragment_trip_list_item_icon_initial"
+            android:layout_alignParentStart="true"
+            />
+    </FrameLayout>
 </LinearLayout>

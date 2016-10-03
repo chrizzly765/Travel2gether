@@ -2,7 +2,7 @@
 <resources>
     <string-array name="currencies">
         <item>€ Euro</item>
-        <item>$ US Dollar</item>
+        <!--item>$ US Dollar</item-->
     </string-array>
 
 </resources>

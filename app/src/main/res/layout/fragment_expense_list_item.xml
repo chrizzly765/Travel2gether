@@ -1,35 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:layout_marginTop="0dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    android:background="@drawable/rectangle">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Titel"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="18dp"
         android:id="@+id/fragment_expense_list_item_title" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
         android:text="100,00 €"
+        android:textSize="18dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/fragment_expense_list_item_title"
         android:id="@+id/fragment_expense_list_item_amount"
         android:layout_alignBottom="@+id/id"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:id="@+id/id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
-
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
-
-</RelativeLayout>
+</LinearLayout>

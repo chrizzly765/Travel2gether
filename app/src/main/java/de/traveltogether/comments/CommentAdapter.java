@@ -65,8 +65,8 @@ public class CommentAdapter extends BaseAdapter {
         Log.d("holder", holder.toString());
         Context context = parent.getContext();
         Comment comment = (Comment)getItem(position);
-        if(StaticData.getNameById(comment.getId())!=null){
-            holder.name.setText(StaticData.getNameById(comment.getId()));
+        if(StaticData.getNameById((int)comment.getId())!=null){
+            holder.name.setText(StaticData.getNameById((int)comment.getId()));
         }
         else{
             //TODO: Problem!!
