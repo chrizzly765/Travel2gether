@@ -59,6 +59,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
     ProgressDialog progressDialog;
     Switch shareEvenlySwitch;
     ParticipantSelectionListFragment fragment;
+    Expense expense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +124,11 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                     onViewError("Bitte gib die Daten vollständig an");
                     return false;
                 }
+                if(featureId!=-1){
+
+                    presenter.onUpdateExpense(expense);
+                }
+                else {
                 int currency = currencySpinner.getSelectedItemPosition();
                 if(currencySpinner.getSelectedItem() == null){
                     currencySpinner.getSelectedItem().toString();
@@ -140,10 +146,6 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                         expense.addPayer(p.getId(), Double.parseDouble(amount.getText().toString()) / chosenParticipants.size());//TODO: add amount in field
                     }
                 }
-                if(featureId!=-1){
-                    presenter.onUpdateExpense(expense);
-                }
-                else {
                     presenter.onCreateExpense(tripId, expense);
                 }
 
@@ -310,7 +312,8 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         finish();
     }
 
-    public void setValues(Expense expense){
+    public void setValues(Expense _expense){
+        expense =_expense;
         title.setText(expense.getTitle());
         description.setText(expense.getDescription());
         amount.setText(String.valueOf(expense.getAmount()));

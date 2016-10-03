@@ -46,6 +46,14 @@ public abstract class AbstractListObject {
 
     public int getCommentsNumber(){return commentsNumber; }
 
+    public void setTitle(String _title){
+        title = _title;
+    }
+
+    public void setDescription(String _description){ description = _description; }
+
+    public void setLastUpdateBy(int _lastUpdateBy){ lastUpdateBy = _lastUpdateBy; }
+
     //TODO: implement description as optional
     public AbstractListObject(String _title, int _id, String _description, int _author){
         title = _title;
