@@ -1,13 +1,18 @@
 package de.traveltogether.tasks;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import de.traveltogether.R;
+import de.traveltogether.StaticData;
+import de.traveltogether.model.Participant;
 import de.traveltogether.model.Task;
 
 public class TaskAdapter extends BaseAdapter {
@@ -56,9 +61,9 @@ public class TaskAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.fragment_task_list_item, parent, false);
             holder = new TaskViewHolder();
             holder.title = (TextView)convertView.findViewById(R.id.fragment_task_list_item_title);
-            //holder.description= (TextView)convertView.findViewById(R.id.fragment_task_list_item_description);
-            //holder.toDoTillDate=(TextView)convertView.findViewById(R.id.fragment_task_list_item_toDoTillDate);
-            //holder.commentCount=(TextView)convertView.findViewById(R.id.fragment_task_list_item_commentCount);
+            holder.icon = (FrameLayout)convertView.findViewById(R.id.fragment_task_list_item_icon);
+            holder.watch = (ImageView)convertView.findViewById(R.id.fragment_task_list_item_icon_watch);
+            holder.toDoTillDate=(TextView)convertView.findViewById(R.id.fragment_task_list_item_toDoTillDate);
             convertView.setTag(holder);
         }
         else{
@@ -69,13 +74,26 @@ public class TaskAdapter extends BaseAdapter {
         Task task = (Task)getItem(position);
         holder.title.setText(task.getTitle());
         //holder.description.setText(task.getDescription());
-        //holder.toDoTillDate.setText(task.getDueDate());
-        //holder.commentCount.setText(task.getCommentCount());
+        // TODO: check date
+
+        holder.toDoTillDate.setTextColor(Color.RED);
+        holder.watch.setBackgroundResource(R.drawable.ic_watch_red);
+        holder.toDoTillDate.setText(task.getDueDate());
+        holder.icon.findViewById(R.id.fragment_task_list_item_icon_circle).setBackgroundResource(
+                StaticData.getIdForColor(StaticData.getColorById(task.getPersonId()))
+        );
+
+        ((TextView)holder.icon.findViewById(R.id.fragment_task_list_item_icon_initial)).setText(
+                StaticData.getNameById(task.getPersonId()).substring(0,1)
+        );
+
         return convertView;
     }
 
     static class TaskViewHolder {
-        TextView title;//, toDoTillDate, commentCount; //+ assignedParticipants
+        TextView title, toDoTillDate;
+        FrameLayout icon;
+        ImageView watch;
 
     }
 }

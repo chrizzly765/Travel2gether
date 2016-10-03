@@ -1,5 +1,9 @@
 package de.traveltogether.tasks.newtask;
 
+import android.util.Log;
+
+import org.json.JSONObject;
+
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.model.Response;
@@ -15,21 +19,58 @@ public class NewTaskInteractor implements INewTaskInteractor {
     INewTaskPresenter listener;
 
     @Override
-    public void createTask(String title, int id, String description, int author, INewTaskPresenter _listener) {
+    public void createTask(long tripId,Task task, INewTaskPresenter _listener) {
+
         listener = _listener;
-        Task task = new Task(title, id, description, author);
-        String json = JsonDecode.getInstance().classToJson(task);
-        HttpRequest request = new HttpRequest(DataType.TASK, ActionType.ADD, json, this);
+        try {
+            String jsonString = JsonDecode.getInstance().classToJson(task);
+            JSONObject obj = new JSONObject(jsonString);
+            obj.put("tripId", tripId);
+            HttpRequest request = new HttpRequest(DataType.TASK, ActionType.ADD, obj.toString(), this);
+        }
+        catch (Exception e){
+            Log.e("NewTaskInteractor", e.getMessage());
+        }
+
+    }
+
+    @Override
+    public void updateTask(Task task, INewTaskPresenter _listener) {
+
+        listener = _listener;
+        HttpRequest request = new HttpRequest(DataType.TASK, ActionType.UPDATE, JsonDecode.getInstance().classToJson(task), this);
+
     }
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if(response.getError()=="false"){
-            long taskId = ((Task) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TASK)).getTaskId();
-            listener.onSuccess(response.getMessage(), taskId);
+            //long taskId = ((Task) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TASK)).getId();
+            if (actionType == ActionType.ADD) {
+                listener.onSuccessCreate(response.getMessage());
+            }
+            else if (actionType == ActionType.UPDATE) {
+                listener.onSuccessUpdate(response.getMessage());
+            }
+            else if (actionType == ActionType.DETAIL) {
+                listener.onSuccessGetDetails((Task) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TASK));
+            }
         }
         else{
             listener.onError(response.getMessage());
+        }
+    }
+
+    @Override
+    public void getDetailsForTask(long featureId, INewTaskPresenter _listener) {
+        listener = _listener;
+        try{
+            JSONObject obj = new JSONObject();
+            obj.put("featureId", featureId);
+            HttpRequest request = new HttpRequest(DataType.TASK, ActionType.DETAIL, obj.toString(), this);
+        }
+        catch(Exception e){
+            Log.e("NewTaskInteractor", e.getMessage());
         }
     }
 }

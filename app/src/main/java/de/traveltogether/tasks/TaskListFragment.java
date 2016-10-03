@@ -65,7 +65,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent detail = new Intent(getActivity(), TaskDetailActivity.class);
         Bundle b = new Bundle();
-        b.putLong("taskId", tasks[position].getId()); //Your id
+        b.putLong("featureId", tasks[position].getId()); //Your id
         detail.putExtras(b); //Put your id to your next Intent
         startActivity(detail);
     }

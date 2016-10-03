@@ -1,5 +1,7 @@
 package de.traveltogether.tasks.newtask;
 
+import de.traveltogether.model.Task;
+
 /**
  * Created by Anna-Lena on 12.05.2016.
  */
@@ -13,13 +15,39 @@ public class NewTaskPresenter implements INewTaskPresenter {
     }
 
     @Override
-    public void onCreateTask(String title, int id, String description, int author) {
-        interactor.createTask(title,id, description, author,this);
+    public void onGetDetailsForTask(long featureId) {
+        interactor.getDetailsForTask(featureId, this);
     }
 
     @Override
-    public void onError(String message) { }
+    public void onSuccessGetDetails(Task task) {
+        view.onViewDetails(task);
+    }
+
 
     @Override
-    public void onSuccess(String message, long taskId) { }
+    public void onCreateTask(long tripId, Task task) {
+        interactor.createTask(tripId, task,this);
+    }
+
+    @Override
+    public void onUpdateTask(Task task) {
+        interactor.updateTask(task,this);
+    }
+
+    @Override
+    public void onError(String message) {
+        view.onViewError(message);
+    }
+
+    @Override
+    public void onSuccessCreate(String message) {
+        view.onSuccessAddingTask();
+    }
+
+    @Override
+    public void onSuccessUpdate(String message) {
+        view.onSuccessUpdateTask();
+    }
+
 }

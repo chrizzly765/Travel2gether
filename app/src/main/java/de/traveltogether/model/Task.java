@@ -9,32 +9,40 @@ import java.util.List;
  */
 public class Task extends AbstractListObject {
 
-    private Long taskId;
-    private int commentCount;
-    private String toDoTillDate;
-    private Participant traveller;
-    private int[] participantIds;
+    private String deadline;
+    private int personId;
+    private int statusId;
 
-
-    public Task(String _title, int _id, String _description, int _author) {
+    public Task(String _title, int _id, String _description, int _author, String _deadline, int _personId, int _statusId) {
         super(_title, _id, _description, _author);
-        //toDoTillDate = (_toDoTillDate == "") ? "0000-00-00" : _toDoTillDate;
-    }
+        deadline = _deadline;
+        personId = _personId;
+        statusId = _statusId;
 
-    public Long getTaskId(){
-        return taskId;
     }
 
     public String getDueDate() {
-        return toDoTillDate;
+        return deadline;
     }
 
-    public int getCommentCount() {
-        return commentCount;
+    public int getPersonId() {
+        return personId;
     }
 
-    public void setCommentCount(int _commentCount) {
-        commentCount = _commentCount;
+    public int getState() {
+        return statusId;
+    }
+
+    public void setDueDate(String _deadline) {
+         deadline = _deadline;
+    }
+
+    public void setPersonId(int _personId) {
+        personId = _personId;
+    }
+
+    public void setState(int _statusId) {
+        statusId = _statusId;
     }
 
 
