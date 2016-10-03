@@ -125,28 +125,35 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                     return false;
                 }
                 if(featureId!=-1){
+                    expense.setTitle(title.getText().toString());
+                    expense.setDescription(description.getText().toString());
+                    expense.setPayer(currentPayerId);
+                    expense.setAmount(Integer.parseInt(amount.getText().toString()));
+                    expense.setAssignedPayers(chosenParticipants);
+                    expense.setLastUpdateBy(StaticData.getUserId());
+
 
                     presenter.onUpdateExpense(expense);
                 }
                 else {
-                int currency = currencySpinner.getSelectedItemPosition();
-                if(currencySpinner.getSelectedItem() == null){
-                    currencySpinner.getSelectedItem().toString();
-                }
-                Expense expense = new Expense(
-                        title.getText().toString(),
-                        0,
-                        description.getText().toString(),
-                        StaticData.getUserId(),
-                        Double.parseDouble(amount.getText().toString()),
-                        currency,
-                        currentPayerId);
-                if(chosenParticipants!=null) {
-                    for (Payer p : chosenParticipants) {
-                        expense.addPayer(p.getId(), Double.parseDouble(amount.getText().toString()) / chosenParticipants.size());//TODO: add amount in field
+                    int currency = currencySpinner.getSelectedItemPosition();
+                    if(currencySpinner.getSelectedItem() == null){
+                        currencySpinner.getSelectedItem().toString();
                     }
-                }
-                    presenter.onCreateExpense(tripId, expense);
+                    Expense expense = new Expense(
+                            title.getText().toString(),
+                            0,
+                            description.getText().toString(),
+                            StaticData.getUserId(),
+                            Double.parseDouble(amount.getText().toString()),
+                            currency,
+                            currentPayerId);
+                    if(chosenParticipants!=null) {
+                        for (Payer p : chosenParticipants) {
+                            expense.addPayer(p.getId(), Double.parseDouble(amount.getText().toString()) / chosenParticipants.size());//TODO: add amount in field
+                        }
+                    }
+                        presenter.onCreateExpense(tripId, expense);
                 }
 
                 return true;
@@ -314,6 +321,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
 
     public void setValues(Expense _expense){
         expense =_expense;
+
         title.setText(expense.getTitle());
         description.setText(expense.getDescription());
         amount.setText(String.valueOf(expense.getAmount()));

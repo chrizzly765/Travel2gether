@@ -99,11 +99,11 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.optionsmenu_detail, menu);
-        if(expense!=null) {
-            if (expense.getAuthor() == StaticData.getUserId()) {
+        //if(expense!=null) {
+            //if (expense.getAuthor() == StaticData.getUserId()) {
                 menu.getItem(R.id.delete).setEnabled(true);
-            }
-        }
+            //}
+        //}
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -113,6 +113,9 @@ public class ExpenseDetailActivity extends AppCompatActivity {
             case R.id.delete:
                 if(expense.getAuthor() == StaticData.getUserId()){
                     presenter.onDeleteExpense(expense.getId());
+                }
+                else{
+                    onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.");
                 }
                 break;
             case R.id.edit:
