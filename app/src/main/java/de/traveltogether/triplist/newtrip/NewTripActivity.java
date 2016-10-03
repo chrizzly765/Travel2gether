@@ -150,12 +150,12 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         if(clickedDatePickerBtn.getId() == R.id.button_datepicker_start){
             int month = monthOfYear + 1;
-            startDate.setText(dayOfMonth + "." + monthOfYear+"." + year);
-            datePicker.setDate(year, monthOfYear, dayOfMonth+1);
+            startDate.setText(dayOfMonth + "." + month+"." + year);
+            datePicker.setDate(year, month, dayOfMonth+1);
         }
         else if(clickedDatePickerBtn.getId() == R.id.button_datepicker_end){
             int month = monthOfYear + 1;
-            endDate.setText(dayOfMonth + "." + monthOfYear +"." + year);
+            endDate.setText(dayOfMonth + "." + month +"." + year);
         }
     }
 
