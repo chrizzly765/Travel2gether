@@ -33,6 +33,7 @@ import java.util.List;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.expense.ExpenseActivity;
 import de.traveltogether.expense.detailexpense.ExpenseDetailPresenter;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
@@ -120,6 +121,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
             case R.id.action_save:
                 if(title.getText().toString()=="" || amount.getText().toString()==""){
                     onViewError("Bitte gib die Daten vollständig an");
+                    return false;
                 }
                 int currency = currencySpinner.getSelectedItemPosition();
                 if(currencySpinner.getSelectedItem() == null){
@@ -154,9 +156,10 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         parent.getItemAtPosition(position);
-        if(view.getId() == R.id.spinner_paid_by){
-            currentPayerId = participants[((Spinner)view).getSelectedItemPosition()].getPersonId();
-        }
+        Log.d("Set payerId ",Integer.toString(participants[position].getPersonId()));
+        //if(view.getId() == R.id.spinner_paid_by){
+            currentPayerId = participants[position].getPersonId();
+        //}
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
@@ -169,6 +172,10 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+        presenter.onGetParticipantsForTrip(tripId);
+        Intent intent = new Intent(this, ExpenseActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
         finish();
     }
 
@@ -184,6 +191,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, participantNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
         currentPayerId = participants[0].getPersonId();
     }
@@ -296,7 +304,9 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-
+        Intent intent = new Intent(this, ExpenseActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
         finish();
     }
 

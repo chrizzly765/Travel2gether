@@ -47,6 +47,7 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
             Intent intent = new Intent(this, NewExpenseActivity.class);
             intent.putExtra("tripId", tripId);
             startActivity(intent);
+            finish();
         }
     }
 

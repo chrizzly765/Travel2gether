@@ -22,13 +22,15 @@ import java.util.List;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.expense.ExpenseActivity;
 import de.traveltogether.expense.ExpenseListFragment;
 import de.traveltogether.expense.newexpense.NewExpenseActivity;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Payer;
 
 public class ExpenseDetailActivity extends AppCompatActivity {
-    long featureId;
+    long featureId =-1;
+    long tripId =-1;
     IExpenseDetailPresenter presenter;
     TextView title;
     TextView description;
@@ -44,6 +46,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         presenter = new ExpenseDetailPresenter(this);
         setContentView(R.layout.activity_expense_detail);
         featureId = getIntent().getLongExtra("featureId", -1);
+        tripId = getIntent().getLongExtra("tripId", -1);
         if(featureId!=-1){
             presenter.onGetDetailsForExpense(featureId);
         }
@@ -116,6 +119,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, NewExpenseActivity.class);
                 intent.putExtra("featureId", expense.getId());
                 startActivity(intent);
+                finish();
                 break;
             default:
                 super.onOptionsItemSelected(item);
@@ -126,6 +130,11 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
     public void onSuccessDelete(){
         //TODO: toast
+        if(tripId!=-1) {
+            Intent intent = new Intent(this, ExpenseActivity.class);
+            intent.putExtra("tripId", tripId);
+            startActivity(intent);
+        }
         finish();
     }
 
