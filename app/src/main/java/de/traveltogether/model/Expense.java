@@ -15,13 +15,17 @@ public class Expense extends AbstractListObject {
     public double getAmount(){
         return amount;
     }
+    public void setAmount(double _amount) {amount = _amount;}
     public int getPayer(){
         return payedBy;
     }
+    public void setPayer(int _payedBy) {payedBy = _payedBy;}
     public int getCurrencyId(){
         return currencyId;
     }
+    public void setCurrencyId(int _currencyId) {currencyId = _currencyId;}
     public List<Payer> getAssignedPayers(){return payer;}
+    public void setAssignedPayers(List<Payer> _payer) {payer = _payer;}
 
     public Expense(String _title, int _id, String _description, int _author, double _amount, int _currency, int _payer) {
         super(_title, _id, _description, _author);
