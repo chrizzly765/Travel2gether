@@ -8,13 +8,12 @@ import java.util.List;
  * Created by Anna-Lena on 12.05.2016.
  */
 public class Task extends AbstractListObject {
-
     private String deadline;
     private int personId;
     private int statusId;
 
-    public Task(String _title, int _id, String _description, int _author, String _deadline, int _personId, int _statusId) {
-        super(_title, _id, _description, _author);
+    public Task(String _title, int _id, long _tripId, String _description, int _author, String _deadline, int _personId, int _statusId) {
+        super(_title, _id,_tripId, _description, _author);
         deadline = _deadline;
         personId = _personId;
         statusId = _statusId;

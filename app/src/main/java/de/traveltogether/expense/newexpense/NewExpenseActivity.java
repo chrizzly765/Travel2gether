@@ -143,6 +143,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                     Expense expense = new Expense(
                             title.getText().toString(),
                             0,
+                            tripId,
                             description.getText().toString(),
                             StaticData.getUserId(),
                             Double.parseDouble(amount.getText().toString()),

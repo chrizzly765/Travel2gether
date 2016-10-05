@@ -24,9 +24,9 @@ import de.traveltogether.settings.SettingsActivity;
 import de.traveltogether.triplist.newtrip.NewTripActivity;
 
 public class ActivitiesActivity extends AppCompatActivity implements View.OnClickListener{
-
     IActivityPresenter presenter;
     Activity[] formerActivities;
+    ActivityFragment fragment;
     public long tripId;
 
     @Override
@@ -64,6 +64,9 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         if (v.getId() == R.id.fab_button){
             Intent set = new Intent(this, NewActivityActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("tripId", tripId);
+            set.putExtras(bundle);
             startActivity(set);
         }
     }
@@ -105,12 +108,14 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
     public void onViewFormerActivities(Activity[] activities){
 
         formerActivities = activities;
+        /*
         if(formerActivities== null){
             formerActivities= new Activity[0];
         }
+        */
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        ActivityFragment fragment = ActivityFragment.newInstance(formerActivities, presenter, tripId);
+        ActivityFragment fragment = ActivityFragment.newInstance(activities, presenter, tripId);
         fragmentTransaction.add(R.id.fragment_activity_list_container, fragment);
         fragmentTransaction.commit();
 

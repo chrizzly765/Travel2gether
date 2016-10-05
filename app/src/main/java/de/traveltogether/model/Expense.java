@@ -27,8 +27,8 @@ public class Expense extends AbstractListObject {
     public List<Payer> getAssignedPayers(){return payer;}
     public void setAssignedPayers(List<Payer> _payer) {payer = _payer;}
 
-    public Expense(String _title, int _id, String _description, int _author, double _amount, int _currency, int _payer) {
-        super(_title, _id, _description, _author);
+    public Expense(String _title, int _id, long _tripId, String _description, int _author, double _amount, int _payer, int _currency) {
+        super(_title, _id, _tripId, _description, _author);
         amount = _amount;
         payedBy = _payer;
         currencyId = _currency;

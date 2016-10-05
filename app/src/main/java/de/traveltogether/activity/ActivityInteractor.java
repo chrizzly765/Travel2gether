@@ -40,8 +40,9 @@ public class ActivityInteractor implements IActivityInteractor {
             Log.e("Error in Interactor", response.getMessage());
             listener.onError(response.getMessage());
         } else {
-            ActivityList activities = (ActivityList)JsonDecode.getInstance().jsonToArray(response.getData(), ActivityList.class);
+            ActivityList activities = (ActivityList)JsonDecode.getInstance().<ActivityList>jsonToArray(response.getData(), ActivityList.class);
             listener.onSuccess(activities.list);
+
         }
 
     }

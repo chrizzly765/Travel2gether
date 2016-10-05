@@ -80,6 +80,7 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
                     Task task = new Task(
                             title.getText().toString(),
                             0,
+                            tripId,
                             description.getText().toString(),
                             StaticData.getUserId(),
                             date.getText().toString(),
