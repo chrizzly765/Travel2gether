@@ -22,13 +22,15 @@ import java.util.List;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.expense.ExpenseActivity;
 import de.traveltogether.expense.ExpenseListFragment;
 import de.traveltogether.expense.newexpense.NewExpenseActivity;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Payer;
 
 public class ExpenseDetailActivity extends AppCompatActivity {
-    long featureId;
+    long featureId =-1;
+    long tripId =-1;
     IExpenseDetailPresenter presenter;
     TextView title;
     TextView description;
@@ -44,6 +46,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         presenter = new ExpenseDetailPresenter(this);
         setContentView(R.layout.activity_expense_detail);
         featureId = getIntent().getLongExtra("featureId", -1);
+        tripId = getIntent().getLongExtra("tripId", -1);
         if(featureId!=-1){
             presenter.onGetDetailsForExpense(featureId);
         }
@@ -72,6 +75,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
     public void onViewDetails(Expense _expense){
         expense = _expense;
+        getSupportActionBar().setTitle(expense.getTitle());
         title.setText(expense.getTitle());
         description.setText(expense.getDescription());
         amount.setText(expense.getAmount() + getResources().getStringArray(R.array.currencies)[expense.getCurrencyId()].substring(0,1));
@@ -95,11 +99,11 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.optionsmenu_detail, menu);
-        if(expense!=null) {
-            if (expense.getAuthor() == StaticData.getUserId()) {
+        //if(expense!=null) {
+            //if (expense.getAuthor() == StaticData.getUserId()) {
                 menu.getItem(R.id.delete).setEnabled(true);
-            }
-        }
+            //}
+        //}
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -110,11 +114,15 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 if(expense.getAuthor() == StaticData.getUserId()){
                     presenter.onDeleteExpense(expense.getId());
                 }
+                else{
+                    onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.");
+                }
                 break;
             case R.id.edit:
                 Intent intent = new Intent(this, NewExpenseActivity.class);
                 intent.putExtra("featureId", expense.getId());
                 startActivity(intent);
+                finish();
                 break;
             default:
                 super.onOptionsItemSelected(item);
@@ -125,6 +133,11 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
     public void onSuccessDelete(){
         //TODO: toast
+        if(tripId!=-1) {
+            Intent intent = new Intent(this, ExpenseActivity.class);
+            intent.putExtra("tripId", tripId);
+            startActivity(intent);
+        }
         finish();
     }
 

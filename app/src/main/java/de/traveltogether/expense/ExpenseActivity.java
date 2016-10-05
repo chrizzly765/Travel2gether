@@ -28,6 +28,7 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("Ausgaben");
         setContentView(R.layout.activity_expense);
         ImageButton add= (ImageButton)findViewById(R.id.activity_expense_button_add);
         add.setOnClickListener(this);
@@ -46,6 +47,7 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
             Intent intent = new Intent(this, NewExpenseActivity.class);
             intent.putExtra("tripId", tripId);
             startActivity(intent);
+            finish();
         }
     }
 

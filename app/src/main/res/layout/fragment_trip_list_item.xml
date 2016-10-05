@@ -4,8 +4,9 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="110dp"
-    android:background="@drawable/border"
-    android:padding="10dp">
+    android:background="@drawable/rectangle"
+    android:padding="8dp"
+    android:paddingBottom="0dp">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -30,12 +31,12 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="clip_vertical|right"
                 android:layout_gravity="center_vertical|right">
 
-                <TextView android:id="@+id/fragment_trip_list_item_startdate"
+                <TextView android:id="@+id/fragment_trip_list_item_date"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -44,25 +45,9 @@
                 android:textColor="#000000"
                 android:gravity="center_vertical|right" />
 
-                <TextView android:id="@+id/fragment_trip_list_item_minus"
-                    android:textAppearance="?android:textAppearanceSmall"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:textSize="14dp"
-                    android:text=" - "
-                    android:layout_gravity="center_vertical|right"
-                    android:textColor="#000000"
-                    android:gravity="center_vertical|right" />
 
-                <TextView android:id="@+id/fragment_trip_list_item_enddate"
-                    android:textAppearance="?android:textAppearanceSmall"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:textSize="14dp"
-                    android:layout_gravity="center_vertical|right"
-                    android:textColor="#000000"
-                    android:gravity="center_vertical|right" />
             </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
@@ -79,4 +64,274 @@
         android:layout_height="20dp"
         android:layout_width="match_parent"
         />
+
+    <!--LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:id = "@+id/fragment_trip_list_item_icon"
+        android:visibility="invisible">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/fragment_trip_list_item_icon_circle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/circle"/>
+            <TextView
+                android:id="@+id/fragment_trip_list_item_icon_initial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text = "A"
+                android:textSize="18dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="center_horizontal|center"/>
+        </RelativeLayout>
+    </LinearLayout-->
+
+    <!--Icon 1-->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:id = "@+id/fragment_trip_list_item_icon">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/fragment_trip_list_item_icon_circle"
+        android:background="@drawable/circle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="N"
+            android:layout_gravity="center_horizontal|center"
+            android:textColor = "#FFFFFF"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="3dp"
+            android:textSize="18dp"
+            android:id="@+id/fragment_trip_list_item_icon_initial"
+            android:layout_alignParentStart="true"
+            />
+    </FrameLayout>
+
+        <!--Icon 2-->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:visibility="invisible"
+        android:id = "@+id/fragment_trip_list_item_icon_2">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/fragment_trip_list_item_icon_circle_2"
+            android:background="@drawable/circle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="N"
+            android:layout_gravity="center_horizontal|center"
+            android:textColor = "#FFFFFF"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="3dp"
+            android:textSize="18dp"
+            android:id="@+id/fragment_trip_list_item_icon_initial_2"
+            android:layout_alignParentStart="true"
+            />
+    </FrameLayout>
+
+        <!--Icon 3-->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+
+            android:visibility="invisible"
+            android:id = "@+id/fragment_trip_list_item_icon_3">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/fragment_trip_list_item_icon_circle_3"
+                android:background="@drawable/circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N"
+                android:layout_gravity="center_horizontal|center"
+                android:textColor = "#FFFFFF"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="3dp"
+                android:textSize="18dp"
+                android:id="@+id/fragment_trip_list_item_icon_initial_3"
+                android:layout_alignParentStart="true"
+                />
+        </FrameLayout>
+
+        <!--Icon 4-->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+
+            android:visibility="invisible"
+            android:id = "@+id/fragment_trip_list_item_icon_4">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/fragment_trip_list_item_icon_circle_4"
+                android:background="@drawable/circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N"
+                android:layout_gravity="center_horizontal|center"
+                android:textColor = "#FFFFFF"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="3dp"
+                android:textSize="18dp"
+                android:id="@+id/fragment_trip_list_item_icon_initial_4"
+                android:layout_alignParentStart="true"
+                />
+        </FrameLayout>
+
+        <!--Icon 5-->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+
+            android:visibility="invisible"
+            android:id = "@+id/fragment_trip_list_item_icon_5">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/fragment_trip_list_item_icon_circle_5"
+                android:background="@drawable/circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N"
+                android:layout_gravity="center_horizontal|center"
+                android:textColor = "#FFFFFF"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="3dp"
+                android:textSize="18dp"
+                android:id="@+id/fragment_trip_list_item_icon_initial_5"
+                android:layout_alignParentStart="true"
+                />
+        </FrameLayout>
+
+        <!--Icon 6-->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+
+            android:visibility="invisible"
+            android:id = "@+id/fragment_trip_list_item_icon_6">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/fragment_trip_list_item_icon_circle_6"
+                android:background="@drawable/circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N"
+                android:layout_gravity="center_horizontal|center"
+                android:textColor = "#FFFFFF"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="3dp"
+                android:textSize="18dp"
+                android:id="@+id/fragment_trip_list_item_icon_initial_6"
+                android:layout_alignParentStart="true"
+                />
+        </FrameLayout>
+
+        <!--Icon 4-->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+
+            android:visibility="invisible"
+            android:id = "@+id/fragment_trip_list_item_icon_7">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/fragment_trip_list_item_icon_circle_7"
+                android:background="@drawable/circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N"
+                android:layout_gravity="center_horizontal|center"
+                android:textColor = "#FFFFFF"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="3dp"
+                android:textSize="18dp"
+                android:id="@+id/fragment_trip_list_item_icon_initial_7"
+                android:layout_alignParentStart="true"
+                />
+        </FrameLayout>
+
+        <!--Icon last-->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+
+            android:visibility="invisible"
+            android:id = "@+id/fragment_trip_list_item_icon_last">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/fragment_trip_list_item_icon_circle_last"
+                android:background="@drawable/circle_light_grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:layout_gravity="center_horizontal|center"
+                android:textColor = "#FFFFFF"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:textSize="18dp"
+                android:id="@+id/fragment_trip_list_item_icon_initial_last"
+                android:layout_alignParentStart="true"
+                />
+        </FrameLayout>
+    </LinearLayout>
 </LinearLayout>

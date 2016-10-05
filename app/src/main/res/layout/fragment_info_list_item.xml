@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:id="@+id/fragment_info_list_item_name"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignBottom="@+id/fragment_info_list_item_icon"
+        android:layout_toEndOf="@+id/fragment_info_list_item_icon"
+        android:textSize="21dp" />
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id = "@+id/fragment_info_list_item_icon">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/fragment_info_list_item_icon_dot"
+            android:background="@drawable/circle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="N"
+            android:layout_gravity="center_horizontal|center"
+            android:textColor = "#FFFFFF"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="4dp"
+            android:textSize="18dp"
+            android:id="@+id/fragment_info_list_item_initial"
+            android:layout_alignParentStart="true"
+            />
+    </FrameLayout>
+</RelativeLayout>

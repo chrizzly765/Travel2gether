@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list"
+    android:name="www.traveltogether.de.traveltogether.triplist.ItemFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutManager="LinearLayoutManager"
+    tools:context="de.traveltogether.triplist.TripListFragment"
+    tools:listitem="@layout/fragment_activity_list_item" >
+
+
+    <ListView android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        tools:listitem="@android:layout/simple_expandable_list_item_2"
+        android:divider="#00000000"
+        android:dividerHeight="8dp" />
+
+</RelativeLayout>
+
+

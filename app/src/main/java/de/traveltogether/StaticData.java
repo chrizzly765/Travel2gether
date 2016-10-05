@@ -65,10 +65,20 @@ public class StaticData {
      * @param id
      * @return
      */
-    static public String getNameById(long id) {
+    static public String getNameById(int id) {
         for (Participant p : participants) {
-            if (p.getPersonId() == id) {
+            if ((int)p.getPersonId() == id) {
                 return p.getUserName();
+            }
+        }
+        return "Not found";
+    }
+
+
+    static public String getColorById(int id){
+        for (Participant p:participants){
+            if(p.getPersonId() == id){
+                return p.getColor();
             }
         }
         return null;
@@ -80,5 +90,33 @@ public class StaticData {
             array[i] = list.get(i);
         }
         return array;
+    }
+
+    static public int getIdForColor(String color){
+        switch(color){
+            case "#00c9c5":
+                return R.drawable.circle00c9c5;
+            case "#00d641":
+                return R.drawable.circle00d641;
+            case "#00e6b6":
+                return R.drawable.circle00e6b6;
+            case "#002c8c":
+                return R.drawable.circle002c8c;
+            case "#002f5b":
+                return R.drawable.circle002f5b;
+            case "#9bd641":
+                return R.drawable.circle9bd641;
+            case "#37a9e3":
+                return R.drawable.circle37a9e3;
+            case "#255fb6":
+                return R.drawable.circle255fb6;
+            case "#dce641":
+                return R.drawable.circledce641;
+            case "#ffe154":
+                return R.drawable.circleffe154;
+            default:
+                return R.drawable.circle_light_grey;
+
+        }
     }
 }

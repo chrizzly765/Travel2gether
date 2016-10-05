@@ -2,7 +2,13 @@
 <resources>
     <string-array name="currencies">
         <item>€ Euro</item>
-        <item>$ US Dollar</item>
+        <!--item>$ US Dollar</item-->
+    </string-array>
+
+    <string-array name="status">
+        <item>Offen</item>
+        <item>In Bearbeitung</item>
+        <item>Erledigt</item>
     </string-array>
 
 </resources>

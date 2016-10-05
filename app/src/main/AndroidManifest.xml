@@ -48,9 +48,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:host="http://www.imagik.de" />
+                <data
+                    android:host="http://www.imagik.de/traveltogether"
+                    android:scheme="http" />
+                <data
+                    android:host="http://www.imagik.de/traveltogether"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
         <!-- android:theme="@android:style/Theme.NoTitleBar android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"" -->
@@ -64,6 +67,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".triplist.newtrip.NewTripActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.newactivity.NewActivityActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
@@ -136,7 +143,7 @@
         <activity
             android:name=".chat.ChatActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".expense.detailexpense.ExpenseDetailActivity"></activity>
+        <activity android:name=".activity.detailactivity.DetailActivityActivity"></activity>
     </application>
 
 </manifest>

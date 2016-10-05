@@ -85,6 +85,7 @@ public class NotificationFragment extends ListFragment implements AdapterView.On
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Notification n = (Notification) adapter.getItem(position);
         activity.presenter.onSetNotificationRead(n.getId());
+        view.setBackgroundResource(R.drawable.rectangle);
         if (n.getType().equals(DataType.TRIP.toString())){
             Intent intent = new Intent(activity, InfoActivity.class);
             intent.putExtra("tripId", n.getFeatureOrTripId());

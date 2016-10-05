@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="de.traveltogether.triplist.newtrip.NewTripActivity"
+    android:orientation="vertical">
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newActivity_title"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:clickable="false"
+        android:editable="true"
+        android:enabled="true"
+        android:hint="Titel der Aktivität" />
+
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newActivity_description"
+        android:hint="Beschreibung"
+        android:layout_below="@+id/newActivity_title"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/newActivity_title" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPostalAddress"
+            android:ems="10"
+            android:id="@+id/newActivity_destination"
+            android:layout_below="@+id/newTrip_endDate"
+            android:layout_alignParentStart="true"
+            android:hint="Ort" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/newActivity_startDate"
+            android:enabled="true"
+            android:hint="Startdatum"
+            android:layout_below="@+id/newActivity_description"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_datepicker_start"
+            android:layout_alignTop="@+id/newTrip_startDate"
+            android:layout_alignStart="@+id/newTrip_button_save"
+            android:backgroundTint="@color/abc_background_cache_hint_selector_material_light"
+            android:src="@android:drawable/ic_menu_today"
+            android:layout_toStartOf="@+id/button_datepicker_end"
+            android:layout_above="@+id/button_datepicker_end"
+            android:layout_alignEnd="@+id/button_datepicker_end" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/newActivity_time"
+            android:layout_alignParentStart="true"
+            android:hint="Uhrzeit"
+            android:layout_below="@+id/newTrip_startDate"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_timepicker"
+            android:src="@android:drawable/ic_menu_today"
+            android:backgroundTint="@color/abc_background_cache_hint_selector_material_light"
+            android:layout_above="@+id/newTrip_place"
+            android:layout_alignStart="@+id/newTrip_button_save" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp">
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:layout_weight="7"
+            android:contentDescription="@android:string/yes"
+            android:clickable="true" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_plane"
+            android:layout_weight="7"
+            android:src="@mipmap/plane"
+            android:contentDescription="@android:string/yes"
+            android:clickable="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_beach"
+            android:layout_weight="7"
+            android:src="@mipmap/beach"
+            android:contentDescription="@android:string/yes"
+            android:clickable="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_cocktail"
+            android:layout_weight="7"
+            android:src="@mipmap/cocktail"
+            android:contentDescription="@android:string/yes"
+            android:clickable="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_ball"
+            android:layout_weight="7"
+            android:src="@mipmap/ball"
+            android:contentDescription="@android:string/yes"
+            android:clickable="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_film"
+            android:layout_weight="7"
+            android:src="@mipmap/film"
+            android:contentDescription="@android:string/yes"
+            android:clickable="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_coffee"
+            android:layout_weight="7"
+            android:src="@mipmap/coffee"
+            android:contentDescription="@android:string/yes"
+            android:clickable="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_food"
+            android:layout_weight="7"
+            android:contentDescription="@android:string/yes"
+            android:clickable="false"
+            android:src="@mipmap/food" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_gift"
+            android:layout_weight="7"
+            android:src="@mipmap/gift"
+            android:contentDescription="@android:string/yes"
+            android:clickable="false" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_sight"
+            android:layout_weight="7"
+            android:src="@mipmap/sight"
+            android:contentDescription="@android:string/yes"
+            android:clickable="false" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_casino"
+            android:layout_weight="7"
+            android:src="@mipmap/casino"
+            android:contentDescription="@android:string/yes"
+            android:clickable="false" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_sport"
+            android:layout_weight="7"
+            android:src="@mipmap/sport"
+            android:contentDescription="@android:string/yes"
+            android:clickable="false" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_landscape"
+            android:layout_weight="7"
+            android:src="@mipmap/landscape"
+            android:contentDescription="@android:string/yes"
+            android:clickable="false" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_bus"
+            android:layout_weight="7"
+            android:src="@mipmap/bus"
+            android:contentDescription="@android:string/yes"
+            android:clickable="false" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ABBRECHEN"
+            android:id="@+id/newActivity_button_cancel"
+            android:layout_below="@+id/newTrip_place"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SPEICHERN"
+            android:id="@+id/newActivity_button_save"
+            android:layout_alignBottom="@+id/newTrip_button_cancel"
+            android:layout_alignParentEnd="true"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>

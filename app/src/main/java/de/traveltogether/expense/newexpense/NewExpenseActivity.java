@@ -33,6 +33,7 @@ import java.util.List;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.expense.ExpenseActivity;
 import de.traveltogether.expense.detailexpense.ExpenseDetailPresenter;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
@@ -57,12 +58,14 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
     ArrayList<Payer> chosenParticipants;
     ProgressDialog progressDialog;
     Switch shareEvenlySwitch;
+    ParticipantSelectionListFragment fragment;
+    Expense expense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_expense);
-
+        getSupportActionBar().setTitle("Neue Ausgabe");
         Bundle b = getIntent().getExtras();
         if (b != null) {
             tripId = b.getLong("tripId", -1);
@@ -70,7 +73,12 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         }
 
         presenter= new NewExpensePresenter(this);
-        presenter.onGetParticipantsForTrip(tripId);
+        if(tripId!=-1) {
+            presenter.onGetParticipantsForTrip(tripId);
+        }
+        else{
+            onViewParticipants(StaticData.getActiveParticipants());
+        }
 
         currencySpinner = (Spinner) findViewById(R.id.spinner_currency);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -92,6 +100,15 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
             progressDialog = ProgressDialog.show(this, "",
                     "Bitte warten...", true);
         }
+        if(chosenParticipants == null){
+            chosenParticipants = new ArrayList<Payer>();
+        }
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragment = ParticipantSelectionListFragment.newInstance(chosenParticipants);
+        fragmentTransaction.add(R.id.activity_new_expense_listcontainer, fragment);
+        fragmentTransaction.commit();
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -105,29 +122,39 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
             case R.id.action_save:
                 if(title.getText().toString()=="" || amount.getText().toString()==""){
                     onViewError("Bitte gib die Daten vollständig an");
-                }
-                int currency = currencySpinner.getSelectedItemPosition();
-                if(currencySpinner.getSelectedItem() == null){
-                    currencySpinner.getSelectedItem().toString();
-                }
-                Expense expense = new Expense(
-                        title.getText().toString(),
-                        0,
-                        description.getText().toString(),
-                        StaticData.getUserId(),
-                        Double.parseDouble(amount.getText().toString()),
-                        currency,
-                        currentPayerId);
-                if(chosenParticipants!=null) {
-                    for (Payer p : chosenParticipants) {
-                        expense.addPayer(p.getId(), p.getAmount());//TODO: add amount in field
-                    }
+                    return false;
                 }
                 if(featureId!=-1){
+                    expense.setTitle(title.getText().toString());
+                    expense.setDescription(description.getText().toString());
+                    expense.setPayer(currentPayerId);
+                    expense.setAmount(Integer.parseInt(amount.getText().toString()));
+                    expense.setAssignedPayers(chosenParticipants);
+                    expense.setLastUpdateBy(StaticData.getUserId());
+
+
                     presenter.onUpdateExpense(expense);
                 }
                 else {
-                    presenter.onCreateExpense(tripId, expense);
+                    int currency = currencySpinner.getSelectedItemPosition();
+                    if(currencySpinner.getSelectedItem() == null){
+                        currencySpinner.getSelectedItem().toString();
+                    }
+                    Expense expense = new Expense(
+                            title.getText().toString(),
+                            0,
+                            tripId,
+                            description.getText().toString(),
+                            StaticData.getUserId(),
+                            Double.parseDouble(amount.getText().toString()),
+                            currency,
+                            currentPayerId);
+                    if(chosenParticipants!=null) {
+                        for (Payer p : chosenParticipants) {
+                            expense.addPayer(p.getId(), Double.parseDouble(amount.getText().toString()) / chosenParticipants.size());//TODO: add amount in field
+                        }
+                    }
+                        presenter.onCreateExpense(tripId, expense);
                 }
 
                 return true;
@@ -139,9 +166,10 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         parent.getItemAtPosition(position);
-        if(view.getId() == R.id.spinner_paid_by){
-            currentPayerId = participants[((Spinner)view).getSelectedItemPosition()].getPersonId();
-        }
+        Log.d("Set payerId ",Integer.toString(participants[position].getPersonId()));
+        //if(view.getId() == R.id.spinner_paid_by){
+            currentPayerId = participants[position].getPersonId();
+        //}
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
@@ -154,6 +182,10 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+        presenter.onGetParticipantsForTrip(tripId);
+        Intent intent = new Intent(this, ExpenseActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
         finish();
     }
 
@@ -169,6 +201,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, participantNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
         currentPayerId = participants[0].getPersonId();
     }
@@ -191,19 +224,16 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         if(chosenParticipants == null){
             chosenParticipants=new ArrayList<Payer>();
         }
+        chosenParticipants.clear();
         for(Integer i: chosenIds){
             chosenParticipants.add(new Payer(participants[i].getPersonId()));
         }
-
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        ParticipantSelectionListFragment fragment = ParticipantSelectionListFragment.newInstance(chosenParticipants);
-        fragmentTransaction.add(R.id.activity_new_expense_listcontainer, fragment);
+        fragmentTransaction.detach(fragment);
+        fragment.refresh(chosenParticipants);
+        fragmentTransaction.attach(fragment);
         fragmentTransaction.commit();
-
-        //LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        //lp.setMargins(16, 232 + chosenParticipants.size()*40, 0, 0);
-        //addButton.setLayoutParams(lp);
     }
 
 
@@ -211,11 +241,20 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final ArrayList<Integer> mSelectedItems = list;
 
+        boolean[] checkedItems = new boolean[participantNames.length];
+        for(int i = 0; i<checkedItems.length; i++){
+            if(list.contains(i)){
+                checkedItems[i] = true;
+            }
+            else{
+                checkedItems[i] = false;
+            }
+        }
         // Set the dialog title
         builder.setTitle("Wer bezahlt mit?");
                 // Specify the list array, the items to be selected by default (null for none),
                 // and the listener through which to receive callbacks when items are selected
-        builder.setMultiChoiceItems(participantNames, null,
+        builder.setMultiChoiceItems(participantNames, checkedItems,
                 new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which,
@@ -275,11 +314,15 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-
+        Intent intent = new Intent(this, ExpenseActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
         finish();
     }
 
-    public void setValues(Expense expense){
+    public void setValues(Expense _expense){
+        expense =_expense;
+
         title.setText(expense.getTitle());
         description.setText(expense.getDescription());
         amount.setText(String.valueOf(expense.getAmount()));

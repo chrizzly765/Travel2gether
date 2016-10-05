@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/box_details"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_vertical_margin">
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        >
 
     <TextView
         android:layout_width="wrap_content"
@@ -65,7 +65,6 @@
         android:layout_width="fill_parent"
         android:layout_height="24dp"
         android:background="#afddf4"
-        android:layout_marginTop="8dp"
         android:layout_below="@id/box_details">
 
         <TextView
