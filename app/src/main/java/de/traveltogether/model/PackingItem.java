@@ -18,4 +18,9 @@ public class PackingItem {
         assignedPerson = _person;
     }
 
+    public PackingItem() {
+
+
+    }
+
 }

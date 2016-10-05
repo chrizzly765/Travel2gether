@@ -110,7 +110,7 @@ public class NotificationFragment extends ListFragment implements AdapterView.On
             intent.putExtra("tripId", n.getFeatureOrTripId());
             startActivity(intent);
         }
-        else if(n.getType().equals(DataType.PACKING.toString())){
+        else if(n.getType().equals(DataType.PACKINGOBJECT.toString())){
             //Intent intent = new Intent(activity, PackingDetailActivity.class);
             //intent.putExtra("id", n.getFeatureOrTripId());
             //startActivity(intent);
