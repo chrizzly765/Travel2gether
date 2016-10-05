@@ -18,4 +18,6 @@ public interface IMainMenuPresenter {
 
     void onGetParticipantsForTrip(long tripId);
 
+    void onSuccessGetParticipants();
+
 }

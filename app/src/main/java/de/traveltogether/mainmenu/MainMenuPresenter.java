@@ -44,4 +44,9 @@ public class MainMenuPresenter implements IMainMenuPresenter {
         interactor.getParticipantsForTrip(tripId, this);
     }
 
+    @Override
+    public void onSuccessGetParticipants() {
+        view.onSuccessGetParticipants();
+    }
+
 }

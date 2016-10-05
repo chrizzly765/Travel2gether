@@ -76,5 +76,9 @@ public enum DataType {
         public String toString(){
             return "Person";
         }
+    },
+    NOTIFICATION{
+        @Override
+        public String toString(){return "Notification";}
     }
 }

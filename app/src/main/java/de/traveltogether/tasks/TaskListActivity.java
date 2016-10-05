@@ -1,15 +1,140 @@
 package de.traveltogether.tasks;
 
+import android.app.AlertDialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.traveltogether.R;
+import de.traveltogether.model.Task;
+import de.traveltogether.tasks.newtask.NewTaskActivity;
 
-public class TaskListActivity extends AppCompatActivity {
+public class TaskListActivity extends AppCompatActivity implements View.OnClickListener {
+
+    long tripId;
+    ITaskListPresenter presenter;
+    //private Task[] tasks;
+    //TaskListFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
+
+        getSupportActionBar().setTitle("Aufgaben");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+        Bundle b = getIntent().getExtras();
+        tripId = -1;
+        if(b != null) {
+            tripId = b.getLong("tripId");
+        }
+
+        ImageButton newTaskBtn = (ImageButton) findViewById(R.id.activity_task_list_button_add);
+        newTaskBtn.setOnClickListener(this);
+        presenter = new TaskListPresenter(this);
+        presenter.onGetTasks(tripId);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if(v.getId() == R.id.activity_task_list_button_add) {
+            Intent intent = new Intent(this, NewTaskActivity.class);
+            intent.putExtra("tripId", tripId);
+            startActivity(intent);
+        }
+    }
+
+    public void onViewTasks(Task[] _tasks){
+        Log.d("TaskListActivity", "got tasks: "+_tasks.length);
+
+        List<Task> taskListOpen = new ArrayList<Task>();
+        List<Task> taskListProgress = new ArrayList<Task>();
+        List<Task> taskListDone = new ArrayList<Task>();
+
+        for (Task t: _tasks) {
+            if(t.getState() == 1) {
+                taskListOpen.add(t);
+            }
+            else if(t.getState() == 2) {
+                taskListProgress.add(t);
+            }
+            else if(t.getState() == 3) {
+                taskListDone.add(t);
+            }
+        }
+
+        FragmentManager fragmentManager = getFragmentManager();
+
+        Task[] arr;
+
+        if(taskListOpen.size() > 0) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            arr = new Task[taskListOpen.size()];
+            taskListOpen.toArray(arr);
+            TaskListFragment fragmentOpen = TaskListFragment.newInstance(arr);
+            fragmentTransaction.add(R.id.fragment_task_list_container_open, fragmentOpen);
+            findViewById(R.id.activity_task_list_divider_open).setVisibility(View.VISIBLE);
+            fragmentTransaction.commit();
+        }
+
+
+        if(taskListProgress.size() > 0) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            arr = new Task[taskListProgress.size()];
+            taskListProgress.toArray(arr);
+            TaskListFragment fragmentProgress = TaskListFragment.newInstance(arr);
+            fragmentTransaction.add(R.id.fragment_task_list_container_progress, fragmentProgress);
+            findViewById(R.id.activity_task_list_divider_progress).setVisibility(View.VISIBLE);
+            fragmentTransaction.commit();
+        }
+
+
+        if(taskListDone.size() > 0) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            arr = new Task[taskListDone.size()];
+            taskListDone.toArray(arr);
+            TaskListFragment fragmentDone = TaskListFragment.newInstance(arr);
+            fragmentTransaction.add(R.id.fragment_task_list_container_done, fragmentDone);
+            findViewById(R.id.activity_task_list_divider_done).setVisibility(View.VISIBLE);
+            fragmentTransaction.commit();
+        }
+
+    }
+
+    public void onViewError(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message);
+        builder.setTitle(getString(R.string.error));
+        builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

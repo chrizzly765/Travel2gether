@@ -3,6 +3,7 @@ package de.traveltogether.triplist;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.widget.ImageButton;
 
 import de.traveltogether.R;
 import de.traveltogether.model.Trip;
+import de.traveltogether.notification.NotificationActivity;
 import de.traveltogether.settings.SettingsActivity;
 import de.traveltogether.triplist.newtrip.NewTripActivity;
 
@@ -26,6 +28,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
     private Trip[] trips;
     TripListFragment fragment;
     private Menu menu;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,9 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         presenter = new TripListPresenter(this);
 
         presenter.onGetTrips();
+
+        progressDialog = ProgressDialog.show(this, "",
+                "Reisen werden geladen...", true);
     }
 
     @Override
@@ -77,6 +83,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         TripListFragment fragment = TripListFragment.newInstance(_trips);
         fragmentTransaction.add(R.id.fragment_trip_list_container, fragment);
         fragmentTransaction.commit();
+        progressDialog.cancel();
     }
 
 
@@ -90,6 +97,8 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_notification:
+                Intent noti = new Intent(this, NotificationActivity.class);
+                startActivity(noti);
                 return true;
             case R.id.action_settings:
                 Intent options = new Intent(this, SettingsActivity.class);
@@ -121,6 +130,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
     }
 */
     public void onViewError(String message) {
+        progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));

@@ -35,11 +35,12 @@ public class InviteInteractor implements IInviteInteractor {
     }
 
     @Override
-    public void invite(int tripId, long personId, IInvitePresenter _listener) {
+    public void invite(long tripId, int receiverId, IInvitePresenter _listener) {
         listener = _listener;
         JSONObject obj = new JSONObject();
         try {
-            obj.put("personId", personId);
+            obj.put("receiverId", receiverId);
+            obj.put("author", StaticData.getUserId());
             obj.put("tripId", tripId);
         } catch (Exception e) {
 

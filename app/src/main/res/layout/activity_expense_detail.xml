@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".expense.detailexpense.ExpenseDetailActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/box_details"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_expense_detail_title"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:text="Titel"
+        android:textSize="21dp"
+        android:layout_alignParentEnd="true"
+        android:clickable = "false"
+        >
+
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100,00 €"
+        android:textSize="21dp"
+        android:id="@+id/activity_expense_detail_amount"
+        android:layout_toRightOf="@+id/activity_expense_detail_title"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="150dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_expense_detail_description"
+        android:text="Beschreibung"
+        android:clickable = "false"
+        android:layout_below="@+id/activity_expense_detail_title"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_expense_detail_paidby"
+        android:text="Max"
+        android:clickable = "false"
+        android:layout_below="@+id/activity_expense_detail_description"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
+    </TextView>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="24dp"
+        android:background="#afddf4"
+        android:layout_below="@id/box_details">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teilen mit"
+            android:id="@+id/textView"
+            android:paddingLeft="16dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="#37a9e3"
+            android:textSize="14dp" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below = "@id/box_details"
+        android:layout_marginTop="30dp"
+        android:id="@+id/activity_expense_detail_list_container"></LinearLayout>
+
+</RelativeLayout>

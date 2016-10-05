@@ -47,6 +47,7 @@ public class HttpRequest  implements IHttpRequest{
             }
             catch(Exception e){
             Log.e("Error in httpRequest", e.getMessage());
+            e.printStackTrace();
             listener.onRequestFinished(new Response("true", "Error", ""), dataType, actionType);
         }
     }

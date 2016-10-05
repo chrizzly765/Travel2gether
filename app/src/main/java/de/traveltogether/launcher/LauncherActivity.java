@@ -1,5 +1,6 @@
 package de.traveltogether.launcher;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,8 @@ public class LauncherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ProgressDialog progressDialog = ProgressDialog.show(this, "",
+                "Bitte warten...", true);
         setContentView(R.layout.activity_launcher);
         Log.d("Launcher","start");
 
@@ -26,6 +29,9 @@ public class LauncherActivity extends AppCompatActivity {
         hash = sharedPref.getString(getString(R.string.saved_hash), "");
         if(hash != ""){
             int userId;
+            /*SharedPreferences.Editor editor = sharedPref.edit();
+            editor.remove(getString(R.string.saved_user_id));
+            editor.commit();*/
             userId = sharedPref.getInt(getString(R.string.saved_user_id), -1);
             if(userId != -1){
                 Intent tl = new Intent(this, TripListActivity.class);
@@ -43,5 +49,6 @@ public class LauncherActivity extends AppCompatActivity {
             Intent login = new Intent(this, LoginActivity.class);
             startActivity(login);
         }
+        progressDialog.cancel();
     }
 }

@@ -140,9 +140,10 @@
         </service>
 
         <activity android:name=".activity.ActivitiesActivity" />
-        <activity android:name=".chat.ChatActivity"
-        android:screenOrientation="portrait">
-        </activity>
+        <activity
+            android:name=".chat.ChatActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".tasks.detail.TaskDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -4,4 +4,16 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorFAB">#00c9c5</color>
+    <color name="colorFABLight">#cdcdcd</color>
+    <color name = "colorWhite">#ffffff</color>
+    <color name = "color002f5b">#002f5b</color>
+    <color name = "color002c8c">#002c8c</color>
+    <color name = "color255fb6">#255fb6</color>
+    <color name = "color37a9e3">#37a9e3</color>
+    <color name = "color00c9c5">#00c9c5</color>
+    <color name = "color00e6b6">#00e6b6</color>
+    <color name = "color00d641">#00d641</color>
+    <color name = "color9bd641">#9bd641</color>
+    <color name = "colordce641">#dce641</color>
+    <color name = "colorffe154">#ffe154</color>
 </resources>

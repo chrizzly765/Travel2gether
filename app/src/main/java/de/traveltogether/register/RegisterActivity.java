@@ -1,5 +1,6 @@
 package de.traveltogether.register;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected EditText repeatPassword;
     protected String salt;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         email = (EditText)findViewById(R.id.registerEmail);
         password=(EditText)findViewById(R.id.registerPassword);
         repeatPassword=(EditText)findViewById(R.id.registerPassword_repeat);
+
     }
 
     public void onClick(View v){
@@ -66,11 +69,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 onViewErrorMessage(getString(R.string.pw_minimum_length));
                 return;
             }
-            if(password.getText() != repeatPassword.getText()){
+            if(password.getText().toString() == repeatPassword.getText().toString()){
                 onViewErrorMessage(getString(R.string.pw_repeat_error));
                 return;
             }
-
+            progressDialog = ProgressDialog.show(this, "",
+                    "Bitte warten...", true);
             v.setEnabled(false);
 
             mRegistrationBroadcastReceiver = new BroadcastReceiver() {
@@ -125,12 +129,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         else if (v.getId()== R.id.login_Text2){
             //Intent login = new Intent(this, LoginActivity.class);
             //startActivity(login);
+            progressDialog.cancel();
             finish();
         }
+        progressDialog.cancel();
 
     }
 
     public void onViewSuccessMessage(String message){
+        progressDialog.cancel();
         registerBtn.setEnabled(true);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.mail_was_sent);
@@ -150,6 +157,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void onViewErrorMessage(String message){
+        progressDialog.cancel();
         registerBtn.setEnabled(true);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);

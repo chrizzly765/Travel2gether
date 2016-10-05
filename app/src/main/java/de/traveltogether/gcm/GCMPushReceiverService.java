@@ -35,7 +35,7 @@ import de.traveltogether.servercommunication.HttpRequest;
 /**
  * Created by NgocTri on 4/9/2016.
  */
-public class GCMPushReceiverService extends GcmListenerService implements IInteractor, DialogInterface.OnClickListener {
+public class GCMPushReceiverService extends GcmListenerService{
     Notification notification;
     @Override
     public void onMessageReceived(String from, Bundle data) {
@@ -43,27 +43,7 @@ public class GCMPushReceiverService extends GcmListenerService implements IInter
         String id = data.getString("id");
         String date = data.getString("date");
         String message = data.getString("message");
-        notification = new Notification(message, DataType.valueOf(type), date, Long.valueOf(id));
-        //Notification not = new Notification(message, DataType.valueOf(feature_type.toUpperCase()), date, id);
-        //NotificationInteractor.addNotification(not);
-
-
-        //sollte die Einladung anzeigen wenn App geöffnet wird.
-        //Wenn das nicht funktioniert, dann erst anzeigen wenn die Notification angetippt wird.
-
-        if(type==DataType.INVITATION.toString().toLowerCase()){
-            invite();
-            sendNotification(message);
-        }
-        else if (type==DataType.CHAT.toString().toLowerCase()){
-            ActivityManager am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
-            List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
-            ComponentName componentInfo = taskInfo.get(0).topActivity;
-            componentInfo.getPackageName();
-        }
-        else {
-            sendNotification(message);
-        }
+        sendNotification(message);
     }
     private void sendNotification(String message) {
         Intent intent = new Intent(this, NotificationActivity.class);
@@ -83,55 +63,5 @@ public class GCMPushReceiverService extends GcmListenerService implements IInter
 
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, noBuilder.build()); //0 = ID of notification
-    }
-
-    void invite(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(notification.getMessage());
-        builder.setTitle(getString(R.string.invitation));
-        builder.setNegativeButton(getString(R.string.decline), this);
-        builder.setPositiveButton(getString(R.string.join), this);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-    @Override
-    public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-
-    }
-
-    /**
-     * OnClicklistener for Dialog which appears if notification type was invitation
-     * @param dialog
-     * @param which
-     */
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
-        if(which==0){
-            dialog.cancel();
-            try {
-                JSONObject obj = new JSONObject();
-                obj.put("tripId", notification.getId().toString());
-                obj.put("personId", StaticData.getUserId());
-                HttpRequest req = new HttpRequest(DataType.INVITATION, ActionType.DECLINE, obj.toString(), this);
-            }
-            catch(Exception e){
-                Log.e(e.getClass().toString(), e.getMessage());
-            }
-            dialog.cancel();
-        }
-        else if(which==1){
-            try {
-                JSONObject obj = new JSONObject();
-                obj.put("tripId", notification.getId().toString());
-                obj.put("personId", StaticData.getUserId());
-                HttpRequest req = new HttpRequest(DataType.INVITATION, ActionType.ACCEPT, obj.toString(), this);
-            }
-            catch(Exception e){
-                Log.e(e.getClass().toString(), e.getMessage());
-            }
-            dialog.cancel();
-        }
     }
 }

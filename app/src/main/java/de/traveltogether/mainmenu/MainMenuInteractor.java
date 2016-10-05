@@ -72,9 +72,15 @@ public class MainMenuInteractor implements IMainMenuInteractor {
                 return;
             }
             if(dataType==DataType.TRIP && actionType==ActionType.GETPARTICIPANTS){
-                Participant[] participants = ((ParticipantList)JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
-                StaticData.setParticipants(participants);
-                return;
+                if(response.getError()!="true") {
+                    Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
+                    StaticData.setParticipants(participants);
+                    listener.onSuccessGetParticipants();
+                    return;
+                }
+                else{
+                    listener.onError(response.getMessage());
+                }
             }
         }
         else{
