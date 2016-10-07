@@ -11,7 +11,7 @@ import android.widget.AdapterView;
 import de.traveltogether.R;
 import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Task;
-import de.traveltogether.tasks.detail.TaskDetailActivity;
+//import de.traveltogether.tasks.detail.TaskDetailActivity;
 
 import java.util.List;
 
@@ -63,11 +63,12 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent detail = new Intent(getActivity(), TaskDetailActivity.class);
+        /*Intent detail = new Intent(getActivity(), TaskDetailActivity.class);
         Bundle b = new Bundle();
         b.putLong("featureId", tasks[position].getId()); //Your id
         detail.putExtras(b); //Put your id to your next Intent
         startActivity(detail);
+        */
     }
 
 }

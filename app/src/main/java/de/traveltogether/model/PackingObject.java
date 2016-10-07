@@ -10,8 +10,8 @@ public class PackingObject extends AbstractListObject {
 
     private List<PackingItem> items = new ArrayList<PackingItem>();
 
-    public PackingObject(String _title, int _id, String _description, int _author, int count) {
-        super(_title,_id, _description, _author);
+    public PackingObject(String _title, int _id, long _tripId, String _description, int _author, int count) {
+        super(_title,_id, _tripId, _description, _author);
         for(int i = 0; i<count; i++){
             items.add(new PackingItem());
         }

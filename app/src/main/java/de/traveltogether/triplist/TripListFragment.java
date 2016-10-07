@@ -70,6 +70,7 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Trip trip = (Trip) adapter.getItem(position);
+
         Intent mainMenu = new Intent(getActivity(), MainActivity.class);
         Bundle b = new Bundle();
         b.putLong("tripId", trips[position].getTripId()); //Your id

@@ -33,6 +33,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_trip_list);
         getSupportActionBar().setTitle("Meine Reisen");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -42,8 +43,8 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         //optionsBtn.setOnClickListener(this);
         ImageButton newTripBtn = (ImageButton) findViewById(R.id.fab_button);
         newTripBtn.setOnClickListener(this);
-        presenter = new TripListPresenter(this);
 
+        presenter = new TripListPresenter(this);
         presenter.onGetTrips();
 
         progressDialog = ProgressDialog.show(this, "",

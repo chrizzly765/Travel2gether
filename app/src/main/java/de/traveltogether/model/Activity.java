@@ -1,17 +1,21 @@
 package de.traveltogether.model;
 
+import android.widget.ImageView;
+
 import java.text.SimpleDateFormat;
 
 /**
  * Created by Anna-Lena on 12.05.2016.
  */
 public class Activity extends AbstractListObject {
-    private String icon;
+    private int icon;
     private String destination;
-    private SimpleDateFormat date = new SimpleDateFormat("dd.MM.yyyy");
-    private SimpleDateFormat time = new SimpleDateFormat("HH:mm");
+    private String date;
+    private String time;
+   // private SimpleDateFormat date = new SimpleDateFormat("dd.MM.yyyy");
+    //private SimpleDateFormat time = new SimpleDateFormat("HH:mm");
 
-    public String getIcon(){
+    public int getIcon(){
         return icon;
     }
 
@@ -19,16 +23,16 @@ public class Activity extends AbstractListObject {
         return destination;
     }
 
-    public SimpleDateFormat getDate(){
+    public String getDate(){
         return date;
     }
-    public SimpleDateFormat getTime(){
+    public String  getTime(){
         return time;
     }
 
     //TODO: implement description, icon, destination, time and date as optional
-    public Activity(String _title, int _id, String _description, int _author, String _icon, String _destination, SimpleDateFormat _time, SimpleDateFormat _date) {
-        super(_title, _id, _description, _author);
+    public Activity(String _title, int _id, long _tripId, String _description, int _author, int _icon, String _destination, String _time, String  _date) {
+        super(_title, _id, _tripId, _description, _author);
         icon = _icon;
         destination = _destination;
         time = _time;

@@ -70,6 +70,10 @@
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.newactivity.NewActivityActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".participantlist.ParticipantListActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -139,7 +143,7 @@
         <activity
             android:name=".chat.ChatActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".tasks.detail.TaskDetailActivity"></activity>
+        <activity android:name=".activity.detailactivity.DetailActivityActivity"></activity>
     </application>
 
 </manifest>
