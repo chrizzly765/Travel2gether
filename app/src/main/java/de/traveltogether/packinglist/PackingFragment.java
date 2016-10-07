@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import de.traveltogether.R;
 import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.PackingObject;
+import de.traveltogether.packinglist.packingdetail.PackingDetailActivity;
 
 import java.util.List;
 
@@ -76,13 +78,12 @@ public class PackingFragment extends ListFragment implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        Log.d("Click", String.valueOf(position));
         PackingObject packingobject = (PackingObject) adapter.getItem(position);
-        Intent mainMenu = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(getActivity(), PackingDetailActivity.class);
         Bundle b = new Bundle();
-        b.putLong("featureId", packingobjects[position].getId());
-        b.putString("title", packingobjects[position].getTitle());
-        mainMenu.putExtras(b); //Put your id to your next Intent
-        startActivity(mainMenu);
+        b.putLong("featureId", packingobject.getId());
+        intent.putExtras(b); //Put your id to your next Intent
+        startActivity(intent);
     }
 }

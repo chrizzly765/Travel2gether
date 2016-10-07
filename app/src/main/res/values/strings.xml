@@ -42,7 +42,7 @@
     <string name="options">Optionen</string>
     <string name="profile">Profil</string>
     <string name="edit">Bearbeiten</string>
-    <string name = "delete">Löschen</string>
+    <string name="delete">Löschen</string>
     <string name="notifications">Benachrichtigungen</string>
     <string name="on">an</string>
     <string name="off">aus</string>

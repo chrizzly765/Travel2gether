@@ -65,7 +65,7 @@ public class PackingAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.fragment_packing_list_item, parent, false);
             holder = new PackingViewHolder();
             holder.title = (CheckBox) convertView.findViewById(R.id.fragment_packing_list_item_checkbox);
-            holder.number = (TextView) convertView.findViewById(R.id.fragment_packing_list_item_current_number);
+            //holder.number = (TextView) convertView.findViewById(R.id.fragment_packing_list_item_current_number);
             holder.itemsPacked = (TextView) convertView.findViewById(R.id.fragment_packing_list_item_number_packed_items);
             //holder.description= (TextView)convertView.findViewById(R.id.fragment_trip_list_item_description);
             //holder.destination=(TextView)convertView.findViewById(R.id.fragment_trip_list_item_destination);
@@ -79,7 +79,7 @@ public class PackingAdapter extends BaseAdapter {
         Context context = parent.getContext();
         PackingObject packingobject = (PackingObject)getItem(position);
         holder.title.setText(packingobject.getTitle());
-        holder.number.setText(String.valueOf(packingobject.getPackingItemsNumber()));
+        //holder.number.setText(String.valueOf(packingobject.getPackingItemsNumber()));
         holder.itemsPacked.setText(String.valueOf(packingobject.getItemsPacked()) + "/" + String.valueOf(packingobject.getPackingItemsNumber()));
         //holder.description.setText(packingobject.getDescription());
         //holder.destination.setText(trip.getDestination());
@@ -90,6 +90,6 @@ public class PackingAdapter extends BaseAdapter {
 
     static class PackingViewHolder{
         CheckBox title;
-        TextView number, itemsPacked;
+        TextView itemsPacked;
     }
 }

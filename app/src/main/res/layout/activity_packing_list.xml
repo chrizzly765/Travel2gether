@@ -12,10 +12,27 @@
 
 <RelativeLayout
 android:id = "@+id/fragment_packing_list_container"
-android:layout_width="wrap_content"
+android:layout_width="fill_parent"
 android:layout_height="wrap_content"
 
 android:paddingTop="32dp"
 android:paddingLeft="8dp"
 android:paddingRight="8dp" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/frameLayout">
+
+        <ImageButton
+            android:layout_margin="15dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/circle"
+            android:id="@+id/activity_packing_list_button_add"
+            android:src="@mipmap/ic_add"
+            android:layout_gravity="right|bottom" />
+    </FrameLayout>
 </RelativeLayout>

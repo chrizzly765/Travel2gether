@@ -3,17 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
-    android:name="de.traveltogether.packinglist.PackingFragment"
+    android:name="de.traveltogether.packinglist.newpackingitem.PackingItemSelectionFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="de.traveltogether.packinglist.PackingFragment"
-    tools:listitem="@layout/fragment_packing_list_item">
-
+    tools:context="de.traveltogether.packinglist.newpackingitem.PackingItemSelectionFragment"
+    tools:listitem="@layout/fragment_packingitem_list_item" >
     <ListView android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/fragment_packing_list_item"
+        tools:listitem="@layout/fragment_packingitem_list_item"
         android:divider="#00000000"
-        android:dividerHeight="8dp"/>
-    </RelativeLayout>
+        android:dividerHeight="8dp" />
+
+
+</RelativeLayout>

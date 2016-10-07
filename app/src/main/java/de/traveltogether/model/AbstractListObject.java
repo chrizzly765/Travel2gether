@@ -3,6 +3,7 @@ package de.traveltogether.model;
 import java.text.SimpleDateFormat;
 
 import de.traveltogether.DataType;
+import de.traveltogether.StaticData;
 
 /**
  * Created by Anna-Lena on 12.05.2016.
@@ -62,13 +63,13 @@ public abstract class AbstractListObject {
     public void setLastUpdateBy(int _lastUpdateBy){ lastUpdateBy = _lastUpdateBy; }
 
     //TODO: implement description as optional
-    public AbstractListObject(String _title, int _id, long _tripId, String _description, int _author){
+    public AbstractListObject(String _title, long _id, long _tripId, String _description, int _author){
         title = _title;
         id = _id;
         tripId = _tripId;
         description = _description;
         author = _author;
-        lastUpdateBy = author;
+        lastUpdateBy = StaticData.getUserId();
     }
 
     public DataType getTypeById(int id){

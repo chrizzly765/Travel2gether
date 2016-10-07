@@ -40,7 +40,7 @@ public class PackingListInteractor implements IPackingListInteractor {
         }
         else{
             try {
-                PackingList packingList = (PackingList)JsonDecode.getInstance().<PackingList>jsonToArray(response.getData(), PackingList.class);
+                PackingList packingList = (PackingList)JsonDecode.getInstance().jsonToArray(response.getData(), PackingList.class);
 
                 listener.onSuccess(packingList.list);
                 return;
@@ -48,6 +48,7 @@ public class PackingListInteractor implements IPackingListInteractor {
             catch(Exception e){
                 Log.e(e.getClass().toString(), e.getMessage());
                 e.printStackTrace();
+                listener.onError(response.getMessage());
             }
         }
     }

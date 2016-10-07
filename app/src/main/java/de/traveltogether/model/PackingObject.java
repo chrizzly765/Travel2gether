@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class PackingObject extends AbstractListObject {
 
-    protected String category;
+    //protected String category = "";
     protected int number;
     protected int itemsPacked;
     protected int[] personsAssigned;
@@ -19,21 +19,21 @@ public class PackingObject extends AbstractListObject {
     public int getPackingItemsNumber(){
         return number;
     }
+    public List<PackingItem> getItems(){return items;}
 
     public int getItemsPacked(){
         return itemsPacked;
     }
 
-    public PackingObject(String _title, int _id, String _description, int _author, int count) {
-        super(_title,_id, _description, _author);
-        for(int i = 0; i<count; i++){
-            items.add(new PackingItem());
-        }
-
+    public int[] getPersonsAssigned(){return personsAssigned;}
+    public PackingObject(String _title, long _id, long _tripId, String _description, int _author, int count) {
+        super(_title,_id, _tripId, _description, _author);
     }
 
-    public void addPackingItem(){
-        items.add(new PackingItem());
+    //public void addPackingItem(int personAssigned){items.add(new PackingItem(personAssigned));    }
+    //public void addPackingItem(int personAssigned, boolean status, long id, int number){ items.add(new PackingItem(personAssigned, status, id, number));}
+    public void addPackingItem(PackingItem _packingItem){
+        items.add(_packingItem);
     }
 }
 

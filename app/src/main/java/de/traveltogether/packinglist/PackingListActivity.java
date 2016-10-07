@@ -49,6 +49,8 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        ImageButton button = (ImageButton)findViewById(R.id.activity_packing_list_button_add);
+        button.setOnClickListener(this);
         //MenuItem optionsBtn = (MenuItem) findViewById(R.id.open_options);
         //optionsBtn.setOnClickListener(this);
         //ImageButton newTripBtn = (ImageButton) findViewById(R.id.fab_button);
@@ -76,8 +78,9 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.fab_button){
+        if (v.getId() == R.id.activity_packing_list_button_add){
             Intent set = new Intent(this, NewPackingItemActivity.class);
+            set.putExtra("tripId", tripId);
             startActivity(set);
         }
     }
@@ -96,4 +99,6 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+
 }

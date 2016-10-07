@@ -4,23 +4,36 @@ package de.traveltogether.model;
  * Created by Anna-Lena on 12.05.2016.
  */
 public class PackingItem {
-    private Participant assignedPerson = null;
-    private boolean packedCheckBox = false;
+    private int personId;
+    private boolean status = false;
+    private long id = 0;
+    private int number = 1;
 
-    public Participant getAssignedPerson(){
-        return assignedPerson;
+    public boolean getStatus(){
+        return status;
+    }
+    public void assignToParticipant(int _person){
+        personId = _person;
+    }
+    public long getId(){return id;}
+    public int getNumber(){return number;}
+    public int getAssignedPerson(){
+        return personId;
     }
 
-    public boolean getPackedCheckBox(){
-        return packedCheckBox;
+
+    public PackingItem(int _personAssigned) {
+        personId = _personAssigned;
+        number = 1;
+        id = 0;
+        status = false;
     }
-    public void assignToParticipant(Participant _person){
-        assignedPerson = _person;
-    }
 
-    public PackingItem() {
-
-
+    public  PackingItem(int _personAssigned, boolean _status, long _id, int _number){
+        personId = _personAssigned;
+        status = _status;
+        id = _id;
+        number = _number;
     }
 
 }
