@@ -10,7 +10,7 @@ public interface INewTaskPresenter {
 
     void onSuccessGetDetails(Task task);
 
-    public void onCreateTask(long tripId, Task task);
+    public void onCreateTask(Task task);
 
     void onUpdateTask(Task task);
 

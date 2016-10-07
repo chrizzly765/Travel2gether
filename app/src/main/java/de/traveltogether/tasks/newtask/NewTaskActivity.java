@@ -88,7 +88,7 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
                             (int) status.getSelectedItemId() + 1
                     );
 
-                    presenter.onCreateTask(tripId, task);
+                    presenter.onCreateTask(task);
                 }
                 else if(featureId != -1) {
 

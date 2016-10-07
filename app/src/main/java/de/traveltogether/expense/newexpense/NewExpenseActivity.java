@@ -154,7 +154,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                             expense.addPayer(p.getId(), Double.parseDouble(amount.getText().toString()) / chosenParticipants.size());//TODO: add amount in field
                         }
                     }
-                        presenter.onCreateExpense(tripId, expense);
+                        presenter.onCreateExpense(expense);
                 }
 
                 return true;

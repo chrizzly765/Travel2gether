@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="de.traveltogether.tasks.detail.TaskDetailActivity">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/box_details"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+       >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/activity_task_detail_title"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:text="Titel"
+        android:textSize="21dp"
+        android:layout_alignParentEnd="true"
+        android:clickable = "false"
+        >
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/activity_task_detail_status"
+            android:text="Status"
+            android:layout_weight="0.5"
+            android:clickable = "false">
+        </TextView>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:visibility="visible"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:id = "@+id/activity_task_detail_item_icon">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginTop="3dp"
+                android:id="@+id/activity_task_detail_item_icon_watch"
+                android:background="@drawable/ic_watch_black" />
+
+            <TextView android:id="@+id/activity_task_detail_item_toDoTillDate"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_toRightOf="@+id/activity_task_detail_item_icon_watch"
+                android:layout_marginStart="2dp"
+                android:textSize="14dp"
+                android:layout_gravity="left"
+                android:textColor="#000000"
+                android:text="date" />
+        </RelativeLayout>
+
+   </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_task_detail_description"
+        android:text="Beschreibung"
+        android:clickable = "false"
+        android:layout_below="@+id/activity_task_detail_status"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
+    </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="24dp"
+        android:background="#afddf4"
+        android:layout_below="@+id/activity_task_list_container_progress"
+        android:id="@+id/activity_task_list_divider_done"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zugeteilt"
+            android:paddingLeft="16dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="#37a9e3"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="16dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/icon_box">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/activity_task_detail_list_item_icon"
+                android:background="@drawable/circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N"
+                android:layout_gravity="center_horizontal|center"
+                android:textColor = "#FFFFFF"
+                android:textSize="18dp"
+                android:id="@+id/activity_task_detail_list_item_initial"
+                />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginLeft="8dp"
+            android:id="@+id/activity_task_detail_list_item_name"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

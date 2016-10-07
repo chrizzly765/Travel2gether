@@ -7,7 +7,7 @@ import de.traveltogether.model.Task;
  * Created by Anna-Lena on 12.05.2016.
  */
 public interface INewTaskInteractor extends IInteractor{
-    public void createTask(long tripId, Task task, INewTaskPresenter _listener);
+    public void createTask(Task task, INewTaskPresenter _listener);
 
     void updateTask(Task task, INewTaskPresenter _listener);
 

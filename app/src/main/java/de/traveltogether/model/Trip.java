@@ -12,10 +12,11 @@ public class Trip {
     private String description;
     private int adminId;
     private int authorId;
-    //private SimpleDateFormat startDate = new SimpleDateFormat("dd.MM.yyyy");
     private String startDate;
     private String endDate;
-    //private SimpleDateFormat endDate = new SimpleDateFormat("dd.MM.yyyy");
+    private int lastUpdateBy;
+    private String lastUpdate;
+
     private ParticipantShort[] participants;
 
     public Long getTripId(){
@@ -50,6 +51,12 @@ public class Trip {
         return adminId;
     }
 
+    public int getLastUpdateBy(){
+        return lastUpdateBy;
+    }
+
+    public String getLastUpdate(){ return lastUpdate; }
+
     public ParticipantShort[] getParticipants(){return participants;}
 
     public Trip(String _title, String _description, String _destination, String _startDate, String _endDate){
@@ -63,7 +70,7 @@ public class Trip {
         participants = new ParticipantShort[0];
     }
 
-    public Trip(long _tripId, String _title, String _description, String _destination, String _startDate, String _endDate, int _authorId, int _adminId){
+    public Trip(long _tripId, String _title, String _description, String _destination, String _startDate, String _endDate, int _authorId, int _adminId, int _lastUpdateBy, String _lastUpdate){
         tripId = _tripId;
         title = _title;
         description = _description;
@@ -72,6 +79,8 @@ public class Trip {
         endDate = _endDate;
         authorId = _authorId;
         adminId = _adminId;
+        lastUpdateBy = _lastUpdateBy;
+        lastUpdate=_lastUpdate;
     }
 
 }

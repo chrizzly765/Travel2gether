@@ -101,7 +101,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         inflater.inflate(R.menu.optionsmenu_detail, menu);
         //if(expense!=null) {
             //if (expense.getAuthor() == StaticData.getUserId()) {
-                menu.getItem(R.id.delete).setEnabled(true);
+                //menu.getItem(R.id.delete).setEnabled(true);
             //}
         //}
         return super.onCreateOptionsMenu(menu);

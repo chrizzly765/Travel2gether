@@ -99,7 +99,9 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
                                     startDate.getText().toString(),
                                     endDate.getText().toString(),
                                     trip.getAuthorId(),
-                                    trip.getAdminId() ));
+                                    trip.getAdminId(),
+                                    StaticData.getUserId(),
+                                    trip.getLastUpdate()));
                 }
                 else {
                     presenter.onCreateTrip(

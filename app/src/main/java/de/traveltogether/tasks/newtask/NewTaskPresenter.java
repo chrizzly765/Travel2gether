@@ -26,8 +26,8 @@ public class NewTaskPresenter implements INewTaskPresenter {
 
 
     @Override
-    public void onCreateTask(long tripId, Task task) {
-        interactor.createTask(tripId, task,this);
+    public void onCreateTask(Task task) {
+        interactor.createTask(task,this);
     }
 
     @Override

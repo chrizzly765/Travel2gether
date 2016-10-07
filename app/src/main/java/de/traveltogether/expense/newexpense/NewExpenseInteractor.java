@@ -33,17 +33,9 @@ public class NewExpenseInteractor implements INewExpenseInteractor {
     }
 
     @Override
-    public void createExpense(long tripId, Expense expense, INewExpensePresenter _listener) {
+    public void createExpense(Expense expense, INewExpensePresenter _listener) {
         listener=_listener;
-        try {
-            String jsonString = JsonDecode.getInstance().classToJson(expense);
-            JSONObject obj = new JSONObject(jsonString);
-            obj.put("tripId", tripId);
-            HttpRequest request = new HttpRequest(DataType.EXPENSE, ActionType.ADD, obj.toString(), this);
-        }
-        catch (Exception e){
-            Log.e("NewExpenseInteractor", e.getMessage());
-        }
+        HttpRequest request = new HttpRequest(DataType.EXPENSE, ActionType.ADD, JsonDecode.getInstance().classToJson(expense), this);
     }
 
     @Override

@@ -16,8 +16,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import de.traveltogether.R;
+import de.traveltogether.date.DateFormat;
 import de.traveltogether.model.Trip;
 import de.traveltogether.notification.NotificationActivity;
 import de.traveltogether.settings.SettingsActivity;
@@ -77,14 +85,46 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
     public void onViewTrips(Trip[] _trips){
         Log.d("TripListActivity", "got trips: "+_trips.length);
         trips= _trips;
+        List<Trip> formerTrips = new ArrayList<Trip>();
+        List<Trip> upcomingTrips = new ArrayList<Trip>();
+        Calendar cal = Calendar.getInstance();
+        String currentDate = new SimpleDateFormat("dd.MM.yyyy").format(cal.getTime());
+
+        for(Trip t : _trips){
+            int comparison= DateFormat.getInstance().compareDates(t.getEndDate(), currentDate);
+            if(comparison>=0){
+                upcomingTrips.add(t);
+            }
+            else{
+                formerTrips.add(t);
+            }
+        }
 
         //Fragment in Activity einbetten
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        TripListFragment fragment = TripListFragment.newInstance(_trips);
-        fragmentTransaction.add(R.id.fragment_trip_list_container, fragment);
-        fragmentTransaction.commit();
-        progressDialog.cancel();
+        if(upcomingTrips.size()>0) {
+            LinearLayout devider = (LinearLayout)findViewById(R.id.activity_trip_list_devider_upcoming);
+            devider.setVisibility(View.VISIBLE);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Trip[] arr = new Trip[upcomingTrips.size()];
+            upcomingTrips.toArray(arr);
+            TripListFragment fragment = TripListFragment.newInstance(arr);
+            fragmentTransaction.add(R.id.fragment_trip_list_container_upcoming, fragment);
+            fragmentTransaction.commit();
+            progressDialog.cancel();
+        }
+        if(formerTrips.size()>0) {
+            LinearLayout devider = (LinearLayout)findViewById(R.id.activity_trip_list_devider_former);
+            devider.setVisibility(View.VISIBLE);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Trip[] arr = new Trip[formerTrips.size()];
+            formerTrips.toArray(arr);
+            TripListFragment fragment = TripListFragment.newInstance(arr);
+            fragmentTransaction.add(R.id.fragment_trip_list_container_former, fragment);
+            fragmentTransaction.commit();
+            progressDialog.cancel();
+        }
     }
 
 

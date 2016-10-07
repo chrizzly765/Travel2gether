@@ -3,19 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="de.traveltogether.triplist.TripListActivity">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="24dp"
-        android:background="#afddf4">
+        android:id="@+id/activity_trip_list_devider_upcoming"
+        android:visibility="invisible"
+        android:background="#afddf4"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bevorstehend"
-            android:id="@+id/textView"
             android:paddingLeft="16dp"
             android:layout_gravity="center_vertical"
             android:textColor="#37a9e3"
@@ -23,31 +26,43 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id = "@+id/fragment_trip_list_container"
+        android:id = "@+id/fragment_trip_list_container_upcoming"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:paddingTop="25dp"
+        android:paddingTop="0dp"
+        android:layout_below="@+id/activity_trip_list_devider_upcoming"
         android:paddingLeft="8dp"
         android:paddingRight="8dp" />
-<!--
-    <Button
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/fragment_trip_list_container_upcoming"
+        android:id="@+id/activity_trip_list_devider_former"
+        android:background="#afddf4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vergangen"
+            android:paddingLeft="16dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="#37a9e3"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id = "@+id/fragment_trip_list_container_former"
         android:layout_width="wrap_content"
+        android:layout_below="@+id/activity_trip_list_devider_former"
         android:layout_height="wrap_content"
-        android:text="Optionen"
-        android:id="@+id/options_button"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
-        -->
-<!--
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Neue Reise"
-        android:id="@+id/new_trip_button"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
--->
+        android:paddingTop="0dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -19,19 +19,10 @@ public class NewTaskInteractor implements INewTaskInteractor {
     INewTaskPresenter listener;
 
     @Override
-    public void createTask(long tripId,Task task, INewTaskPresenter _listener) {
+    public void createTask(Task task, INewTaskPresenter _listener) {
 
         listener = _listener;
-        try {
-            String jsonString = JsonDecode.getInstance().classToJson(task);
-            JSONObject obj = new JSONObject(jsonString);
-            obj.put("tripId", tripId);
-            HttpRequest request = new HttpRequest(DataType.TASK, ActionType.ADD, obj.toString(), this);
-        }
-        catch (Exception e){
-            Log.e("NewTaskInteractor", e.getMessage());
-        }
-
+        HttpRequest request = new HttpRequest(DataType.TASK, ActionType.ADD, JsonDecode.getInstance().classToJson(task), this);
     }
 
     @Override
