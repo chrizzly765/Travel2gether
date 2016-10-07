@@ -35,6 +35,9 @@
             android:name=".expense.ExpenseActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".expense.detailexpense.ExpenseDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".expense.newexpense.NewExpenseActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
@@ -142,8 +145,9 @@
         <activity android:name=".activity.ActivitiesActivity" />
         <activity
             android:name=".chat.ChatActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.detailactivity.DetailActivityActivity"></activity>
+            android:screenOrientation="portrait">
+        </activity>
+        <!--activity android:name=".activity.detailactivity.DetailActivityActivity"></activity-->
     </application>
 
 </manifest>

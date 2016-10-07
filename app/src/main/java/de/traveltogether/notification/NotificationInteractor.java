@@ -75,8 +75,14 @@ public class NotificationInteractor implements INotificationInteractor {
         }
         else{
             if(dataType.equals(DataType.NOTIFICATION) && actionType.equals(ActionType.LIST)) {
-                Notification[] list = ((NotificationList) JsonDecode.getInstance().jsonToArray(response.getData(), NotificationList.class)).list;
-                listener.onViewNotificationList(list);
+                NotificationList not = ((NotificationList) JsonDecode.getInstance().jsonToArray(response.getData(), NotificationList.class));
+                if(not!=null) {
+                    Notification[] list = not.list;
+                    listener.onViewNotificationList(list);
+                }
+                else {
+                    listener.onViewNotificationList(new Notification[0]);
+                }
             }
         }
     }

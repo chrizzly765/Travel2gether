@@ -32,8 +32,8 @@ public class NewExpensePresenter implements INewExpensePresenter {
     }
 
     @Override
-    public void onCreateExpense(long tripId, Expense expense) {
-        interactor.createExpense(tripId, expense, this);
+    public void onCreateExpense(Expense expense) {
+        interactor.createExpense(expense, this);
     }
 
     @Override
