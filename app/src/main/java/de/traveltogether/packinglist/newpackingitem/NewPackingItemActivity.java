@@ -100,6 +100,10 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
             case R.id.action_save:
                 if(title.getText().toString()=="" || number.getText().toString()=="") {
                     onViewError("Bitte gib die Daten vollständig an");
+                    return false;
+                }
+                if(chosenParticipants.size() > Integer.parseInt(number.getText().toString())){
+                    number.setText(String.valueOf(chosenParticipants.size()));
                 }
                 if(featureId!=-1){
                     PackingObject packingobject = new PackingObject(title.getText().toString(),
@@ -109,9 +113,14 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                             Integer.parseInt(number.getText().toString()));
 
                     if(chosenParticipants!=null) {
-                        for (PackingItem p : chosenParticipants) {
+                        /*for (PackingItem p : chosenParticipants) {
                             packingobject.addPackingItem(p);//TODO: add amount in field
+                        }*/
+                        PackingItem[] array= new PackingItem[chosenParticipants.size()];
+                        for (int i=0; i<chosenParticipants.size();i++) {
+                            PackingItem it = new PackingItem((int)chosenParticipants.get(i).getId());
                         }
+                        packingobject.setPackingItems(array);
                     }
                     presenter.onUpdatePackingObject(packingobject);
                 }
@@ -125,14 +134,16 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                             Integer.parseInt(number.getText().toString())
                     );
                     if(chosenParticipants!=null) {
-                        for (PackingItem p : chosenParticipants) {
-                            packingobject.addPackingItem(p);//TODO: add amount in field
+                        PackingItem[] array= new PackingItem[chosenParticipants.size()];
+                        for (int i=0; i<chosenParticipants.size();i++) {
+                            PackingItem it = new PackingItem((int)chosenParticipants.get(i).getId());
                         }
+                        packingobject.setPackingItems(array);
+
                     }
                     presenter.onCreatePackingObject(packingobject);
 
                 }
-
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -158,7 +169,10 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         title.setText(packingObject.getTitle());
         number.setText(packingObject.getPackingItemsNumber());
         description.setText(packingObject.getDescription());
-        chosenParticipants = (ArrayList<PackingItem>)packingObject.getItems();
+        for(PackingItem p: packingObject.getItems()){
+            chosenParticipants.add(p);
+        }
+        //chosenParticipants = (List<PackingItem>)packingObject.getItems();
         chosenIds = new ArrayList<Integer>();
         for(PackingItem p:chosenParticipants){
             chosenIds.add((int)p.getId());

@@ -4,6 +4,32 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_height="wrap_content"
+        android:id = "@+id/fragment_expense_detail_item_icon">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="0dp"
+            android:id="@+id/fragment_expense_detail_item_icon_circle"
+            android:background="@drawable/circle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_gravity="center_horizontal|center"
+            android:textColor = "#FFFFFF"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:textSize="18dp"
+            android:id="@+id/fragment_expense_detail_item_icon_initial"
+            android:layout_alignParentStart="true"
+            />
+    </FrameLayout>
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -11,6 +37,7 @@
         android:textColor="@android:color/black"
         android:layout_gravity="left"
         android:textSize="18dp"
+        android:layout_marginLeft="8dp"
         android:layout_weight="1"
         android:id="@+id/fragment_expense_detail_item_name" />
     <TextView

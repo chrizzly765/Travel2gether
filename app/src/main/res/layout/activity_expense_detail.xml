@@ -47,16 +47,79 @@
         android:layout_alignParentEnd="true">
     </TextView>
 
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_below="@+id/activity_expense_detail_description"
+            android:orientation="horizontal"
+            android:gravity="top|left"
+            android:layout_marginLeft="-8dp"
+            android:layout_height="wrap_content">
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="0.9"
+            android:layout_height="wrap_content"
+            android:id = "@+id/activity_expense_detail_icon">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="1dp"
+            android:id="@+id/activity_expense_detail_icon_circle"
+            android:background="@drawable/circle" />
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"
+            android:id="@+id/activity_expense_detail_payer_icon">
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/circle"
+                android:id="@+id/activity_expense_detail_payer_icon_circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="€"
+                android:layout_gravity="center_horizontal|center"
+                android:textColor = "#FFFFFF"
+                android:layout_marginTop= "0dp"
+                android:textSize="8dp"
+                android:layout_alignParentStart="true"
+                />
+
+            </FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M"
+                android:layout_gravity="center_vertical|center"
+                android:textColor = "#FFFFFF"
+                android:layout_marginLeft="-3dp"
+                android:layout_marginTop="1dp"
+                android:textSize="14dp"
+                android:id="@+id/activiy_expense_detail_icon_initial"
+                android:layout_alignParentStart="true"
+                />
+        </FrameLayout>
     <TextView
-        android:layout_width="wrap_content"
+        android:gravity="center_vertical|left"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/activity_expense_detail_paidby"
         android:text="Max"
+        android:paddingLeft="4dp"
+        android:paddingTop="3dp"
+        android:layout_weight="0.1"
         android:clickable = "false"
-        android:layout_below="@+id/activity_expense_detail_description"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true">
     </TextView>
+        </LinearLayout>
 
     </RelativeLayout>
 

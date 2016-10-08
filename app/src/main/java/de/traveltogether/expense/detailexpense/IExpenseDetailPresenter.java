@@ -11,4 +11,6 @@ public interface IExpenseDetailPresenter {
     public void onError(String message);
     public void onDeleteExpense(long id);
     public void onSuccessDelete();
+
+    void onCloseActivity();
 }

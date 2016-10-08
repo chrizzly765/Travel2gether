@@ -23,7 +23,7 @@ public class LauncherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_launcher);
         Log.d("Launcher","start");
 
-        SharedPreferences sharedPref = getSharedPreferences("TravelTogetherPrefs",Context.MODE_WORLD_READABLE );
+        SharedPreferences sharedPref = getSharedPreferences("TravelTogetherPrefs",Context.MODE_PRIVATE );
         //SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         String hash = "";
         hash = sharedPref.getString(getString(R.string.saved_hash), "");

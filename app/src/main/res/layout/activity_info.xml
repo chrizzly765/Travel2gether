@@ -65,14 +65,14 @@
         android:layout_height="24dp"
         android:layout_below="@id/activity_info_description"
         android:layout_marginTop="8dp"
+        android:visibility="invisible"
         android:background="#afddf4"
-        android:id="@+id/activity_info_devider">
+        android:id="@+id/activity_info_devider_active">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mitreisende"
-            android:id="@+id/textView"
             android:paddingLeft="16dp"
             android:layout_gravity="center_vertical"
             android:textColor="#37a9e3"
@@ -80,10 +80,71 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id = "@+id/activity_info_fragment_container"
+        android:id = "@+id/activity_info_fragment_container_active"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_info_devider"
+        android:layout_below="@+id/activity_info_devider_active"
+        android:paddingTop="0dp"
+        android:orientation="vertical"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp" />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="24dp"
+        android:layout_below="@id/activity_info_fragment_container_active"
+        android:layout_marginTop="8dp"
+        android:background="#afddf4"
+        android:visibility="invisible"
+        android:id="@+id/activity_info_devider_invited">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eingeladen"
+            android:paddingLeft="16dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="#37a9e3"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id = "@+id/activity_info_fragment_container_invited"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_info_devider_invited"
+        android:paddingTop="0dp"
+        android:orientation="vertical"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="24dp"
+        android:layout_below="@id/activity_info_fragment_container_invited"
+        android:layout_marginTop="8dp"
+        android:background="#afddf4"
+        android:visibility="invisible"
+        android:id="@+id/activity_info_devider_resigned">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ausgetreten"
+            android:paddingLeft="16dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="#37a9e3"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id = "@+id/activity_info_fragment_container_resigned"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_info_devider_resigned"
         android:paddingTop="0dp"
         android:orientation="vertical"
         android:paddingLeft="0dp"
@@ -91,11 +152,11 @@
 
     <ImageButton
         android:id="@+id/activity_info_button_add"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/activity_info_fragment_container"
+        android:layout_below="@+id/activity_info_fragment_container_resigned"
         android:background="@drawable/circle_light_grey"
         android:src="@mipmap/ic_add" />
 

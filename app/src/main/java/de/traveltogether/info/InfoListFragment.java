@@ -27,8 +27,7 @@ public class InfoListFragment extends ListFragment {
     public InfoListFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
+
     public static InfoListFragment newInstance(Participant[] _participants) {
         InfoListFragment fragment = new InfoListFragment();
         fragment.participants = _participants;
@@ -38,7 +37,6 @@ public class InfoListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override

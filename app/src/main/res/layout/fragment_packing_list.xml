@@ -2,10 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
     android:name="de.traveltogether.packinglist.PackingFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     app:layoutManager="LinearLayoutManager"
     tools:context="de.traveltogether.packinglist.PackingFragment"
     tools:listitem="@layout/fragment_packing_list_item">
@@ -14,6 +13,5 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/fragment_packing_list_item"
-        android:divider="#00000000"
-        android:dividerHeight="8dp"/>
+        android:dividerHeight="1dp"/>
     </RelativeLayout>

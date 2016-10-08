@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/button_datepicker_start"
             android:backgroundTint="@color/abc_background_cache_hint_selector_material_light"
-            android:src="@mipmap/ic_calendar"
+            android:src="@mipmap/ic_calender_grey"
             android:layout_weight="1.5"/>
 
         <EditText
@@ -57,7 +57,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button_datepicker_end"
-            android:src="@mipmap/ic_calendar"
+            android:src="@mipmap/ic_calender_grey"
             android:backgroundTint="@color/abc_background_cache_hint_selector_material_light"
             android:layout_weight="1.5"/>
 

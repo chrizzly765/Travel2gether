@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
@@ -67,19 +73,45 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
     public void onViewDetail(Trip _trip){
         trip = _trip;
         ((TextView)findViewById(R.id.activity_info_title)).setText(trip.getTitle());
-        ((TextView)findViewById(R.id.activity_info_description)).setText(trip.getDestination());
+        ((TextView)findViewById(R.id.activity_info_description)).setText(trip.getDescription());
         ((TextView)findViewById(R.id.activity_info_startdate)).setText(trip.getStartDate());
         ((TextView)findViewById(R.id.activity_info_enddate)).setText(trip.getEndDate());
         ((TextView)findViewById(R.id.activity_info_destination)).setText(trip.getDestination());
     }
 
     public void onViewParticipants(Participant[] participants){
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        InfoListFragment fragment = InfoListFragment.newInstance(participants);
-        fragmentTransaction.add(R.id.activity_info_fragment_container, fragment);
-        fragmentTransaction.commit();
-        progressDialog.cancel();
+
+        Participant[] activeParts = StaticData.getActiveParticipants();
+        Participant[] invitedParts = StaticData.getInvitedParticipants();
+        Participant[] resignedParts = StaticData.getResignedParticipants();
+
+        if(activeParts.length>0) {
+            findViewById(R.id.activity_info_devider_active).setVisibility(View.VISIBLE);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            InfoListFragment fragment = InfoListFragment.newInstance(activeParts);
+            fragmentTransaction.add(R.id.activity_info_fragment_container_active, fragment);
+            fragmentTransaction.commit();
+            progressDialog.cancel();
+        }
+        if(invitedParts.length>0) {
+            findViewById(R.id.activity_info_devider_invited).setVisibility(View.VISIBLE);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            InfoListFragment fragment = InfoListFragment.newInstance(invitedParts);
+            fragmentTransaction.add(R.id.activity_info_fragment_container_invited, fragment);
+            fragmentTransaction.commit();
+            progressDialog.cancel();
+        }
+        if(resignedParts.length>0) {
+            findViewById(R.id.activity_info_devider_resigned).setVisibility(View.VISIBLE);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            InfoListFragment fragment = InfoListFragment.newInstance(resignedParts);
+            fragmentTransaction.add(R.id.activity_info_fragment_container_resigned, fragment);
+            fragmentTransaction.commit();
+            progressDialog.cancel();
+        }
     }
 
     @Override
@@ -112,7 +144,11 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         switch (item.getItemId()) {
             case R.id.delete:
                 if (trip.getAdminId() == StaticData.getUserId()) {
-                    //TODO: DELETE
+                    presenter.onDeleteTrip(tripId);
+                }
+                else{
+                    onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.");
+
                 }
                 break;
             case R.id.edit:
@@ -125,5 +161,14 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
         return  true;
+    }
+
+    public void onSuccessDeleteTrip(){
+        Context context = getApplicationContext();
+        CharSequence text = "Reise gelöscht.";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+        finish();
     }
 }

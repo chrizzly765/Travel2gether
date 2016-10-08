@@ -41,6 +41,8 @@
             android:layout_alignParentStart="true"
             />
     </FrameLayout>
+</RelativeLayout>
+
 
     <!--EditText
         android:layout_width="140dp"
@@ -52,6 +54,4 @@
         android:layout_toRightOf="@+id/fragment_participant_selection_list_item_name"
         android:hint = "Betrag"
         android:layout_marginLeft="100dp"/-->
-
-</RelativeLayout>
 

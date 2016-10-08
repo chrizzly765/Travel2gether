@@ -61,7 +61,6 @@ public class PackingDetailAdapter extends BaseAdapter {
 
         Context context = parent.getContext();
         PackingItem item = (PackingItem) getItem(position);
-        Log.d("payer id", String.valueOf(item.getId()) + " " + StaticData.getNameById(item.getAssignedPerson()));
         holder.name.setText(StaticData.getNameById(item.getAssignedPerson()));
         holder.box.setActivated(item.getStatus());
         if(item.getAssignedPerson() == StaticData.getUserId()){

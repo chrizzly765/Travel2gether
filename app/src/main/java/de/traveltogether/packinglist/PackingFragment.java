@@ -1,11 +1,5 @@
 package de.traveltogether.packinglist;
 
-import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-
 
 import android.app.ListFragment;
 import android.content.Intent;
@@ -17,19 +11,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import de.traveltogether.R;
-import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.PackingObject;
 import de.traveltogether.packinglist.packingdetail.PackingDetailActivity;
 
-import java.util.List;
 
 
-
-/**
- * A fragment representing a list of Items.
- * <p>
- * interface.
- */
 public class PackingFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
     private PackingAdapter adapter;
@@ -44,8 +30,7 @@ public class PackingFragment extends ListFragment implements AdapterView.OnItemC
 
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
+
     public static PackingFragment newInstance(PackingObject[] _packingobject) {
         PackingFragment fragment = new PackingFragment();
         fragment.packingobjects = _packingobject;
@@ -64,12 +49,11 @@ public class PackingFragment extends ListFragment implements AdapterView.OnItemC
         return view;
     }
 
-    public void onStart(){
+    public void onStart() {
         super.onStart();
-        if(packingobjects==null || packingobjects.length == 0 ){
+        if (packingobjects == null || packingobjects.length == 0) {
             //TODO: show new trip listitem
-        }
-        else {
+        } else {
             adapter = new PackingAdapter(getActivity(), packingobjects);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);

@@ -31,6 +31,11 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
 
     }
 
+    public void refresh(Trip[] _trips){
+        trips=_trips;
+        adapter.refresh(trips);
+    }
+
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static TripListFragment newInstance(Trip[] _trips ) {

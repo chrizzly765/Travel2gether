@@ -1,5 +1,7 @@
 package de.traveltogether.info;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 import de.traveltogether.ActionType;
@@ -45,6 +47,19 @@ public class InfoInteractor implements IInfoInteractor{
     }
 
     @Override
+    public void deleteTrip(long tripId, IInfoPresenter _listener) {
+        listener = _listener;
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("tripId", tripId);
+            HttpRequest request = new HttpRequest(DataType.TRIP, ActionType.DELETE, jsonObject.toString(), this);
+        }
+        catch(Exception e){
+            Log.e(e.getClass().toString(), e.getMessage());
+        }
+    }
+
+    @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if(response.getError() == "true"){
             listener.onError(response.getMessage());
@@ -53,7 +68,12 @@ public class InfoInteractor implements IInfoInteractor{
             if (actionType == ActionType.DETAIL) {
                 listener.onSuccessGetDetail((Trip)JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP));
             } else if (actionType == ActionType.GETPARTICIPANTS) {
-                listener.onSuccessGetParticipants(((ParticipantList)JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list);
+                Participant[] participants = ((ParticipantList)JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
+                StaticData.setParticipants(participants);
+                listener.onSuccessGetParticipants(participants);
+            }
+            else if(actionType==ActionType.DELETE){
+                listener.onSuccessDeleteTrip();
             }
         }
     }

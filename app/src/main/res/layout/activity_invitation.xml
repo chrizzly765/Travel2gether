@@ -5,62 +5,12 @@
     android:layout_height="match_parent"
     tools:context="de.traveltogether.invitation.InvitationActivity"
     android:orientation="horizontal">
-
-
-    <!--fragment
-        android:id="@+id/fragment_invitation"
-        android:name="de.traveltogether.invitation.InvitationFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/abc_activity_chooser_view" /-->
-
     <RelativeLayout
         android:id = "@+id/fragment_invitation_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_alignParentEnd="true" />
-
-    <!--LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/button_invite"
-            android:src="@android:drawable/ic_menu_share"
-            android:backgroundTint="@color/abc_background_cache_hint_selector_material_light"
-            android:layout_gravity="center_vertical" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Andere einladen"
-            android:id="@+id/text_invite"
-            android:autoText="true"
-            android:layout_gravity="center_vertical" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="24dp"
-        android:background="#afddf4"
-        android:layout_marginTop="40dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Vorschläge"
-            android:id="@+id/textInvitation"
-            android:paddingLeft="16dp"
-            android:layout_gravity="center_vertical"
-            android:textColor="#37a9e3"
-            android:textSize="14dp" />
-    </LinearLayout-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -76,7 +26,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="false"
         android:layout_alignParentBottom="true"
-        android:layout_gravity="right|bottom" />/>
+        android:layout_gravity="right|bottom" />
     </FrameLayout>
 
 </RelativeLayout>

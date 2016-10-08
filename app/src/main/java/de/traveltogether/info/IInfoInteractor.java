@@ -8,4 +8,5 @@ import de.traveltogether.IInteractor;
 public interface IInfoInteractor extends IInteractor{
     public void getInfoForTripId(long tripId, IInfoPresenter listener);
     public void getParticipantsForTrip(long tripId, IInfoPresenter listener);
+    public void deleteTrip(long tripId, IInfoPresenter listener);
 }

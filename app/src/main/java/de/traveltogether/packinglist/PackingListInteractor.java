@@ -43,7 +43,6 @@ public class PackingListInteractor implements IPackingListInteractor {
                 PackingList packingList = (PackingList)JsonDecode.getInstance().jsonToArray(response.getData(), PackingList.class);
 
                 listener.onSuccess(packingList.list);
-                return;
             }
             catch(Exception e){
                 Log.e(e.getClass().toString(), e.getMessage());

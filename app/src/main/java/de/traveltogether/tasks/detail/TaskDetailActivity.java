@@ -102,14 +102,14 @@ public class TaskDetailActivity extends AppCompatActivity {
 
         Date date = new Date(task.getDueDate());
 
-        if(date.compareDateWithCurrent()) {
+        /*if(date.compareDateWithCurrent()) {
             colorDeadline = Color.BLACK;
             colorIcon = R.drawable.ic_watch_black;
         }
         else {
             colorDeadline = Color.RED;
             colorIcon = R.drawable.ic_watch_red;
-        }
+        }*/
 
         watch.setImageResource(colorIcon);
         toDoTillDate.setText(task.getDueDate());

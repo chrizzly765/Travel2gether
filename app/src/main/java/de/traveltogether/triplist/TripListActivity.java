@@ -34,9 +34,12 @@ import de.traveltogether.triplist.newtrip.NewTripActivity;
 public class TripListActivity extends AppCompatActivity implements View.OnClickListener {
     ITripListPresenter presenter;
     private Trip[] trips;
-    TripListFragment fragment;
+    TripListFragment fragmentUpcoming;
+    TripListFragment fragmentFormer;
+
     private Menu menu;
     ProgressDialog progressDialog;
+    MenuItem notiItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +55,13 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         ImageButton newTripBtn = (ImageButton) findViewById(R.id.fab_button);
         newTripBtn.setOnClickListener(this);
 
-        presenter = new TripListPresenter(this);
-        presenter.onGetTrips();
-
         progressDialog = ProgressDialog.show(this, "",
                 "Reisen werden geladen...", true);
+
+        presenter = new TripListPresenter(this);
+        presenter.onGetTrips();
+        presenter.onGetNotiCount();
+
     }
 
     @Override
@@ -71,6 +76,41 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.remove(fragment);
         fragmentTransaction.commit();*/
+
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        presenter.onGetTrips();
+        presenter.onGetNotiCount();
+    }
+
+    public void onSuccessGetNotiCount(int count){
+        switch (count){
+            case 0:  notiItem.setIcon(R.drawable.ic_noti_0);
+                break;
+            case 1: notiItem.setIcon(R.drawable.ic_noti_1);
+                break;
+            case 2: notiItem.setIcon(R.drawable.ic_noti_2);
+                break;
+            case 3: notiItem.setIcon(R.drawable.ic_noti_3);
+                break;
+            case 4: notiItem.setIcon(R.drawable.ic_noti_4);
+                break;
+            case 5: notiItem.setIcon(R.drawable.ic_noti_5);
+                break;
+            case 6: notiItem.setIcon(R.drawable.ic_noti_6);
+                break;
+            case 7: notiItem.setIcon(R.drawable.ic_noti_7);
+                break;
+            case 8: notiItem.setIcon(R.drawable.ic_noti_8);
+                break;
+            case 9: notiItem.setIcon(R.drawable.ic_noti_9);
+                break;
+            default: notiItem.setIcon(R.drawable.ic_noti_higher);
+                break;
+        }
 
     }
 
@@ -102,28 +142,42 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
 
         //Fragment in Activity einbetten
         if(upcomingTrips.size()>0) {
-            LinearLayout devider = (LinearLayout)findViewById(R.id.activity_trip_list_devider_upcoming);
-            devider.setVisibility(View.VISIBLE);
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            Trip[] arr = new Trip[upcomingTrips.size()];
-            upcomingTrips.toArray(arr);
-            TripListFragment fragment = TripListFragment.newInstance(arr);
-            fragmentTransaction.add(R.id.fragment_trip_list_container_upcoming, fragment);
-            fragmentTransaction.commit();
-            progressDialog.cancel();
+            if(fragmentUpcoming==null) {
+                LinearLayout devider = (LinearLayout) findViewById(R.id.activity_trip_list_devider_upcoming);
+                devider.setVisibility(View.VISIBLE);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Trip[] arr = new Trip[upcomingTrips.size()];
+                upcomingTrips.toArray(arr);
+                TripListFragment fragment = TripListFragment.newInstance(arr);
+                fragmentTransaction.add(R.id.fragment_trip_list_container_upcoming, fragment);
+                fragmentTransaction.commit();
+                progressDialog.cancel();
+                fragmentUpcoming = fragment;
+            }
+            else{
+                Trip[] array =  new Trip[upcomingTrips.size()];
+                fragmentUpcoming.refresh(upcomingTrips.toArray(array));
+            }
         }
         if(formerTrips.size()>0) {
-            LinearLayout devider = (LinearLayout)findViewById(R.id.activity_trip_list_devider_former);
-            devider.setVisibility(View.VISIBLE);
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            Trip[] arr = new Trip[formerTrips.size()];
-            formerTrips.toArray(arr);
-            TripListFragment fragment = TripListFragment.newInstance(arr);
-            fragmentTransaction.add(R.id.fragment_trip_list_container_former, fragment);
-            fragmentTransaction.commit();
-            progressDialog.cancel();
+            if(fragmentFormer==null) {
+                LinearLayout devider = (LinearLayout) findViewById(R.id.activity_trip_list_devider_former);
+                devider.setVisibility(View.VISIBLE);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Trip[] arr = new Trip[formerTrips.size()];
+                formerTrips.toArray(arr);
+                TripListFragment fragment = TripListFragment.newInstance(arr);
+                fragmentTransaction.add(R.id.fragment_trip_list_container_former, fragment);
+                fragmentTransaction.commit();
+                progressDialog.cancel();
+                fragmentFormer = fragment;
+            }
+            else{
+                Trip[] array =  new Trip[formerTrips.size()];
+                fragmentFormer.refresh(formerTrips.toArray(array));
+            }
         }
     }
 
@@ -131,6 +185,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main, menu);
+        notiItem = menu.getItem(0);
         return super.onCreateOptionsMenu(menu);
     }
 

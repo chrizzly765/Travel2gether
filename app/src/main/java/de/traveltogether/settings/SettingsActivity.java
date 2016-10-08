@@ -28,7 +28,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.remove(getString(R.string.saved_hash));
             editor.remove(getString(R.string.saved_user_id));
-            editor.commit();
+            editor.apply();
 
             Intent login = new Intent(this, LoginActivity.class);
             startActivity(login);
