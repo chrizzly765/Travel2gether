@@ -81,7 +81,7 @@ public class StaticData {
                 return p.getColor();
             }
         }
-        return null;
+        return "";
     }
 
     static private Participant[] toArray(ArrayList<Participant> list){

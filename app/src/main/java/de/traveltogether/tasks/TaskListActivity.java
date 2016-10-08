@@ -3,6 +3,7 @@ package de.traveltogether.tasks;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -22,15 +23,14 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
 
     long tripId;
     ITaskListPresenter presenter;
-    //private Task[] tasks;
-    //TaskListFragment fragment;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
 
-        getSupportActionBar().setTitle("Aufgaben");
+        getSupportActionBar().setTitle(R.string.tasks);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
@@ -45,6 +45,8 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
         newTaskBtn.setOnClickListener(this);
         presenter = new TaskListPresenter(this);
         presenter.onGetTasks(tripId);
+
+        progressDialog = ProgressDialog.show(this, "", getResources().getString(R.string.please_wait), true);
     }
 
     @Override
@@ -68,6 +70,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void onViewTasks(Task[] _tasks){
+
         Log.d("TaskListActivity", "got tasks: "+_tasks.length);
 
         List<Task> taskListOpen = new ArrayList<Task>();
@@ -100,7 +103,6 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.commit();
         }
 
-
         if(taskListProgress.size() > 0) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             arr = new Task[taskListProgress.size()];
@@ -111,7 +113,6 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.commit();
         }
 
-
         if(taskListDone.size() > 0) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             arr = new Task[taskListDone.size()];
@@ -121,10 +122,12 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             findViewById(R.id.activity_task_list_divider_done).setVisibility(View.VISIBLE);
             fragmentTransaction.commit();
         }
-
+        progressDialog.cancel();
     }
 
     public void onViewError(String message) {
+
+        progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));

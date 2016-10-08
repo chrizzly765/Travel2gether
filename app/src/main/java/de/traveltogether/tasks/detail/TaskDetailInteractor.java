@@ -46,11 +46,14 @@ public class TaskDetailInteractor implements ITaskDetailInteractor {
     }
 
     @Override
-    public void deleteTask(long id, ITaskDetailPresenter _listener) {
+    //public void deleteTask(long id, ITaskDetailPresenter _listener) {
+    public void deleteTask(Task task, ITaskDetailPresenter _listener) {
         listener = _listener;
         try{
             JSONObject obj = new JSONObject();
-            obj.put("featureId", id);
+            obj.put("featureId", task.getId());
+            obj.put("personId", task.getPersonId());
+            obj.put("author", task.getAuthor());
             HttpRequest request = new HttpRequest(DataType.TASK, ActionType.DELETE, obj.toString(), this);
         }
         catch(Exception e){

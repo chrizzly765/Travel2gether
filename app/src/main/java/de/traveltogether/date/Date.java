@@ -2,6 +2,9 @@ package de.traveltogether.date;
 
 import android.util.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  * Created by Anna-Lena on 22.09.2016.
  */
@@ -11,6 +14,11 @@ public class Date {
     int day;
     String monthAsWord = "";
 
+    private long currentDateInSeconds;
+    private long dateInSeconds;
+    private SimpleDateFormat dateFormat;
+    private String date;
+
     String languageCode = "DE";
 
     public Date(String dateString){
@@ -18,6 +26,7 @@ public class Date {
             day = Integer.parseInt(s[0]);
             month = Integer.parseInt(s[1]);
             year = Integer.parseInt(s[2]);
+            date = dateString;
 
             switch (month) {
                 case 1:
@@ -60,6 +69,41 @@ public class Date {
                     monthAsWord = "Januar";
                     break;
             }
+    }
 
+    private void setDateFormat(String format) {
+        dateFormat = new SimpleDateFormat(format);
+    }
+
+    private void setDateInSeconds() {
+
+        try {
+            dateInSeconds = dateFormat.parse(date).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setCurrentDateInSeconds() {
+        currentDateInSeconds = (new java.util.Date().getTime());
+    }
+
+    /**
+     * true if date >= current date
+     * false if date < current date
+     * @return boolean
+     */
+    public boolean compareDateWithCurrent() {
+
+        setDateFormat("dd.MM.yyyy");
+        setDateInSeconds();
+        setCurrentDateInSeconds();
+
+        if(dateInSeconds >= currentDateInSeconds) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

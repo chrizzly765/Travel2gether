@@ -10,15 +10,18 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import de.traveltogether.date.Date;
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
-import de.traveltogether.model.Participant;
 import de.traveltogether.model.Task;
 
 public class TaskAdapter extends BaseAdapter {
 
     private Task[] taskList;
     private final LayoutInflater inflater;
+
+    private int colorDeadline;
+    private int colorIcon;
 
     public TaskAdapter(Context context, Task[] _tasks) {
         inflater = LayoutInflater.from(context);
@@ -70,15 +73,23 @@ public class TaskAdapter extends BaseAdapter {
             holder = (TaskViewHolder)convertView.getTag();
         }
 
-        Context context = parent.getContext();
+        //Context context = parent.getContext();
         Task task = (Task)getItem(position);
         holder.title.setText(task.getTitle());
-        //holder.description.setText(task.getDescription());
-        // TODO: check date
+        Date date = new Date(task.getDueDate());
 
-        holder.toDoTillDate.setTextColor(Color.RED);
-        holder.watch.setBackgroundResource(R.drawable.ic_watch_red);
+        if(date.compareDateWithCurrent()) {
+            colorDeadline = Color.BLACK;
+            colorIcon = R.drawable.ic_watch_black;
+        }
+        else {
+            colorDeadline = Color.RED;
+            colorIcon = R.drawable.ic_watch_red;
+        }
+
+        holder.watch.setBackgroundResource(colorIcon);
         holder.toDoTillDate.setText(task.getDueDate());
+        holder.toDoTillDate.setTextColor(colorDeadline);
         holder.icon.findViewById(R.id.fragment_task_list_item_icon_circle).setBackgroundResource(
                 StaticData.getIdForColor(StaticData.getColorById(task.getPersonId()))
         );
@@ -87,6 +98,11 @@ public class TaskAdapter extends BaseAdapter {
                 StaticData.getNameById(task.getPersonId()).substring(0,1)
         );
 
+        // if no one's assigned, hide icon
+        if(task.getPersonId() == 0) {
+            holder.icon.setVisibility(View.INVISIBLE);
+        }
+
         return convertView;
     }
 
@@ -94,6 +110,5 @@ public class TaskAdapter extends BaseAdapter {
         TextView title, toDoTillDate;
         FrameLayout icon;
         ImageView watch;
-
     }
 }

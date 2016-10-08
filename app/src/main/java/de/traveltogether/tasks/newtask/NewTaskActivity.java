@@ -1,25 +1,35 @@
 package de.traveltogether.tasks.newtask;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.datepicker.DatePickerFragment;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Task;
+import de.traveltogether.tasks.TaskListActivity;
 
-public class NewTaskActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class NewTaskActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener, View.OnClickListener {
 
     INewTaskPresenter presenter;
     TextView title;
@@ -28,18 +38,22 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     Spinner assignedTo;
     Spinner status;
     Task task;
-    long tripId;
-    long featureId;
+    long tripId = -1;
+    long featureId = -1;
     Participant[] participants;
-    String[] participantNames;
+    ArrayList<String> participantNames;
     int currentPersonId;
+    ProgressDialog progressDialog;
+
+    DatePickerFragment datePicker;
+    ImageButton clickedDatePickerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
 
-        getSupportActionBar().setTitle("Neue Aufgabe");
+        getSupportActionBar().setTitle(R.string.new_task);
         Bundle b = getIntent().getExtras();
         if (b != null) {
             tripId = b.getLong("tripId", -1);
@@ -52,17 +66,29 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         assignedTo = (Spinner) findViewById(R.id.spinner_assigned_to);
         status = (Spinner) findViewById(R.id.spinner_status);
         presenter = new NewTaskPresenter(this);
+        datePicker =new DatePickerFragment();
 
         if(featureId != -1) {
             presenter.onGetDetailsForTask(featureId);
         }
 
+        onViewParticipants(StaticData.getActiveParticipants());
+
+        ImageButton datePickerBtn = (ImageButton) findViewById(R.id.button_datepicker_new_task);
+        datePickerBtn.setOnClickListener(this);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.status, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         status.setAdapter(adapter);
+    }
 
-        onViewParticipants(StaticData.getActiveParticipants());
+
+    public void onClick(View v) {
+        if (v.getId() == R.id.button_datepicker_new_task){
+            clickedDatePickerBtn = (ImageButton) v;
+            datePicker.show(getFragmentManager(), DatePickerFragment.TAG);
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -111,8 +137,12 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         parent.getItemAtPosition(position);
-        if(view.getId() == R.id.spinner_assigned_to){
-            currentPersonId = participants[((Spinner)view).getSelectedItemPosition()].getPersonId();
+        if (position > 0) {
+            // -1 because of the first entry "Bitte wählen"
+            currentPersonId = participants[position-1].getPersonId();
+        }
+        else {
+            currentPersonId = 0;
         }
     }
 
@@ -121,24 +151,29 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     }
 
     public void onSuccessAddingTask(){
-        Context context = getApplicationContext();
-        CharSequence text = "Aufgabe hinzugefügt.";
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        Toast.makeText(getApplicationContext(), R.string.task_updated, Toast.LENGTH_SHORT).show();
         finish();
+        updateActivity(this);
     }
 
     public void onSuccessUpdateTask(){
-        Context context = getApplicationContext();
-        CharSequence text = "Aufgabe aktualisiert.";
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        tripId = task.getTripId();
+        Toast.makeText(getApplicationContext(), R.string.task_added, Toast.LENGTH_SHORT).show();
         finish();
+        updateActivity(this);
+    }
+
+    public void updateActivity(Context c) {
+
+        Intent intent = new Intent(c, TaskListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putLong("tripId", tripId);
+        intent.putExtras(bundle);
+        c.startActivity(intent);
     }
 
     public void onViewError(String message) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));
@@ -152,22 +187,45 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         dialog.show();
     }
 
-
     public void onViewParticipants(Participant[] _participants){
 
         participants = _participants;
+        participantNames = new ArrayList<>();
 
-        participantNames = new String[participants.length];
+        participantNames.add(getResources().getString(R.string.please_choose));
         for(int i = 0; i<participants.length;i++){
-            participantNames[i] = participants[i].getUserName();
+            participantNames.add(participants[i].getUserName());
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, participantNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         assignedTo.setAdapter(adapter);
         assignedTo.setOnItemSelectedListener(this);
-
         currentPersonId = participants[0].getPersonId();
+    }
+
+    public void onViewParticipants(Participant[] _participants, Task task){
+
+        participants = _participants;
+        participantNames = new ArrayList<>();
+        int selectedPos = 0;
+
+        participantNames.add(getResources().getString(R.string.please_choose));
+        for(int i = 0; i<participants.length;i++){
+            participantNames.add(participants[i].getUserName());
+            if(participants[i].getPersonId() == task.getPersonId()) {
+                currentPersonId = participants[i].getPersonId();
+
+                // ++ because of first entry "Bitte wählen"
+                selectedPos = i+1;
+            }
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, participantNames);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        assignedTo.setAdapter(adapter);
+        assignedTo.setOnItemSelectedListener(this);
+        assignedTo.setSelection(selectedPos);
     }
 
     public void onViewDetails(Task _task) {
@@ -178,5 +236,17 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         date.setText(task.getDueDate());
         currentPersonId = task.getPersonId();
         status.setSelection(task.getState()-1);
+
+        // fill dropdown with participants
+        onViewParticipants(StaticData.getActiveParticipants(), task);
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        if(clickedDatePickerBtn.getId() == R.id.button_datepicker_new_task){
+            int month = monthOfYear + 1;
+            date.setText(dayOfMonth + "." + month+"." + year);
+            datePicker.setDate(year, month, dayOfMonth+1);
+        }
     }
 }

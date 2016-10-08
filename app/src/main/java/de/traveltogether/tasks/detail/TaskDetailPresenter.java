@@ -31,8 +31,9 @@ public class TaskDetailPresenter implements ITaskDetailPresenter {
     }
 
     @Override
-    public void onDeleteTask(long id) {
-        interactor.deleteTask(id, this);
+    //public void onDeleteTask(long id) {
+    public void onDeleteTask(Task task) {
+        interactor.deleteTask(task, this);
     }
 
     @Override

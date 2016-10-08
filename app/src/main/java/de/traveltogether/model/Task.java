@@ -1,8 +1,5 @@
 package de.traveltogether.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * Created by Anna-Lena on 12.05.2016.
@@ -43,6 +40,5 @@ public class Task extends AbstractListObject {
     public void setState(int _statusId) {
         statusId = _statusId;
     }
-
 
 }
