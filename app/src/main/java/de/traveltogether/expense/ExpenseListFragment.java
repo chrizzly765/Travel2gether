@@ -55,12 +55,30 @@ public class ExpenseListFragment extends ListFragment implements AdapterView.OnI
     public void onStart(){
         super.onStart();
         if(expenses==null || expenses.length==0 ){
-            //TODO: show new trip listitem
+            getActivity().findViewById(R.id.activity_expense_empty).setVisibility(View.VISIBLE);
         }
         else {
+            getActivity().findViewById(R.id.activity_expense_empty).setVisibility(View.INVISIBLE);
             adapter = new ExpenseAdapter(getActivity(),expenses);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);
+
+
+            if (adapter == null) {
+                return;
+            }
+            ViewGroup vg = getListView();
+            int totalHeight = 0;
+            for (int i = 0; i < adapter.getCount(); i++) {
+                View listItem = adapter.getView(i, null, vg);
+                listItem.measure(0, 0);
+                totalHeight += listItem.getMeasuredHeight();
+            }
+
+            ViewGroup.LayoutParams par = getListView().getLayoutParams();
+            par.height = totalHeight + (getListView().getDividerHeight() * (adapter.getCount() - 1));
+            getListView().setLayoutParams(par);
+            getListView().requestLayout();
         }
 
     }

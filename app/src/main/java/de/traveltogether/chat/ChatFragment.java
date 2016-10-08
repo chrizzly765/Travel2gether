@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
@@ -65,7 +66,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_comment, container, false);
         inputField = (EditText)view.findViewById(R.id.fragment_comment_editText);
-        Button send = (Button)view.findViewById(R.id.fragment_comment_button_send);
+        ImageButton send = (ImageButton)view.findViewById(R.id.fragment_comment_button_send);
         send.setOnClickListener(this);
         return view;
     }

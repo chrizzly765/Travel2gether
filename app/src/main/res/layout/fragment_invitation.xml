@@ -10,6 +10,7 @@
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="vertical"
             android:layout_height="match_parent">
     <LinearLayout
         android:orientation="horizontal"
@@ -33,12 +34,15 @@
         android:orientation="horizontal"
         android:id="@+id/fragment_invitation_listbox"
         android:layout_width="fill_parent"
-        android:layout_height="1500dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/fragment_invitation_devider">
 
     <ListView android:id="@android:id/list"
         android:layout_width="fill_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_height="fill_parent"
+        android:dividerHeight="0dp"
         tools:listitem="@android:layout/simple_expandable_list_item_1" />
 </LinearLayout>
     <LinearLayout
@@ -49,7 +53,7 @@
 
         <ImageButton
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/fragment_button_invite"
             android:src="@drawable/ic_menu_share"
             android:backgroundTint="@color/abc_background_cache_hint_selector_material_light"

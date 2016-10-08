@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Expense extends AbstractListObject {
     private double amount;
-    private int currencyId;
+    private int currencyId = 0;
     private int payedBy;
     private List<Payer> payer = new ArrayList<Payer>();
 

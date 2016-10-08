@@ -47,7 +47,7 @@ public class PackingItemSelectionAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         if(packingItems.length>0) {
-            return packingItems[position].getId();
+            return packingItems[position].getAssignedPerson();
         }
         else{
             return -1;

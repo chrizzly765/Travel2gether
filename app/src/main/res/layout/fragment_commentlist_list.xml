@@ -6,8 +6,6 @@
     android:name="www.traveltogether.de.traveltogether.comments.CommentListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="de.traveltogether.comments.CommentListFragment"
     tools:listitem="@layout/fragment_commentlist_list_item">
@@ -16,7 +14,7 @@
 android:layout_width="fill_parent"
 android:layout_height="fill_parent"
     tools:listitem="@android:layout/simple_expandable_list_item_2"
-    android:divider="#eeeeee"
-    android:dividerHeight="1dp" />
+    android:divider="#000000"
+    android:dividerHeight="0dp" />
 
 </RelativeLayout>

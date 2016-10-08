@@ -50,12 +50,22 @@ public class ExpenseParticipantFragment extends ListFragment{
 
     public void onStart(){
         super.onStart();
-        if(participants==null || participants.length==0 ){
-            //TODO: show new trip listitem
-        }
-        else {
+        if(!(participants==null || participants.length==0 )){
             adapter = new ExpenseParticipantAdapter(getActivity(),participants);
             setListAdapter(adapter);
+
+            ViewGroup vg = getListView();
+            int totalHeight = 0;
+            for (int i = 0; i < adapter.getCount(); i++) {
+                View listItem = adapter.getView(i, null, vg);
+                listItem.measure(0, 0);
+                totalHeight += listItem.getMeasuredHeight();
+            }
+
+            ViewGroup.LayoutParams par = getListView().getLayoutParams();
+            par.height = totalHeight + (getListView().getDividerHeight() * (adapter.getCount() - 1));
+            getListView().setLayoutParams(par);
+            getListView().requestLayout();
         }
 
     }

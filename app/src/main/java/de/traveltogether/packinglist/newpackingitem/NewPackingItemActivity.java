@@ -118,7 +118,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                         }*/
                         PackingItem[] array= new PackingItem[chosenParticipants.size()];
                         for (int i=0; i<chosenParticipants.size();i++) {
-                            PackingItem it = new PackingItem((int)chosenParticipants.get(i).getId());
+                            PackingItem it = new PackingItem((int)chosenParticipants.get(i).getAssignedPerson());
                         }
                         packingobject.setPackingItems(array);
                     }
@@ -136,7 +136,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                     if(chosenParticipants!=null) {
                         PackingItem[] array= new PackingItem[chosenParticipants.size()];
                         for (int i=0; i<chosenParticipants.size();i++) {
-                            PackingItem it = new PackingItem((int)chosenParticipants.get(i).getId());
+                            PackingItem it = new PackingItem((int)chosenParticipants.get(i).getAssignedPerson());
                         }
                         packingobject.setPackingItems(array);
 
@@ -175,7 +175,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         //chosenParticipants = (List<PackingItem>)packingObject.getItems();
         chosenIds = new ArrayList<Integer>();
         for(PackingItem p:chosenParticipants){
-            chosenIds.add((int)p.getId());
+            chosenIds.add((int)p.getAssignedPerson());
         }
     }
 

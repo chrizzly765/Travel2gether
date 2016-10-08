@@ -89,7 +89,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         ((ImageView)icon.findViewById(R.id.activity_expense_detail_payer_icon_circle))
                 .setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(expense.getPayer())));
         ((TextView)icon.findViewById(R.id.activiy_expense_detail_icon_initial))
-                .setText(StaticData.getNameById(expense.getPayer()));
+                .setText(StaticData.getNameById(expense.getPayer()).substring(0,1));
 
         onViewPayers(expense.getAssignedPayers());
 

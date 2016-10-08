@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +38,6 @@ public class InvitationActivity extends AppCompatActivity{
             tripId = b.getLong("tripId");
             formerActivity = b.getString("formerActivity", "newTrip");
         }
-
         setContentView(R.layout.activity_invitation);
 
 

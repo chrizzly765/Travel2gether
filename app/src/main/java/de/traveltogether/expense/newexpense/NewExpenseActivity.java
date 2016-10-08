@@ -48,6 +48,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
     EditText amount;
     EditText description;
     Spinner currencySpinner;
+    Spinner payedBySpinner;
     int currentPayerId;
     ImageButton addButton;
     long tripId;
@@ -90,7 +91,6 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         title= (EditText)findViewById(R.id.activity_new_expense_title);
         description= (EditText)findViewById(R.id.activity_new_expense_description);
         amount = (EditText)findViewById(R.id.activity_new_expense_amount);
-        //currencySpinner = (View)findViewById(R.id.spinner_currency);
         addButton = (ImageButton)findViewById(R.id.activity_new_expense_button_add);
         addButton.setOnClickListener(this);
 
@@ -140,7 +140,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                     presenter.onUpdateExpense(expense);
                 }
                 else {
-                    int currency = currencySpinner.getSelectedItemPosition();
+                    //int currency = currencySpinner.getSelectedItemPosition();
                     /*if(currencySpinner.getSelectedItem() == null){
                         currency = currencySpinner.getSelectedItem().toString();
                     }*/
@@ -152,7 +152,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                             StaticData.getUserId(),
                             Double.parseDouble(amount.getText().toString()),
                             currentPayerId,
-                            currency);
+                            0);
                     if(chosenParticipants!=null) {
                         for (Payer p : chosenParticipants) {
                             expense.addPayer(p.getId(), Double.parseDouble(amount.getText().toString()) / chosenParticipants.size());//TODO: add amount in field
@@ -201,11 +201,11 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         for(int i = 0; i<participants.length;i++){
             participantNames[i] = participants[i].getUserName();
         }
-        Spinner spinner = (Spinner)findViewById(R.id.spinner_paid_by);
+        payedBySpinner = (Spinner)findViewById(R.id.spinner_paid_by);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, participantNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        payedBySpinner.setAdapter(adapter);
+        payedBySpinner.setOnItemSelectedListener(this);
 
         currentPayerId = participants[0].getPersonId();
     }
@@ -325,11 +325,22 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         description.setText(expense.getDescription());
         amount.setText(String.valueOf(expense.getAmount()));
         currentPayerId = expense.getPayer();
+
         chosenParticipants = (ArrayList<Payer>) expense.getAssignedPayers();
         chosenIds=new ArrayList<Integer>();
-        for(Payer p:chosenParticipants){
-            chosenIds.add(p.getId());
+        for(int i = 0; i<participants.length; i++){
+            if(chosenParticipants.contains(participants)) {
+                chosenIds.add(i);
+            }
         }
+        int position = 0;
+        for(int i = 0; i<participants.length; i++){
+            if(participants[i].getPersonId() == currentPayerId){
+                position = i;
+            }
+        }
+        updateParticipantList();
+        payedBySpinner.setSelection(position);
         progressDialog.cancel();
     }
 }

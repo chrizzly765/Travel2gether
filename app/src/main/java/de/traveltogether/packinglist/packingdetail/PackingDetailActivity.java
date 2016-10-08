@@ -22,7 +22,7 @@ import de.traveltogether.model.PackingObject;
 import de.traveltogether.packinglist.PackingListActivity;
 import de.traveltogether.packinglist.newpackingitem.NewPackingItemActivity;
 
-public class PackingDetailActivity extends AppCompatActivity {
+public class PackingDetailActivity extends AppCompatActivity implements DialogInterface.OnClickListener{
 
     long featureId =-1;
     //long tripId =-1;
@@ -131,9 +131,21 @@ public class PackingDetailActivity extends AppCompatActivity {
     }
 
     public void onCloseActivity(){
-        finish();
+        progressDialog.cancel();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Auf dieses Packelement kann nicht mehr zugegriffen werden.");
+        builder.setTitle(getString(R.string.error));
+        builder.setNegativeButton(getString(R.string.ok), this);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        //finish();
     }
 
 
-
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        dialog.cancel();
+        finish();
+    }
 }

@@ -7,14 +7,17 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -85,6 +88,7 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         Participant[] invitedParts = StaticData.getInvitedParticipants();
         Participant[] resignedParts = StaticData.getResignedParticipants();
 
+        RelativeLayout add = (RelativeLayout)findViewById(R.id.activity_info_button_add);
         if(activeParts.length>0) {
             findViewById(R.id.activity_info_devider_active).setVisibility(View.VISIBLE);
             FragmentManager fragmentManager = getFragmentManager();
@@ -93,6 +97,13 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
             fragmentTransaction.add(R.id.activity_info_fragment_container_active, fragment);
             fragmentTransaction.commit();
             progressDialog.cancel();
+
+            RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)add.getLayoutParams();
+            lp.addRule(RelativeLayout.BELOW, R.id.activity_info_fragment_container_active);
+            add.setLayoutParams(lp);
+        }
+        else{
+            findViewById(R.id.activity_info_devider_active).setVisibility(View.GONE);
         }
         if(invitedParts.length>0) {
             findViewById(R.id.activity_info_devider_invited).setVisibility(View.VISIBLE);
@@ -102,6 +113,13 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
             fragmentTransaction.add(R.id.activity_info_fragment_container_invited, fragment);
             fragmentTransaction.commit();
             progressDialog.cancel();
+
+            RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)add.getLayoutParams();
+            lp.addRule(RelativeLayout.BELOW, R.id.activity_info_fragment_container_invited);
+            add.setLayoutParams(lp);
+        }
+        else{
+            findViewById(R.id.activity_info_devider_invited).setVisibility(View.GONE);
         }
         if(resignedParts.length>0) {
             findViewById(R.id.activity_info_devider_resigned).setVisibility(View.VISIBLE);
@@ -111,19 +129,26 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
             fragmentTransaction.add(R.id.activity_info_fragment_container_resigned, fragment);
             fragmentTransaction.commit();
             progressDialog.cancel();
+
+            RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)add.getLayoutParams();
+            lp.addRule(RelativeLayout.BELOW, R.id.activity_info_fragment_container_resigned);
+            add.setLayoutParams(lp);
         }
+
+        else{
+            findViewById(R.id.activity_info_devider_resigned).setVisibility(View.GONE);
+        }
+
     }
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.activity_info_button_add){
-            Intent intent = new Intent (this, InvitationActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putLong("tripId", tripId);
-            bundle.putString("formerActivity", "info");
-            intent.putExtras(bundle);
-            startActivity(intent);
-        }
+        Intent intent = new Intent (this, InvitationActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putLong("tripId", tripId);
+        bundle.putString("formerActivity", "info");
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
 

@@ -6,7 +6,7 @@ package de.traveltogether.model;
 public class PackingItem {
     private int personId;
     private boolean status = false;
-    private long id = 0;
+    //private long id = 0;
     private int number = 1;
 
     public boolean getStatus(){
@@ -15,7 +15,7 @@ public class PackingItem {
     public void assignToParticipant(int _person){
         personId = _person;
     }
-    public long getId(){return id;}
+    //public long getId(){return id;}
     public int getNumber(){return number;}
     public int getAssignedPerson(){
         return personId;
@@ -25,14 +25,14 @@ public class PackingItem {
     public PackingItem(int _personAssigned) {
         personId = _personAssigned;
         number = 1;
-        id = 0;
+        //id = 0;
         status = false;
     }
 
     public  PackingItem(int _personAssigned, boolean _status, long _id, int _number){
         personId = _personAssigned;
         status = _status;
-        id = _id;
+        //id = _id;
         number = _number;
     }
 

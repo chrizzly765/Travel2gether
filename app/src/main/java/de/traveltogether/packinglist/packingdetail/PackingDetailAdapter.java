@@ -40,7 +40,7 @@ public class PackingDetailAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return items[position].getId();
+        return items[position].getAssignedPerson();
     }
 
     @Override
