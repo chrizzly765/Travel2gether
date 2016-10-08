@@ -79,7 +79,7 @@ public class PackingDetailActivity extends AppCompatActivity implements DialogIn
         onViewPackingItems(packingObject.getItems());
     }
 
-    public void onViewPackingItems(PackingItem[] _packingItemList){
+    public void onViewPackingItems(List<PackingItem> _packingItemList){
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         PackingDetailFragment fragment = PackingDetailFragment.newInstance(_packingItemList);

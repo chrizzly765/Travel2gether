@@ -20,7 +20,7 @@ import java.util.List;
 
 public class PackingDetailFragment extends ListFragment {
 
-    PackingItem[] items;
+    List<PackingItem> items;
     PackingDetailAdapter adapter;
 
     /**
@@ -30,7 +30,7 @@ public class PackingDetailFragment extends ListFragment {
     public PackingDetailFragment() {
     }
 
-    public static PackingDetailFragment newInstance(PackingItem[] _items) {
+    public static PackingDetailFragment newInstance(List<PackingItem> _items) {
         PackingDetailFragment fragment = new PackingDetailFragment();
         fragment.items=_items;
         return fragment;
@@ -51,15 +51,15 @@ public class PackingDetailFragment extends ListFragment {
 
     public void onStart(){
         super.onStart();
-        if(items==null || items.length==0 ){
+        if(items==null || items.size()==0 ){
             //TODO: show new trip listitem
         }
         else {
-            //PackingItem[] array = new PackingItem[items.size()];
-            /*for(int i = 0; i < items.size(); i++){
+            PackingItem[] array = new PackingItem[items.size()];
+            for(int i = 0; i < items.size(); i++){
                 array[i] = items.get(i);
-            }*/
-            adapter = new PackingDetailAdapter(getActivity(),items);
+            }
+            adapter = new PackingDetailAdapter(getActivity(),array);
             setListAdapter(adapter);
         }
 

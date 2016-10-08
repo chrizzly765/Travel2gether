@@ -113,14 +113,9 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                             Integer.parseInt(number.getText().toString()));
 
                     if(chosenParticipants!=null) {
-                        /*for (PackingItem p : chosenParticipants) {
+                        for (PackingItem p : chosenParticipants) {
                             packingobject.addPackingItem(p);//TODO: add amount in field
-                        }*/
-                        PackingItem[] array= new PackingItem[chosenParticipants.size()];
-                        for (int i=0; i<chosenParticipants.size();i++) {
-                            PackingItem it = new PackingItem((int)chosenParticipants.get(i).getAssignedPerson());
                         }
-                        packingobject.setPackingItems(array);
                     }
                     presenter.onUpdatePackingObject(packingobject);
                 }
@@ -135,10 +130,9 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                     );
                     if(chosenParticipants!=null) {
                         PackingItem[] array= new PackingItem[chosenParticipants.size()];
-                        for (int i=0; i<chosenParticipants.size();i++) {
-                            PackingItem it = new PackingItem((int)chosenParticipants.get(i).getAssignedPerson());
+                        for (PackingItem p : chosenParticipants) {
+                            packingobject.addPackingItem(p);//TODO: add amount in field
                         }
-                        packingobject.setPackingItems(array);
 
                     }
                     presenter.onCreatePackingObject(packingobject);
