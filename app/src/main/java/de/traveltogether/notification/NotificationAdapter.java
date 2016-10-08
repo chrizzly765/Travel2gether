@@ -76,24 +76,36 @@ public class NotificationAdapter extends BaseAdapter {
         holder.date.setText(not.getReceiveDate());
         if( not.getType().equals(DataType.EXPENSE.toString())){
             holder.icon.setImageResource(R.drawable.ic_expense);
+            holder.icon.setBackgroundResource(R.drawable.circle1ddbc8);
         }
         else if(not.getType().equals(DataType.CHAT.toString())){
             holder.icon.setImageResource(R.drawable.ic_check);
+            holder.icon.setBackgroundResource(R.drawable.circle37a9e3);
         }
         else if (not.getType().equals(DataType.PACKINGOBJECT.toString())){
             holder.icon.setImageResource(R.drawable.ic_packing);
+            holder.icon.setBackgroundResource(R.drawable.circle27b3e2);
+
         }
         else if (not.getType().equals(DataType.TASK.toString())){
             holder.icon.setImageResource(R.mipmap.ic_check);
+            holder.icon.setBackgroundResource(R.drawable.circle03c7c6);
+
         }
         else if (not.getType().equals(DataType.TRIP.toString())){
             holder.icon.setImageResource(R.mipmap.ic_info);
+            holder.icon.setBackgroundResource(R.drawable.circle00e6b6);
+
         }
         else if (not.getType().equals(DataType.ACTIVITY.toString())){
             holder.icon.setImageResource(R.drawable.ic_activity);
+            holder.icon.setBackgroundResource(R.drawable.circle2cc0d3);
+
         }
         else if (not.getType().equals(DataType.INVITATION.toString())){
             holder.icon.setImageResource(R.drawable.ic_notification);
+            holder.icon.setBackgroundResource(R.drawable.circle00e6b6);
+
         }
 
         if(not.getOpened()==true) {

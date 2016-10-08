@@ -59,11 +59,13 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
-        <!-- android:theme="@android:style/Theme.NoTitleBar android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"" -->
         <activity
             android:name=".packinglist.newpackingitem.NewPackingItemActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".packinglist.packingdetail.PackingDetailActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".tasks.newtask.NewTaskActivity"
             android:noHistory="true"
@@ -146,8 +148,6 @@
         <activity
             android:name=".chat.ChatActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".packinglist.packingdetail.PackingDetailActivity"
-            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import de.traveltogether.R;
@@ -56,6 +58,7 @@ public class CommentAdapter extends BaseAdapter {
             holder.name = (TextView)convertView.findViewById(R.id.fragment_commentlist_list_item_name);
             holder.date= (TextView)convertView.findViewById(R.id.fragment_commentlist_list_item_date);
             holder.content=(TextView)convertView.findViewById(R.id.fragment_commentlist_list_item_content);
+            holder.icon = (FrameLayout)convertView.findViewById(R.id.fragment_commentlist_list_item_icon);
             convertView.setTag(holder);
         }
         else{
@@ -73,10 +76,15 @@ public class CommentAdapter extends BaseAdapter {
         }
         holder.date.setText(comment.getDate());
         holder.content.setText(comment.getText());
+        ((ImageView)holder.icon.findViewById(R.id.fragment_commentlist_list_item_icon_circle))
+                .setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById((int)comment.getId())));
+        ((TextView)holder.icon.findViewById(R.id.fragment_commentlist_list_item_icon_initial))
+                .setText(StaticData.getNameById((int)comment.getId()).substring(0,1));
         return convertView;
     }
 
     static class CommentViewHolder {
         TextView name, date, content;
+        FrameLayout icon;
     }
 }

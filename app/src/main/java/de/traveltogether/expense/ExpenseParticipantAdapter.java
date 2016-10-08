@@ -8,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import de.traveltogether.R;
+import de.traveltogether.StaticData;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
 
@@ -48,8 +51,8 @@ public class ExpenseParticipantAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.fragment_expense_participant_list_item, parent, false);
             holder = new ParticipantViewHolder();
             holder.name = (TextView)convertView.findViewById(R.id.fragment_expense_participant_list_item_name);
-            //holder.description= (TextView)convertView.findViewById(R.id.fragment_trip_list_item_description);
             holder.amount=(TextView)convertView.findViewById(R.id.fragment_expense_participant_list_item_amount);
+            holder.dot = (ImageView)convertView.findViewById(R.id.fragment_expense_participant_color_dot);
             convertView.setTag(holder);
         }
         else{
@@ -70,11 +73,13 @@ public class ExpenseParticipantAdapter extends BaseAdapter {
             holder.amount.setTextColor(Color.RED);
         }
         holder.amount.setText(amount);
+        holder.dot.setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(participant.getPersonId())));
+
         return convertView;
     }
 
     public class ParticipantViewHolder {
         TextView name, amount;
-        //TODO: Add circle
+        ImageView dot;
     }
 }

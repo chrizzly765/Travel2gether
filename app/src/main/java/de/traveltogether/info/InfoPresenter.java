@@ -40,4 +40,14 @@ public class InfoPresenter implements  IInfoPresenter {
     public void onSuccessGetParticipants(Participant[] participants) {
         view.onViewParticipants(participants);
     }
+
+    @Override
+    public void onDeleteTrip(long tripId) {
+        interactor.deleteTrip(tripId, this);
+    }
+
+    @Override
+    public void onSuccessDeleteTrip() {
+        view.onSuccessDeleteTrip();
+    }
 }

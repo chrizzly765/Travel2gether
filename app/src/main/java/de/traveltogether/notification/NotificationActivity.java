@@ -26,6 +26,7 @@ public class NotificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("Benachrichtigungen");
         presenter= new NotificationPresenter(this);
         setContentView(R.layout.activity_notification);
         presenter.onGetNotificationList();

@@ -65,7 +65,8 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_expense);
-        getSupportActionBar().setTitle("Neue Ausgabe");
+
+
         Bundle b = getIntent().getExtras();
         if (b != null) {
             tripId = b.getLong("tripId", -1);
@@ -95,10 +96,13 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
 
         shareEvenlySwitch = (Switch)findViewById(R.id.activity_new_expense_switch);
         if(featureId!=-1){
-
+            getSupportActionBar().setTitle("Ausgabe bearbeiten");
             presenter.onGetDetailForExpense(featureId);
             progressDialog = ProgressDialog.show(this, "",
                     "Bitte warten...", true);
+        }
+        else {
+            getSupportActionBar().setTitle("Neue Ausgabe");
         }
         if(chosenParticipants == null){
             chosenParticipants = new ArrayList<Payer>();
@@ -128,7 +132,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                     expense.setTitle(title.getText().toString());
                     expense.setDescription(description.getText().toString());
                     expense.setPayer(currentPayerId);
-                    expense.setAmount(Integer.parseInt(amount.getText().toString()));
+                    expense.setAmount(Double.parseDouble(amount.getText().toString()));
                     expense.setAssignedPayers(chosenParticipants);
                     expense.setLastUpdateBy(StaticData.getUserId());
 
@@ -137,9 +141,9 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                 }
                 else {
                     int currency = currencySpinner.getSelectedItemPosition();
-                    if(currencySpinner.getSelectedItem() == null){
-                        currencySpinner.getSelectedItem().toString();
-                    }
+                    /*if(currencySpinner.getSelectedItem() == null){
+                        currency = currencySpinner.getSelectedItem().toString();
+                    }*/
                     Expense expense = new Expense(
                             title.getText().toString(),
                             0,
@@ -147,8 +151,8 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                             description.getText().toString(),
                             StaticData.getUserId(),
                             Double.parseDouble(amount.getText().toString()),
-                            currency,
-                            currentPayerId);
+                            currentPayerId,
+                            currency);
                     if(chosenParticipants!=null) {
                         for (Payer p : chosenParticipants) {
                             expense.addPayer(p.getId(), Double.parseDouble(amount.getText().toString()) / chosenParticipants.size());//TODO: add amount in field
@@ -243,12 +247,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
 
         boolean[] checkedItems = new boolean[participantNames.length];
         for(int i = 0; i<checkedItems.length; i++){
-            if(list.contains(i)){
-                checkedItems[i] = true;
-            }
-            else{
-                checkedItems[i] = false;
-            }
+            checkedItems[i] = list.contains(i);
         }
         // Set the dialog title
         builder.setTitle("Wer bezahlt mit?");
@@ -295,7 +294,6 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
 
     @Override
     public void onClick(View v) {
-        Log.d("onclick", String.valueOf(v.getId()));
         if(v.getId()== addButton.getId()){
             //open dialog to choose
             if(chosenIds!=null){

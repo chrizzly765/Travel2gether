@@ -11,4 +11,6 @@ public interface IPackingDetailPresenter {
     public void onError(String message);
     public void onDeletePackingObject(long id);
     public void onSuccessDelete();
+
+    void onCloseActivity();
 }

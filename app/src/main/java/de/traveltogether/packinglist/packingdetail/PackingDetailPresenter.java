@@ -38,4 +38,9 @@ public class PackingDetailPresenter implements IPackingDetailPresenter{
     public void onSuccessDelete() {
         view.onSuccessDelete();
     }
+
+    @Override
+    public void onCloseActivity(){
+        view.onCloseActivity();
+    };
 }

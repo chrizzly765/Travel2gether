@@ -8,17 +8,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import de.traveltogether.R;
+import de.traveltogether.StaticData;
 import de.traveltogether.model.Person;
 import de.traveltogether.triplist.TripListActivity;
 
 import static android.content.Intent.createChooser;
 
-public class InvitationActivity extends AppCompatActivity implements View.OnClickListener{
+public class InvitationActivity extends AppCompatActivity{
 
     IInvitePresenter presenter;
     Person[] formerParticipants;
@@ -37,8 +40,6 @@ public class InvitationActivity extends AppCompatActivity implements View.OnClic
 
         setContentView(R.layout.activity_invitation);
 
-        Button continueButton = (Button)findViewById(R.id.invitation_button_continue);
-        continueButton.setOnClickListener(this);
 
         presenter = new InvitePresenter(this);
         presenter.onGetFormerParticipants();
@@ -51,16 +52,25 @@ public class InvitationActivity extends AppCompatActivity implements View.OnClic
 
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId()==R.id.invitation_button_continue) {
-            if(formerActivity== "newTrip") {
-                Intent tripList = new Intent(this, TripListActivity.class);
-                startActivity(tripList);
-            }
-            finish();
-        }
 
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.edit, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.action_save:
+                if(formerActivity== "newTrip") {
+                    Intent tripList = new Intent(this, TripListActivity.class);
+                    startActivity(tripList);
+                }
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void onViewError(String message) {

@@ -9,4 +9,8 @@ public interface ITripListPresenter {
     public void onGetTrips();
     public void onSuccess(Trip[] trips);
     public void onError(String message);
+
+    void onGetNotiCount();
+
+    void onSuccessNotiCount(int notiCount);
 }

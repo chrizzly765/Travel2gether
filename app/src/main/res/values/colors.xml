@@ -6,10 +6,15 @@
     <color name="colorFAB">#00c9c5</color>
     <color name="colorFABLight">#cdcdcd</color>
     <color name = "colorWhite">#ffffff</color>
+    <color name="colorBGLight">#c7dcdd</color>
     <color name = "color002f5b">#002f5b</color>
     <color name = "color002c8c">#002c8c</color>
     <color name = "color255fb6">#255fb6</color>
     <color name = "color37a9e3">#37a9e3</color>
+    <color name = "color27b3e2">#27b3e2</color>
+    <color name = "color2cc0d3">#2cc0d3</color>
+    <color name = "color03c7c6">#03c7c6</color>
+    <color name = "color1ddbc8">#1ddbc8</color>
     <color name = "color00c9c5">#00c9c5</color>
     <color name = "color00e6b6">#00e6b6</color>
     <color name = "color00d641">#00d641</color>

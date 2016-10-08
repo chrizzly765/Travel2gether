@@ -32,4 +32,14 @@ public class TripListPresenter implements ITripListPresenter {
     public void onError(String message) {
         view.onViewError(message);
     }
+
+    @Override
+    public void onGetNotiCount(){
+        interactor.getNotiCount(this);
+    }
+
+    @Override
+    public void onSuccessNotiCount(int notiCount){
+        view.onSuccessGetNotiCount(notiCount);
+    }
 }

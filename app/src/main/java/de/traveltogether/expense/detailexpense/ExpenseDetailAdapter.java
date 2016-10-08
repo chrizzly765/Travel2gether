@@ -8,13 +8,18 @@ package de.traveltogether.expense.detailexpense;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.BaseAdapter;
+        import android.widget.FrameLayout;
+        import android.widget.ImageView;
         import android.widget.TextView;
+
+        import org.w3c.dom.Text;
 
         import de.traveltogether.R;
         import de.traveltogether.StaticData;
         import de.traveltogether.model.Expense;
         import de.traveltogether.model.Payer;
 
+        import java.text.DecimalFormat;
         import java.util.List;
 
 public class ExpenseDetailAdapter extends BaseAdapter {
@@ -50,6 +55,7 @@ public class ExpenseDetailAdapter extends BaseAdapter {
             holder.name = (TextView)convertView.findViewById(R.id.fragment_expense_detail_item_name);
             //holder.description= (TextView)convertView.findViewById(R.id.fragment_trip_list_item_description);
             holder.amount=(TextView)convertView.findViewById(R.id.fragment_expense_detail_item_amount);
+            holder.icon = (FrameLayout)convertView.findViewById(R.id.fragment_expense_detail_item_icon);
             convertView.setTag(holder);
         }
         else{
@@ -61,15 +67,17 @@ public class ExpenseDetailAdapter extends BaseAdapter {
         Log.d("payer id", String.valueOf(payer.getId()) + " " + StaticData.getNameById(payer.getId()));
         holder.name.setText(StaticData.getNameById(payer.getId()));
         String amount = "";
-        amount= "- " + String.valueOf(payer.getAmount()) + "€";//get right currency?
+        DecimalFormat df = new DecimalFormat("#0.00");
+        amount = "- " + String.valueOf(df.format(payer.getAmount())) + " €"; //getRe (R.array.currencies)[expense.getCurrencyId()].substring(0,1))
         holder.amount.setTextColor(Color.RED);
-
-
+        ((TextView)holder.icon.findViewById(R.id.fragment_expense_detail_item_icon_initial)).setText(holder.name.getText().toString().substring(0,1));
+        ((ImageView)holder.icon.findViewById(R.id.fragment_expense_detail_item_icon_circle)).setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(payer.getId())));
         holder.amount.setText(amount);
         return convertView;
     }
 
     public class ExpenseDetailViewHolder {
         TextView name, amount;
+        FrameLayout icon;
     }
 }

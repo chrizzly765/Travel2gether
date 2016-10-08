@@ -25,9 +25,10 @@ import de.traveltogether.packinglist.newpackingitem.NewPackingItemActivity;
 public class PackingDetailActivity extends AppCompatActivity {
 
     long featureId =-1;
-    long tripId =-1;
+    //long tripId =-1;
     TextView title;
     TextView description;
+    TextView count;
     IPackingDetailPresenter presenter;
     ProgressDialog progressDialog;
 
@@ -40,12 +41,13 @@ public class PackingDetailActivity extends AppCompatActivity {
         presenter = new PackingDetailPresenter(this);
         setContentView(R.layout.activity_packing_detail);
         featureId = getIntent().getLongExtra("featureId", -1);
-        tripId = getIntent().getLongExtra("tripId", -1);
+        //tripId = getIntent().getLongExtra("tripId", -1);
         if(featureId!=-1){
             presenter.onGetDetailsForPackingObject(featureId);
         }
         title = (TextView) findViewById(R.id.activity_packing_detail_title);
         description = (TextView) findViewById(R.id.activity_packing_detail_description);
+        count = (TextView)findViewById(R.id.activity_packing_detail_count);
         //amount = (TextView) findViewById(R.id.activity_expense_detail_amount);
         //paidBy = (TextView)findViewById(R.id.activity_expense_detail_paidby);
         progressDialog = ProgressDialog.show(this, "",
@@ -72,15 +74,12 @@ public class PackingDetailActivity extends AppCompatActivity {
         packingObject = _packingobject;
         getSupportActionBar().setTitle(packingObject.getTitle());
         title.setText(packingObject.getTitle());
+        count.setText(packingObject.getPackingItemsNumber());
         description.setText(packingObject.getDescription());
-        //amount.setText(expense.getAmount() + getResources().getStringArray(R.array.currencies)[expense.getCurrencyId()].substring(0,1));
-        //paidBy.setText(StaticData.getNameById(expense.getPayer()));
-
         onViewPackingItems(packingObject.getItems());
-
     }
 
-    public void onViewPackingItems(List<PackingItem> _packingItemList){
+    public void onViewPackingItems(PackingItem[] _packingItemList){
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         PackingDetailFragment fragment = PackingDetailFragment.newInstance(_packingItemList);
@@ -94,11 +93,6 @@ public class PackingDetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.optionsmenu_detail, menu);
-        //if(expense!=null) {
-        //if (expense.getAuthor() == StaticData.getUserId()) {
-        menu.getItem(R.id.delete).setEnabled(true);
-        //}
-        //}
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -128,11 +122,15 @@ public class PackingDetailActivity extends AppCompatActivity {
 
     public void onSuccessDelete(){
         //TODO: toast
-        if(tripId!=-1) {
+        /*if(tripId!=-1) {
             Intent intent = new Intent(this, PackingListActivity.class);
             intent.putExtra("tripId", tripId);
             startActivity(intent);
-        }
+        }*/
+        finish();
+    }
+
+    public void onCloseActivity(){
         finish();
     }
 

@@ -7,4 +7,6 @@ import de.traveltogether.IInteractor;
  */
 public interface ITripListInteractor extends IInteractor {
     public void getTrips(ITripListPresenter listener);
+
+    void getNotiCount(ITripListPresenter _listener);
 }

@@ -50,7 +50,13 @@ public class PackingDetailInteractor implements IPackingDetailInteractor {
                 listener.onSuccessDelete();
             }
             else if (actionType == ActionType.DETAIL) {
-                listener.onSuccessGetDetails((PackingObject) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.EXPENSE));
+                try {
+                    listener.onSuccessGetDetails((PackingObject) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.EXPENSE));
+                }
+                catch(Exception e){
+                    listener.onError("Auf dieses Packelement kann nicht mehr zugegriffen werden.");
+                    listener.onCloseActivity();
+                }
             }
         }
         else{

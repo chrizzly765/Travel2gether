@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import de.traveltogether.R;
+import de.traveltogether.StaticData;
 import de.traveltogether.model.Participant;
 
 import java.util.List;
@@ -77,7 +78,7 @@ public class InfoParticipantAdapter extends BaseAdapter {
         initial.setText(participant.getUserName().substring(0, 1));
 
         ImageView dot = (ImageView) holder.icon.findViewById(R.id.fragment_info_list_item_icon_dot);
-        //dot.setBackgroundResource(R.drawable. ... ); //TODO: Set right color
+        dot.setBackgroundResource(StaticData.getIdForColor(participant.getColor()));
         return convertView;
 
     }

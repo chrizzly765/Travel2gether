@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -81,6 +83,14 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         amount.setText(expense.getAmount() + getResources().getStringArray(R.array.currencies)[expense.getCurrencyId()].substring(0,1));
         paidBy.setText(StaticData.getNameById(expense.getPayer()));
 
+        FrameLayout icon = (FrameLayout)findViewById(R.id.activity_expense_detail_icon);
+        ((ImageView)icon.findViewById(R.id.activity_expense_detail_icon_circle))
+                .setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(expense.getPayer())));
+        ((ImageView)icon.findViewById(R.id.activity_expense_detail_payer_icon_circle))
+                .setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(expense.getPayer())));
+        ((TextView)icon.findViewById(R.id.activiy_expense_detail_icon_initial))
+                .setText(StaticData.getNameById(expense.getPayer()));
+
         onViewPayers(expense.getAssignedPayers());
 
     }
@@ -99,11 +109,6 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.optionsmenu_detail, menu);
-        //if(expense!=null) {
-            //if (expense.getAuthor() == StaticData.getUserId()) {
-                //menu.getItem(R.id.delete).setEnabled(true);
-            //}
-        //}
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -120,7 +125,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 break;
             case R.id.edit:
                 Intent intent = new Intent(this, NewExpenseActivity.class);
-                intent.putExtra("featureId", expense.getId());
+                intent.putExtra("featureId", featureId);
                 startActivity(intent);
                 finish();
                 break;
@@ -138,6 +143,10 @@ public class ExpenseDetailActivity extends AppCompatActivity {
             intent.putExtra("tripId", tripId);
             startActivity(intent);
         }
+        finish();
+    }
+
+    public void onCloseActivity(){
         finish();
     }
 

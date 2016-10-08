@@ -78,10 +78,10 @@ public class LoginInteractor implements ILoginInteractor {
                     Log.d("Error: ", e.getMessage());
                 }
 
-                SharedPreferences sharedPref =  listener.getView().getSharedPreferences("TravelTogetherPrefs", Context.MODE_WORLD_READABLE);
+                SharedPreferences sharedPref =  listener.getView().getSharedPreferences("TravelTogetherPrefs", Context.MODE_PRIVATE);
                 //SharedPreferences sharedPref = listener.getView().getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString(listener.getView().getString(R.string.saved_hash), hash.toString());
+                editor.putString(listener.getView().getString(R.string.saved_hash), hash);
                 if (userId != -1) {
                     editor.putInt(listener.getView().getString(R.string.saved_user_id), userId);
                     StaticData.setUserId(userId);

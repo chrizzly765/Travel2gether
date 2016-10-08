@@ -12,4 +12,6 @@ public interface IInfoPresenter {
     public void onSuccessGetDetail(Trip trip);
     public void onGetParticipantsForTrip(long tripId);
     public void onSuccessGetParticipants(Participant[] participants);
+    public void onDeleteTrip(long tripId);
+    public void onSuccessDeleteTrip();
 }

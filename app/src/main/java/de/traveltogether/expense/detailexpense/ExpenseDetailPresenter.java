@@ -38,4 +38,7 @@ public class ExpenseDetailPresenter implements IExpenseDetailPresenter {
     public void onSuccessDelete() {
         view.onSuccessDelete();
     }
+
+    @Override
+    public void onCloseActivity(){view.onCloseActivity();}
 }
