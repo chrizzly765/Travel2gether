@@ -11,8 +11,10 @@ import android.widget.TextView;
 
 import android.graphics.BitmapFactory;
 import de.traveltogether.R;
+import de.traveltogether.date.DateFormat;
 import de.traveltogether.model.Activity;
 import de.traveltogether.model.Trip;
+import de.traveltogether.time.TimeFormat;
 
 
 public class ActivityAdapter extends BaseAdapter  {
@@ -63,7 +65,7 @@ public class ActivityAdapter extends BaseAdapter  {
             holder.icon = (ImageView)convertView.findViewById(R.id.fragment_activity_list_item_icon);
             holder.destination=(TextView)convertView.findViewById(R.id.fragment_activity_list_item_place);
             holder.startDate=(TextView)convertView.findViewById(R.id.fragment_activity_list_item_date);
-            //holder.time=(TextView)convertView.findViewById(R.id.fragment_activity_list_item_time);
+            holder.time=(TextView)convertView.findViewById(R.id.fragment_activity_list_item_time);
             convertView.setTag(holder);
         }
         else{
@@ -76,8 +78,9 @@ public class ActivityAdapter extends BaseAdapter  {
         holder.icon.setBackgroundResource(activity.getIcon());
         //holder.date.setText(activity.getDate());
         holder.destination.setText(activity.getDestination());
-        holder.startDate.setText(activity.getDate());
+        holder.startDate.setText(DateFormat.getInstance().getDateInWords(activity.getDate()));
         //holder.time.setText(activity.getTime());
+        holder.time.setText(TimeFormat.getInstance().getTimeWithoutSecondsWithWord(activity.getTime()));
         return convertView;
     }
 

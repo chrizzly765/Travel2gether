@@ -45,7 +45,15 @@
             android:id="@+id/newActivity_destination"
             android:layout_below="@+id/newTrip_endDate"
             android:layout_alignParentStart="true"
-            android:hint="Ort" />
+            android:hint="Ort"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView3"
+            android:src="@mipmap/ic_place_grey"
+            android:layout_weight="5" />
 
     </LinearLayout>
 
@@ -73,7 +81,7 @@
             android:layout_alignTop="@+id/newTrip_startDate"
             android:layout_alignStart="@+id/newTrip_button_save"
             android:backgroundTint="@color/abc_background_cache_hint_selector_material_light"
-            android:src="@android:drawable/ic_menu_today"
+            android:src="@mipmap/ic_calender_grey"
             android:layout_toStartOf="@+id/button_datepicker_end"
             android:layout_above="@+id/button_datepicker_end"
             android:layout_alignEnd="@+id/button_datepicker_end" />
@@ -94,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button_timepicker"
-            android:src="@android:drawable/ic_menu_today"
+            android:src="@mipmap/ic_watch_grey"
             android:backgroundTint="@color/abc_background_cache_hint_selector_material_light"
             android:layout_above="@+id/newTrip_place"
             android:layout_alignStart="@+id/newTrip_button_save" />

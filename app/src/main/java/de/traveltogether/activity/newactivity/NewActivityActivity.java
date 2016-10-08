@@ -2,6 +2,7 @@ package de.traveltogether.activity.newactivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,16 +10,24 @@ import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import de.traveltogether.StaticData;
 import de.traveltogether.activity.ActivitiesActivity;
+import de.traveltogether.model.Activity;
 import de.traveltogether.model.Participant;
 import de.traveltogether.R;
 import de.traveltogether.datepicker.DatePickerFragment;
@@ -28,6 +37,7 @@ import de.traveltogether.timepicker.TimePickerFragment;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 
@@ -43,7 +53,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     ImageView iconBtn;
     EditText title;
     int id;
-    long tripId;
+    long tripId = -1;
     EditText description;
     EditText destination;
     int iconTag;
@@ -53,41 +63,78 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     int participant;
     Button cancel;
     Button save;
+    Activity activity;
+    long featureId = -1;
+    Spinner currencySpinner;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_activity);
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
+            tripId = b.getLong("tripId", -1);
+            featureId = b.getLong("featureId", -1);
+        }
+/*
+        currencySpinner = (Spinner) findViewById(R.id.spinner_currency);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.currencies, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        currencySpinner.setAdapter(adapter);
+*/
         presenter = new NewActivityPresenter(this);
+
         datePicker =new DatePickerFragment();
         timePicker =new TimePickerFragment();
-        setContentView(R.layout.activity_new_activity);
 
         title = (EditText) findViewById(R.id.newActivity_title);
         id = 0;
         description = (EditText)findViewById(R.id.newActivity_description);
         destination = (EditText) findViewById(R.id.newActivity_destination);
-        //iconTag = R.mipmap.plane;
         startDate = (EditText) findViewById(R.id.newActivity_startDate);
         time = (EditText) findViewById(R.id.newActivity_time);
-        //participant = new Participant(123, "isa", "isarachinger@gmx.de");
-        participant = 13;
+        //participant = 13;
 
+        if(featureId!=-1){
+
+            presenter.onGetDetailForActivity(featureId);
+            progressDialog = ProgressDialog.show(this, "",
+                    "Bitte warten...", true);
+        }
+/*
         Bundle b = getIntent().getExtras();
         tripId = -1; // or other values
         if (b != null) {
             tripId = b.getLong("tripId");
         }
+        if (b != null) {
+            tripId = b.getLong("tripId", -1);
+            featureId = b.getLong("featureId", -1);
+        }
+        */
+
+        /*
+        if(featureId!=-1){
+
+            presenter.onGetDetailForExpense(featureId);
+            progressDialog = ProgressDialog.show(this, "",
+                    "Bitte warten...", true);
+        }
+        */
+
         //String inputDate = "14:00";
         //timeFormat = new SimpleDateFormat("14:00");
         //dateFormat = new SimpleDateFormat("14.02.16");
         //dateFormat = new SimpleDateFormat();
         //time = timeFormat.parse(inputDate);
-
+/*
         cancel = (Button)findViewById(R.id.newActivity_button_cancel);
         cancel.setOnClickListener(this);
         save = (Button)findViewById(R.id.newActivity_button_save);
         save.setOnClickListener(this);
-
+*/
         ImageButton datePickerStartBtn = (ImageButton) findViewById(R.id.button_datepicker_start);
         datePickerStartBtn.setOnClickListener(this);
 
@@ -122,12 +169,90 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         iconBtnBus.setOnClickListener(this);
     }
 
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.edit, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.action_save:
+
+                if(title.getText().toString()==""){
+                    onViewError("Bitte gib die Daten vollständig an");
+                    return false;
+                }
+                if(featureId!=-1){
+                    activity.setTitle(title.getText().toString());
+                    activity.setDescription(description.getText().toString());
+                    activity.setLastUpdateBy(StaticData.getUserId());
+
+                    presenter.onUpdateActivity(activity);
+                }
+                else {
+
+                    /*
+                    int currency = currencySpinner.getSelectedItemPosition();
+                    if(currencySpinner.getSelectedItem() == null){
+                        currencySpinner.getSelectedItem().toString();
+                    }
+                    */
+                    Activity activity = new Activity(
+                            title.getText().toString(),
+                            id,//Integer.parseInt(id.getText().toString()),
+                            tripId,
+                            description.getText().toString(),
+                            StaticData.getUserId(),
+                            iconTag,
+                            destination.getText().toString(),
+                            time.getText().toString(),
+                            startDate.getText().toString() );
+
+                    presenter.onCreateActivity(tripId, activity);
+                }
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void onSuccessAddingActivity(){
+        Context context = getApplicationContext();
+        CharSequence text = "Ausgabe hinzugefügt.";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+        Intent intent = new Intent(this, ActivitiesActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
+        finish();
+    }
+
+    public void onViewError(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message);
+        builder.setTitle(getString(R.string.error));
+        builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     @Override
     public void onClick(View v) {
+/*
         if(v.getId()==R.id.newActivity_button_cancel){
             finish();
         }
         else if (v.getId()==R.id.newActivity_button_save){
+
             presenter.onCreateActivity(
                     title.getText().toString(),
                     id,//Integer.parseInt(id.getText().toString()),
@@ -138,9 +263,9 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
                     destination.getText().toString(),
                     time.getText().toString(),
                     startDate.getText().toString());
-        }
 
-        else if (v.getId() == R.id.button_datepicker_start){
+        }
+*/      if (v.getId() == R.id.button_datepicker_start){
             clickedDatePickerBtn = (ImageButton) v;
             datePicker.show(getFragmentManager(), DatePickerFragment.TAG);
         }
@@ -167,7 +292,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         }
         else if (v.getId() == R.id.icon_coffee){
             iconTag = R.mipmap.coffee;
-    }
+        }
         else if (v.getId() == R.id.icon_food){
             iconTag = R.mipmap.food;
         }
@@ -206,6 +331,32 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         dialog.show();
     }
 
+    public void onSuccessUpdateActivity(){
+        Context context = getApplicationContext();
+        CharSequence text = "Ausgabe geändert.";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+        Intent intent = new Intent(this, ActivitiesActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
+        finish();
+    }
+
+    public void setValues(Activity _activity){
+        activity =_activity;
+
+        title.setText(activity.getTitle());
+        description.setText(activity.getDescription());
+        startDate.setText(activity.getDate());
+        time.setText(activity.getTime());
+
+        progressDialog.cancel();
+    }
+
+
+
+/*
     public void onSuccess(String message){
         Context context = getApplicationContext();
         CharSequence text = getString(R.string.newtrip_success);
@@ -221,7 +372,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         startActivity(activity);
         finish();
     }
-
+*/
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         if(clickedDatePickerBtn.getId() == R.id.button_datepicker_start){
@@ -243,6 +394,8 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
             timePicker.setTime(hour, minute);
         }
     }
+
+
 
 
 

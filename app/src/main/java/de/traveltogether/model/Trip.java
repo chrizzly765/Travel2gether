@@ -59,6 +59,7 @@ public class Trip {
 
     public ParticipantShort[] getParticipants(){return participants;}
 
+
     public Trip(String _title, String _description, String _destination, String _startDate, String _endDate){
         title = _title;
         description = _description;

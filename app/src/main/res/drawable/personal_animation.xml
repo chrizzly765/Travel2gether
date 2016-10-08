@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/icon_user_percentage_0" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_5" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_10" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_15" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_20" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_25" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_30" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_35" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_40" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_45" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_50" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_55" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_60" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_65" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_70" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_75" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_80" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_85" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_90" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_95" android:duration="100" />
+    <item android:drawable="@drawable/icon_user_percentage_100" android:duration="100" />
+</animation-list>

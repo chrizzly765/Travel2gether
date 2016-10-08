@@ -9,6 +9,8 @@ import de.traveltogether.DataType;
 import de.traveltogether.StaticData;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Response;
+import de.traveltogether.model.Statistic;
+import de.traveltogether.model.Trip;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
@@ -82,14 +84,43 @@ public class MainMenuInteractor implements IMainMenuInteractor {
                     listener.onError(response.getMessage());
                 }
             }
+            if(dataType==DataType.TRIP && actionType==ActionType.GETSTATISTIC){
+                if(response.getError()!="true") {
+                    listener.onSuccessGetStatistics((Statistic) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.STATISTIC));
+                    //Statistic statistics = ((Statistic) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.STATISTIC));
+                    //listener.onSuccessGetStatistics(statistics);
+                    return;
+                }
+                else{
+                    listener.onError(response.getMessage());
+                }
+            }
         }
         else{
             listener.onError(response.getMessage());
         }
+
     }
+
+    @Override
+    public void getStatisticsForTrip(long tripId, int userId, IMainMenuPresenter _listener) {
+        listener = _listener;
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("tripId", tripId);
+            jsonObject.put("personId", userId);
+            HttpRequest request = new HttpRequest(DataType.TRIP, ActionType.GETSTATISTIC, jsonObject.toString(), this);
+        }
+        catch(Exception e){
+            Log.e(e.getClass().toString(), e.getMessage());
+        }
+    }
+
+
     class ParticipantList {
         public Participant[] list;
     }
+
 }
 
 

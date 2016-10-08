@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import de.traveltogether.model.Participant;
+import de.traveltogether.model.Statistic;
 import de.traveltogether.participantlist.ParticipantState;
 
 /**
@@ -25,7 +26,6 @@ public class StaticData {
     static public Participant[] getAllParticipants(){
         return participants;
     }
-
     static public void setParticipants(Participant[] _participants){
         participants=_participants;
     }

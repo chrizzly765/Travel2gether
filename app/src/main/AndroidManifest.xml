@@ -151,7 +151,8 @@
         <activity android:name=".activity.ActivitiesActivity" />
         <activity
             android:name=".chat.ChatActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.detailactivity.DetailActivityActivity"  android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

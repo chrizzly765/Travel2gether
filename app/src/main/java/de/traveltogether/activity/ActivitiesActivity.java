@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import de.traveltogether.R;
+import de.traveltogether.StaticData;
 import de.traveltogether.activity.newactivity.NewActivityActivity;
 import de.traveltogether.model.Trip;
 import de.traveltogether.model.Activity;
@@ -71,26 +72,33 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.main, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.optionsmenu_detail, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case R.id.action_notification:
-                return true;
-            case R.id.action_settings:
-                Intent options = new Intent(this, SettingsActivity.class);
-                startActivity(options);
-                return true;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.delete:
+                //TODO: DELETE
+                break;
+            case R.id.edit:
+                Intent intent = new Intent(this, NewActivityActivity.class);
+                intent.putExtra("tripId", tripId);
+                startActivity(intent);
+                break;
             default:
-                return super.onOptionsItemSelected(item);
+                super.onOptionsItemSelected(item);
+                break;
         }
+        return  true;
     }
 
+*/
     public void onViewError(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);

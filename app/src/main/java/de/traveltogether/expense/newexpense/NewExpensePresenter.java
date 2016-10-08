@@ -52,8 +52,6 @@ public class NewExpensePresenter implements INewExpensePresenter {
         interactor.updateExpense(expense, this);
     }
 
-
-
     @Override
     public void onSuccessGetDetail(Expense expense) {
         view.setValues(expense);

@@ -80,5 +80,9 @@ public enum DataType {
     NOTIFICATION{
         @Override
         public String toString(){return "Notification";}
+    },
+    STATISTIC{
+        @Override
+        public String toString(){return "Statistic";}
     }
 }

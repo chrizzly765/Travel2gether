@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import de.traveltogether.R;
+import de.traveltogether.activity.detailactivity.DetailActivityActivity;
 import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Activity;
 import de.traveltogether.model.Trip;
@@ -65,11 +66,14 @@ public class ActivityFragment extends ListFragment implements AdapterView.OnItem
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Activity activity = (Activity) adapter.getItem(position);
-        Intent mainMenu = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(getActivity(), DetailActivityActivity.class);
+        intent.putExtra("featureId", activity.getId()); //
+        /*
         Bundle b = new Bundle();
         b.putString("title", formerActivities[position].getTitle());
-        mainMenu.putExtras(b); //Put your id to your next Intent
-        startActivity(mainMenu);
+        detailActivity.putExtras(b); //Put your id to your next Intent
+        */
+        startActivity(intent);
 
     }
 }

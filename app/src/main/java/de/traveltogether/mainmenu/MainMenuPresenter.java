@@ -1,6 +1,8 @@
 package de.traveltogether.mainmenu;
 
 import de.traveltogether.model.Participant;
+import de.traveltogether.model.Statistic;
+import de.traveltogether.model.Trip;
 
 /**
  * Created by Anna-Lena on 12.05.2016.
@@ -49,4 +51,14 @@ public class MainMenuPresenter implements IMainMenuPresenter {
         view.onSuccessGetParticipants();
     }
 
+    @Override
+    public void onGetStatistics(long tripId, int userId) {
+        interactor.getStatisticsForTrip(tripId, userId, this);
+    }
+
+
+    @Override
+    public void onSuccessGetStatistics(Statistic statistic) {
+        view.onSuccessGetStatistics(statistic);
+    }
 }

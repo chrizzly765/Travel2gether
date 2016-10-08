@@ -1,5 +1,7 @@
 package de.traveltogether.date;
 
+import java.util.Calendar;
+
 /**
  * Created by Anna-Lena on 22.09.2016.
  */
@@ -96,5 +98,18 @@ public class DateFormat {
         }else{
             return -1;
         }
+    }
+
+    public String getDateAsCountdown(String startDate){
+        Date d = new Date(startDate);
+        String s = "";
+
+        Calendar calander = Calendar.getInstance();
+        int cDay = calander.get(Calendar.DAY_OF_MONTH);
+        int cMonth = calander.get(Calendar.MONTH) + 1;
+        int cYear = calander.get(Calendar.YEAR);
+
+        s = String.valueOf(d.month - cMonth) + " : " + String.valueOf(d.day - cDay);
+        return s;
     }
 }

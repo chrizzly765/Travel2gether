@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
+import de.traveltogether.model.Activity;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Response;
 
@@ -15,14 +16,10 @@ import de.traveltogether.model.Response;
 public class NewActivityPresenter implements INewActivityPresenter {
     private NewActivityActivity view;
     INewActivityInteractor interactor;
+
     public NewActivityPresenter(NewActivityActivity _view){
         view = _view;
         interactor = new NewActivityInteractor();
-    }
-
-    @Override
-    public void onCreateActivity(String title, int id, long tripId, String description, int participant, int icon, String destination, String time, String date) {
-        interactor.createActivity(title, id, tripId, description, participant, icon, destination, time, date,this);
     }
 
     @Override
@@ -31,7 +28,32 @@ public class NewActivityPresenter implements INewActivityPresenter {
     }
 
     @Override
-    public void onSuccess(String message) {
-        view.onSuccess(message);
+    public void onCreateActivity(long tripId, Activity activity) {
+        interactor.createActivity(tripId, activity, this);
+    }
+
+    @Override
+    public void onSuccessAddingActivity() {
+        view.onSuccessAddingActivity();
+    }
+
+    @Override
+    public void onGetDetailForActivity(long featureId) {
+        interactor.getDetailsForActivity(featureId, this);
+    }
+
+    @Override
+    public void onUpdateActivity(Activity activity){
+        interactor.updateActivity(activity, this);
+    }
+
+    @Override
+    public void onSuccessGetDetail(Activity activity) {
+        view.setValues(activity);
+    }
+
+    @Override
+    public void onSuccessUpdateActivity() {
+        view.onSuccessUpdateActivity();
     }
 }
