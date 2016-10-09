@@ -35,7 +35,7 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getSupportActionBar().setTitle("Aktivitäten und Orte");
         Bundle b = getIntent().getExtras();
         tripId = -1; // or other values
         if (b != null) {
@@ -47,7 +47,6 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
 
         setContentView(R.layout.activity_activities);
 
-        getSupportActionBar().setTitle("Meine Reisen");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);

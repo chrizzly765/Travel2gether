@@ -78,13 +78,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
             tripId = b.getLong("tripId", -1);
             featureId = b.getLong("featureId", -1);
         }
-/*
-        currencySpinner = (Spinner) findViewById(R.id.spinner_currency);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.currencies, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        currencySpinner.setAdapter(adapter);
-*/
         presenter = new NewActivityPresenter(this);
 
         datePicker =new DatePickerFragment();
@@ -96,46 +89,17 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         destination = (EditText) findViewById(R.id.newActivity_destination);
         startDate = (EditText) findViewById(R.id.newActivity_startDate);
         time = (EditText) findViewById(R.id.newActivity_time);
-        //participant = 13;
 
         if(featureId!=-1){
-
+            getSupportActionBar().setTitle("Aktivität bearbeiten");
             presenter.onGetDetailForActivity(featureId);
             progressDialog = ProgressDialog.show(this, "",
                     "Bitte warten...", true);
         }
-/*
-        Bundle b = getIntent().getExtras();
-        tripId = -1; // or other values
-        if (b != null) {
-            tripId = b.getLong("tripId");
+        else {
+            getSupportActionBar().setTitle("Neue Aktivität");
         }
-        if (b != null) {
-            tripId = b.getLong("tripId", -1);
-            featureId = b.getLong("featureId", -1);
-        }
-        */
 
-        /*
-        if(featureId!=-1){
-
-            presenter.onGetDetailForExpense(featureId);
-            progressDialog = ProgressDialog.show(this, "",
-                    "Bitte warten...", true);
-        }
-        */
-
-        //String inputDate = "14:00";
-        //timeFormat = new SimpleDateFormat("14:00");
-        //dateFormat = new SimpleDateFormat("14.02.16");
-        //dateFormat = new SimpleDateFormat();
-        //time = timeFormat.parse(inputDate);
-/*
-        cancel = (Button)findViewById(R.id.newActivity_button_cancel);
-        cancel.setOnClickListener(this);
-        save = (Button)findViewById(R.id.newActivity_button_save);
-        save.setOnClickListener(this);
-*/
         ImageButton datePickerStartBtn = (ImageButton) findViewById(R.id.button_datepicker_start);
         datePickerStartBtn.setOnClickListener(this);
 

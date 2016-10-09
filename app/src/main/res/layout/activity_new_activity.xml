@@ -48,13 +48,6 @@
             android:hint="Ort"
             android:layout_weight="1" />
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView3"
-            android:src="@mipmap/ic_place_grey"
-            android:layout_weight="5" />
-
     </LinearLayout>
 
     <LinearLayout
