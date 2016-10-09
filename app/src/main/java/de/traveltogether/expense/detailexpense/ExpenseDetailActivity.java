@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import de.traveltogether.R;
@@ -80,12 +81,15 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     }
 
     public void onViewDetails(Expense _expense){
+
+        DecimalFormat df = new DecimalFormat(StaticData.currencyFormatDE);
+
         expense = _expense;
         getSupportActionBar().setTitle(expense.getTitle());
         title.setText(expense.getTitle());
         tripId=expense.getTripId();
         description.setText(expense.getDescription());
-        amount.setText(expense.getAmount() + getResources().getStringArray(R.array.currencies)[expense.getCurrencyId()].substring(0,1));
+        amount.setText(df.format(expense.getAmount()) + getResources().getStringArray(R.array.currencies)[expense.getCurrencyId()].substring(0,1));
         paidBy.setText(StaticTripData.getNameById(expense.getPayer()));
 
         FrameLayout icon = (FrameLayout)findViewById(R.id.activity_expense_detail_icon);

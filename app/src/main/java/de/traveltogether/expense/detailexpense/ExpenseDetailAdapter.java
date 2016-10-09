@@ -68,8 +68,8 @@ public class ExpenseDetailAdapter extends BaseAdapter {
         Log.d("payer id", String.valueOf(payer.getId()) + " " + StaticTripData.getNameById(payer.getId()));
         holder.name.setText(StaticTripData.getNameById(payer.getId()));
         String amount = "";
-        DecimalFormat df = new DecimalFormat("#0.00");
-        amount = "- " + String.valueOf(df.format(payer.getAmount())) + " €"; //getRe (R.array.currencies)[expense.getCurrencyId()].substring(0,1))
+        DecimalFormat df = new DecimalFormat(StaticData.currencyFormatDE);
+        amount = "- " + String.valueOf(df.format(payer.getAmount())) + " " + StaticData.currencySymbolDE; //getRe (R.array.currencies)[expense.getCurrencyId()].substring(0,1))
         holder.amount.setTextColor(Color.RED);
         ((TextView)holder.icon.findViewById(R.id.fragment_expense_detail_item_icon_initial)).setText(holder.name.getText().toString().substring(0,1));
         ((ImageView)holder.icon.findViewById(R.id.fragment_expense_detail_item_icon_circle)).setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(payer.getId())));

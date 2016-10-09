@@ -66,8 +66,8 @@ public class ExpenseAdapter extends BaseAdapter {
         Context context = parent.getContext();
         Expense expense = (Expense) getItem(position);
         holder.title.setText(expense.getTitle());
-        DecimalFormat df = new DecimalFormat("#0.00");
-        String amount = String.valueOf(df.format(expense.getAmount())) + " €"; //getRe (R.array.currencies)[expense.getCurrencyId()].substring(0,1))
+        DecimalFormat df = new DecimalFormat(StaticData.currencyFormatDE);
+        String amount = String.valueOf(df.format(expense.getAmount())) + " " + StaticData.currencySymbolDE; //getRe (R.array.currencies)[expense.getCurrencyId()].substring(0,1))
                 holder.amount.setText(amount);
         if(expense.getAssignedPayers().size()>0){
             ArrayList<Payer> payers = (ArrayList<Payer>)expense.getAssignedPayers();
@@ -113,8 +113,6 @@ public class ExpenseAdapter extends BaseAdapter {
                                 .setText(StaticTripData.getNameById(payers.get(i).getId()).substring(0,1));
                         ((ImageView)holder.icon3.findViewById(R.id.fragment_expense_list_item_icon_circle_3))
                                 .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(payers.get(i).getId())));
-
-
                     }
             }
 

@@ -13,7 +13,8 @@ import de.traveltogether.participantlist.ParticipantState;
  */
 public class StaticData {
     static private int UserId;
-
+    static public String currencyFormatDE = "#0.00";
+    static public String currencySymbolDE = "€";
 
     static public int getUserId() {
         return UserId;
@@ -21,8 +22,6 @@ public class StaticData {
     static public void setUserId(int id){
         UserId = id;
     }
-
-
 
     static public int getIdForColor(String color){
         switch(color){
