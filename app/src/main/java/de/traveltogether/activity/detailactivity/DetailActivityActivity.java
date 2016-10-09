@@ -63,6 +63,7 @@ public class DetailActivityActivity extends AppCompatActivity  {
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
+
         if(featureId!=-1){
             presenter.onGetDetailsForActivity(featureId);
         }
@@ -87,7 +88,8 @@ public class DetailActivityActivity extends AppCompatActivity  {
         });
 
         AlertDialog dialog = builder.create();
-        dialog.show();
+        dialog.cancel();
+        tripId=detailActivity.getTripId();
     }
 
     public void onViewDetails(Activity _activity){
@@ -123,7 +125,7 @@ public class DetailActivityActivity extends AppCompatActivity  {
                 }
                 break;
             case R.id.edit:
-                Intent intent = new Intent(this, NewActivityActivity.class);
+                Intent intent = new Intent(this,NewActivityActivity.class);
                 Bundle b = new Bundle();
                 b.putLong("featureId", featureId);
                 b.putLong("tripId", tripId);

@@ -55,8 +55,9 @@ public class InvitationAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.fragment_invitation_list_item, parent, false);
             holder = new TripViewHolder();
-            holder.name = (TextView)convertView.findViewById(R.id.fragment_invitation_list_name);
-            holder.grayIcon = (ImageView)convertView.findViewById(R.id.fragment_invitation_list_icon);
+            holder.name = (TextView)convertView.findViewById(R.id.fragment_invitation_list_item_name);
+            holder.grayIcon = (ImageView)convertView.findViewById(R.id.fragment_invitation_list_item_icon);
+            holder.initial = (TextView) convertView.findViewById(R.id.fragment_invitation_list_item_initial);
             convertView.setTag(holder);
         }
         else{
@@ -66,11 +67,13 @@ public class InvitationAdapter extends BaseAdapter {
         Context context = parent.getContext();
         Person person = (Person)getItem(position);
         holder.name.setText(person.getUserName());
+        holder.initial.setText(person.getUserName().substring(0,1));
+
         return convertView;
     }
 
     static class TripViewHolder {
         ImageView grayIcon;
-        TextView name;
+        TextView name, initial;
     }
 }

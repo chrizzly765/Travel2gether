@@ -36,14 +36,15 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         add.setOnClickListener(this);
 
         tripId = getIntent().getLongExtra("tripId", -1);
+
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
-        presenter = new ExpensePresenter(this);
-        presenter.onGetExpenseList(tripId);
-        onViewParticipants(StaticTripData.getActiveParticipants());
         progressDialog = ProgressDialog.show(this, "",
                 "Bitte warten...", true);
+        presenter = new ExpensePresenter(this);
+        presenter.onGetExpenseList(tripId);
+        presenter.onGetParticipantList(tripId);
     }
 
     @Override
@@ -72,12 +73,15 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void onViewParticipants(Participant[] participants){
+        StaticTripData.setParticipants(participants);
+        Participant[] activeParts =StaticTripData.getActiveParticipants();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        ExpenseParticipantFragment fragment = ExpenseParticipantFragment.newInstance(participants);
+        ExpenseParticipantFragment fragment = ExpenseParticipantFragment.newInstance(activeParts);
         fragmentTransaction.add(R.id.activity_expense_participants_container, fragment);
         fragmentTransaction.commit();
 
+        progressDialog.cancel();
 
         //RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_expense_participants_container);
         //ViewGroup.LayoutParams params = layout.getLayoutParams();
@@ -85,7 +89,9 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void onViewExpenses(Expense[] expenses){
-        progressDialog.cancel();
+        if(progressDialog.isShowing()) {
+            progressDialog.cancel();
+        }
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         ExpenseListFragment fragment = ExpenseListFragment.newInstance(expenses);

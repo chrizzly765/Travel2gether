@@ -69,6 +69,7 @@ public class ActivityFragment extends ListFragment implements AdapterView.OnItem
         Intent intent = new Intent(getActivity(), DetailActivityActivity.class);
         Bundle b = new Bundle();
         b.putLong("featureId", activity.getId());
+        b.putLong("tripId", activity.getTripId());
         intent.putExtras(b);        /*
         Bundle b = new Bundle();
         b.putString("title", formerActivities[position].getTitle());

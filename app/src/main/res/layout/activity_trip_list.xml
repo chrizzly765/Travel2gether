@@ -97,8 +97,7 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_marginTop="16dp"
-                android:layout_below="@id/fragment_trip_list_container_former"
+                android:layout_below="@id/activity_trip_list_former_empty"
                 android:layout_height="80dp" />
 
         </RelativeLayout>
