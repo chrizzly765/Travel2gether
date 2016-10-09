@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fragment_button_invite"
-            android:src="@drawable/ic_menu_share"
+            android:src="@mipmap/ic_menu_share"
             android:backgroundTint="@color/abc_background_cache_hint_selector_material_light"
             android:layout_gravity="center_vertical" />
 
