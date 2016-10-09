@@ -89,7 +89,7 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         Participant[] invitedParts = StaticTripData.getInvitedParticipants();
         Participant[] resignedParts = StaticTripData.getResignedParticipants();
 
-        RelativeLayout add = (RelativeLayout)findViewById(R.id.activity_info_button_add);
+        RelativeLayout add = (RelativeLayout)findViewById(R.id.activity_info_button_add_box);
         if(activeParts.length>0) {
             findViewById(R.id.activity_info_devider_active).setVisibility(View.VISIBLE);
             FragmentManager fragmentManager = getFragmentManager();
