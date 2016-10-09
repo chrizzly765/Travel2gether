@@ -95,6 +95,7 @@ public class DetailActivityActivity extends AppCompatActivity  {
     public void onViewDetails(Activity _activity){
         progressDialog.cancel();
         detailActivity = _activity;
+        tripId=_activity.getTripId();
         getSupportActionBar().setTitle(detailActivity.getTitle());
         title.setText(detailActivity.getTitle());
         description.setText(detailActivity.getDescription());
