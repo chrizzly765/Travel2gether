@@ -32,7 +32,7 @@ public class PackingObject extends AbstractListObject {
     //public void addPackingItem(int personAssigned){items.add(new PackingItem(personAssigned));    }
     //public void addPackingItem(int personAssigned, boolean status, long id, int number){ items.add(new PackingItem(personAssigned, status, id, number));}
     public void addPackingItem(PackingItem _packingItem){
-        number++;
+        //number++;
         items.add(_packingItem);
     }
 }
