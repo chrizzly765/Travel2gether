@@ -93,6 +93,7 @@ public class TaskDetailActivity extends AppCompatActivity {
 
     public void onViewDetails(Task _task){
         task = _task;
+        tripId = task.getTripId();
         getSupportActionBar().setTitle(task.getTitle());
         title.setText(task.getTitle());
         description.setText(task.getDescription());
@@ -189,7 +190,7 @@ public class TaskDetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, TaskListActivity.class);
         intent.putExtra("tripId", tripId);
         startActivity(intent);
         finish();

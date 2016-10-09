@@ -90,7 +90,6 @@ public class ExpenseListFragment extends ListFragment implements AdapterView.OnI
         Intent intent = new Intent(getActivity(), ExpenseDetailActivity.class);
         Bundle b = new Bundle();
         b.putLong("featureId", expense.getId());
-        b.putLong("tripId", expense.getTripId());
         intent.putExtras(b);
         startActivity(intent);
     }

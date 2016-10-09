@@ -63,10 +63,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Bundle b = getIntent().getExtras();
         tripId = -1; // or other values
         if (b != null) {
-            tripId = b.getLong("tripId");
-            title = b.getString("title");
+            tripId = b.getLong("tripId",-1);
+            title = b.getString("title", "");
             adminId = b.getInt("adminId");
                 setActionBar(title);
+        }
+        if(title==""){
+            presenter.onGetTitleForTrip(tripId);
         }
 
         StaticTripData.setCurrentTripId(tripId);
@@ -384,5 +387,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(this, TripListActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void onSuccessGetTitle(String _title){
+        title = _title;
+        getSupportActionBar().setTitle(title);
     }
 }

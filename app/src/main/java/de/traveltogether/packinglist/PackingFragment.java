@@ -67,7 +67,6 @@ public class PackingFragment extends ListFragment implements AdapterView.OnItemC
         Intent intent = new Intent(getActivity(), PackingDetailActivity.class);
         Bundle b = new Bundle();
         b.putLong("featureId", packingobject.getId());
-        b.putLong("tripId", packingobject.getTripId());
         intent.putExtras(b); //Put your id to your next Intent
         startActivity(intent);
         getActivity().finish();

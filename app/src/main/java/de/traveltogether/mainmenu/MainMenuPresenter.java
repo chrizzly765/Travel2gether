@@ -61,4 +61,14 @@ public class MainMenuPresenter implements IMainMenuPresenter {
     public void onSuccessGetStatistics(Statistic statistic) {
         view.onSuccessGetStatistics(statistic);
     }
+
+    @Override
+    public void onGetTitleForTrip(long tripId) {
+        interactor.getTitleForTrip(tripId, this);
+    }
+
+    @Override
+    public void onSuccessGetTitle(String title){
+        view.onSuccessGetTitle(title);
+    }
 }

@@ -95,6 +95,9 @@ public class MainMenuInteractor implements IMainMenuInteractor {
                     listener.onError(response.getMessage());
                 }
             }
+            if(actionType==ActionType.GETTITLE){
+                listener.onSuccessGetTitle(response.getData());
+            }
         }
         else{
             listener.onError(response.getMessage());
@@ -113,6 +116,18 @@ public class MainMenuInteractor implements IMainMenuInteractor {
         }
         catch(Exception e){
             Log.e(e.getClass().toString(), e.getMessage());
+        }
+    }
+
+    @Override
+    public void getTitleForTrip(long tripId, IMainMenuPresenter listener) {
+        try{
+            JSONObject obj = new JSONObject();
+            obj.put("tripId", tripId);
+            HttpRequest request = new HttpRequest(DataType.TRIP, ActionType.GETTITLE, obj.toString(), this);
+        }
+        catch (Exception e){
+
         }
     }
 
