@@ -3,6 +3,7 @@ package de.traveltogether.chat;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
     ICommentPresenter presenter;
     Comment[] comments;
     EditText inputField;
+    ProgressDialog progressDialog;
 
     public ChatFragment () {
         // Required empty public constructor
@@ -48,9 +50,13 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
 
         presenter = new CommentPresenter(this);
         presenter.onGetCommentsForTrip(id);
+        progressDialog = ProgressDialog.show(getActivity(), "",
+                "Nachrichten werden geladen...", true);
     }
 
     public void onViewComments(Comment[] _comments){
+        progressDialog.cancel();
+
         comments = _comments;
 
         //Fragment in Activity einbetten
@@ -68,6 +74,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
         inputField = (EditText)view.findViewById(R.id.fragment_comment_editText);
         ImageButton send = (ImageButton)view.findViewById(R.id.fragment_comment_button_send);
         send.setOnClickListener(this);
+
         return view;
     }
 

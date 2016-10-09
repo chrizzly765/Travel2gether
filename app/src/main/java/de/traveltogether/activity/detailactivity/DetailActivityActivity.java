@@ -48,6 +48,8 @@ public class DetailActivityActivity extends AppCompatActivity  {
     TextView date;
     TextView time;
     TextView place;
+    ProgressDialog progressDialog;
+
 
     Activity detailActivity;
 
@@ -69,9 +71,12 @@ public class DetailActivityActivity extends AppCompatActivity  {
         date = (TextView) findViewById(R.id.detailActivity_date);
         time = (TextView)findViewById(R.id.detailActivity_time);
         place = (TextView)findViewById(R.id.detailActivity_place);
+        progressDialog = ProgressDialog.show(this, "",
+                "Bitte warten...", true);
     }
 
     public void onViewError(String message){
+        progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));
@@ -86,6 +91,7 @@ public class DetailActivityActivity extends AppCompatActivity  {
     }
 
     public void onViewDetails(Activity _activity){
+        progressDialog.cancel();
         detailActivity = _activity;
         getSupportActionBar().setTitle(detailActivity.getTitle());
         title.setText(detailActivity.getTitle());
