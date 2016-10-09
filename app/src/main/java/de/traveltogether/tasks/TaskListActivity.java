@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,9 +107,11 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             arr = new Task[taskListOpen.size()];
             taskListOpen.toArray(arr);
             TaskListFragment fragmentOpen = TaskListFragment.newInstance(arr);
-            fragmentTransaction.add(R.id.fragment_task_list_container_open, fragmentOpen);
-            findViewById(R.id.activity_task_list_divider_open).setVisibility(View.VISIBLE);
+            fragmentTransaction.add(R.id.activity_task_list_container_open, fragmentOpen);
             fragmentTransaction.commit();
+        }
+        else {
+            onEmpty(R.id.activity_task_list_empty_open);
         }
 
         if(taskListProgress.size() > 0) {
@@ -114,9 +119,11 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             arr = new Task[taskListProgress.size()];
             taskListProgress.toArray(arr);
             TaskListFragment fragmentProgress = TaskListFragment.newInstance(arr);
-            fragmentTransaction.add(R.id.fragment_task_list_container_progress, fragmentProgress);
-            findViewById(R.id.activity_task_list_divider_progress).setVisibility(View.VISIBLE);
+            fragmentTransaction.add(R.id.activity_task_list_container_progress, fragmentProgress);
             fragmentTransaction.commit();
+        }
+        else {
+            onEmpty(R.id.activity_task_list_empty_progress);
         }
 
         if(taskListDone.size() > 0) {
@@ -124,11 +131,20 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             arr = new Task[taskListDone.size()];
             taskListDone.toArray(arr);
             TaskListFragment fragmentDone = TaskListFragment.newInstance(arr);
-            fragmentTransaction.add(R.id.fragment_task_list_container_done, fragmentDone);
-            findViewById(R.id.activity_task_list_divider_done).setVisibility(View.VISIBLE);
+            fragmentTransaction.add(R.id.activity_task_list_container_done, fragmentDone);
             fragmentTransaction.commit();
         }
+        else {
+            onEmpty(R.id.activity_task_list_empty_txt_done);
+        }
         progressDialog.cancel();
+    }
+
+    public void onEmpty(int id) {
+        findViewById(R.id.activity_task_list_empty_done).setVisibility(View.VISIBLE);
+        TextView txt = (TextView)findViewById(id);
+        txt.setText(R.string.no_entries);
+        txt.setHeight(20);
     }
 
     public void onViewError(String message) {

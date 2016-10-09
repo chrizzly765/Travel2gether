@@ -177,6 +177,7 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
 
     public void onViewError(String message) {
 
+        progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));

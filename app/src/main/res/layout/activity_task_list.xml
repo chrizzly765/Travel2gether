@@ -6,13 +6,21 @@
     android:orientation="vertical"
     tools:context="de.traveltogether.tasks.TaskListActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="24dp"
         android:background="#afddf4"
-        android:id="@+id/activity_task_list_divider_open"
-        android:visibility="invisible">
+        android:id="@+id/activity_task_list_divider_open">
 
         <TextView
             android:layout_width="wrap_content"
@@ -22,12 +30,31 @@
             android:layout_gravity="center_vertical"
             android:textColor="#37a9e3"
             android:textSize="14dp" />
+
     </LinearLayout>
 
     <LinearLayout
-        android:id = "@+id/fragment_task_list_container_open"
-        android:orientation="vertical"
+        android:id = "@+id/activity_task_list_empty_open"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
         android:layout_below="@+id/activity_task_list_divider_open"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="test"
+            android:textAlignment="center"
+            android:id="@+id/activity_task_list_empty_txt_open"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id = "@+id/activity_task_list_container_open"
+        android:orientation="vertical"
+        android:layout_below="@+id/activity_task_list_empty_open"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
@@ -37,11 +64,10 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="24dp"
-        android:layout_below="@+id/fragment_task_list_container_open"
+        android:layout_below="@+id/activity_task_list_container_open"
         android:background="#afddf4"
         android:layout_marginTop="8dp"
-        android:id="@+id/activity_task_list_divider_progress"
-        android:visibility="invisible">
+        android:id="@+id/activity_task_list_divider_progress">
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,9 +80,27 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id = "@+id/fragment_task_list_container_progress"
-        android:orientation="vertical"
+        android:id = "@+id/activity_task_list_empty_progress"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
         android:layout_below="@+id/activity_task_list_divider_progress"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="test"
+            android:textAlignment="center"
+            android:id="@+id/activity_task_list_empty_txt_progress"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id = "@+id/activity_task_list_container_progress"
+        android:orientation="vertical"
+        android:layout_below="@+id/activity_task_list_empty_progress"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
@@ -67,10 +111,9 @@
         android:layout_width="fill_parent"
         android:layout_height="24dp"
         android:background="#afddf4"
-        android:layout_below="@+id/fragment_task_list_container_progress"
+        android:layout_below="@+id/activity_task_list_container_progress"
         android:id="@+id/activity_task_list_divider_done"
-        android:layout_marginTop="8dp"
-        android:visibility="invisible">
+        android:layout_marginTop="8dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -83,13 +126,35 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id = "@+id/fragment_task_list_container_done"
+        android:id = "@+id/activity_task_list_empty_done"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/activity_task_list_divider_done"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="test"
+            android:textAlignment="center"
+            android:id="@+id/activity_task_list_empty_txt_done"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id = "@+id/activity_task_list_container_done"
         android:orientation="vertical"
         android:layout_below="@+id/activity_task_list_divider_done"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
         android:paddingRight="8dp" />
+
+        </RelativeLayout>
+
+    </ScrollView>
 
     <FrameLayout
         android:layout_width="match_parent"
