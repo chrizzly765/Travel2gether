@@ -61,11 +61,13 @@ public class ActivityAdapter extends BaseAdapter  {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.fragment_activity_list_item, parent, false);
             holder = new TripViewHolder();
+
             holder.title = (TextView)convertView.findViewById(R.id.fragment_activity_list_item_title);
             holder.icon = (ImageView)convertView.findViewById(R.id.fragment_activity_list_item_icon);
             holder.destination=(TextView)convertView.findViewById(R.id.fragment_activity_list_item_place);
             holder.startDate=(TextView)convertView.findViewById(R.id.fragment_activity_list_item_date);
             holder.time=(TextView)convertView.findViewById(R.id.fragment_activity_list_item_time);
+
             convertView.setTag(holder);
         }
         else{

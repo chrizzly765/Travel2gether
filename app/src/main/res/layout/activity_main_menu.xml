@@ -27,7 +27,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp">
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -52,7 +53,8 @@
                             android:layout_alignParentTop="true"
                             android:text="Tage"
                             android:textSize="12dp"
-                            android:gravity="center|center_vertical|center_horizontal" />
+                            android:gravity="center|center_vertical|center_horizontal"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -73,7 +75,8 @@
                             android:layout_alignParentTop="true"
                             android:text="Stunden"
                             android:textSize="12dp"
-                            android:gravity="center_vertical|center_horizontal" />
+                            android:gravity="center_vertical|center_horizontal"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -96,7 +99,8 @@
                             android:text="Minuten"
                             android:textSize="12dp"
                             android:gravity="right"
-                            android:layout_gravity="center_vertical" />
+                            android:layout_gravity="center_vertical"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -110,7 +114,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentTop="true"
                     android:text="    00    :    00    :    00    "
-                    android:textSize="18dp"
+                    android:textSize="24dp"
                     android:textStyle="bold"
                     android:layout_marginTop="-5dp" />
 
@@ -129,11 +133,13 @@
                     android:layout_marginTop="10dp">
 
                     <ImageView
-                        android:layout_width="110dp"
-                        android:layout_height="110dp"
+                        android:layout_width="115dp"
+                        android:layout_height="115dp"
                         android:id="@+id/main_menu_group_animation"
                         android:layout_gravity="center|right"
-                        android:layout_centerInParent="true" />
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="20dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -141,7 +147,7 @@
                         android:text="0%"
                         android:id="@+id/main_menu_group_text"
                         android:layout_centerInParent="true"
-                        android:paddingTop="45dp"
+                        android:paddingTop="70dp"
                         android:textColor="#00e6b6"
                         android:textSize="18dp" />
                 </RelativeLayout>
@@ -153,11 +159,13 @@
                     android:layout_marginTop="10dp">
 
                     <ImageView
-                        android:layout_width="110dp"
-                        android:layout_height="110dp"
+                        android:layout_width="115dp"
+                        android:layout_height="115dp"
                         android:id="@+id/main_menu_personal_animation"
                         android:layout_gravity="center"
-                        android:layout_centerInParent="true" />
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="20dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -165,23 +173,11 @@
                         android:text="0%"
                         android:id="@+id/main_menu_personal_text"
                         android:layout_centerInParent="true"
-                        android:paddingTop="45dp"
+                        android:paddingTop="70dp"
                         android:textColor="#37a9e3"
                         android:textSize="18dp" />
                 </RelativeLayout>
             </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fortschritt"
-                android:id="@+id/main_menu_fortschritt"
-                android:layout_gravity="center"
-                android:textColor="#1ddbc8"
-                android:paddingBottom="10dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:textSize="14dp" />
 
         </RelativeLayout>
 
