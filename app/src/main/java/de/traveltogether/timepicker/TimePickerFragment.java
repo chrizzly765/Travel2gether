@@ -47,6 +47,6 @@ public class TimePickerFragment extends DialogFragment {
     }
 
     public void setTime (int hour, int minute){
-        date.set(hour, minute);
+       // date.set(hour, minute);
     }
 }

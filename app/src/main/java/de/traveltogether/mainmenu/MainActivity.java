@@ -244,8 +244,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("startDateLog","statsitcLog2: " + statistic.getGroup());
         Log.d("startDateLog","statsitcLog3: " + statistic.getPersonal());
 
-        long timeoutGroup = Math.round(statistic.getGroup() * 2000) ;
-        long timeoutPersonal = Math.round(statistic.getPersonal() * 2000);
+        long timeoutGroup = Math.round(statistic.getGroup() * 2100) ;
+        long timeoutPersonal = Math.round(statistic.getPersonal() * 2100);
 
         Log.d("startDateLog","statsitcLog4: " + timeoutGroup);
 
@@ -361,7 +361,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);
             startActivity(intent);
-            finish();
         }
         else if(v.getId()==R.id.main_menu_tasks){
             Intent intent = new Intent(this, TaskListActivity.class);

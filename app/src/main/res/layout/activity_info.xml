@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text=""
         android:textSize="21dp"
         android:id="@+id/activity_info_title"
         android:layout_alignParentTop="true"
@@ -36,7 +36,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text=""
         android:id="@+id/activity_info_destination"
         android:layout_below="@+id/activity_info_title"
         android:layout_alignParentStart="true" />
@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Start"
+                android:text=""
                 android:textColor="@color/color37a9e3"
                 android:id="@+id/activity_info_start_label"
                 android:layout_alignParentStart="true" />
@@ -63,7 +63,7 @@
                 android:paddingLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
+                android:text=""
                 android:id="@+id/activity_info_startdate" />
 
         </LinearLayout>
@@ -77,7 +77,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ende"
+                android:text=""
                 android:textColor="@color/color37a9e3"
                 android:id="@+id/activity_info_end_label"
                 android:layout_alignParentStart="true" />
@@ -85,7 +85,7 @@
                 android:paddingLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
+                android:text=""
                 android:id="@+id/activity_info_enddate" />
 
         </LinearLayout>
@@ -95,7 +95,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text=""
         android:layout_marginTop="8dp"
         android:id="@+id/activity_info_description"
         android:layout_below="@+id/activity_info_startdate"
@@ -115,7 +115,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mitreisende"
+            android:text=""
             android:paddingLeft="16dp"
             android:layout_gravity="center_vertical"
             android:textColor="#37a9e3"
@@ -146,7 +146,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Eingeladen"
+            android:text=""
             android:paddingLeft="16dp"
             android:layout_gravity="center_vertical"
             android:textColor="#37a9e3"
@@ -176,7 +176,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ausgetreten"
+            android:text=""
             android:paddingLeft="16dp"
             android:layout_gravity="center_vertical"
             android:textColor="#37a9e3"

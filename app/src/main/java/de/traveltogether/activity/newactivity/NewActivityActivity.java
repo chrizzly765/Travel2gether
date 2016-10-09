@@ -394,7 +394,23 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
         if(clickedTimePickerBtn.getId() == R.id.button_timepicker){
-            time.setText(Integer.toString(hour) + ":" + Integer.toString(minute));
+            String stringHour = "";
+            String stringMinute = "";
+            if (hour < 10) {
+                stringHour = "0" + Integer.toString(hour);
+            }
+            else {
+                stringHour = Integer.toString(hour);
+            }
+            if (minute < 10) {
+                 stringMinute = "0" + Integer.toString(minute);
+            }
+            else {
+                stringMinute = Integer.toString(minute);
+            }
+
+            time.setText(stringHour + ":" + stringMinute);
+            Log.d("TimeTest", "Test: "  + hour + " " +  minute);
             timePicker.setTime(hour, minute);
         }
     }

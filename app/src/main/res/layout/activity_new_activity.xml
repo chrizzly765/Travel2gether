@@ -69,6 +69,11 @@
             android:ems="10"
             android:id="@+id/newActivity_startDate"
             android:enabled="true"
+            android:editable="false"
+            android:focusableInTouchMode="false"
+            android:focusable="false"
+            android:clickable="false"
+            android:cursorVisible="false"
             android:hint="Startdatum"
             android:layout_below="@+id/newActivity_description"
             android:layout_alignParentStart="true"
@@ -91,6 +96,11 @@
             android:layout_height="wrap_content"
             android:inputType="date"
             android:ems="10"
+            android:editable="false"
+            android:focusableInTouchMode="false"
+            android:focusable="false"
+            android:clickable="false"
+            android:cursorVisible="false"
             android:id="@+id/newActivity_time"
             android:layout_alignParentStart="true"
             android:hint="Uhrzeit"
@@ -248,30 +258,6 @@
             android:src="@mipmap/bus"
             android:contentDescription="@android:string/yes"
             android:clickable="false" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ABBRECHEN"
-            android:id="@+id/newActivity_button_cancel"
-            android:layout_below="@+id/newTrip_place"
-            android:layout_alignParentStart="true"
-            android:layout_weight="1" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SPEICHERN"
-            android:id="@+id/newActivity_button_save"
-            android:layout_alignBottom="@+id/newTrip_button_cancel"
-            android:layout_alignParentEnd="true"
-            android:layout_weight="1" />
     </LinearLayout>
 
 </LinearLayout>
