@@ -16,7 +16,7 @@
         android:id="@+id/detailActivity_title"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:text="Titel"
+        android:text=""
         android:textSize="21dp"
         android:layout_alignParentEnd="true"
         android:clickable = "false"
@@ -33,7 +33,7 @@
             android:id="@+id/detailActivity_date"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:text="Datum"
+            android:text=""
             android:layout_alignParentEnd="true"
             android:clickable="false"
             android:layout_marginRight="10dp" />
@@ -44,7 +44,7 @@
             android:id="@+id/detailActivity_time"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:text="Uhrzeit"
+            android:text=""
             android:layout_alignParentEnd="true"
             android:clickable="false" />
     </LinearLayout>
@@ -55,7 +55,7 @@
         android:id="@+id/detailActivity_description"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:text="Beschreibung"
+        android:text=""
         android:layout_alignParentEnd="true"
         android:clickable="false"
         android:layout_marginTop="10dp"
@@ -79,7 +79,7 @@
             android:id="@+id/detailActivity_place"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:text="Ort"
+            android:text=""
             android:textSize="21dp"
             android:layout_alignParentEnd="true"
             android:clickable="false" />

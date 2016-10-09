@@ -48,6 +48,8 @@ public class DetailActivityActivity extends AppCompatActivity  {
     TextView date;
     TextView time;
     TextView place;
+    ProgressDialog progressDialog;
+
 
     Activity detailActivity;
 
@@ -61,6 +63,7 @@ public class DetailActivityActivity extends AppCompatActivity  {
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
+
         if(featureId!=-1){
             presenter.onGetDetailsForActivity(featureId);
         }
@@ -69,9 +72,12 @@ public class DetailActivityActivity extends AppCompatActivity  {
         date = (TextView) findViewById(R.id.detailActivity_date);
         time = (TextView)findViewById(R.id.detailActivity_time);
         place = (TextView)findViewById(R.id.detailActivity_place);
+        progressDialog = ProgressDialog.show(this, "",
+                "Bitte warten...", true);
     }
 
     public void onViewError(String message){
+        progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));
@@ -82,10 +88,12 @@ public class DetailActivityActivity extends AppCompatActivity  {
         });
 
         AlertDialog dialog = builder.create();
-        dialog.show();
+        dialog.cancel();
+        tripId=detailActivity.getTripId();
     }
 
     public void onViewDetails(Activity _activity){
+        progressDialog.cancel();
         detailActivity = _activity;
         getSupportActionBar().setTitle(detailActivity.getTitle());
         title.setText(detailActivity.getTitle());
@@ -117,7 +125,7 @@ public class DetailActivityActivity extends AppCompatActivity  {
                 }
                 break;
             case R.id.edit:
-                Intent intent = new Intent(this, NewActivityActivity.class);
+                Intent intent = new Intent(this,NewActivityActivity.class);
                 Bundle b = new Bundle();
                 b.putLong("featureId", featureId);
                 b.putLong("tripId", tripId);

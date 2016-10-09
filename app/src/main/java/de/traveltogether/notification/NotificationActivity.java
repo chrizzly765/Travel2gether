@@ -3,6 +3,7 @@ package de.traveltogether.notification;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,8 @@ public class NotificationActivity extends AppCompatActivity {
 
     INotificationPresenter presenter;
     Notification[] notifications;
+    ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +35,12 @@ public class NotificationActivity extends AppCompatActivity {
         presenter= new NotificationPresenter(this);
         setContentView(R.layout.activity_notification);
         presenter.onGetNotificationList();
+        progressDialog = ProgressDialog.show(this, "",
+                "Benachrichtigungen werden geladen...", true);
     }
 
     void onViewNotificationList(Notification[] _notifications){
+        progressDialog.cancel();
         this.notifications = _notifications;
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -45,6 +51,7 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     void onViewErrorMessage(String message){
+        progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));

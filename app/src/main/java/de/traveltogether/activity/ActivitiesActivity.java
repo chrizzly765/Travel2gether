@@ -3,6 +3,7 @@ package de.traveltogether.activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +32,7 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
     Activity[] formerActivities;
     ActivityFragment fragment;
     public long tripId;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,9 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
 
         ImageButton newTripBtn = (ImageButton) findViewById(R.id.fab_button);
         newTripBtn.setOnClickListener(this);
+
+        progressDialog = ProgressDialog.show(this, "",
+                "Aktivitäten werden geladen...", true);
 
         presenter = new ActivityPresenter(this);
         presenter.onGetFormerActivities(tripId);
@@ -105,6 +110,7 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
 
 */
     public void onViewError(String message) {
+        progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));
@@ -131,6 +137,7 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
         ActivityFragment fragment = ActivityFragment.newInstance(activities, presenter, tripId);
         fragmentTransaction.add(R.id.fragment_activity_list_container, fragment);
         fragmentTransaction.commit();
+        progressDialog.cancel();
 
     }
 

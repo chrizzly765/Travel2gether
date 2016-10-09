@@ -78,11 +78,10 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
 
         presenter= new NewExpensePresenter(this);
         if(tripId!=-1) {
-            presenter.onGetParticipantsForTrip(tripId);
+            //presenter.onGetParticipantsForTrip(tripId);
         }
-        else{
-            onViewParticipants(StaticTripData.getActiveParticipants());
-        }
+        onViewParticipants(StaticTripData.getActiveParticipants());
+
 
         currencySpinner = (Spinner) findViewById(R.id.spinner_currency);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -129,6 +128,9 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                 if(title.getText().toString()=="" || amount.getText().toString()==""){
                     onViewError("Bitte gib die Daten vollständig an");
                     return false;
+                }
+                if(chosenParticipants.size()<1){
+                    chosenParticipants.add(new Payer(currentPayerId));
                 }
                 if(featureId!=-1){
                     expense.setTitle(title.getText().toString());

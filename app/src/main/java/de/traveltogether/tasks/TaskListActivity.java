@@ -111,7 +111,8 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.commit();
         }
         else {
-            onEmpty(R.id.activity_task_list_empty_open);
+            findViewById(R.id.activity_task_list_empty_open).setVisibility(View.VISIBLE);
+            onEmpty(R.id.activity_task_list_empty_txt_open);
         }
 
         if(taskListProgress.size() > 0) {
@@ -123,7 +124,8 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.commit();
         }
         else {
-            onEmpty(R.id.activity_task_list_empty_progress);
+            findViewById(R.id.activity_task_list_empty_progress).setVisibility(View.VISIBLE);
+            onEmpty(R.id.activity_task_list_empty_txt_progress);
         }
 
         if(taskListDone.size() > 0) {
@@ -135,13 +137,13 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.commit();
         }
         else {
+            findViewById(R.id.activity_task_list_empty_done).setVisibility(View.VISIBLE);
             onEmpty(R.id.activity_task_list_empty_txt_done);
         }
         progressDialog.cancel();
     }
 
     public void onEmpty(int id) {
-        findViewById(R.id.activity_task_list_empty_done).setVisibility(View.VISIBLE);
         TextView txt = (TextView)findViewById(id);
         txt.setText(R.string.no_entries);
         txt.setHeight(20);

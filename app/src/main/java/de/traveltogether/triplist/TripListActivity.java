@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -144,8 +145,6 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         //Fragment in Activity einbetten
         if(upcomingTrips.size()>0) {
             if(fragmentUpcoming==null) {
-                LinearLayout devider = (LinearLayout) findViewById(R.id.activity_trip_list_devider_upcoming);
-                devider.setVisibility(View.VISIBLE);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Trip[] arr = new Trip[upcomingTrips.size()];
@@ -161,10 +160,16 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
                 fragmentUpcoming.refresh(upcomingTrips.toArray(array));
             }
         }
+        else{
+            findViewById(R.id.activity_trip_list_upcoming_empty).setVisibility(View.VISIBLE);
+            RelativeLayout devider = (RelativeLayout)findViewById(R.id.activity_trip_list_devider_former);
+
+            RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)devider.getLayoutParams();
+            lp.addRule(RelativeLayout.BELOW, R.id.activity_trip_list_upcoming_empty);
+            devider.setLayoutParams(lp);
+        }
         if(formerTrips.size()>0) {
             if(fragmentFormer==null) {
-                LinearLayout devider = (LinearLayout) findViewById(R.id.activity_trip_list_devider_former);
-                devider.setVisibility(View.VISIBLE);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Trip[] arr = new Trip[formerTrips.size()];

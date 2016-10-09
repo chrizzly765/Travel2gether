@@ -21,8 +21,10 @@ import android.widget.Toast;
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.datepicker.DatePickerFragment;
+import de.traveltogether.info.InfoActivity;
 import de.traveltogether.invitation.InvitationActivity;
 import de.traveltogether.model.Trip;
+import de.traveltogether.triplist.TripListActivity;
 
 public class NewTripActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
     INewTripPresenter presenter;
@@ -173,6 +175,26 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void onSuccessUpdateTrip(String message){
+        Intent intent = new Intent(this, InfoActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(tripId!=-1){
+            Intent intent = new Intent(this, InfoActivity.class);
+            intent.putExtra("tripId", tripId);
+            startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(this, TripListActivity.class);
+            intent.putExtra("tripId", tripId);
+            startActivity(intent);
+        }
+        finish();
+
+
     }
 }

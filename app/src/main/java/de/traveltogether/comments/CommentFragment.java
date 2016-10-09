@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import de.traveltogether.R;
@@ -50,6 +52,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
     }
 
     public void onViewComments(Comment[] _comments){
+
         comments = _comments;
 
         //Fragment in Activity einbetten
@@ -65,7 +68,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_comment, container, false);
         inputField = (EditText)view.findViewById(R.id.fragment_comment_editText);
-        Button send = (Button)view.findViewById(R.id.fragment_comment_button_send);
+        ImageButton send = (ImageButton)view.findViewById(R.id.fragment_comment_button_send);
         send.setOnClickListener(this);
         return view;
     }
