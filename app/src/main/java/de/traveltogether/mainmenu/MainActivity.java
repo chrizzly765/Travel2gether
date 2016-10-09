@@ -23,6 +23,7 @@ import android.os.Handler;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.activity.ActivitiesActivity;
 import de.traveltogether.chat.ChatActivity;
 import de.traveltogether.date.DateFormat;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setActionBar(title);
         }
 
-
+        StaticTripData.setCurrentTripId(tripId);
         groupAnimationContainer = (ImageView) findViewById(R.id.main_menu_group_animation);
         groupAnimationContainer.setBackgroundResource(R.drawable.group_animation);
         groupStatisticAnimation = (AnimationDrawable) groupAnimationContainer.getBackground();
@@ -159,7 +160,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dialog.show();
                 return true;
             case R.id.change_admin:
-                //TODO: get participants, choose one of them
                 return true;
             case R.id.leave_trip:
                 AlertDialog.Builder adBuilder = new AlertDialog.Builder(this);
@@ -334,6 +334,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);
             startActivity(intent);
+            finish();
         }
         else if(v.getId()==R.id.main_menu_expences){
             Intent intent = new Intent(this, ExpenseActivity.class);
@@ -341,6 +342,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);
             startActivity(intent);
+            finish();
         }
         else if(v.getId()==R.id.main_menu_activities){
             Intent intent = new Intent(this, ActivitiesActivity.class);
@@ -348,6 +350,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);
             startActivity(intent);
+            finish();
         }
         else if(v.getId()==R.id.main_menu_chat){
             Intent intent = new Intent(this, ChatActivity.class);
@@ -355,6 +358,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);
             startActivity(intent);
+            finish();
         }
         else if(v.getId()==R.id.main_menu_tasks){
             Intent intent = new Intent(this, TaskListActivity.class);
@@ -362,6 +366,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);
             startActivity(intent);
+            finish();
         }
         else if(v.getId()==R.id.main_menu_packing){
             Intent intent = new Intent(this, PackingListActivity.class);
@@ -369,31 +374,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);
             startActivity(intent);
+            finish();
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.optionsmenu_detail, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.delete:
-                //TODO: DELETE
-                break;
-            case R.id.edit:
-                //Intent intent = new Intent(this, NewTripActivity.class);
-                //intent.putExtra("tripId", tripId);
-                //startActivity(intent);
-                break;
-            default:
-                super.onOptionsItemSelected(item);
-                break;
-        }
-        return  true;
+    public void onBackPressed() {
+        Intent intent = new Intent(this, TripListActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -14,6 +14,7 @@ import android.content.Context;
 import de.traveltogether.R;
 
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.model.PackingObject;
 
 
@@ -97,37 +98,37 @@ public class PackingAdapter extends BaseAdapter {
                        holder.icon1.findViewById(R.id.fragment_packing_list_item_icon_dots_1).setVisibility(View.VISIBLE);
                    }else {
                        ((TextView)holder.icon1.findViewById(R.id.fragment_packing_list_item_icon_initial_1))
-                               .setText(StaticData.getNameById(packingobject.getPersonsAssigned()[i]).substring(0,1));
+                               .setText(StaticTripData.getNameById(packingobject.getPersonsAssigned()[i]).substring(0,1));
                        ((ImageView) holder.icon1.findViewById(R.id.fragment_packing_list_item_icon_circle_1))
                                .setBackgroundResource(
-                                       StaticData.getIdForColor(StaticData.getColorById(packingobject.getPersonsAssigned()[i])
+                                       StaticData.getIdForColor(StaticTripData.getColorById(packingobject.getPersonsAssigned()[i])
                                        ));
                    }
                }else if(i==1){
                    holder.icon2.setVisibility(View.VISIBLE);
                    ((TextView)holder.icon2.findViewById(R.id.fragment_packing_list_item_icon_initial_2))
-                           .setText(StaticData.getNameById(packingobject.getPersonsAssigned()[i]).substring(0,1));
+                           .setText(StaticTripData.getNameById(packingobject.getPersonsAssigned()[i]).substring(0,1));
                    ((ImageView) holder.icon2.findViewById(R.id.fragment_packing_list_item_icon_circle_2))
                            .setBackgroundResource(
-                                   StaticData.getIdForColor(StaticData.getColorById(packingobject.getPersonsAssigned()[i])
+                                   StaticData.getIdForColor(StaticTripData.getColorById(packingobject.getPersonsAssigned()[i])
                                    ));
                }
                else if(i==2){
                    holder.icon3.setVisibility(View.VISIBLE);
                    ((TextView)holder.icon3.findViewById(R.id.fragment_packing_list_item_icon_initial_3))
-                           .setText(StaticData.getNameById(packingobject.getPersonsAssigned()[i]).substring(0,1));
+                           .setText(StaticTripData.getNameById(packingobject.getPersonsAssigned()[i]).substring(0,1));
                    ((ImageView) holder.icon3.findViewById(R.id.fragment_packing_list_item_icon_circle_3))
                            .setBackgroundResource(
-                                   StaticData.getIdForColor(StaticData.getColorById(packingobject.getPersonsAssigned()[i])
+                                   StaticData.getIdForColor(StaticTripData.getColorById(packingobject.getPersonsAssigned()[i])
                                    ));
                }
                else if(i==3){
                    holder.icon3.setVisibility(View.VISIBLE);
                    ((TextView)holder.icon3.findViewById(R.id.fragment_packing_list_item_icon_initial_3))
-                           .setText(StaticData.getNameById(packingobject.getPersonsAssigned()[i]).substring(0,1));
+                           .setText(StaticTripData.getNameById(packingobject.getPersonsAssigned()[i]).substring(0,1));
                    ((ImageView) holder.icon3.findViewById(R.id.fragment_packing_list_item_icon_circle_3))
                            .setBackgroundResource(
-                                   StaticData.getIdForColor(StaticData.getColorById(packingobject.getPersonsAssigned()[i])
+                                   StaticData.getIdForColor(StaticTripData.getColorById(packingobject.getPersonsAssigned()[i])
                                    ));
                }
            }

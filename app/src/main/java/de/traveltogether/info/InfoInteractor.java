@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Response;
 import de.traveltogether.model.Trip;
@@ -69,7 +70,7 @@ public class InfoInteractor implements IInfoInteractor{
                 listener.onSuccessGetDetail((Trip)JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP));
             } else if (actionType == ActionType.GETPARTICIPANTS) {
                 Participant[] participants = ((ParticipantList)JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
-                StaticData.setParticipants(participants);
+                StaticTripData.setParticipants(participants);
                 listener.onSuccessGetParticipants(participants);
             }
             else if(actionType==ActionType.DELETE){

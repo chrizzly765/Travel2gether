@@ -26,7 +26,9 @@ import java.util.List;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.invitation.InvitationActivity;
+import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Trip;
 import de.traveltogether.triplist.TripListFragment;
@@ -70,7 +72,6 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
 
         AlertDialog dialog = builder.create();
         dialog.show();
-        finish();
     }
 
     public void onViewDetail(Trip _trip){
@@ -84,9 +85,9 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onViewParticipants(Participant[] participants){
 
-        Participant[] activeParts = StaticData.getActiveParticipants();
-        Participant[] invitedParts = StaticData.getInvitedParticipants();
-        Participant[] resignedParts = StaticData.getResignedParticipants();
+        Participant[] activeParts = StaticTripData.getActiveParticipants();
+        Participant[] invitedParts = StaticTripData.getInvitedParticipants();
+        Participant[] resignedParts = StaticTripData.getResignedParticipants();
 
         RelativeLayout add = (RelativeLayout)findViewById(R.id.activity_info_button_add);
         if(activeParts.length>0) {
@@ -103,7 +104,9 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
             add.setLayoutParams(lp);
         }
         else{
-            findViewById(R.id.activity_info_devider_active).setVisibility(View.GONE);
+            ((LinearLayout)findViewById(R.id.activity_info_devider_active)).removeView(findViewById(R.id.activity_info_devider_active));
+
+            //findViewById(R.id.activity_info_devider_active).setVisibility(View.GONE);
         }
         if(invitedParts.length>0) {
             findViewById(R.id.activity_info_devider_invited).setVisibility(View.VISIBLE);
@@ -119,7 +122,9 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
             add.setLayoutParams(lp);
         }
         else{
-            findViewById(R.id.activity_info_devider_invited).setVisibility(View.GONE);
+            ((LinearLayout)findViewById(R.id.activity_info_devider_invited)).removeView(findViewById(R.id.activity_info_devider_invited));
+
+            //findViewById(R.id.activity_info_devider_invited).setVisibility(View.GONE);
         }
         if(resignedParts.length>0) {
             findViewById(R.id.activity_info_devider_resigned).setVisibility(View.VISIBLE);
@@ -136,7 +141,9 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         else{
-            findViewById(R.id.activity_info_devider_resigned).setVisibility(View.GONE);
+            ((LinearLayout)findViewById(R.id.activity_info_devider_resigned)).removeView(findViewById(R.id.activity_info_devider_resigned));
+
+            //findViewById(R.id.activity_info_devider_resigned).setVisibility(View.GONE);
         }
 
     }
@@ -149,6 +156,7 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         bundle.putString("formerActivity", "info");
         intent.putExtras(bundle);
         startActivity(intent);
+        finish();
     }
 
 
@@ -180,6 +188,7 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(this, NewTripActivity.class);
                 intent.putExtra("tripId", tripId);
                 startActivity(intent);
+                finish();
                 break;
             default:
                 super.onOptionsItemSelected(item);
@@ -194,6 +203,14 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
         finish();
     }
 }

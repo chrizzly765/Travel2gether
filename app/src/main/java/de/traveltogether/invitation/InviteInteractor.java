@@ -23,11 +23,12 @@ public class InviteInteractor implements IInviteInteractor {
     IInvitePresenter listener;
 
     @Override
-    public void getFormerParticipants(IInvitePresenter _listener) {
+    public void getFormerParticipants(long tripId, IInvitePresenter _listener) {
         listener = _listener;
         JSONObject obj = new JSONObject();
         try {
             obj.put("personId", StaticData.getUserId());
+            obj.put("tripId", tripId);
         } catch (Exception e) {
 
         }

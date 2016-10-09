@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import de.traveltogether.R;
+import de.traveltogether.StaticTripData;
+import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.PackingObject;
 
 import android.app.ProgressDialog;
@@ -45,6 +47,9 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_packing_list);
         tripId = getIntent().getLongExtra("tripId", -1);
+        if(tripId!=-1){
+            StaticTripData.setCurrentTripId(tripId);
+        }
         getSupportActionBar().setTitle("Packliste");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
@@ -82,6 +87,7 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
             Intent set = new Intent(this, NewPackingItemActivity.class);
             set.putExtra("tripId", tripId);
             startActivity(set);
+            finish();
         }
     }
 
@@ -100,5 +106,12 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
         dialog.show();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
+        finish();
+    }
 
 }

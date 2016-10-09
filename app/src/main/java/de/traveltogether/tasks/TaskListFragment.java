@@ -69,6 +69,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
         b.putLong("tripId", tasks[position].getTripId());
         detail.putExtras(b); //Put your id to your next Intent
         startActivity(detail);
+        getActivity().finish();
     }
 
 }

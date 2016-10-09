@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.model.Comment;
 
 /**
@@ -68,8 +69,8 @@ public class CommentAdapter extends BaseAdapter {
         Log.d("holder", holder.toString());
         Context context = parent.getContext();
         Comment comment = (Comment)getItem(position);
-        if(StaticData.getNameById((int)comment.getId())!=null){
-            holder.name.setText(StaticData.getNameById((int)comment.getId()));
+        if(StaticTripData.getNameById((int)comment.getId())!=null){
+            holder.name.setText(StaticTripData.getNameById((int)comment.getId()));
         }
         else{
             //TODO: Problem!!
@@ -77,9 +78,9 @@ public class CommentAdapter extends BaseAdapter {
         holder.date.setText(comment.getDate());
         holder.content.setText(comment.getText());
         ((ImageView)holder.icon.findViewById(R.id.fragment_commentlist_list_item_icon_circle))
-                .setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById((int)comment.getId())));
+                .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById((int)comment.getId())));
         ((TextView)holder.icon.findViewById(R.id.fragment_commentlist_list_item_icon_initial))
-                .setText(StaticData.getNameById((int)comment.getId()).substring(0,1));
+                .setText(StaticTripData.getNameById((int)comment.getId()).substring(0,1));
         return convertView;
     }
 

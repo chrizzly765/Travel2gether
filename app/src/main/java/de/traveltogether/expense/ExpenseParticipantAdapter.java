@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
 
@@ -73,7 +74,7 @@ public class ExpenseParticipantAdapter extends BaseAdapter {
             holder.amount.setTextColor(Color.RED);
         }
         holder.amount.setText(amount);
-        holder.dot.setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(participant.getPersonId())));
+        holder.dot.setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(participant.getPersonId())));
 
         return convertView;
     }

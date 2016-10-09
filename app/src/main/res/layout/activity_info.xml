@@ -196,13 +196,13 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_below="@+id/activity_info_fragment_container_resigned"
-        android:id="@+id/activity_info_button_add"
         android:layout_height="wrap_content">
     <ImageButton
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:id="@+id/activity_info_button_add"
         android:background="@drawable/circle_light_grey"
         android:src="@mipmap/ic_add" />
     </RelativeLayout>

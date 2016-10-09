@@ -18,7 +18,9 @@ import android.widget.ImageButton;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.activity.newactivity.NewActivityActivity;
+import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Trip;
 import de.traveltogether.model.Activity;
 import de.traveltogether.settings.SettingsActivity;
@@ -37,7 +39,10 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
         Bundle b = getIntent().getExtras();
         tripId = -1; // or other values
         if (b != null) {
-            tripId = b.getLong("tripId");
+            tripId = b.getLong("tripId", -1);
+        }
+        if(tripId!=-1){
+            StaticTripData.setCurrentTripId(tripId);
         }
 
         setContentView(R.layout.activity_activities);
@@ -69,6 +74,7 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
             bundle.putLong("tripId", tripId);
             set.putExtras(bundle);
             startActivity(set);
+            finish();
         }
     }
 
@@ -127,5 +133,13 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
         fragmentTransaction.add(R.id.fragment_activity_list_container, fragment);
         fragmentTransaction.commit();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
+        finish();
     }
 }

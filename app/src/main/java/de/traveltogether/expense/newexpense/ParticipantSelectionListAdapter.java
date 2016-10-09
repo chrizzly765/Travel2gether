@@ -17,6 +17,7 @@ import java.util.Currency;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Payer;
 
@@ -77,8 +78,8 @@ public class ParticipantSelectionListAdapter extends BaseAdapter {
 
         Context context = parent.getContext();
         Payer payer = (Payer) getItem(position);
-        holder.name.setText(StaticData.getNameById(payer.getId()));
-        holder.initial.setText(StaticData.getNameById(payer.getId()).substring(0,1));
+        holder.name.setText(StaticTripData.getNameById(payer.getId()));
+        holder.initial.setText(StaticTripData.getNameById(payer.getId()).substring(0,1));
         //holder.icon.setImageDrawable(trip.getStartDate()); // TODO: set color!
         DecimalFormat df = new DecimalFormat("#0.00");
         //holder.amount.setText(String.valueOf(df.format(payer.getAmount()))); //TODO: set amount

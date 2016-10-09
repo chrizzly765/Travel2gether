@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import de.traveltogether.StaticData;
 import de.traveltogether.model.Notification;
 import de.traveltogether.model.Response;
 import de.traveltogether.servercommunication.HttpRequest;
+import de.traveltogether.triplist.TripListActivity;
 
 public class NotificationActivity extends AppCompatActivity {
 
@@ -54,6 +56,13 @@ public class NotificationActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, TripListActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

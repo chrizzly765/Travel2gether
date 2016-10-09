@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.model.PackingItem;
 
 import java.text.DecimalFormat;
@@ -73,9 +74,9 @@ public class PackingItemSelectionAdapter extends BaseAdapter {
 
         Context context = parent.getContext();
         PackingItem packingItem = (PackingItem) getItem(position);
-        holder.name.setText(StaticData.getNameById(packingItem.getAssignedPerson()));
-        holder.initial.setText(StaticData.getNameById(packingItem.getAssignedPerson()).substring(0,1));
-        holder.icon.setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(packingItem.getAssignedPerson()))); // TODO: set color!
+        holder.name.setText(StaticTripData.getNameById(packingItem.getAssignedPerson()));
+        holder.initial.setText(StaticTripData.getNameById(packingItem.getAssignedPerson()).substring(0,1));
+        holder.icon.setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(packingItem.getAssignedPerson()))); // TODO: set color!
         DecimalFormat df = new DecimalFormat("#0.00");
         //holder.amount.setText(String.valueOf(df.format(payer.getAmount()))); //TODO: set amount
         return convertView;

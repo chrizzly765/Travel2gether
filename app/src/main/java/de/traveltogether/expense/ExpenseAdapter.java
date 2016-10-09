@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Payer;
 
@@ -73,11 +74,11 @@ public class ExpenseAdapter extends BaseAdapter {
 
             holder.iconLast.setVisibility(View.VISIBLE);
             ((TextView) holder.iconLast.findViewById(R.id.fragment_expense_list_item_icon_initial_last))
-                    .setText(StaticData.getNameById(expense.getPayer()).substring(0, 1));
+                    .setText(StaticTripData.getNameById(expense.getPayer()).substring(0, 1));
             ((ImageView) holder.iconLast.findViewById(R.id.fragment_expense_list_item_icon_circle_last))
-                    .setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(expense.getPayer())));
+                    .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(expense.getPayer())));
             ((ImageView)holder.iconLast.findViewById(R.id.fragment_expense_list_item_payer_icon_circle_last))
-                    .setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(expense.getPayer())));
+                    .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(expense.getPayer())));
             ((FrameLayout)holder.iconLast.findViewById(R.id.fragment_expense_list_item_payer_icon_last))
                         .setVisibility(View.VISIBLE);
 
@@ -94,24 +95,24 @@ public class ExpenseAdapter extends BaseAdapter {
                     }
                     else {
                         holder.icon1.setVisibility(View.VISIBLE);
-                        ((TextView) holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_initial_1)).setText(StaticData.getNameById(payers.get(i).getId()).substring(0, 1));
-                        ((ImageView) holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_circle_1)).setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(payers.get(i).getId())));
+                        ((TextView) holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_initial_1)).setText(StaticTripData.getNameById(payers.get(i).getId()).substring(0, 1));
+                        ((ImageView) holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_circle_1)).setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(payers.get(i).getId())));
                     }
                 }
                 else if(i==1){
                     holder.icon2.setVisibility(View.VISIBLE);
                     ((TextView)holder.icon2.findViewById(R.id.fragment_expense_list_item_icon_initial_2))
-                            .setText(StaticData.getNameById(payers.get(i).getId()).substring(0,1));
+                            .setText(StaticTripData.getNameById(payers.get(i).getId()).substring(0,1));
                     ((ImageView)holder.icon2.findViewById(R.id.fragment_expense_list_item_icon_circle_2))
-                            .setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(payers.get(i).getId())));
+                            .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(payers.get(i).getId())));
 
 
                 }else if(i==2){
                     holder.icon3.setVisibility(View.VISIBLE);
                         ((TextView)holder.icon3.findViewById(R.id.fragment_expense_list_item_icon_initial_3))
-                                .setText(StaticData.getNameById(payers.get(i).getId()).substring(0,1));
+                                .setText(StaticTripData.getNameById(payers.get(i).getId()).substring(0,1));
                         ((ImageView)holder.icon3.findViewById(R.id.fragment_expense_list_item_icon_circle_3))
-                                .setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(payers.get(i).getId())));
+                                .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(payers.get(i).getId())));
 
 
                     }

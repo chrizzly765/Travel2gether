@@ -79,7 +79,7 @@ public class NotificationAdapter extends BaseAdapter {
             holder.icon.setBackgroundResource(R.drawable.circle1ddbc8);
         }
         else if(not.getType().equals(DataType.CHAT.toString())){
-            holder.icon.setImageResource(R.drawable.ic_check);
+            holder.icon.setImageResource(R.drawable.ic_chat);
             holder.icon.setBackgroundResource(R.drawable.circle37a9e3);
         }
         else if (not.getType().equals(DataType.PACKINGOBJECT.toString())){
@@ -108,7 +108,7 @@ public class NotificationAdapter extends BaseAdapter {
 
         }
 
-        if(not.getOpened()==true) {
+        if(not.getOpened()==true || not.getType().equals(DataType.INVITATION.toString())) {
             convertView.setBackgroundResource(R.drawable.rectangle);
         }
         else{

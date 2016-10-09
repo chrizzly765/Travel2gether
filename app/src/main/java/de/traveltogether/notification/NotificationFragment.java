@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 
 import de.traveltogether.DataType;
 import de.traveltogether.R;
+import de.traveltogether.activity.detailactivity.DetailActivityActivity;
 import de.traveltogether.chat.ChatActivity;
 import de.traveltogether.expense.detailexpense.ExpenseDetailActivity;
 import de.traveltogether.info.InfoActivity;
@@ -21,6 +22,7 @@ import de.traveltogether.model.Notification;
 import de.traveltogether.model.Trip;
 import de.traveltogether.notification.NotificationAdapter;
 import de.traveltogether.packinglist.packingdetail.PackingDetailActivity;
+import de.traveltogether.tasks.detail.TaskDetailActivity;
 
 /**
  * A fragment representing a list of Items.
@@ -92,31 +94,37 @@ public class NotificationFragment extends ListFragment implements AdapterView.On
             Intent intent = new Intent(activity, InfoActivity.class);
             intent.putExtra("tripId", n.getFeatureOrTripId());
             startActivity(intent);
+            getActivity().finish();
         }
         else if(n.getType().equals(DataType.EXPENSE.toString())){
             Intent intent = new Intent(activity, ExpenseDetailActivity.class);
             intent.putExtra("featureId", n.getFeatureOrTripId());
             startActivity(intent);
+            getActivity().finish();
         }
         else if (n.getType().equals(DataType.ACTIVITY.toString())){
-            //Intent intent = new Intent(activity, ActivityDetailActivity.class);
-            //intent.putExtra("featureId", n.getFeatureOrTripId());
-            //startActivity(intent);
+            Intent intent = new Intent(activity, DetailActivityActivity.class);
+            intent.putExtra("featureId", n.getFeatureOrTripId());
+            startActivity(intent);
+            getActivity().finish();
         }
         else if(n.getType().equals(DataType.TASK.toString())){
-            //Intent intent = new Intent(activity, TaskDetailActivity.class);
-            //intent.putExtra("featureId", n.getFeatureOrTripId());
-            //startActivity(intent);
+            Intent intent = new Intent(activity, TaskDetailActivity.class);
+            intent.putExtra("featureId", n.getFeatureOrTripId());
+            startActivity(intent);
+            getActivity().finish();
         }
         else if(n.getType().equals(DataType.CHAT.toString())){
             Intent intent = new Intent(activity, ChatActivity.class);
             intent.putExtra("tripId", n.getFeatureOrTripId());
             startActivity(intent);
+            getActivity().finish();
         }
         else if(n.getType().equals(DataType.PACKINGOBJECT.toString())){
             Intent intent = new Intent(activity, PackingDetailActivity.class);
             intent.putExtra("featureId", n.getFeatureOrTripId());
             startActivity(intent);
+            getActivity().finish();
         }
 
     }

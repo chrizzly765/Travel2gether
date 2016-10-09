@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import de.traveltogether.R;
 import de.traveltogether.login.LoginActivity;
+import de.traveltogether.triplist.TripListActivity;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -34,5 +35,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             startActivity(login);
             finish();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, TripListActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

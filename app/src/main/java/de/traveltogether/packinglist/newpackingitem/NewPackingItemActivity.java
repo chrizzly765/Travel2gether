@@ -26,9 +26,12 @@ import java.util.ArrayList;
 
 import de.traveltogether.StaticData;
 import de.traveltogether.R;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.model.PackingItem;
 import de.traveltogether.model.PackingObject;
 import de.traveltogether.model.Participant;
+import de.traveltogether.packinglist.PackingListActivity;
+import de.traveltogether.packinglist.packingdetail.PackingDetailActivity;
 
 public class NewPackingItemActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -61,10 +64,10 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         description = (EditText) findViewById(R.id.activity_new_packingobject_description);
         addButton = (ImageButton)findViewById(R.id.activity_new_packingobject_button_add);
         addButton.setOnClickListener(this);
-        participants = StaticData.getActiveParticipants();
-        participantNames = new String[StaticData.getActiveParticipants().length];
-        for(int i = 0; i < StaticData.getActiveParticipants().length; i++){
-            participantNames[i] = StaticData.getActiveParticipants()[i].getUserName();
+        participants = StaticTripData.getActiveParticipants();
+        participantNames = new String[StaticTripData.getActiveParticipants().length];
+        for(int i = 0; i < StaticTripData.getActiveParticipants().length; i++){
+            participantNames[i] = StaticTripData.getActiveParticipants()[i].getUserName();
         }
 
         presenter = new NewPackingItemPresenter(this);
@@ -160,6 +163,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
 
     public void onSuccessGetDetail(PackingObject _packingObject){
         packingObject = _packingObject;
+        tripId=packingObject.getTripId();
         title.setText(packingObject.getTitle());
         number.setText(packingObject.getPackingItemsNumber());
         description.setText(packingObject.getDescription());
@@ -179,6 +183,13 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+
+        Intent intent = new Intent(this, PackingDetailActivity.class);
+        Bundle b = new Bundle();
+        b.putLong("featureId", featureId);
+        b.putLong("tripId", tripId);
+        intent.putExtras(b);
+        startActivity(intent);
         finish();
     }
 
@@ -188,6 +199,12 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+
+        Intent intent = new Intent(this, PackingListActivity.class);
+        Bundle b = new Bundle();
+        b.putLong("tripId", tripId);
+        intent.putExtras(b);
+        startActivity(intent);
         finish();
     }
 
@@ -272,6 +289,24 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         fragment.refresh(chosenParticipants);
         fragmentTransaction.attach(fragment);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(featureId!=-1){
+            Intent intent = new Intent(this, PackingDetailActivity.class);
+            Bundle b = new Bundle();
+            b.putLong("featureId", featureId);
+            b.putLong("tripId", tripId);
+            intent.putExtras(b);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(this, PackingListActivity.class);
+            intent.putExtra("tripId", tripId);
+            startActivity(intent);
+        }
+        finish();
     }
 
 }

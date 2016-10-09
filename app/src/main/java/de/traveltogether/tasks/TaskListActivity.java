@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.traveltogether.R;
+import de.traveltogether.StaticTripData;
+import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Task;
 import de.traveltogether.tasks.newtask.NewTaskActivity;
 
@@ -39,6 +41,9 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
         tripId = -1;
         if(b != null) {
             tripId = b.getLong("tripId");
+        }
+        if(tripId!=-1){
+            StaticTripData.setCurrentTripId(tripId);
         }
 
         ImageButton newTaskBtn = (ImageButton) findViewById(R.id.activity_task_list_button_add);
@@ -66,6 +71,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             Intent intent = new Intent(this, NewTaskActivity.class);
             intent.putExtra("tripId", tripId);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -139,5 +145,13 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
+        finish();
     }
 }

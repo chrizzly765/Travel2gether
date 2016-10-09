@@ -24,10 +24,12 @@ import java.util.ArrayList;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.datepicker.DatePickerFragment;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Task;
 import de.traveltogether.tasks.TaskListActivity;
+import de.traveltogether.tasks.detail.TaskDetailActivity;
 
 public class NewTaskActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener, View.OnClickListener {
 
@@ -72,7 +74,7 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
             presenter.onGetDetailsForTask(featureId);
         }
 
-        onViewParticipants(StaticData.getActiveParticipants());
+        onViewParticipants(StaticTripData.getActiveParticipants());
 
         ImageButton datePickerBtn = (ImageButton) findViewById(R.id.button_datepicker_new_task);
         datePickerBtn.setOnClickListener(this);
@@ -170,6 +172,7 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         bundle.putLong("tripId", tripId);
         intent.putExtras(bundle);
         c.startActivity(intent);
+        finish();
     }
 
     public void onViewError(String message) {
@@ -231,6 +234,7 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     public void onViewDetails(Task _task) {
 
         task = _task;
+        tripId=task.getTripId();
         title.setText(task.getTitle());
         description.setText(task.getDescription());
         date.setText(task.getDueDate());
@@ -238,7 +242,7 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         status.setSelection(task.getState()-1);
 
         // fill dropdown with participants
-        onViewParticipants(StaticData.getActiveParticipants(), task);
+        onViewParticipants(StaticTripData.getActiveParticipants(), task);
     }
 
     @Override
@@ -248,5 +252,23 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
             date.setText(dayOfMonth + "." + month+"." + year);
             datePicker.setDate(year, month, dayOfMonth+1);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(featureId!=-1){
+            Intent intent = new Intent(this, TaskDetailActivity.class);
+            Bundle b = new Bundle();
+            b.putLong("featureId", featureId);
+            b.putLong("tripId", tripId);
+            intent.putExtras(b);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(this, TaskListActivity.class);
+            intent.putExtra("tripId", tripId);
+            startActivity(intent);
+        }
+        finish();
     }
 }

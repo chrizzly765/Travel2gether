@@ -16,6 +16,7 @@ package de.traveltogether.expense.detailexpense;
 
         import de.traveltogether.R;
         import de.traveltogether.StaticData;
+        import de.traveltogether.StaticTripData;
         import de.traveltogether.model.Expense;
         import de.traveltogether.model.Payer;
 
@@ -64,14 +65,14 @@ public class ExpenseDetailAdapter extends BaseAdapter {
 
         Context context = parent.getContext();
         Payer payer = (Payer) getItem(position);
-        Log.d("payer id", String.valueOf(payer.getId()) + " " + StaticData.getNameById(payer.getId()));
-        holder.name.setText(StaticData.getNameById(payer.getId()));
+        Log.d("payer id", String.valueOf(payer.getId()) + " " + StaticTripData.getNameById(payer.getId()));
+        holder.name.setText(StaticTripData.getNameById(payer.getId()));
         String amount = "";
         DecimalFormat df = new DecimalFormat("#0.00");
         amount = "- " + String.valueOf(df.format(payer.getAmount())) + " €"; //getRe (R.array.currencies)[expense.getCurrencyId()].substring(0,1))
         holder.amount.setTextColor(Color.RED);
         ((TextView)holder.icon.findViewById(R.id.fragment_expense_detail_item_icon_initial)).setText(holder.name.getText().toString().substring(0,1));
-        ((ImageView)holder.icon.findViewById(R.id.fragment_expense_detail_item_icon_circle)).setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(payer.getId())));
+        ((ImageView)holder.icon.findViewById(R.id.fragment_expense_detail_item_icon_circle)).setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(payer.getId())));
         holder.amount.setText(amount);
         return convertView;
     }

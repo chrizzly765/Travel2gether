@@ -12,24 +12,24 @@
 
         />
 
-    <ImageButton
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_send"
-        android:backgroundTint="@color/abc_background_cache_hint_selector_material_light"
-        android:id="@+id/fragment_comment_button_send"
-        android:layout_gravity="right|bottom" />
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal|bottom">
+
     <EditText
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_weight="0.1"
         android:layout_height="wrap_content"
         android:id="@+id/fragment_comment_editText"
-        android:layout_gravity="center_horizontal|bottom"
         android:hint="@string/comment" />
 
-
-    <!--
-    android:text="@string/hello_blank_fragment"
--->
+    <ImageButton
+        android:layout_weight="0.9"
+        android:layout_width="fill_parent"
+        android:layout_height="35dp"
+        android:background="@mipmap/ic_send"
+        android:id="@+id/fragment_comment_button_send" />
+    </LinearLayout>
 </FrameLayout>

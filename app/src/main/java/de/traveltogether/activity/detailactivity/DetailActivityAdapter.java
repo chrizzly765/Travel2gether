@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Payer;
 import de.traveltogether.model.Activity;
@@ -59,8 +60,8 @@ public class DetailActivityAdapter extends BaseAdapter {
 
         Context context = parent.getContext();
         Payer payer = (Payer) getItem(position);
-        Log.d("payer id", String.valueOf(payer.getId()) + " " + StaticData.getNameById(payer.getId()));
-        holder.name.setText(StaticData.getNameById(payer.getId()));
+        Log.d("payer id", String.valueOf(payer.getId()) + " " + StaticTripData.getNameById(payer.getId()));
+        holder.name.setText(StaticTripData.getNameById(payer.getId()));
         String amount = "";
         amount= "- " + String.valueOf(payer.getAmount()) + "€";//get right currency?
         holder.amount.setTextColor(Color.RED);

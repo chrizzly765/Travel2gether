@@ -88,7 +88,10 @@ public class ExpenseListFragment extends ListFragment implements AdapterView.OnI
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Expense expense = (Expense) adapter.getItem(position);
         Intent intent = new Intent(getActivity(), ExpenseDetailActivity.class);
-        intent.putExtra("featureId", expense.getId()); //Put your id to your next Intent
+        Bundle b = new Bundle();
+        b.putLong("featureId", expense.getId());
+        b.putLong("tripId", expense.getTripId());
+        intent.putExtras(b);
         startActivity(intent);
     }
 }

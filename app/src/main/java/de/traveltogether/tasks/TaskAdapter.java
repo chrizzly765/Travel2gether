@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import de.traveltogether.StaticTripData;
 import de.traveltogether.date.Date;
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
@@ -91,11 +92,11 @@ public class TaskAdapter extends BaseAdapter {
         holder.toDoTillDate.setText(task.getDueDate());
         holder.toDoTillDate.setTextColor(colorDeadline);
         holder.icon.findViewById(R.id.fragment_task_list_item_icon_circle).setBackgroundResource(
-                StaticData.getIdForColor(StaticData.getColorById(task.getPersonId()))
+                StaticData.getIdForColor(StaticTripData.getColorById(task.getPersonId()))
         );
 
         ((TextView)holder.icon.findViewById(R.id.fragment_task_list_item_icon_initial)).setText(
-                StaticData.getNameById(task.getPersonId()).substring(0,1)
+                StaticTripData.getNameById(task.getPersonId()).substring(0,1)
         );
 
         // if no one's assigned, hide icon

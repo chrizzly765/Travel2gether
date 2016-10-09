@@ -59,6 +59,8 @@ public class GCMPushReceiverService extends GcmListenerService{
                 .setContentTitle("TravelTogether")
                 .setContentText(message)
                 .setAutoCancel(true)
+                .setFullScreenIntent(pendingIntent,  true)
+                .setColor(getColor(R.color.colorPrimary))
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);

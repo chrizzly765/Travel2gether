@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.info.InfoActivity;
+import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Person;
 import de.traveltogether.triplist.TripListActivity;
 
@@ -33,6 +35,7 @@ public class InvitationActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
+        getSupportActionBar().setTitle("Mitreisende hinzufügen");
         tripId = -1; // or other values
         if (b != null) {
             tripId = b.getLong("tripId");
@@ -42,7 +45,7 @@ public class InvitationActivity extends AppCompatActivity{
 
 
         presenter = new InvitePresenter(this);
-        presenter.onGetFormerParticipants();
+        presenter.onGetFormerParticipants(tripId);
         /*FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         InvitationFragment fragment = InvitationFragment.newInstance();
@@ -65,6 +68,11 @@ public class InvitationActivity extends AppCompatActivity{
                 if(formerActivity== "newTrip") {
                     Intent tripList = new Intent(this, TripListActivity.class);
                     startActivity(tripList);
+                }
+                else{
+                    Intent intent = new Intent(this, InfoActivity.class);
+                    intent.putExtra("tripId", tripId);
+                    startActivity(intent);
                 }
                 finish();
                 return true;
@@ -105,5 +113,16 @@ public class InvitationActivity extends AppCompatActivity{
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(formerActivity!="newTrip"){
+            Intent intent = new Intent(this, InfoActivity.class);
+            intent.putExtra("tripId", tripId);
+            startActivity(intent);
+            finish();
+        }
+        //else do nothing
     }
 }

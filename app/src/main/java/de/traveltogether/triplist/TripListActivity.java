@@ -119,6 +119,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         if (v.getId() == R.id.fab_button){
             Intent set = new Intent(this, NewTripActivity.class);
             startActivity(set);
+            finish();
         }
     }
 
@@ -195,36 +196,18 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
             case R.id.action_notification:
                 Intent noti = new Intent(this, NotificationActivity.class);
                 startActivity(noti);
+                finish();
                 return true;
             case R.id.action_settings:
                 Intent options = new Intent(this, SettingsActivity.class);
                 startActivity(options);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.optionsmenu_triplist, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case R.id.open_options:
-                Intent options = new Intent(this, SettingsActivity.class);
-                startActivity(options);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-*/
     public void onViewError(String message) {
         progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

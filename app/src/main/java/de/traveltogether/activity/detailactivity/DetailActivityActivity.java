@@ -24,12 +24,14 @@ import java.util.List;
 import de.traveltogether.R;
 //import de.traveltogether.activity.newactivity.NewActivityActivity;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.activity.ActivityFragment;
 import de.traveltogether.activity.ActivitiesActivity;
 import de.traveltogether.activity.detailactivity.DetailActivityFragment;
 import de.traveltogether.activity.detailactivity.DetailActivityPresenter;
 //import de.traveltogether.expense.detailexpense.IExpenseDetailPresenter;
 import de.traveltogether.activity.newactivity.NewActivityActivity;
+import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Payer;
 import de.traveltogether.model.Trip;
@@ -56,6 +58,9 @@ public class DetailActivityActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_detail_activity);
         featureId = getIntent().getLongExtra("featureId", -1);
         tripId = getIntent().getLongExtra("tripId", -1);
+        if(tripId!=-1){
+            StaticTripData.setCurrentTripId(tripId);
+        }
         if(featureId!=-1){
             presenter.onGetDetailsForActivity(featureId);
         }
@@ -113,7 +118,10 @@ public class DetailActivityActivity extends AppCompatActivity  {
                 break;
             case R.id.edit:
                 Intent intent = new Intent(this, NewActivityActivity.class);
-                intent.putExtra("featureId", featureId);
+                Bundle b = new Bundle();
+                b.putLong("featureId", featureId);
+                b.putLong("tripId", tripId);
+                intent.putExtras(b);
                 startActivity(intent);
                 finish();
                 break;
@@ -172,6 +180,13 @@ public class DetailActivityActivity extends AppCompatActivity  {
         finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, ActivitiesActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
+        finish();
+    }
 
 
 }

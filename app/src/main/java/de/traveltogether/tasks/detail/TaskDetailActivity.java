@@ -19,7 +19,9 @@ import android.widget.Toast;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.date.Date;
+import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Task;
 import de.traveltogether.tasks.TaskListActivity;
 import de.traveltogether.tasks.newtask.NewTaskActivity;
@@ -53,6 +55,10 @@ public class TaskDetailActivity extends AppCompatActivity {
         presenter = new TaskDetailPresenter(this);
         featureId = getIntent().getLongExtra("featureId", -1);
 
+        tripId=getIntent().getLongExtra("tripId", -1);
+        if(tripId!=-1){
+            StaticTripData.setCurrentTripId(tripId);
+        }
         if(featureId!=-1){
             presenter.onGetDetailsForTask(featureId);
         }
@@ -115,9 +121,9 @@ public class TaskDetailActivity extends AppCompatActivity {
         toDoTillDate.setText(task.getDueDate());
         toDoTillDate.setTextColor(colorDeadline);
         if(task.getPersonId() != 0) {
-            name.setText(StaticData.getNameById(task.getPersonId()));
+            name.setText(StaticTripData.getNameById(task.getPersonId()));
             initial.setText(name.getText().toString().substring(0, 1));
-            icon.setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(task.getPersonId())));
+            icon.setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(task.getPersonId())));
         }
         else {
             icon.setVisibility(View.INVISIBLE);
@@ -148,9 +154,12 @@ public class TaskDetailActivity extends AppCompatActivity {
                 break;
             case R.id.edit:
                 Intent intent = new Intent(this, NewTaskActivity.class);
-                intent.putExtra("featureId", task.getId());
-                intent.putExtra("tripId", tripId);
+                Bundle b = new Bundle();
+                b.putLong("featureId", task.getId());
+                b.putLong("tripId", tripId);
+                intent.putExtras(b);
                 startActivity(intent);
+                finish();
                 break;
             default:
                 super.onOptionsItemSelected(item);
@@ -175,5 +184,14 @@ public class TaskDetailActivity extends AppCompatActivity {
         bundle.putLong("tripId", tripId);
         intent.putExtras(bundle);
         c.startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
+        finish();
     }
 }

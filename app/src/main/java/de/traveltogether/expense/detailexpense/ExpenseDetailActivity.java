@@ -24,6 +24,7 @@ import java.util.List;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.expense.ExpenseActivity;
 import de.traveltogether.expense.ExpenseListFragment;
 import de.traveltogether.expense.newexpense.NewExpenseActivity;
@@ -49,6 +50,9 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_expense_detail);
         featureId = getIntent().getLongExtra("featureId", -1);
         tripId = getIntent().getLongExtra("tripId", -1);
+        if(tripId!=-1){
+            StaticTripData.setCurrentTripId(tripId);
+        }
         if(featureId!=-1){
             presenter.onGetDetailsForExpense(featureId);
         }
@@ -79,17 +83,18 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         expense = _expense;
         getSupportActionBar().setTitle(expense.getTitle());
         title.setText(expense.getTitle());
+        tripId=expense.getTripId();
         description.setText(expense.getDescription());
         amount.setText(expense.getAmount() + getResources().getStringArray(R.array.currencies)[expense.getCurrencyId()].substring(0,1));
-        paidBy.setText(StaticData.getNameById(expense.getPayer()));
+        paidBy.setText(StaticTripData.getNameById(expense.getPayer()));
 
         FrameLayout icon = (FrameLayout)findViewById(R.id.activity_expense_detail_icon);
         ((ImageView)icon.findViewById(R.id.activity_expense_detail_icon_circle))
-                .setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(expense.getPayer())));
+                .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(expense.getPayer())));
         ((ImageView)icon.findViewById(R.id.activity_expense_detail_payer_icon_circle))
-                .setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(expense.getPayer())));
+                .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(expense.getPayer())));
         ((TextView)icon.findViewById(R.id.activiy_expense_detail_icon_initial))
-                .setText(StaticData.getNameById(expense.getPayer()).substring(0,1));
+                .setText(StaticTripData.getNameById(expense.getPayer()).substring(0,1));
 
         onViewPayers(expense.getAssignedPayers());
 
@@ -125,7 +130,10 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 break;
             case R.id.edit:
                 Intent intent = new Intent(this, NewExpenseActivity.class);
-                intent.putExtra("featureId", featureId);
+                Bundle b = new Bundle();
+                b.putLong("featureId", featureId);
+                b.putLong("tripId", tripId);
+                intent.putExtras(b);
                 startActivity(intent);
                 finish();
                 break;

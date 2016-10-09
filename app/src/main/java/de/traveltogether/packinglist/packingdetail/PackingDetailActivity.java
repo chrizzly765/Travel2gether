@@ -17,15 +17,17 @@ import java.util.List;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.model.PackingItem;
 import de.traveltogether.model.PackingObject;
 import de.traveltogether.packinglist.PackingListActivity;
 import de.traveltogether.packinglist.newpackingitem.NewPackingItemActivity;
+import de.traveltogether.triplist.TripListActivity;
 
 public class PackingDetailActivity extends AppCompatActivity implements DialogInterface.OnClickListener{
 
     long featureId =-1;
-    //long tripId =-1;
+    long tripId =-1;
     TextView title;
     TextView description;
     TextView count;
@@ -41,7 +43,10 @@ public class PackingDetailActivity extends AppCompatActivity implements DialogIn
         presenter = new PackingDetailPresenter(this);
         setContentView(R.layout.activity_packing_detail);
         featureId = getIntent().getLongExtra("featureId", -1);
-        //tripId = getIntent().getLongExtra("tripId", -1);
+        tripId = getIntent().getLongExtra("tripId", -1);
+        if(tripId!=-1){
+            StaticTripData.setCurrentTripId(tripId);
+        }
         if(featureId!=-1){
             presenter.onGetDetailsForPackingObject(featureId);
         }
@@ -72,6 +77,7 @@ public class PackingDetailActivity extends AppCompatActivity implements DialogIn
 
     public void onViewDetails(PackingObject _packingobject){
         packingObject = _packingobject;
+        tripId=packingObject.getTripId();
         getSupportActionBar().setTitle(packingObject.getTitle());
         title.setText(packingObject.getTitle());
         count.setText(packingObject.getPackingItemsNumber());
@@ -109,7 +115,10 @@ public class PackingDetailActivity extends AppCompatActivity implements DialogIn
                 break;
             case R.id.edit:
                 Intent intent = new Intent(this, NewPackingItemActivity.class);
-                intent.putExtra("featureId", packingObject.getId());
+                Bundle b = new Bundle();
+                b.putLong("featureId", featureId);
+                b.putLong("tripId", tripId);
+                intent.putExtras(b);
                 startActivity(intent);
                 finish();
                 break;
@@ -122,11 +131,11 @@ public class PackingDetailActivity extends AppCompatActivity implements DialogIn
 
     public void onSuccessDelete(){
         //TODO: toast
-        /*if(tripId!=-1) {
+        if(tripId!=-1) {
             Intent intent = new Intent(this, PackingListActivity.class);
             intent.putExtra("tripId", tripId);
             startActivity(intent);
-        }*/
+        }
         finish();
     }
 
@@ -146,6 +155,30 @@ public class PackingDetailActivity extends AppCompatActivity implements DialogIn
     @Override
     public void onClick(DialogInterface dialog, int which) {
         dialog.cancel();
+
+        if(tripId!=-1) {
+            Intent intent = new Intent(this, PackingListActivity.class);
+            intent.putExtra("tripId", tripId);
+            startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(this, TripListActivity.class);
+            startActivity(intent);
+        }
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(tripId!=-1) {
+            Intent intent = new Intent(this, PackingListActivity.class);
+            intent.putExtra("tripId", tripId);
+            startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(this, TripListActivity.class);
+            startActivity(intent);
+        }
         finish();
     }
 }

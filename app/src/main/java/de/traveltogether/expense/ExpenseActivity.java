@@ -16,7 +16,9 @@ import android.widget.RelativeLayout;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.expense.newexpense.NewExpenseActivity;
+import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
 
@@ -34,9 +36,12 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         add.setOnClickListener(this);
 
         tripId = getIntent().getLongExtra("tripId", -1);
+        if(tripId!=-1){
+            StaticTripData.setCurrentTripId(tripId);
+        }
         presenter = new ExpensePresenter(this);
         presenter.onGetExpenseList(tripId);
-        onViewParticipants(StaticData.getActiveParticipants());
+        onViewParticipants(StaticTripData.getActiveParticipants());
         progressDialog = ProgressDialog.show(this, "",
                 "Bitte warten...", true);
     }
@@ -88,5 +93,11 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         fragmentTransaction.commit();
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
+        finish();
+    }
 }

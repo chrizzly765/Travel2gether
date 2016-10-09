@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.model.PackingItem;
 
 import java.util.List;
@@ -61,13 +62,13 @@ public class PackingDetailAdapter extends BaseAdapter {
 
         Context context = parent.getContext();
         PackingItem item = (PackingItem) getItem(position);
-        holder.name.setText(StaticData.getNameById(item.getAssignedPerson()));
+        holder.name.setText(StaticTripData.getNameById(item.getAssignedPerson()));
         holder.box.setActivated(item.getStatus());
         if(item.getAssignedPerson() == StaticData.getUserId()){
             holder.box.setEnabled(true);
         }
         ((TextView)holder.icon.findViewById(R.id.fragment_packing_detail_list_item_initial)).setText(holder.name.getText().toString().substring(0,1));
-        ((ImageView)holder.icon.findViewById(R.id.fragment_packing_detail_list_item_circle)).setBackgroundResource(StaticData.getIdForColor(StaticData.getColorById(item.getAssignedPerson())));
+        ((ImageView)holder.icon.findViewById(R.id.fragment_packing_detail_list_item_circle)).setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(item.getAssignedPerson())));
         String amount = "";
 
         return convertView;

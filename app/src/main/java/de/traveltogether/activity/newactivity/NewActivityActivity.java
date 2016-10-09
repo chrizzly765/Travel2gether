@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import de.traveltogether.StaticData;
 import de.traveltogether.activity.ActivitiesActivity;
+import de.traveltogether.activity.detailactivity.DetailActivityActivity;
 import de.traveltogether.model.Activity;
 import de.traveltogether.model.Participant;
 import de.traveltogether.R;
@@ -337,15 +338,18 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-        Intent intent = new Intent(this, ActivitiesActivity.class);
-        intent.putExtra("tripId", tripId);
+        Intent intent = new Intent(this, DetailActivityActivity.class);
+        Bundle b = new Bundle();
+        b.putLong("featureId", featureId);
+        b.putLong("tripId", tripId);
+        intent.putExtras(b);
         startActivity(intent);
         finish();
     }
 
     public void setValues(Activity _activity){
         activity =_activity;
-
+        tripId = activity.getTripId();
         title.setText(activity.getTitle());
         description.setText(activity.getDescription());
         startDate.setText(activity.getDate());
@@ -394,7 +398,23 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
             timePicker.setTime(hour, minute);
         }
     }
-
+    @Override
+    public void onBackPressed() {
+        if(featureId!=-1){
+            Intent intent = new Intent(this, DetailActivityActivity.class);
+            Bundle b = new Bundle();
+            b.putLong("featureId", featureId);
+            b.putLong("tripId", tripId);
+            intent.putExtras(b);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(this, ActivitiesActivity.class);
+            intent.putExtra("tripId", tripId);
+            startActivity(intent);
+        }
+        finish();
+    }
 
 
 

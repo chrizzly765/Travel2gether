@@ -33,7 +33,9 @@ import java.util.List;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.expense.ExpenseActivity;
+import de.traveltogether.expense.detailexpense.ExpenseDetailActivity;
 import de.traveltogether.expense.detailexpense.ExpenseDetailPresenter;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
@@ -79,7 +81,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
             presenter.onGetParticipantsForTrip(tripId);
         }
         else{
-            onViewParticipants(StaticData.getActiveParticipants());
+            onViewParticipants(StaticTripData.getActiveParticipants());
         }
 
         currencySpinner = (Spinner) findViewById(R.id.spinner_currency);
@@ -320,7 +322,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
 
     public void setValues(Expense _expense){
         expense =_expense;
-
+        tripId = expense.getTripId();
         title.setText(expense.getTitle());
         description.setText(expense.getDescription());
         amount.setText(String.valueOf(expense.getAmount()));
@@ -342,5 +344,23 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         updateParticipantList();
         payedBySpinner.setSelection(position);
         progressDialog.cancel();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(featureId!=-1){
+            Intent intent = new Intent(this, ExpenseDetailActivity.class);
+            Bundle b = new Bundle();
+            b.putLong("featureId", featureId);
+            b.putLong("tripId", tripId);
+            intent.putExtras(b);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(this, ExpenseActivity.class);
+            intent.putExtra("tripId", tripId);
+            startActivity(intent);
+        }
+        finish();
     }
 }

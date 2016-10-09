@@ -15,8 +15,8 @@ public class InvitePresenter implements IInvitePresenter {
     }
 
     @Override
-    public void onGetFormerParticipants() {
-        interactor.getFormerParticipants(this);
+    public void onGetFormerParticipants(long tripId) {
+        interactor.getFormerParticipants(tripId, this);
     }
 
     @Override

@@ -50,7 +50,7 @@ public class MainMenuInteractor implements IMainMenuInteractor {
 
     @Override
     public void getParticipantsForTrip(long tripId, IMainMenuPresenter _listener) {
-        listener = _listener;
+        /*listener = _listener;
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("tripId", tripId);
@@ -59,7 +59,7 @@ public class MainMenuInteractor implements IMainMenuInteractor {
         catch(Exception e){
             Log.e(e.getClass().toString(), e.getMessage());
         }
-
+*/
     }
 
     @Override
@@ -73,17 +73,17 @@ public class MainMenuInteractor implements IMainMenuInteractor {
                 listener.onSuccessLeavingTrip();
                 return;
             }
-            if(dataType==DataType.TRIP && actionType==ActionType.GETPARTICIPANTS){
+            /*if(dataType==DataType.TRIP && actionType==ActionType.GETPARTICIPANTS){
                 if(response.getError()!="true") {
                     Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
-                    StaticData.setParticipants(participants);
+                    StaticTripData.setParticipants(participants);
                     listener.onSuccessGetParticipants();
                     return;
                 }
                 else{
                     listener.onError(response.getMessage());
                 }
-            }
+            }*/
             if(dataType==DataType.TRIP && actionType==ActionType.GETSTATISTIC){
                 if(response.getError()!="true") {
                     listener.onSuccessGetStatistics((Statistic) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.STATISTIC));
