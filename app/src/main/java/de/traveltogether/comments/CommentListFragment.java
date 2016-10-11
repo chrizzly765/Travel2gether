@@ -55,6 +55,22 @@ public class CommentListFragment extends ListFragment{
         else {
             adapter = new CommentAdapter(getActivity(), comments);
             setListAdapter(adapter);
+
+            if (adapter == null) {
+                return;
+            }
+            ViewGroup vg = getListView();
+            int totalHeight = 0;
+            for (int i = 0; i < adapter.getCount(); i++) {
+                View listItem = adapter.getView(i, null, vg);
+                listItem.measure(0, 0);
+                totalHeight += (listItem.getMeasuredHeight());
+            }
+
+            ViewGroup.LayoutParams par = getListView().getLayoutParams();
+            par.height = totalHeight + (getListView().getDividerHeight() * (adapter.getCount() - 1));
+            getListView().setLayoutParams(par);
+            getListView().requestLayout();
         }
     }
 

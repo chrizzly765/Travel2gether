@@ -71,14 +71,20 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
     public void onViewPackingObjects(PackingObject[] _packingobjects){
         Log.d("PackingListActivity", "got packingobjects: "+_packingobjects.length);
         packingobjects = _packingobjects;
+        if(packingobjects.length == 0){
+            findViewById(R.id.activity_packing_list_empty_text).setVisibility(View.VISIBLE);
+        }
+        else {
 
-        //Fragment in Activity einbetten
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        PackingFragment fragment = PackingFragment.newInstance(_packingobjects);
-        fragmentTransaction.add(R.id.fragment_packing_list_container, fragment);
-        fragmentTransaction.commit();
+            //Fragment in Activity einbetten
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            PackingFragment fragment = PackingFragment.newInstance(_packingobjects);
+            fragmentTransaction.add(R.id.fragment_packing_list_container, fragment);
+            fragmentTransaction.commit();
+        }
         progressDialog.cancel();
+
     }
 
     @Override

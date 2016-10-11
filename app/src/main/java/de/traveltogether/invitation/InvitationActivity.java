@@ -35,7 +35,12 @@ public class InvitationActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
+
         getSupportActionBar().setTitle("Mitreisende hinzufügen");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         tripId = -1; // or other values
         if (b != null) {
             tripId = b.getLong("tripId");

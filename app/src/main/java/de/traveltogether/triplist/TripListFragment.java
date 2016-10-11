@@ -73,7 +73,7 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
             for (int i = 0; i < adapter.getCount(); i++) {
                 View listItem = adapter.getView(i, null, vg);
                 listItem.measure(0, 0);
-                totalHeight += listItem.getMeasuredHeight();
+                totalHeight += 440;//listItem.getMeasuredHeight();
             }
 
             ViewGroup.LayoutParams par = getListView().getLayoutParams();

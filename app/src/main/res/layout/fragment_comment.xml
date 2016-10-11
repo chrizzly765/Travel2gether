@@ -5,13 +5,15 @@
     tools:context="de.traveltogether.comments.CommentFragment">
 
 
-    <RelativeLayout
-        android:id = "@+id/fragment_comment_list_container"
-        android:layout_width="wrap_content"
-        android:layout_height="2000dp"
-
-        />
-
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+           <RelativeLayout
+            android:id = "@+id/fragment_comment_list_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+    </ScrollView>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -21,6 +23,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_weight="0.1"
+        android:inputType="textCapSentences"
         android:layout_height="wrap_content"
         android:id="@+id/fragment_comment_editText"
         android:hint="@string/comment" />

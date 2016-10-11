@@ -6,8 +6,6 @@
     android:name="de.traveltogether.tasks.TaskListFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="0dp"
-    android:layout_marginRight="0dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="de.traveltogether.tasks.TaskListFragment"
     tools:listitem="@layout/fragment_task_list_item" >

@@ -31,6 +31,7 @@ import de.traveltogether.invitation.InvitationActivity;
 import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Trip;
+import de.traveltogether.triplist.TripListActivity;
 import de.traveltogether.triplist.TripListFragment;
 import de.traveltogether.triplist.newtrip.NewTripActivity;
 
@@ -44,6 +45,10 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
+        getSupportActionBar().setTitle("Info");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         presenter = new InfoPresenter(this);
         tripId = this.getIntent().getLongExtra("tripId", -1);
         if(tripId==-1){
@@ -53,7 +58,6 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         presenter.onGetParticipantsForTrip(tripId);
         progressDialog = ProgressDialog.show(this, "",
                 "Info wird geladen...", true);
-        getSupportActionBar().setTitle("Info");
 
         findViewById(R.id.activity_info_button_add).setOnClickListener(this);
     }
@@ -97,7 +101,6 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
             InfoListFragment fragment = InfoListFragment.newInstance(activeParts);
             fragmentTransaction.add(R.id.activity_info_fragment_container_active, fragment);
             fragmentTransaction.commit();
-            progressDialog.cancel();
 
             RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)add.getLayoutParams();
             lp.addRule(RelativeLayout.BELOW, R.id.activity_info_fragment_container_active);
@@ -115,7 +118,6 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
             InfoListFragment fragment = InfoListFragment.newInstance(invitedParts);
             fragmentTransaction.add(R.id.activity_info_fragment_container_invited, fragment);
             fragmentTransaction.commit();
-            progressDialog.cancel();
 
             RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)add.getLayoutParams();
             lp.addRule(RelativeLayout.BELOW, R.id.activity_info_fragment_container_invited);
@@ -133,7 +135,6 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
             InfoListFragment fragment = InfoListFragment.newInstance(resignedParts);
             fragmentTransaction.add(R.id.activity_info_fragment_container_resigned, fragment);
             fragmentTransaction.commit();
-            progressDialog.cancel();
 
             RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)add.getLayoutParams();
             lp.addRule(RelativeLayout.BELOW, R.id.activity_info_fragment_container_resigned);
@@ -145,6 +146,8 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
 
             //findViewById(R.id.activity_info_devider_resigned).setVisibility(View.GONE);
         }
+        progressDialog.cancel();
+
 
     }
 
@@ -203,6 +206,8 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+        Intent intent = new Intent(this, TripListActivity.class);
+        startActivity(intent);
         finish();
     }
 

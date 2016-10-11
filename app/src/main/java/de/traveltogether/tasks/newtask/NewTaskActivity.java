@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -54,7 +55,9 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
-
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setTitle(R.string.new_task);
         Bundle b = getIntent().getExtras();
         if (b != null) {
@@ -71,6 +74,7 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         datePicker =new DatePickerFragment();
 
         if(featureId != -1) {
+            getSupportActionBar().setTitle("Aufgabe bearbeiten");
             presenter.onGetDetailsForTask(featureId);
         }
 
@@ -78,6 +82,8 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
 
         ImageButton datePickerBtn = (ImageButton) findViewById(R.id.button_datepicker_new_task);
         datePickerBtn.setOnClickListener(this);
+        EditText datePickerText = (EditText) findViewById(R.id.activity_new_task_date);
+        datePickerText.setOnClickListener(this);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.status, android.R.layout.simple_spinner_item);
@@ -87,7 +93,7 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
 
 
     public void onClick(View v) {
-        if (v.getId() == R.id.button_datepicker_new_task){
+        if (v.getId() == R.id.button_datepicker_new_task || v.getId() == R.id.activity_new_task_date){
             clickedDatePickerBtn = (ImageButton) v;
             datePicker.show(getFragmentManager(), DatePickerFragment.TAG);
         }
@@ -153,14 +159,14 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     }
 
     public void onSuccessAddingTask(){
-        Toast.makeText(getApplicationContext(), R.string.task_updated, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), R.string.task_added, Toast.LENGTH_SHORT).show();
         finish();
         updateActivity(this);
     }
 
     public void onSuccessUpdateTask(){
         tripId = task.getTripId();
-        Toast.makeText(getApplicationContext(), R.string.task_added, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), R.string.task_updated, Toast.LENGTH_SHORT).show();
         finish();
         updateActivity(this);
     }

@@ -15,6 +15,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="textCapSentences"
             android:id="@+id/activity_new_packingobject_title"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
@@ -26,6 +27,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/activity_new_packingobject_description"
             android:hint = "@string/description"
+            android:inputType="textCapSentences"
             android:layout_below="@+id/activity_new_packingobject_count"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true" />

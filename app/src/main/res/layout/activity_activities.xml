@@ -12,9 +12,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:paddingTop="32dp"
+        android:paddingTop="24dp"
         android:paddingLeft="8dp"
-        android:paddingRight="8dp" />
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:visibility="invisible"
+        android:id="@+id/activity_activities_empty"
+        android:layout_height="30dp"
+        android:gravity="center|bottom"
+        android:layout_gravity="center_horizontal"
+        android:text="Noch kein Element vorhanden." />
 
     <FrameLayout
         android:layout_width="match_parent"

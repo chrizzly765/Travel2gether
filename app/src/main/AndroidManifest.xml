@@ -148,11 +148,13 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".activity.ActivitiesActivity" />
+        <activity android:name=".activity.ActivitiesActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".chat.ChatActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.detailactivity.DetailActivityActivity"  android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.detailactivity.DetailActivityActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

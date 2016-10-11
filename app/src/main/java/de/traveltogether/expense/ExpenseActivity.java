@@ -31,6 +31,10 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Ausgaben");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         setContentView(R.layout.activity_expense);
         ImageButton add= (ImageButton)findViewById(R.id.activity_expense_button_add);
         add.setOnClickListener(this);
@@ -89,14 +93,16 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void onViewExpenses(Expense[] expenses){
-        if(progressDialog.isShowing()) {
-            progressDialog.cancel();
-        }
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         ExpenseListFragment fragment = ExpenseListFragment.newInstance(expenses);
         fragmentTransaction.add(R.id.activity_expense_list_container, fragment);
         fragmentTransaction.commit();
+
+        if(progressDialog.isShowing()) {
+            progressDialog.cancel();
+        }
     }
 
     @Override

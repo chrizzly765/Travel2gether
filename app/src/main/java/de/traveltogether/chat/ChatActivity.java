@@ -19,6 +19,10 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("Chat");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         setContentView(R.layout.activity_chat);
         Bundle b = getIntent().getExtras();
         tripId = -1;
