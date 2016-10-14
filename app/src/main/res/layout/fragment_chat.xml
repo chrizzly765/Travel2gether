@@ -4,13 +4,17 @@
     android:layout_height="match_parent"
     tools:context="de.traveltogether.chat.ChatFragment">
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
     <RelativeLayout
         android:id = "@+id/fragment_comment_list_container"
         android:layout_width="fill_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         />
 
+    </ScrollView>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -20,15 +24,17 @@
         <EditText
             android:layout_width="fill_parent"
             android:layout_weight="0.1"
+            android:inputType="textCapSentences"
             android:layout_height="wrap_content"
             android:id="@+id/fragment_comment_editText"
-            android:hint="@string/comment" />
+            android:hint="Nachricht schreiben" />
 
         <ImageButton
             android:layout_weight="0.9"
             android:layout_width="fill_parent"
             android:layout_height="35dp"
-            android:background="@mipmap/ic_send"
+            android:src="@mipmap/ic_send"
+            android:backgroundTint="@android:color/transparent"
             android:id="@+id/fragment_comment_button_send" />
     </LinearLayout>
     <!--

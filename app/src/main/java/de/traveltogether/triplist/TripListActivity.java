@@ -152,7 +152,6 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
                 TripListFragment fragment = TripListFragment.newInstance(arr);
                 fragmentTransaction.add(R.id.fragment_trip_list_container_upcoming, fragment);
                 fragmentTransaction.commit();
-                progressDialog.cancel();
                 fragmentUpcoming = fragment;
             }
             else{
@@ -177,7 +176,6 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
                 TripListFragment fragment = TripListFragment.newInstance(arr);
                 fragmentTransaction.add(R.id.fragment_trip_list_container_former, fragment);
                 fragmentTransaction.commit();
-                progressDialog.cancel();
                 fragmentFormer = fragment;
             }
             else{
@@ -185,6 +183,11 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
                 fragmentFormer.refresh(formerTrips.toArray(array));
             }
         }
+        else{
+            findViewById(R.id.activity_trip_list_former_empty).setVisibility(View.VISIBLE);
+        }
+        progressDialog.cancel();
+
     }
 
 

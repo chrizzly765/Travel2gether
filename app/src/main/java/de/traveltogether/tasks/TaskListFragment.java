@@ -3,6 +3,7 @@ package de.traveltogether.tasks;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,9 +65,10 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
             for (int i = 0; i < adapter.getCount(); i++) {
                 View listItem = adapter.getView(i, null, vg);
                 listItem.measure(0, 0);
-                totalHeight += listItem.getMeasuredHeight();
+                Log.d("measured height", String.valueOf(listItem.getMeasuredHeight()));
+                totalHeight += 384;//listItem.getMeasuredHeight();
             }
-
+            Log.d("total height", String.valueOf(totalHeight));
             ViewGroup.LayoutParams par = getListView().getLayoutParams();
             par.height = totalHeight + (getListView().getDividerHeight() * (adapter.getCount() - 1));
             getListView().setLayoutParams(par);

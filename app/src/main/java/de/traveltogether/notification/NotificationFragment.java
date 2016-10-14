@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 
 import de.traveltogether.DataType;
 import de.traveltogether.R;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.activity.detailactivity.DetailActivityActivity;
 import de.traveltogether.chat.ChatActivity;
 import de.traveltogether.expense.detailexpense.ExpenseDetailActivity;
@@ -115,6 +116,7 @@ public class NotificationFragment extends ListFragment implements AdapterView.On
             getActivity().finish();
         }
         else if(n.getType().equals(DataType.CHAT.toString())){
+            StaticTripData.setCurrentTripId(n.getFeatureOrTripId());
             Intent intent = new Intent(activity, ChatActivity.class);
             intent.putExtra("tripId", n.getFeatureOrTripId());
             startActivity(intent);

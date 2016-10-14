@@ -30,6 +30,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
     ICommentPresenter presenter;
     Comment[] comments;
     EditText inputField;
+    CommentListFragment fragment;
 
     public CommentFragment() {
         // Required empty public constructor
@@ -55,12 +56,21 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
 
         comments = _comments;
 
-        //Fragment in Activity einbetten
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        CommentListFragment fragment = CommentListFragment.newInstance(comments);
-        fragmentTransaction.add(R.id.fragment_comment_list_container, fragment);
-        fragmentTransaction.commit();
+        if(fragment == null) {
+            //Fragment in Activity einbetten
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragment = CommentListFragment.newInstance(comments);
+            fragmentTransaction.add(R.id.fragment_comment_list_container, fragment);
+            fragmentTransaction.commit();
+        }
+        else{
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.detach(fragment);
+            fragmentTransaction.attach(fragment);
+            fragmentTransaction.commit();
+        }
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,6 +87,9 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
     public void onClick(View v) {
         if(v.getId()==R.id.fragment_comment_button_send){
             String text = inputField.getText().toString();
+            if(text==""){
+                return;
+            }
             presenter.onSendCommentForFeature(id, StaticData.getUserId(), text);
 
             //Text löschen wenn Eingabe fertig

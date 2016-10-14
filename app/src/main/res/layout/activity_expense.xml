@@ -4,82 +4,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="de.traveltogether.expense.ExpenseActivity">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:orientation="vertical"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="24dp"
-        android:id="@+id/box_Overview"
-        android:background="#afddf4">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text= "@string/account_balances"
-            android:id="@+id/textView_Overview"
-            android:paddingLeft="16dp"
-            android:layout_gravity="center_vertical"
-            android:textColor="#37a9e3"
-            android:textSize="14dp" />
-    </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id = "@+id/activity_expense_participants_container"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/box_Overview"
-        android:paddingTop="0dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="24dp"
+                android:id="@+id/box_Overview"
+                android:background="#afddf4">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/activity_expense_participants_container"
-        android:background="#afddf4"
-        android:id="@+id/box_participants">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/account_balances"
+                    android:id="@+id/textView_Overview"
+                    android:paddingLeft="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#37a9e3"
+                    android:textSize="14dp" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/expenses"
-            android:id="@+id/textView_List"
-            android:paddingLeft="16dp"
-            android:layout_marginTop="0dp"
-            android:layout_gravity="center_vertical"
-            android:textColor="#37a9e3"
-            android:textSize="14dp" />
-    </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/activity_expense_participants_container"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/box_Overview"
+                android:paddingTop="0dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp" />
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:visibility="invisible"
-            android:id="@+id/activity_expense_empty"
-            android:layout_below="@id/activity_expense_participants_container"
-            android:layout_height="70dp"
-            android:layout_alignParentStart="true"
-            android:gravity="center|bottom"
-            android:layout_gravity="center_horizontal"
-            android:text="Noch kein Element vorhanden."/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/activity_expense_participants_container"
+                android:background="#afddf4"
+                android:id="@+id/box_participants">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/expenses"
+                    android:id="@+id/textView_List"
+                    android:paddingLeft="16dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#37a9e3"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:visibility="invisible"
+                android:id="@+id/activity_expense_empty"
+                android:layout_below="@id/activity_expense_participants_container"
+                android:layout_height="70dp"
+                android:layout_alignParentStart="true"
+                android:gravity="center|bottom"
+                android:layout_gravity="center_horizontal"
+                android:text="Noch kein Element vorhanden." />
 
 
-    <RelativeLayout
-        android:id = "@+id/activity_expense_list_container"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/box_participants"
-        android:paddingTop="0dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp" />
-</RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/activity_expense_list_container"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/box_participants"
+                android:paddingTop="0dp"
+                android:paddingBottom="80dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp" />
+        </RelativeLayout>
     </ScrollView>
     <!--Add button-->
     <FrameLayout
@@ -99,4 +103,4 @@
             android:src="@mipmap/ic_add"
             android:layout_gravity="right|bottom" />
     </FrameLayout>
-    </RelativeLayout>
+</RelativeLayout>

@@ -49,8 +49,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     INewActivityPresenter presenter;
     DatePickerFragment datePicker;
     TimePickerFragment timePicker;
-    ImageButton clickedDatePickerBtn;
-    ImageButton clickedTimePickerBtn;
     ImageView iconBtn;
     EditText title;
     int id;
@@ -73,6 +71,12 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_activity);
+
+        getSupportActionBar().setTitle("Neue Aktivität");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         Bundle b = getIntent().getExtras();
         if (b != null) {
             tripId = b.getLong("tripId", -1);
@@ -102,9 +106,13 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
 
         ImageButton datePickerStartBtn = (ImageButton) findViewById(R.id.button_datepicker_start);
         datePickerStartBtn.setOnClickListener(this);
+        EditText datePickerStartText = (EditText) findViewById(R.id.newActivity_startDate);
+        datePickerStartText.setOnClickListener(this);
 
         ImageButton clickedTimePickerBtn = (ImageButton) findViewById(R.id.button_timepicker);
         clickedTimePickerBtn.setOnClickListener(this);
+        EditText datePickerTimeText = (EditText) findViewById(R.id.newActivity_time);
+        datePickerTimeText.setOnClickListener(this);
 
         ImageView iconBtnPlane = (ImageView) findViewById(R.id.icon_plane);
         iconBtnPlane.setOnClickListener(this);
@@ -186,7 +194,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
 
     public void onSuccessAddingActivity(){
         Context context = getApplicationContext();
-        CharSequence text = "Ausgabe hinzugefügt.";
+        CharSequence text = "Aktivität hinzugefügt.";
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
@@ -230,13 +238,11 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
                     startDate.getText().toString());
 
         }
-*/      if (v.getId() == R.id.button_datepicker_start){
-            clickedDatePickerBtn = (ImageButton) v;
+*/      if (v.getId() == R.id.button_datepicker_start || v.getId()==R.id.newActivity_startDate){
             datePicker.show(getFragmentManager(), DatePickerFragment.TAG);
         }
 
-        else if (v.getId() == R.id.button_timepicker){
-            clickedTimePickerBtn = (ImageButton) v;
+        else if (v.getId() == R.id.button_timepicker || v.getId() == R.id.newActivity_time){
             timePicker.show(getFragmentManager(), TimePickerFragment.ZEIT);
         }
 
@@ -283,6 +289,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void onViewErrorMessage(String message){
+        progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));
@@ -298,7 +305,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
 
     public void onSuccessUpdateActivity(){
         Context context = getApplicationContext();
-        CharSequence text = "Ausgabe geändert.";
+        CharSequence text = "Aktivität aktualisiert.";
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
@@ -343,11 +350,10 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
 */
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        if(clickedDatePickerBtn.getId() == R.id.button_datepicker_start){
             int month = monthOfYear + 1;
             startDate.setText(dayOfMonth + "." + month+"." + year);
             datePicker.setDate(year, monthOfYear, dayOfMonth+1);
-        }
+
         /*
         else if(clickedDatePickerBtn.getId() == R.id.button_datepicker_end){
             int month = monthOfYear + 1;
@@ -357,7 +363,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     }
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
-        if(clickedTimePickerBtn.getId() == R.id.button_timepicker){
             String stringHour = "";
             String stringMinute = "";
             if (hour < 10) {
@@ -376,7 +381,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
             time.setText(stringHour + ":" + stringMinute);
             Log.d("TimeTest", "Test: "  + hour + " " +  minute);
             timePicker.setTime(hour, minute);
-        }
     }
     @Override
     public void onBackPressed() {

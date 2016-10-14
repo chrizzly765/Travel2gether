@@ -52,9 +52,11 @@ public class ActivityFragment extends ListFragment implements AdapterView.OnItem
     public void onStart(){
         super.onStart();
         if(formerActivities==null || formerActivities.length==0 ){
-            //TODO: show new trip listitem
+            getActivity().findViewById(R.id.activity_activities_empty).setVisibility(View.VISIBLE);
         }
         else {
+            getActivity().findViewById(R.id.activity_activities_empty).setVisibility(View.INVISIBLE);
+
             adapter = new ActivityAdapter(getActivity(), formerActivities);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);

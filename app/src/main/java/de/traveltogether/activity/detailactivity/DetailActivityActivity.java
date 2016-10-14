@@ -57,6 +57,12 @@ public class DetailActivityActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new DetailActivityPresenter(this);
+
+        getSupportActionBar().setTitle("Aktivität");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         setContentView(R.layout.activity_detail_activity);
         featureId = getIntent().getLongExtra("featureId", -1);
         tripId = getIntent().getLongExtra("tripId", -1);
@@ -95,6 +101,7 @@ public class DetailActivityActivity extends AppCompatActivity  {
     public void onViewDetails(Activity _activity){
         progressDialog.cancel();
         detailActivity = _activity;
+        tripId=_activity.getTripId();
         getSupportActionBar().setTitle(detailActivity.getTitle());
         title.setText(detailActivity.getTitle());
         description.setText(detailActivity.getDescription());

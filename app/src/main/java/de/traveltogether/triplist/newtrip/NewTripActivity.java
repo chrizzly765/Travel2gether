@@ -2,6 +2,7 @@ package de.traveltogether.triplist.newtrip;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,6 +40,7 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     Button save;
     long tripId;
     Trip trip;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,25 +59,32 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
         place = (EditText) findViewById(R.id.newTrip_place);
 
         if(tripId != -1){
+
+            progressDialog = ProgressDialog.show(this, "",
+                    "Reisen werden geladen...", true);
             presenter.onGetDetailsForTrip(tripId);
         }
 
         ImageButton datePickerStartBtn = (ImageButton) findViewById(R.id.button_datepicker_start);
         datePickerStartBtn.setOnClickListener(this);
+        EditText datePickerStartText = (EditText) findViewById(R.id.newTrip_startDate);
+        datePickerStartText.setOnClickListener(this);
 
         ImageButton datePickerEndBtn = (ImageButton) findViewById(R.id.button_datepicker_end);
         datePickerEndBtn.setOnClickListener(this);
+        EditText datePickerEndText = (EditText) findViewById(R.id.newTrip_endDate);
+        datePickerEndText.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.button_datepicker_start){
-            clickedDatePickerBtn = (ImageButton) v;
+        if (v.getId() == R.id.button_datepicker_start  || v.getId()==R.id.newTrip_startDate){
+            clickedDatePickerBtn = (ImageButton) findViewById(R.id.button_datepicker_start);
             datePicker.show(getFragmentManager(), DatePickerFragment.TAG);
         }
-        else if (v.getId() == R.id.button_datepicker_end){
-            clickedDatePickerBtn = (ImageButton) v;
+        else if (v.getId() == R.id.button_datepicker_end || v.getId()==R.id.newTrip_endDate){
+            clickedDatePickerBtn = (ImageButton) findViewById(R.id.button_datepicker_end);
             datePicker.show(getFragmentManager(), DatePickerFragment.TAG);
         }
     }
@@ -122,6 +131,7 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void onViewErrorMessage(String message){
+        progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));
@@ -171,7 +181,7 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
         place.setText(trip.getDestination());
         startDate.setText(trip.getStartDate());
         endDate.setText(trip.getEndDate());
-
+        progressDialog.cancel();
     }
 
     public void onSuccessUpdateTrip(String message){

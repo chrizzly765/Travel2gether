@@ -57,7 +57,12 @@ public class InviteInteractor implements IInviteInteractor {
                 listener.onError(response.getMessage());
             } else {
                 PersonList persons = (PersonList)JsonDecode.getInstance().jsonToArray(response.getData(), PersonList.class);
-                listener.onShowParticipants(persons.list);
+                if(persons!=null) {
+                    listener.onShowParticipants(persons.list);
+                }
+                else {
+                    listener.onShowParticipants(new Person[0]);
+                }
             }
         }
         else if(actionType == ActionType.INVITE){

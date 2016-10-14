@@ -48,11 +48,15 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
     PackingObject packingObject;
     ImageButton addButton;
     PackingItemSelectionFragment fragment;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_packing_item);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         Bundle b = getIntent().getExtras();
         if (b != null) {
             tripId = b.getLong("tripId", -1);
@@ -74,8 +78,8 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         if(featureId!=-1){
             getSupportActionBar().setTitle("Packelement bearbeiten");
             presenter.onGetDetailForPackingObject(featureId);
-            //progressDialog = ProgressDialog.show(this, "",
-                    //"Bitte warten...", true);
+            progressDialog = ProgressDialog.show(this, "",
+                    "Packelement wird geladen...", true);
         }
         else {
             getSupportActionBar().setTitle("Neues Packelement");
@@ -148,6 +152,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
     }
 
     public void onViewError(String message) {
+        progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));
@@ -175,6 +180,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         for(PackingItem p:chosenParticipants){
             chosenIds.add((int)p.getAssignedPerson());
         }
+        progressDialog.cancel();
     }
 
     public void onSuccessUpdatePackingObject(){

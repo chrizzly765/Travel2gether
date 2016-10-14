@@ -69,6 +69,9 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_expense);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         Bundle b = getIntent().getExtras();
         if (b != null) {
@@ -333,8 +336,10 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         chosenParticipants = (ArrayList<Payer>) expense.getAssignedPayers();
         chosenIds=new ArrayList<Integer>();
         for(int i = 0; i<participants.length; i++){
-            if(chosenParticipants.contains(participants)) {
-                chosenIds.add(i);
+            for(int j = 0; j<chosenParticipants.size(); j++){
+                if(chosenParticipants.get(j).getId() == participants[i].getPersonId()) {
+                    chosenIds.add(i);
+                }
             }
         }
         int position = 0;
