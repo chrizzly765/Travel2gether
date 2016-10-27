@@ -34,6 +34,8 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
     public void refresh(Trip[] _trips){
         trips=_trips;
         adapter.refresh(trips);
+        adapter.notifyDataSetChanged();
+
     }
 
     // TODO: Customize parameter initialization
@@ -96,6 +98,6 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
         b.putInt("adminId", trips[position].getAdminId());
         mainMenu.putExtras(b); //Put your id to your next Intent
         startActivity(mainMenu);
-        getActivity().finish();
+        //getActivity().finish();
     }
 }

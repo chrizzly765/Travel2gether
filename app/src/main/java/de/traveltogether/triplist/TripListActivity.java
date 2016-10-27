@@ -59,33 +59,34 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         progressDialog = ProgressDialog.show(this, "",
                 "Reisen werden geladen...", true);
 
-        presenter = new TripListPresenter(this);
-        presenter.onGetTrips();
-        presenter.onGetNotiCount();
+
 
     }
 
     @Override
     protected void onStart(){
         super.onStart();
+        presenter = new TripListPresenter(this);
+        presenter.onGetTrips();
+        presenter.onGetNotiCount();
     }
 
-    @Override
-    protected void onPause(){
-        super.onPause();
-        /*FragmentManager fragmentManager = getFragmentManager();
+    /*@Override
+    protected void onRestart(){
+        super.onRestart();
+        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.remove(fragment);
-        fragmentTransaction.commit();*/
+        fragmentTransaction.detach(fragmentFormer);
+        fragmentTransaction.detach(fragmentUpcoming);
+        fragmentTransaction.commit();
+    }*/
 
-    }
-
-    @Override
+    /*@Override
     protected void onResume(){
         super.onResume();
         presenter.onGetTrips();
         presenter.onGetNotiCount();
-    }
+    }*/
 
     public void onSuccessGetNotiCount(int count){
         switch (count){
@@ -120,7 +121,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         if (v.getId() == R.id.fab_button){
             Intent set = new Intent(this, NewTripActivity.class);
             startActivity(set);
-            finish();
+            //finish();
         }
     }
 
@@ -204,12 +205,12 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
             case R.id.action_notification:
                 Intent noti = new Intent(this, NotificationActivity.class);
                 startActivity(noti);
-                finish();
+                //finish();
                 return true;
             case R.id.action_settings:
                 Intent options = new Intent(this, SettingsActivity.class);
                 startActivity(options);
-                finish();
+                //finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

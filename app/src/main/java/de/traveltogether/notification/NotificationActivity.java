@@ -68,11 +68,11 @@ public class NotificationActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         Intent intent = new Intent(this, TripListActivity.class);
         startActivity(intent);
         finish();
-    }
+    }*/
 
 }
