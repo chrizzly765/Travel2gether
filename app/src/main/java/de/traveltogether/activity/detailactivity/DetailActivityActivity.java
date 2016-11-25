@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import de.traveltogether.time.TimeFormat;
 import java.util.List;
 
 import de.traveltogether.R;
@@ -106,7 +107,8 @@ public class DetailActivityActivity extends AppCompatActivity  {
         title.setText(detailActivity.getTitle());
         description.setText(detailActivity.getDescription());
         date.setText(detailActivity.getDate());
-        time.setText(detailActivity.getTime());
+        //time.setText(detailActivity.getTime());
+        time.setText(TimeFormat.getInstance().getTimeWithoutSecondsWithWord(detailActivity.getTime()));
         place.setText(detailActivity.getDestination());
 
        // onViewPayers(detailActivity.getAssignedPayers());
@@ -203,5 +205,26 @@ public class DetailActivityActivity extends AppCompatActivity  {
         finish();
     }
 
+    /*
+    public void onTimeSet(int hour, int minute) {
+        String stringHour = "";
+        String stringMinute = "";
+        if (hour < 10) {
+            stringHour = "0" + Integer.toString(hour);
+        }
+        else {
+            stringHour = Integer.toString(hour);
+        }
+        if (minute < 10) {
+            stringMinute = "0" + Integer.toString(minute);
+        }
+        else {
+            stringMinute = Integer.toString(minute);
+        }
 
+        time.setText(stringHour + ":" + stringMinute);
+        Log.d("TimeTest", "Test: "  + hour + " " +  minute);
+        timePicker.setTime(hour, minute);
+    }
+*/
 }

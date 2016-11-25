@@ -109,73 +109,123 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="5dp">
 
-
-        <ImageView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
             android:layout_weight="7"
-            android:contentDescription="@android:string/yes"
-            android:clickable="true" />
+            android:gravity="center_vertical|center_horizontal">
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/icon_empty"
+                android:src="@mipmap/plane"
+                android:contentDescription="@android:string/yes"
+                android:clickable="true"
+                android:background="@drawable/image_button_state" />
+        </LinearLayout>
 
-
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:gravity="center_vertical|center_horizontal">
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:id="@+id/icon_plane"
-            android:layout_weight="7"
             android:src="@mipmap/plane"
             android:contentDescription="@android:string/yes"
-            android:clickable="true" />
+            android:clickable="true"
+            android:background="@drawable/image_button_state" />
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/icon_beach"
             android:layout_weight="7"
+            android:gravity="center_vertical|center_horizontal">
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/icon_beach"
             android:src="@mipmap/beach"
             android:contentDescription="@android:string/yes"
-            android:clickable="true" />
+            android:clickable="true"
+            android:background="@drawable/image_button_state" />
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/icon_cocktail"
             android:layout_weight="7"
+            android:gravity="center_vertical|center_horizontal">
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/icon_cocktail"
             android:src="@mipmap/cocktail"
             android:contentDescription="@android:string/yes"
-            android:clickable="true" />
+            android:clickable="true"
+            android:background="@drawable/image_button_state" />
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/icon_ball"
             android:layout_weight="7"
-            android:src="@mipmap/ball"
-            android:contentDescription="@android:string/yes"
-            android:clickable="true" />
+            android:gravity="center_vertical|center_horizontal">
 
-        <ImageView
-            android:layout_width="wrap_content"
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/icon_ball"
+                android:src="@mipmap/ball"
+                android:contentDescription="@android:string/yes"
+                android:clickable="true"
+                android:background="@drawable/image_button_state" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:gravity="center_vertical|center_horizontal">
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:id="@+id/icon_film"
-            android:layout_weight="7"
             android:src="@mipmap/film"
             android:contentDescription="@android:string/yes"
-            android:clickable="true" />
+            android:clickable="true"
+            android:background="@drawable/image_button_state" />
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/icon_coffee"
             android:layout_weight="7"
+            android:gravity="center_vertical|center_horizontal">
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/icon_coffee"
             android:src="@mipmap/coffee"
             android:contentDescription="@android:string/yes"
-            android:clickable="true" />
+            android:clickable="true"
+            android:background="@drawable/image_button_state" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -185,68 +235,117 @@
         android:layout_height="wrap_content"
         android:paddingTop="5dp">
 
-        <ImageView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:gravity="center_vertical|center_horizontal">
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:id="@+id/icon_food"
-            android:layout_weight="7"
             android:contentDescription="@android:string/yes"
-            android:clickable="false"
-            android:src="@mipmap/food" />
+            android:clickable="true"
+            android:src="@mipmap/food"
+            android:background="@drawable/image_button_state" />
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/icon_gift"
             android:layout_weight="7"
+            android:gravity="center_vertical|center_horizontal">
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/icon_gift"
             android:src="@mipmap/gift"
             android:contentDescription="@android:string/yes"
-            android:clickable="false" />
+            android:clickable="true"
+            android:background="@drawable/image_button_state" />
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/icon_sight"
             android:layout_weight="7"
+            android:gravity="center_vertical|center_horizontal">
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/icon_sight"
             android:src="@mipmap/sight"
             android:contentDescription="@android:string/yes"
-            android:clickable="false" />
+            android:clickable="true"
+            android:background="@drawable/image_button_state" />
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/icon_casino"
             android:layout_weight="7"
+            android:gravity="center_vertical|center_horizontal">
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/icon_casino"
             android:src="@mipmap/casino"
             android:contentDescription="@android:string/yes"
-            android:clickable="false" />
+            android:clickable="true"
+            android:background="@drawable/image_button_state" />
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/icon_sport"
             android:layout_weight="7"
+            android:gravity="center_vertical|center_horizontal">
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/icon_sport"
             android:src="@mipmap/sport"
             android:contentDescription="@android:string/yes"
-            android:clickable="false" />
+            android:clickable="true"
+            android:background="@drawable/image_button_state" />
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/icon_landscape"
             android:layout_weight="7"
+            android:gravity="center_vertical|center_horizontal">
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/icon_landscape"
             android:src="@mipmap/landscape"
             android:contentDescription="@android:string/yes"
-            android:clickable="false" />
+            android:clickable="true"
+            android:background="@drawable/image_button_state" />
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/icon_bus"
             android:layout_weight="7"
+            android:gravity="center_vertical|center_horizontal">
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/icon_bus"
             android:src="@mipmap/bus"
             android:contentDescription="@android:string/yes"
-            android:clickable="false" />
+            android:clickable="true"
+            android:background="@drawable/image_button_state" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

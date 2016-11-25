@@ -33,6 +33,7 @@ import de.traveltogether.model.Participant;
 import de.traveltogether.R;
 import de.traveltogether.datepicker.DatePickerFragment;
 import de.traveltogether.invitation.InvitationActivity;
+import de.traveltogether.time.TimeFormat;
 import de.traveltogether.timepicker.TimePickerFragment;
 
 import java.io.File;
@@ -66,6 +67,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     long featureId = -1;
     Spinner currencySpinner;
     ProgressDialog progressDialog;
+    Boolean isSelected = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,18 +116,22 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         EditText datePickerTimeText = (EditText) findViewById(R.id.newActivity_time);
         datePickerTimeText.setOnClickListener(this);
 
-        ImageView iconBtnPlane = (ImageView) findViewById(R.id.icon_plane);
+
+        ImageButton iconBtnEmpty = (ImageButton) findViewById(R.id.icon_empty);
+        iconBtnEmpty.setOnClickListener(this);
+        ImageButton iconBtnPlane = (ImageButton) findViewById(R.id.icon_plane);
         iconBtnPlane.setOnClickListener(this);
-        ImageView iconBtnBeach = (ImageView) findViewById(R.id.icon_beach);
+        ImageButton iconBtnBeach = (ImageButton) findViewById(R.id.icon_beach);
         iconBtnBeach.setOnClickListener(this);
-        ImageView iconBtnCocktail = (ImageView) findViewById(R.id.icon_cocktail);
+        ImageButton iconBtnCocktail = (ImageButton) findViewById(R.id.icon_cocktail);
         iconBtnCocktail.setOnClickListener(this);
-        ImageView iconBtnBall = (ImageView) findViewById(R.id.icon_ball);
+        ImageButton iconBtnBall = (ImageButton) findViewById(R.id.icon_ball);
         iconBtnBall.setOnClickListener(this);
-        ImageView iconBtnFilm = (ImageView) findViewById(R.id.icon_film);
+        ImageButton iconBtnFilm = (ImageButton) findViewById(R.id.icon_film);
         iconBtnFilm.setOnClickListener(this);
-        ImageView iconBtnCoffee = (ImageView) findViewById(R.id.icon_coffee);
+        ImageButton iconBtnCoffee = (ImageButton) findViewById(R.id.icon_coffee);
         iconBtnCoffee.setOnClickListener(this);
+
         ImageView iconBtnFood = (ImageView) findViewById(R.id.icon_food);
         iconBtnFood.setOnClickListener(this);
         ImageView iconBtnGift = (ImageView) findViewById(R.id.icon_gift);
@@ -220,6 +226,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
+        isSelected = true;
 /*
         if(v.getId()==R.id.newActivity_button_cancel){
             finish();
@@ -245,47 +252,63 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         else if (v.getId() == R.id.button_timepicker || v.getId() == R.id.newActivity_time){
             timePicker.show(getFragmentManager(), TimePickerFragment.ZEIT);
         }
-
+        else if (v.getId() == R.id.icon_empty){
+            v.setSelected(!v.isSelected());
+            iconTag = R.mipmap.plane;
+        }
         else if (v.getId() == R.id.icon_plane){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.plane;
         }
         else if (v.getId() == R.id.icon_beach){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.beach;
         }
         else if (v.getId() == R.id.icon_cocktail){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.cocktail;
         }
         else if (v.getId() == R.id.icon_ball){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.ball;
         }
         else if (v.getId() == R.id.icon_film){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.film;
         }
         else if (v.getId() == R.id.icon_coffee){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.coffee;
         }
         else if (v.getId() == R.id.icon_food){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.food;
         }
         else if (v.getId() == R.id.icon_gift){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.gift;
         }
         else if (v.getId() == R.id.icon_sight){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.sight;
         }
         else if (v.getId() == R.id.icon_casino){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.casino;
         }
         else if (v.getId() == R.id.icon_sport){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.sport;
         }
         else if (v.getId() == R.id.icon_landscape){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.landscape;
         }
         else if (v.getId() == R.id.icon_bus){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.bus;
         }
-
+        //isSelected = false;
     }
 
     public void onViewErrorMessage(String message){
@@ -324,8 +347,8 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         title.setText(activity.getTitle());
         description.setText(activity.getDescription());
         startDate.setText(activity.getDate());
-        time.setText(activity.getTime());
-
+        //time.setText(activity.getTime());
+        time.setText(TimeFormat.getInstance().getTimeWithoutSecondsWithoutWord(activity.getTime()));
         progressDialog.cancel();
     }
 

@@ -230,12 +230,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String stringGroup = Long.toString(Math.round(statistic.getGroup() * 100)) + "%";
         String stringPersonal = Long.toString(Math.round(statistic.getPersonal() * 100)) + "%";
 
-
+/*
 
         TextView groupText = (TextView) findViewById(R.id.main_menu_group_text);
         groupText.setText(stringGroup);
         TextView personalText = (TextView) findViewById(R.id.main_menu_personal_text);
         personalText.setText(stringPersonal);
+        */
         TextView startDateText = (TextView) findViewById(R.id.main_menu_countdown);
         startDateText.setText(getCountdown(statistic.getStartDate()));
         //startDateText.setText(DateFormat.getInstance().getDateAsCountdown(statistic.getStartDate()));
