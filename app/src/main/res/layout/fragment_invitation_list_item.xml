@@ -1,20 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragment_invitation_list_icon" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_marginBottom="8dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <TextView
-        android:layout_width="128dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name"
-        android:textSize="21dp"
-        android:id="@+id/fragment_invitation_list_name"
-        android:layout_gravity="left"
-        android:layout_weight="0.01" />
-</LinearLayout>
+        android:id="@+id/fragment_invitation_list_item_name"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignBottom="@+id/icon_box"
+        android:layout_toEndOf="@+id/icon_box"
+        android:textSize="21dp" />
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id = "@+id/icon_box">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/fragment_invitation_list_item_icon"
+            android:background="@drawable/circle_light_grey" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="N"
+            android:layout_gravity="center_horizontal|center"
+            android:textColor = "#FFFFFF"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="4dp"
+            android:textSize="18dp"
+            android:id="@+id/fragment_invitation_list_item_initial"
+            android:layout_alignParentStart="true"
+            />
+    </FrameLayout>
+
+    <!--EditText
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/fragment_participant_selection_list_amount"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/fragment_participant_selection_list_item_name"
+        android:hint = "Betrag"
+        android:layout_marginLeft="100dp"/-->
+
+</RelativeLayout>

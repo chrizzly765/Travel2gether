@@ -2,6 +2,7 @@ package de.traveltogether.triplist.newtrip;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,11 +19,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.datepicker.DatePickerFragment;
+import de.traveltogether.info.InfoActivity;
 import de.traveltogether.invitation.InvitationActivity;
 import de.traveltogether.model.Trip;
+import de.traveltogether.triplist.TripListActivity;
 
 public class NewTripActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
     INewTripPresenter presenter;
@@ -37,6 +42,7 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     Button save;
     long tripId;
     Trip trip;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,25 +61,32 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
         place = (EditText) findViewById(R.id.newTrip_place);
 
         if(tripId != -1){
+
+            progressDialog = ProgressDialog.show(this, "",
+                    "Reisen werden geladen...", true);
             presenter.onGetDetailsForTrip(tripId);
         }
 
         ImageButton datePickerStartBtn = (ImageButton) findViewById(R.id.button_datepicker_start);
         datePickerStartBtn.setOnClickListener(this);
+        EditText datePickerStartText = (EditText) findViewById(R.id.newTrip_startDate);
+        datePickerStartText.setOnClickListener(this);
 
         ImageButton datePickerEndBtn = (ImageButton) findViewById(R.id.button_datepicker_end);
         datePickerEndBtn.setOnClickListener(this);
+        EditText datePickerEndText = (EditText) findViewById(R.id.newTrip_endDate);
+        datePickerEndText.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.button_datepicker_start){
-            clickedDatePickerBtn = (ImageButton) v;
+        if (v.getId() == R.id.button_datepicker_start  || v.getId()==R.id.newTrip_startDate){
+            clickedDatePickerBtn = (ImageButton) findViewById(R.id.button_datepicker_start);
             datePicker.show(getFragmentManager(), DatePickerFragment.TAG);
         }
-        else if (v.getId() == R.id.button_datepicker_end){
-            clickedDatePickerBtn = (ImageButton) v;
+        else if (v.getId() == R.id.button_datepicker_end || v.getId()==R.id.newTrip_endDate){
+            clickedDatePickerBtn = (ImageButton) findViewById(R.id.button_datepicker_end);
             datePicker.show(getFragmentManager(), DatePickerFragment.TAG);
         }
     }
@@ -93,9 +106,9 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
                     presenter.onUpdateTrip(
                             new Trip(
                                     trip.getTripId(),
-                                    title.getText().toString(),
-                                    description.getText().toString(),
-                                    place.getText().toString(),
+                                    StringEscapeUtils.escapeJava(title.getText().toString()),
+                                    StringEscapeUtils.escapeJava(description.getText().toString()),
+                                    StringEscapeUtils.escapeJava(place.getText().toString()),
                                     startDate.getText().toString(),
                                     endDate.getText().toString(),
                                     trip.getAuthorId(),
@@ -105,11 +118,11 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 else {
                     presenter.onCreateTrip(
-                            title.getText().toString(),
-                            description.getText().toString(),
+                            StringEscapeUtils.escapeJava((title).getText().toString()),
+                            StringEscapeUtils.escapeJava(description.getText().toString()),
                             startDate.getText().toString(),
                             endDate.getText().toString(),
-                            place.getText().toString());
+                            StringEscapeUtils.escapeJava(place.getText().toString()));
                 }
                 break;
             default:
@@ -120,6 +133,7 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void onViewErrorMessage(String message){
+        progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(getString(R.string.error));
@@ -169,10 +183,30 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
         place.setText(trip.getDestination());
         startDate.setText(trip.getStartDate());
         endDate.setText(trip.getEndDate());
-
+        progressDialog.cancel();
     }
 
     public void onSuccessUpdateTrip(String message){
+        Intent intent = new Intent(this, InfoActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(tripId!=-1){
+            Intent intent = new Intent(this, InfoActivity.class);
+            intent.putExtra("tripId", tripId);
+            startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(this, TripListActivity.class);
+            intent.putExtra("tripId", tripId);
+            startActivity(intent);
+        }
+        finish();
+
+
     }
 }

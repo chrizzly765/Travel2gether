@@ -104,7 +104,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
             if(ConnectionResult.SUCCESS != resultCode) {
 
-                Log.d("if", "start");
                 //Check type of error
                 if(GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
                     Toast.makeText(getApplicationContext(), "Google Play Service is not install/enabled in this device!", Toast.LENGTH_LONG).show();

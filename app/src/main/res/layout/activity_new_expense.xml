@@ -4,12 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="de.traveltogether.expense.newexpense.NewExpenseActivity">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,6 +16,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="textCapSentences"
         android:id="@+id/activity_new_expense_title"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
@@ -48,6 +44,8 @@
         android:layout_weight="0.5"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_currency"
+        android:layout_alignEnd = "@+id/activity_new_expense_amount"
+        android:layout_alignBottom="@+id/activity_new_expense_amount"
         android:spinnerMode="dropdown" />
 
         </LinearLayout>
@@ -57,6 +55,8 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="textCapSentences"
+
             android:id="@+id/activity_new_expense_description"
             android:hint = "@string/description"
             android:layout_below="@+id/activity_new_expense_box_line2"
@@ -81,6 +81,9 @@
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_alignEnd = "@+id/activity_new_expense_amount"
+        android:layout_alignBottom="@+id/activity_new_expense_amount"
         android:id="@+id/spinner_paid_by"
         android:layout_weight="1"/>
         </LinearLayout>
@@ -121,10 +124,9 @@
         android:layout_height="wrap_content">
 
         <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id= "@+id/activity_new_expense_listcontainer">
-
         </FrameLayout>
 
         <ImageButton
@@ -138,6 +140,4 @@
             android:src="@mipmap/ic_add" />
 
     </RelativeLayout>
-    </RelativeLayout>
-</ScrollView>
 </RelativeLayout>

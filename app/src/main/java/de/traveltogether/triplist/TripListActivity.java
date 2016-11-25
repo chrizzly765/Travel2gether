@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -58,33 +59,34 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         progressDialog = ProgressDialog.show(this, "",
                 "Reisen werden geladen...", true);
 
-        presenter = new TripListPresenter(this);
-        presenter.onGetTrips();
-        presenter.onGetNotiCount();
+
 
     }
 
     @Override
     protected void onStart(){
         super.onStart();
+        presenter = new TripListPresenter(this);
+        presenter.onGetTrips();
+        presenter.onGetNotiCount();
     }
 
-    @Override
-    protected void onPause(){
-        super.onPause();
-        /*FragmentManager fragmentManager = getFragmentManager();
+    /*@Override
+    protected void onRestart(){
+        super.onRestart();
+        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.remove(fragment);
-        fragmentTransaction.commit();*/
+        fragmentTransaction.detach(fragmentFormer);
+        fragmentTransaction.detach(fragmentUpcoming);
+        fragmentTransaction.commit();
+    }*/
 
-    }
-
-    @Override
+    /*@Override
     protected void onResume(){
         super.onResume();
         presenter.onGetTrips();
         presenter.onGetNotiCount();
-    }
+    }*/
 
     public void onSuccessGetNotiCount(int count){
         switch (count){
@@ -119,7 +121,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         if (v.getId() == R.id.fab_button){
             Intent set = new Intent(this, NewTripActivity.class);
             startActivity(set);
-            finish();
+            //finish();
         }
     }
 
@@ -144,8 +146,6 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         //Fragment in Activity einbetten
         if(upcomingTrips.size()>0) {
             if(fragmentUpcoming==null) {
-                LinearLayout devider = (LinearLayout) findViewById(R.id.activity_trip_list_devider_upcoming);
-                devider.setVisibility(View.VISIBLE);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Trip[] arr = new Trip[upcomingTrips.size()];
@@ -153,7 +153,6 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
                 TripListFragment fragment = TripListFragment.newInstance(arr);
                 fragmentTransaction.add(R.id.fragment_trip_list_container_upcoming, fragment);
                 fragmentTransaction.commit();
-                progressDialog.cancel();
                 fragmentUpcoming = fragment;
             }
             else{
@@ -161,10 +160,16 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
                 fragmentUpcoming.refresh(upcomingTrips.toArray(array));
             }
         }
+        else{
+            findViewById(R.id.activity_trip_list_upcoming_empty).setVisibility(View.VISIBLE);
+            RelativeLayout devider = (RelativeLayout)findViewById(R.id.activity_trip_list_devider_former);
+
+            RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)devider.getLayoutParams();
+            lp.addRule(RelativeLayout.BELOW, R.id.activity_trip_list_upcoming_empty);
+            devider.setLayoutParams(lp);
+        }
         if(formerTrips.size()>0) {
             if(fragmentFormer==null) {
-                LinearLayout devider = (LinearLayout) findViewById(R.id.activity_trip_list_devider_former);
-                devider.setVisibility(View.VISIBLE);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Trip[] arr = new Trip[formerTrips.size()];
@@ -172,7 +177,6 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
                 TripListFragment fragment = TripListFragment.newInstance(arr);
                 fragmentTransaction.add(R.id.fragment_trip_list_container_former, fragment);
                 fragmentTransaction.commit();
-                progressDialog.cancel();
                 fragmentFormer = fragment;
             }
             else{
@@ -180,6 +184,11 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
                 fragmentFormer.refresh(formerTrips.toArray(array));
             }
         }
+        else{
+            findViewById(R.id.activity_trip_list_former_empty).setVisibility(View.VISIBLE);
+        }
+        progressDialog.cancel();
+
     }
 
 
@@ -196,12 +205,12 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
             case R.id.action_notification:
                 Intent noti = new Intent(this, NotificationActivity.class);
                 startActivity(noti);
-                finish();
+                //finish();
                 return true;
             case R.id.action_settings:
                 Intent options = new Intent(this, SettingsActivity.class);
                 startActivity(options);
-                finish();
+                //finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

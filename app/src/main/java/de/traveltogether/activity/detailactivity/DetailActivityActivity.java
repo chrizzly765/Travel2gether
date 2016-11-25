@@ -57,12 +57,19 @@ public class DetailActivityActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new DetailActivityPresenter(this);
+
+        getSupportActionBar().setTitle("Aktivität");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         setContentView(R.layout.activity_detail_activity);
         featureId = getIntent().getLongExtra("featureId", -1);
         tripId = getIntent().getLongExtra("tripId", -1);
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
+
         if(featureId!=-1){
             presenter.onGetDetailsForActivity(featureId);
         }
@@ -87,12 +94,14 @@ public class DetailActivityActivity extends AppCompatActivity  {
         });
 
         AlertDialog dialog = builder.create();
-        dialog.show();
+        dialog.cancel();
+        tripId=detailActivity.getTripId();
     }
 
     public void onViewDetails(Activity _activity){
         progressDialog.cancel();
         detailActivity = _activity;
+        tripId=_activity.getTripId();
         getSupportActionBar().setTitle(detailActivity.getTitle());
         title.setText(detailActivity.getTitle());
         description.setText(detailActivity.getDescription());
@@ -123,7 +132,7 @@ public class DetailActivityActivity extends AppCompatActivity  {
                 }
                 break;
             case R.id.edit:
-                Intent intent = new Intent(this, NewActivityActivity.class);
+                Intent intent = new Intent(this,NewActivityActivity.class);
                 Bundle b = new Bundle();
                 b.putLong("featureId", featureId);
                 b.putLong("tripId", tripId);

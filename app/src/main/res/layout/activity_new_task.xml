@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/activity_new_task_title"
+            android:inputType="textCapSentences"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
@@ -42,10 +43,13 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/activity_new_task_date"
                 android:hint = "Datum"
+                android:focusableInTouchMode="false"
+                android:focusable="false"
+                android:clickable="false"
+                android:cursorVisible="false"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_weight="0.1"
-                android:editable="false"/>
+                android:layout_weight="0.1"/>
 
             <ImageButton
                 android:layout_width="fill_parent"
@@ -77,9 +81,9 @@
         <Spinner
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:id="@+id/spinner_assigned_to"
-            android:layout_weight="0.4"
-            android:layout_marginTop="4dp"/>
+            android:layout_weight="0.4"/>
         </LinearLayout>
 
         <LinearLayout
@@ -102,9 +106,9 @@
         <Spinner
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:id="@+id/spinner_status"
-            android:layout_weight="0.4"
-            android:layout_marginTop="4dp"/>
+            android:layout_weight="0.4"/>
 
         </LinearLayout>
     </RelativeLayout>

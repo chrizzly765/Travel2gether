@@ -4,7 +4,7 @@
     <string name="saved_hash">Saved Hash</string>
     <string name="saved_salt">Saved Salt</string>
     <string name="saved_user_id">Saved UserId</string>
-    <string name="app_name">TravelTogether</string>
+    <string name="app_name">Travel\nTogether</string>
     <string name="logo_description">TravelTogether Logo</string>
     <!-- LoginActivity -->
     <string name="login">Anmelden</string>

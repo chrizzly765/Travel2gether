@@ -381,12 +381,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         Intent intent = new Intent(this, TripListActivity.class);
         startActivity(intent);
         finish();
-    }
+    }*/
 
     public void onSuccessGetTitle(String _title){
         title = _title;

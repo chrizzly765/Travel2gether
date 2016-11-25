@@ -14,11 +14,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/newActivity_title"
+        android:inputType="textCapSentences"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:clickable="false"
-        android:editable="true"
         android:enabled="true"
         android:hint="Titel der Aktivität" />
 
@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/newActivity_description"
         android:hint="Beschreibung"
+        android:inputType="textCapSentences"
         android:layout_below="@+id/newActivity_title"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/newActivity_title" />
@@ -48,13 +49,6 @@
             android:hint="Ort"
             android:layout_weight="1" />
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView3"
-            android:src="@mipmap/ic_place_grey"
-            android:layout_weight="5" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -69,7 +63,6 @@
             android:ems="10"
             android:id="@+id/newActivity_startDate"
             android:enabled="true"
-            android:editable="false"
             android:focusableInTouchMode="false"
             android:focusable="false"
             android:clickable="false"
@@ -83,8 +76,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button_datepicker_start"
-            android:layout_alignTop="@+id/newTrip_startDate"
-            android:layout_alignStart="@+id/newTrip_button_save"
             android:backgroundTint="@color/abc_background_cache_hint_selector_material_light"
             android:src="@mipmap/ic_calender_grey"
             android:layout_toStartOf="@+id/button_datepicker_end"
@@ -96,7 +87,6 @@
             android:layout_height="wrap_content"
             android:inputType="date"
             android:ems="10"
-            android:editable="false"
             android:focusableInTouchMode="false"
             android:focusable="false"
             android:clickable="false"
@@ -104,7 +94,6 @@
             android:id="@+id/newActivity_time"
             android:layout_alignParentStart="true"
             android:hint="Uhrzeit"
-            android:layout_below="@+id/newTrip_startDate"
             android:layout_alignParentLeft="true"
             android:layout_weight="1" />
 
@@ -261,3 +250,11 @@
     </LinearLayout>
 
 </LinearLayout>
+
+
+    <!--ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:src="@mipmap/ic_place_grey"
+        android:layout_weight="5" /-->

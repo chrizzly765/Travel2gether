@@ -47,8 +47,13 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new ExpenseDetailPresenter(this);
         setContentView(R.layout.activity_expense_detail);
+
+        getSupportActionBar().setTitle("Ausgabe");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        presenter = new ExpenseDetailPresenter(this);
         featureId = getIntent().getLongExtra("featureId", -1);
         tripId = getIntent().getLongExtra("tripId", -1);
         if(tripId!=-1){
@@ -85,7 +90,6 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         DecimalFormat df = new DecimalFormat(StaticData.currencyFormatDE);
 
         expense = _expense;
-        getSupportActionBar().setTitle(expense.getTitle());
         title.setText(expense.getTitle());
         tripId=expense.getTripId();
         description.setText(expense.getDescription());

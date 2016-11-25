@@ -19,6 +19,10 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("Chat");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         setContentView(R.layout.activity_chat);
         Bundle b = getIntent().getExtras();
         tripId = -1;
@@ -30,6 +34,11 @@ public class ChatActivity extends AppCompatActivity {
         ChatFragment fragment = ChatFragment.newInstance(tripId);
         fragmentTransaction.add(R.id.activity_chat_comment_container, fragment);
         fragmentTransaction.commit();
+
+        getSupportActionBar().setTitle("Meine Nachrichten");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
     }
 
     @Override

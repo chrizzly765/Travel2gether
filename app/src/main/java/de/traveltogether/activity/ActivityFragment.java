@@ -52,9 +52,11 @@ public class ActivityFragment extends ListFragment implements AdapterView.OnItem
     public void onStart(){
         super.onStart();
         if(formerActivities==null || formerActivities.length==0 ){
-            //TODO: show new trip listitem
+            getActivity().findViewById(R.id.activity_activities_empty).setVisibility(View.VISIBLE);
         }
         else {
+            getActivity().findViewById(R.id.activity_activities_empty).setVisibility(View.INVISIBLE);
+
             adapter = new ActivityAdapter(getActivity(), formerActivities);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);
@@ -69,6 +71,7 @@ public class ActivityFragment extends ListFragment implements AdapterView.OnItem
         Intent intent = new Intent(getActivity(), DetailActivityActivity.class);
         Bundle b = new Bundle();
         b.putLong("featureId", activity.getId());
+        b.putLong("tripId", activity.getTripId());
         intent.putExtras(b);        /*
         Bundle b = new Bundle();
         b.putString("title", formerActivities[position].getTitle());

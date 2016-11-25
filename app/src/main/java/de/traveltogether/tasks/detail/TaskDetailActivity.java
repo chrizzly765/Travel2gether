@@ -51,7 +51,10 @@ public class TaskDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail);
-
+        getSupportActionBar().setTitle("Aufgabe");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         presenter = new TaskDetailPresenter(this);
         featureId = getIntent().getLongExtra("featureId", -1);
 
@@ -72,7 +75,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         icon = (ImageView) findViewById(R.id.activity_task_detail_list_item_icon);
         watch = (ImageView)findViewById(R.id.activity_task_detail_item_icon_watch);
 
-        progressDialog = ProgressDialog.show(this, "", getResources().getString(R.string.please_wait), true);
+        progressDialog = ProgressDialog.show(this, "", "Aufgabe wird geladen...", true);
     }
 
     public void onViewError(String message){

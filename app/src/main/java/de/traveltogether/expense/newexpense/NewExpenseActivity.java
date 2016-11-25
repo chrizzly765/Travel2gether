@@ -69,6 +69,9 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_expense);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         Bundle b = getIntent().getExtras();
         if (b != null) {
@@ -78,11 +81,10 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
 
         presenter= new NewExpensePresenter(this);
         if(tripId!=-1) {
-            presenter.onGetParticipantsForTrip(tripId);
+            //presenter.onGetParticipantsForTrip(tripId);
         }
-        else{
-            onViewParticipants(StaticTripData.getActiveParticipants());
-        }
+        onViewParticipants(StaticTripData.getActiveParticipants());
+
 
         currencySpinner = (Spinner) findViewById(R.id.spinner_currency);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -129,6 +131,9 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                 if(title.getText().toString()=="" || amount.getText().toString()==""){
                     onViewError("Bitte gib die Daten vollständig an");
                     return false;
+                }
+                if(chosenParticipants.size()<1){
+                    chosenParticipants.add(new Payer(currentPayerId));
                 }
                 if(featureId!=-1){
                     expense.setTitle(title.getText().toString());
@@ -331,8 +336,10 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         chosenParticipants = (ArrayList<Payer>) expense.getAssignedPayers();
         chosenIds=new ArrayList<Integer>();
         for(int i = 0; i<participants.length; i++){
-            if(chosenParticipants.contains(participants)) {
-                chosenIds.add(i);
+            for(int j = 0; j<chosenParticipants.size(); j++){
+                if(chosenParticipants.get(j).getId() == participants[i].getPersonId()) {
+                    chosenIds.add(i);
+                }
             }
         }
         int position = 0;

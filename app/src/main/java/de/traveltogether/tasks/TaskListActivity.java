@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -87,15 +88,16 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
         List<Task> taskListDone = new ArrayList<Task>();
 
         for (Task t: _tasks) {
-            if(t.getState() == 1) {
-                taskListOpen.add(t);
+           if(t.getState() == 1) {
+               taskListOpen.add(t);
             }
             else if(t.getState() == 2) {
                 taskListProgress.add(t);
             }
             else if(t.getState() == 3) {
-                taskListDone.add(t);
-            }
+               taskListDone.add(t);
+           }
+
         }
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -103,6 +105,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
         Task[] arr;
 
         if(taskListOpen.size() > 0) {
+
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             arr = new Task[taskListOpen.size()];
             taskListOpen.toArray(arr);
@@ -111,11 +114,16 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.commit();
         }
         else {
-            findViewById(R.id.activity_task_list_empty_open).setVisibility(View.VISIBLE);
-            onEmpty(R.id.activity_task_list_empty_txt_open);
+            //findViewById(R.id.activity_task_list_open_empty).setVisibility(View.VISIBLE);
+            //onEmpty(R.id.activity_task_list_empty_txt_open);
         }
 
         if(taskListProgress.size() > 0) {
+            /*RelativeLayout rel = (RelativeLayout)findViewById(R.id.activity_task_list_divider_progress);
+            RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)rel.getLayoutParams();
+            lp.addRule(RelativeLayout.BELOW, R.id.activity_task_list_container_open);
+            rel.setLayoutParams(lp);*/
+
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             arr = new Task[taskListProgress.size()];
             taskListProgress.toArray(arr);
@@ -124,11 +132,16 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.commit();
         }
         else {
-            findViewById(R.id.activity_task_list_empty_progress).setVisibility(View.VISIBLE);
-            onEmpty(R.id.activity_task_list_empty_txt_progress);
+            //findViewById(R.id.activity_task_list_progress_empty).setVisibility(View.VISIBLE);
+            //onEmpty(R.id.activity_task_list_empty_txt_progress);
         }
 
         if(taskListDone.size() > 0) {
+            /*RelativeLayout rel = (RelativeLayout)findViewById(R.id.activity_task_list_divider_done);
+            RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)rel.getLayoutParams();
+            lp.addRule(RelativeLayout.BELOW, R.id.activity_task_list_container_progress);
+            rel.setLayoutParams(lp);*/
+
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             arr = new Task[taskListDone.size()];
             taskListDone.toArray(arr);
@@ -137,17 +150,18 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.commit();
         }
         else {
-            findViewById(R.id.activity_task_list_empty_done).setVisibility(View.VISIBLE);
-            onEmpty(R.id.activity_task_list_empty_txt_done);
+            //findViewById(R.id.activity_task_list_done_empty).setVisibility(View.VISIBLE);
+            //onEmpty(R.id.activity_task_list_empty_txt_done);
         }
         progressDialog.cancel();
     }
 
-    public void onEmpty(int id) {
+    /*public void onEmpty(int id) {
         TextView txt = (TextView)findViewById(id);
+        txt.setVisibility(View.VISIBLE);
         txt.setText(R.string.no_entries);
         txt.setHeight(20);
-    }
+    }*/
 
     public void onViewError(String message) {
 

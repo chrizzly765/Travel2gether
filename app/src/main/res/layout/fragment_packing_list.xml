@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:name="de.traveltogether.packinglist.PackingFragment"
+    android:name="de.traveltogether.packinglist.PackingListFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layoutManager="LinearLayoutManager"
-    tools:context="de.traveltogether.packinglist.PackingFragment"
+    tools:context="de.traveltogether.packinglist.PackingListFragment"
     tools:listitem="@layout/fragment_packing_list_item">
 
     <ListView android:id="@android:id/list"

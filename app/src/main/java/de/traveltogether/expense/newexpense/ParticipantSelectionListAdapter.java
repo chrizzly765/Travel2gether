@@ -80,9 +80,7 @@ public class ParticipantSelectionListAdapter extends BaseAdapter {
         Payer payer = (Payer) getItem(position);
         holder.name.setText(StaticTripData.getNameById(payer.getId()));
         holder.initial.setText(StaticTripData.getNameById(payer.getId()).substring(0,1));
-        //holder.icon.setImageDrawable(trip.getStartDate()); // TODO: set color!
-        DecimalFormat df = new DecimalFormat("#0.00");
-        //holder.amount.setText(String.valueOf(df.format(payer.getAmount()))); //TODO: set amount
+        holder.icon.setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(payer.getId()))); // TODO: set color!
         return convertView;
     }
 

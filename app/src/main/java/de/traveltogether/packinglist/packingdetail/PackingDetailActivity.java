@@ -80,7 +80,7 @@ public class PackingDetailActivity extends AppCompatActivity implements DialogIn
         tripId=packingObject.getTripId();
         getSupportActionBar().setTitle(packingObject.getTitle());
         title.setText(packingObject.getTitle());
-        count.setText(packingObject.getPackingItemsNumber());
+        count.setText(String.valueOf(packingObject.getPackingItemsNumber()));
         description.setText(packingObject.getDescription());
         onViewPackingItems(packingObject.getItems());
     }

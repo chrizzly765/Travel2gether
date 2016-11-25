@@ -6,9 +6,11 @@ package de.traveltogether.model;
 public class Login {
     String email;
     String password;
+    String token;
 
-    public Login(String _email, String _password){
+    public Login(String _email, String _password, String _token){
         email = _email;
         password = _password;
+        token = _token;
     }
 }

@@ -13,8 +13,8 @@ public class LoginPresenter implements ILoginPresenter {
         interactor = new LoginInteractor();
     }
 
-    public void onLogin(String _email, String _password){
-        interactor.login(_email, _password, this);
+    public void onLogin(String _email, String _password, String _token){
+        interactor.login(_email, _password, _token, this);
     }
 
     public void onSuccess(String message){

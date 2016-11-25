@@ -32,6 +32,9 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Benachrichtigungen");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         presenter= new NotificationPresenter(this);
         setContentView(R.layout.activity_notification);
         presenter.onGetNotificationList();
@@ -40,7 +43,6 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     void onViewNotificationList(Notification[] _notifications){
-        progressDialog.cancel();
         this.notifications = _notifications;
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -48,6 +50,7 @@ public class NotificationActivity extends AppCompatActivity {
         NotificationFragment fragment = NotificationFragment.newInstance(_notifications, this);
         fragmentTransaction.add(R.id.activity_notification_fragment_container, fragment);
         fragmentTransaction.commit();
+        progressDialog.cancel();
     }
 
     void onViewErrorMessage(String message){
@@ -65,11 +68,11 @@ public class NotificationActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         Intent intent = new Intent(this, TripListActivity.class);
         startActivity(intent);
         finish();
-    }
+    }*/
 
 }

@@ -2,7 +2,10 @@ package de.traveltogether.triplist;
 
 import android.app.ListFragment;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +37,8 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
     public void refresh(Trip[] _trips){
         trips=_trips;
         adapter.refresh(trips);
+        adapter.notifyDataSetChanged();
+
     }
 
     // TODO: Customize parameter initialization
@@ -68,11 +73,15 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);
 
+            Resources resources = getActivity().getResources();
+            DisplayMetrics metrics = resources.getDisplayMetrics();
+            int px = (int)(102 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
+            int unbounded = View.MeasureSpec.makeMeasureSpec(px, View.MeasureSpec.AT_MOST);
             ViewGroup vg = getListView();
             int totalHeight = 0;
             for (int i = 0; i < adapter.getCount(); i++) {
                 View listItem = adapter.getView(i, null, vg);
-                listItem.measure(0, 0);
+                listItem.measure(unbounded, unbounded);
                 totalHeight += listItem.getMeasuredHeight();
             }
 
@@ -96,6 +105,6 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
         b.putInt("adminId", trips[position].getAdminId());
         mainMenu.putExtras(b); //Put your id to your next Intent
         startActivity(mainMenu);
-        getActivity().finish();
+        //getActivity().finish();
     }
 }
