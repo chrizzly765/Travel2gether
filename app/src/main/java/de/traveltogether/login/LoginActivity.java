@@ -3,9 +3,12 @@ package de.traveltogether.login;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,8 +17,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import de.traveltogether.R;
+import de.traveltogether.gcm.GCMRegistrationIntentService;
 import de.traveltogether.register.RegisterActivity;
+import de.traveltogether.servercommunication.HashFactory;
 import de.traveltogether.triplist.TripListActivity;
 
 import static de.traveltogether.servercommunication.HashFactory.hashPassword;
@@ -27,7 +35,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected EditText email;
     protected EditText password;
     protected ILoginPresenter presenter;
+    String salt;
     ProgressDialog progressDialog;
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +96,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         CharSequence text = getString(R.string.login_success);
         int duration = Toast.LENGTH_SHORT;
 
+
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
         Intent tLIntent = new Intent(this, TripListActivity.class);
@@ -95,12 +107,56 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return this;
     }
 
-    public void onGetSaltSuccess(String salt){
-        int length = password.getText().length();
-        char [] pw = new char[length];
-        password.getText().getChars(0,length, pw, 0);
-        String hash = hashPassword(pw, salt);
-        presenter.onLogin(email.getText().toString(), hash);
+    public void onGetSaltSuccess(String _salt){
+        salt = _salt;
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                //Check type of intent filter
+                if(intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_SUCCESS)){
+                    //Registration success
+                    String token = intent.getStringExtra("token");
+
+                    int length = password.getText().length();
+                    char [] pw = new char[length];
+                    password.getText().getChars(0,length, pw, 0);
+                    String hash = hashPassword(pw, salt);
+                    presenter.onLogin(email.getText().toString(), hash, token);
+
+
+                } else if(intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_ERROR)){
+                    //Registration error
+                    onViewError("Error in receiving token from GCM.");
+                }
+            }
+        };
+
+
+        //Check status of Google play service in device
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
+        if(ConnectionResult.SUCCESS != resultCode) {
+
+            //Check type of error
+            if(GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                Toast.makeText(getApplicationContext(), "Google Play Service is not install/enabled in this device!", Toast.LENGTH_LONG).show();
+                //So notification
+                GooglePlayServicesUtil.showErrorNotification(resultCode, getApplicationContext());
+            } else {
+                Toast.makeText(getApplicationContext(), "This device does not support for Google Play Service!", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            //Start service
+            Intent itent = new Intent(this, GCMRegistrationIntentService.class);
+            startService(itent);
+        }
+
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(GCMRegistrationIntentService.REGISTRATION_SUCCESS));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(GCMRegistrationIntentService.REGISTRATION_ERROR));
+
+
     }
 
     public void onBackPressed(){

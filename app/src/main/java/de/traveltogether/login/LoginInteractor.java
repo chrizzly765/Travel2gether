@@ -22,10 +22,10 @@ public class LoginInteractor implements ILoginInteractor {
     ILoginPresenter listener;
     String hash;
 
-    public void login(String _email, String _hash, ILoginPresenter _listener){
+    public void login(String _email, String _hash, String _token, ILoginPresenter _listener){
         listener = _listener;
         hash = _hash;
-        Login log = new Login(_email, _hash);
+        Login log = new Login(_email, _hash, _token);
 
         String jsonString = JsonDecode.getInstance().classToJson(log).replace("\\n", "\n");
         HttpRequest request = new HttpRequest(DataType.LOGIN, ActionType.LOGIN, jsonString, this);
