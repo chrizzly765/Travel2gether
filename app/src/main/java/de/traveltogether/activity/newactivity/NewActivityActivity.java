@@ -254,7 +254,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         }
         else if (v.getId() == R.id.icon_empty){
             v.setSelected(!v.isSelected());
-            //v.setSelected(isSelected);
             iconTag = R.mipmap.plane;
         }
         else if (v.getId() == R.id.icon_plane){
