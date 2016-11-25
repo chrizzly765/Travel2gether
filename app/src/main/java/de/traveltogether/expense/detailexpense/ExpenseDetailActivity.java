@@ -41,7 +41,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     TextView amount;
     TextView paidBy;
     ProgressDialog progressDialog;
-
+    ExpenseDetailFragment payersFragment;
     Expense expense;
 
     @Override
@@ -59,15 +59,31 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
-        if(featureId!=-1){
-            presenter.onGetDetailsForExpense(featureId);
-        }
+
         title = (TextView) findViewById(R.id.activity_expense_detail_title);
         description = (TextView) findViewById(R.id.activity_expense_detail_description);
         amount = (TextView) findViewById(R.id.activity_expense_detail_amount);
         paidBy = (TextView)findViewById(R.id.activity_expense_detail_paidby);
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
         progressDialog = ProgressDialog.show(this, "",
                 "Bitte warten...", true);
+        if(featureId!=-1){
+            presenter.onGetDetailsForExpense(featureId);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.detach(payersFragment);
+        fragmentTransaction.commit();
+        super.onSaveInstanceState(outState);
     }
 
     public void onViewError(String message){
@@ -111,8 +127,8 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     public void onViewPayers(List<Payer> payerList){
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        ExpenseDetailFragment fragment = ExpenseDetailFragment.newInstance(payerList);
-        fragmentTransaction.add(R.id.activity_expense_detail_list_container, fragment);
+        payersFragment = ExpenseDetailFragment.newInstance(payerList);
+        fragmentTransaction.add(R.id.activity_expense_detail_list_container, payersFragment);
         fragmentTransaction.commit();
 
         progressDialog.cancel();
@@ -143,7 +159,6 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 b.putLong("tripId", tripId);
                 intent.putExtras(b);
                 startActivity(intent);
-                finish();
                 break;
             default:
                 super.onOptionsItemSelected(item);
@@ -154,17 +169,13 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
     public void onSuccessDelete(){
         //TODO: toast
-        if(tripId!=-1) {
-            Intent intent = new Intent(this, ExpenseActivity.class);
-            intent.putExtra("tripId", tripId);
-            startActivity(intent);
-        }
+
         finish();
     }
+
 
     public void onCloseActivity(){
         finish();
     }
-
 
 }

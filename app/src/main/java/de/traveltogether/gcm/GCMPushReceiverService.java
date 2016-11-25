@@ -26,6 +26,7 @@ import de.traveltogether.DataType;
 import de.traveltogether.IInteractor;
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
+import de.traveltogether.chat.ChatActivity;
 import de.traveltogether.model.Notification;
 import de.traveltogether.model.Response;
 import de.traveltogether.notification.NotificationActivity;
@@ -43,7 +44,17 @@ public class GCMPushReceiverService extends GcmListenerService{
         String id = data.getString("id");
         String date = data.getString("date");
         String message = data.getString("message");
-        sendNotification(message);
+        if(type.equals(DataType.CHAT.toString())){
+            if(StaticData.currentActivity!=null && StaticData.currentActivity.getClass() == ChatActivity.class){
+                ((ChatActivity)StaticData.currentActivity).update();
+            }
+            else {
+                sendNotification(message);
+            }
+        }
+        else {
+            sendNotification(message);
+        }
     }
     private void sendNotification(String message) {
         Intent intent = new Intent(this, NotificationActivity.class);

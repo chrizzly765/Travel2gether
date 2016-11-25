@@ -22,10 +22,10 @@ public class LoginInteractor implements ILoginInteractor {
     ILoginPresenter listener;
     String hash;
 
-    public void login(String _email, String _hash, String _token, ILoginPresenter _listener){
+    public void login(String _email, String _hash, ILoginPresenter _listener){
         listener = _listener;
         hash = _hash;
-        Login log = new Login(_email, _hash, _token);
+        Login log = new Login(_email, _hash);
 
         String jsonString = JsonDecode.getInstance().classToJson(log).replace("\\n", "\n");
         HttpRequest request = new HttpRequest(DataType.LOGIN, ActionType.LOGIN, jsonString, this);
@@ -44,12 +44,28 @@ public class LoginInteractor implements ILoginInteractor {
 
     }
 
+    @Override
+    public void updateToken(String token, ILoginPresenter _listener) {
+        try {
+            listener = _listener;
+            JSONObject obj = new JSONObject();
+            obj.put("deviceId", token);
+            obj.put("personId", StaticData.getUserId());
+
+            //TODO: when server ready
+            HttpRequest request = new HttpRequest(DataType.PERSON, ActionType.UPDATEDEVICEID, obj.toString(), this);
+        }
+        catch(Exception e){
+            //TODO
+        }
+    }
+
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType){
         if(response.getError()=="true"){
             listener.onError(response.getMessage());
         }
         else {
-            if(dataType == DataType.LOGIN && actionType == ActionType.GETSALT) {
+            if (dataType == DataType.LOGIN && actionType == ActionType.GETSALT) {
                 String salt = "";
                 try {
                     JSONObject json = new JSONObject(response.getData());
@@ -59,13 +75,12 @@ public class LoginInteractor implements ILoginInteractor {
                     listener.onError("Error in getting salt");
                     Log.d("Error: ", "Error in getting salt");
                 }
-                if(salt!="") {
+                if (salt != "") {
                     listener.onReturnSalt(salt);
-                }else{
+                } else {
                     listener.onError("Error in getting salt");
                 }
-            }
-            else if(dataType ==DataType.LOGIN && actionType == ActionType.LOGIN){
+            } else if (dataType == DataType.LOGIN && actionType == ActionType.LOGIN) {
                 //save hash in shared prefs
                 int userId = -1;
 
@@ -78,20 +93,22 @@ public class LoginInteractor implements ILoginInteractor {
                     Log.d("Error: ", e.getMessage());
                 }
 
-                SharedPreferences sharedPref =  listener.getView().getSharedPreferences("TravelTogetherPrefs", Context.MODE_PRIVATE);
+                SharedPreferences sharedPref = listener.getView().getSharedPreferences("TravelTogetherPrefs", Context.MODE_PRIVATE);
                 //SharedPreferences sharedPref = listener.getView().getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString(listener.getView().getString(R.string.saved_hash), hash);
                 if (userId != -1) {
                     editor.putInt(listener.getView().getString(R.string.saved_user_id), userId);
                     StaticData.setUserId(userId);
-                }
-                else{
+                } else {
                     listener.onError("Fehler beim Anmelden. Bitte versuche es erneut.");//TODO: String Ersetzen
                 }
                 //editor.apply();
                 boolean saved = editor.commit();
                 listener.onSuccess(response.getMessage());
+            } else if (dataType == DataType.PERSON && actionType == ActionType.UPDATEDEVICEID) {
+                Log.d("LoginInteractor", "DeviceId updated");
+                //TODO: do we have to do something?
             }
         }
     }

@@ -30,6 +30,9 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
     long tripId;
     ITaskListPresenter presenter;
     ProgressDialog progressDialog;
+    TaskListFragment fragmentOpen;
+    TaskListFragment fragmentProgress;
+    TaskListFragment fragmentDone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,19 +56,29 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
         ImageButton newTaskBtn = (ImageButton) findViewById(R.id.activity_task_list_button_add);
         newTaskBtn.setOnClickListener(this);
         presenter = new TaskListPresenter(this);
-        presenter.onGetTasks(tripId);
 
-        progressDialog = ProgressDialog.show(this, "", getResources().getString(R.string.please_wait), true);
     }
 
     @Override
     protected void onStart(){
         super.onStart();
+        presenter.onGetTasks(tripId);
+        progressDialog = ProgressDialog.show(this, "", getResources().getString(R.string.please_wait), true);
     }
 
     @Override
-    protected void onPause(){
-        super.onPause();
+    protected void onSaveInstanceState(Bundle outState){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if(fragmentOpen!=null)
+            fragmentTransaction.detach(fragmentOpen);
+        if(fragmentProgress!=null)
+            fragmentTransaction.detach(fragmentProgress);
+        if(fragmentDone!=null)
+            fragmentTransaction.detach(fragmentDone);
+
+        fragmentTransaction.commit();
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -75,7 +88,6 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             Intent intent = new Intent(this, NewTaskActivity.class);
             intent.putExtra("tripId", tripId);
             startActivity(intent);
-            finish();
         }
     }
 
@@ -109,7 +121,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             arr = new Task[taskListOpen.size()];
             taskListOpen.toArray(arr);
-            TaskListFragment fragmentOpen = TaskListFragment.newInstance(arr);
+            fragmentOpen = TaskListFragment.newInstance(arr);
             fragmentTransaction.add(R.id.activity_task_list_container_open, fragmentOpen);
             fragmentTransaction.commit();
         }
@@ -127,7 +139,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             arr = new Task[taskListProgress.size()];
             taskListProgress.toArray(arr);
-            TaskListFragment fragmentProgress = TaskListFragment.newInstance(arr);
+            fragmentProgress = TaskListFragment.newInstance(arr);
             fragmentTransaction.add(R.id.activity_task_list_container_progress, fragmentProgress);
             fragmentTransaction.commit();
         }
@@ -145,7 +157,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             arr = new Task[taskListDone.size()];
             taskListDone.toArray(arr);
-            TaskListFragment fragmentDone = TaskListFragment.newInstance(arr);
+            fragmentDone = TaskListFragment.newInstance(arr);
             fragmentTransaction.add(R.id.activity_task_list_container_done, fragmentDone);
             fragmentTransaction.commit();
         }
@@ -177,13 +189,5 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
 
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("tripId", tripId);
-        startActivity(intent);
-        finish();
     }
 }

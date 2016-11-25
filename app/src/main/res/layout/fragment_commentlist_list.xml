@@ -13,7 +13,7 @@
 <ListView android:id="@android:id/list"
 android:layout_width="fill_parent"
 android:layout_height="wrap_content"
-    tools:listitem="@android:layout/simple_expandable_list_item_2"
+    tools:listitem="@layout/fragment_commentlist_list_item"
     android:divider="#000000"
     android:dividerHeight="0dp" />
 

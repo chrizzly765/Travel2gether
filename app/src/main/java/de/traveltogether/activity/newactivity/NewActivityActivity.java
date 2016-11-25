@@ -98,9 +98,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
 
         if(featureId!=-1){
             getSupportActionBar().setTitle("Aktivität bearbeiten");
-            presenter.onGetDetailForActivity(featureId);
-            progressDialog = ProgressDialog.show(this, "",
-                    "Bitte warten...", true);
         }
         else {
             getSupportActionBar().setTitle("Neue Aktivität");
@@ -146,6 +143,17 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         iconBtnLandscape.setOnClickListener(this);
         ImageView iconBtnBus = (ImageView) findViewById(R.id.icon_bus);
         iconBtnBus.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        if(featureId!=-1) {
+            presenter.onGetDetailForActivity(featureId);
+            progressDialog = ProgressDialog.show(this, "",
+                    "Bitte warten...", true);
+        }
     }
 
 
@@ -204,9 +212,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-        Intent intent = new Intent(this, ActivitiesActivity.class);
-        intent.putExtra("tripId", tripId);
-        startActivity(intent);
         finish();
     }
 
@@ -332,12 +337,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-        Intent intent = new Intent(this, DetailActivityActivity.class);
-        Bundle b = new Bundle();
-        b.putLong("featureId", featureId);
-        b.putLong("tripId", tripId);
-        intent.putExtras(b);
-        startActivity(intent);
         finish();
     }
 
@@ -386,44 +385,21 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     }
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
-            String stringHour = "";
-            String stringMinute = "";
-            if (hour < 10) {
-                stringHour = "0" + Integer.toString(hour);
-            }
-            else {
-                stringHour = Integer.toString(hour);
-            }
-            if (minute < 10) {
-                 stringMinute = "0" + Integer.toString(minute);
-            }
-            else {
-                stringMinute = Integer.toString(minute);
-            }
-
-            time.setText(stringHour + ":" + stringMinute);
-            Log.d("TimeTest", "Test: "  + hour + " " +  minute);
-            timePicker.setTime(hour, minute);
-    }
-    @Override
-    public void onBackPressed() {
-        if(featureId!=-1){
-            Intent intent = new Intent(this, DetailActivityActivity.class);
-            Bundle b = new Bundle();
-            b.putLong("featureId", featureId);
-            b.putLong("tripId", tripId);
-            intent.putExtras(b);
-            startActivity(intent);
+        String stringHour = "";
+        String stringMinute = "";
+        if (hour < 10) {
+            stringHour = "0" + Integer.toString(hour);
+        } else {
+            stringHour = Integer.toString(hour);
         }
-        else {
-            Intent intent = new Intent(this, ActivitiesActivity.class);
-            intent.putExtra("tripId", tripId);
-            startActivity(intent);
+        if (minute < 10) {
+            stringMinute = "0" + Integer.toString(minute);
+        } else {
+            stringMinute = Integer.toString(minute);
         }
-        finish();
+
+        time.setText(stringHour + ":" + stringMinute);
+        Log.d("TimeTest", "Test: " + hour + " " + minute);
+        timePicker.setTime(hour, minute);
     }
-
-
-
-
 }

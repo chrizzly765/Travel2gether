@@ -7,6 +7,7 @@ import de.traveltogether.IInteractor;
  */
 public interface ILoginInteractor extends IInteractor{
 
-    public void login(String email, String hash, String _token, ILoginPresenter listener);
+    public void login(String email, String hash, ILoginPresenter listener);
     public void getSalt(String email, ILoginPresenter listener);
+    public void updateToken(String token, ILoginPresenter listener);
 }

@@ -40,11 +40,4 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             finish();
         }
     }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, TripListActivity.class);
-        startActivity(intent);
-        finish();
-    }
 }

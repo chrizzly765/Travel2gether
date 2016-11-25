@@ -45,6 +45,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("onCreate", "create");
 
         setContentView(R.layout.activity_trip_list);
         getSupportActionBar().setTitle("Meine Reisen");
@@ -55,38 +56,30 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         //optionsBtn.setOnClickListener(this);
         ImageButton newTripBtn = (ImageButton) findViewById(R.id.fab_button);
         newTripBtn.setOnClickListener(this);
-
-        progressDialog = ProgressDialog.show(this, "",
-                "Reisen werden geladen...", true);
-
-
-
     }
 
     @Override
     protected void onStart(){
+        Log.e("onStart", "start");
         super.onStart();
+        progressDialog = ProgressDialog.show(this, "",
+                "Reisen werden geladen...", true);
         presenter = new TripListPresenter(this);
-        presenter.onGetTrips();
         presenter.onGetNotiCount();
+        presenter.onGetTrips();
     }
 
-    /*@Override
-    protected void onRestart(){
-        super.onRestart();
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.detach(fragmentFormer);
-        fragmentTransaction.detach(fragmentUpcoming);
+        if(fragmentFormer!=null)
+            fragmentTransaction.detach(fragmentFormer);
+        if(fragmentUpcoming!=null)
+            fragmentTransaction.detach(fragmentUpcoming);
         fragmentTransaction.commit();
-    }*/
-
-    /*@Override
-    protected void onResume(){
-        super.onResume();
-        presenter.onGetTrips();
-        presenter.onGetNotiCount();
-    }*/
+        super.onSaveInstanceState(outState);
+    }
 
     public void onSuccessGetNotiCount(int count){
         switch (count){
@@ -126,7 +119,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void onViewTrips(Trip[] _trips){
-        Log.d("TripListActivity", "got trips: "+_trips.length);
+        Log.e("TripListActivity", "got trips: "+_trips.length);
         trips= _trips;
         List<Trip> formerTrips = new ArrayList<Trip>();
         List<Trip> upcomingTrips = new ArrayList<Trip>();
@@ -145,20 +138,14 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
 
         //Fragment in Activity einbetten
         if(upcomingTrips.size()>0) {
-            if(fragmentUpcoming==null) {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Trip[] arr = new Trip[upcomingTrips.size()];
-                upcomingTrips.toArray(arr);
-                TripListFragment fragment = TripListFragment.newInstance(arr);
-                fragmentTransaction.add(R.id.fragment_trip_list_container_upcoming, fragment);
-                fragmentTransaction.commit();
-                fragmentUpcoming = fragment;
-            }
-            else{
-                Trip[] array =  new Trip[upcomingTrips.size()];
-                fragmentUpcoming.refresh(upcomingTrips.toArray(array));
-            }
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Trip[] arr = new Trip[upcomingTrips.size()];
+            upcomingTrips.toArray(arr);
+            TripListFragment fragment = TripListFragment.newInstance(arr);
+            fragmentTransaction.add(R.id.fragment_trip_list_container_upcoming, fragment);
+            fragmentTransaction.commit();
+            fragmentUpcoming = fragment;
         }
         else{
             findViewById(R.id.activity_trip_list_upcoming_empty).setVisibility(View.VISIBLE);
@@ -169,20 +156,15 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
             devider.setLayoutParams(lp);
         }
         if(formerTrips.size()>0) {
-            if(fragmentFormer==null) {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Trip[] arr = new Trip[formerTrips.size()];
-                formerTrips.toArray(arr);
-                TripListFragment fragment = TripListFragment.newInstance(arr);
-                fragmentTransaction.add(R.id.fragment_trip_list_container_former, fragment);
-                fragmentTransaction.commit();
-                fragmentFormer = fragment;
-            }
-            else{
-                Trip[] array =  new Trip[formerTrips.size()];
-                fragmentFormer.refresh(formerTrips.toArray(array));
-            }
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Trip[] arr = new Trip[formerTrips.size()];
+            formerTrips.toArray(arr);
+            TripListFragment fragment = TripListFragment.newInstance(arr);
+            fragmentTransaction.add(R.id.fragment_trip_list_container_former, fragment);
+            //fragmentTransaction.attach(fragment);
+            fragmentTransaction.commit();
+            fragmentFormer = fragment;
         }
         else{
             findViewById(R.id.activity_trip_list_former_empty).setVisibility(View.VISIBLE);

@@ -75,7 +75,6 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
 
         if(featureId != -1) {
             getSupportActionBar().setTitle("Aufgabe bearbeiten");
-            presenter.onGetDetailsForTask(featureId);
         }
 
         onViewParticipants(StaticTripData.getActiveParticipants());
@@ -89,6 +88,14 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
                 R.array.status, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         status.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        if(featureId != -1) {
+            presenter.onGetDetailsForTask(featureId);
+        }
     }
 
 
@@ -161,23 +168,11 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     public void onSuccessAddingTask(){
         Toast.makeText(getApplicationContext(), R.string.task_added, Toast.LENGTH_SHORT).show();
         finish();
-        updateActivity(this);
     }
 
     public void onSuccessUpdateTask(){
         tripId = task.getTripId();
         Toast.makeText(getApplicationContext(), R.string.task_updated, Toast.LENGTH_SHORT).show();
-        finish();
-        updateActivity(this);
-    }
-
-    public void updateActivity(Context c) {
-
-        Intent intent = new Intent(c, TaskListActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putLong("tripId", tripId);
-        intent.putExtras(bundle);
-        c.startActivity(intent);
         finish();
     }
 
@@ -259,23 +254,5 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
             date.setText(dayOfMonth + "." + month+"." + year);
             datePicker.setDate(year, month, dayOfMonth+1);
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(featureId!=-1){
-            Intent intent = new Intent(this, TaskDetailActivity.class);
-            Bundle b = new Bundle();
-            b.putLong("featureId", featureId);
-            b.putLong("tripId", tripId);
-            intent.putExtras(b);
-            startActivity(intent);
-        }
-        else {
-            Intent intent = new Intent(this, TaskListActivity.class);
-            intent.putExtra("tripId", tripId);
-            startActivity(intent);
-        }
-        finish();
     }
 }

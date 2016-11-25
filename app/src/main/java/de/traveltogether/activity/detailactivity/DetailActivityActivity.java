@@ -70,17 +70,22 @@ public class DetailActivityActivity extends AppCompatActivity  {
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
-
-        if(featureId!=-1){
-            presenter.onGetDetailsForActivity(featureId);
-        }
         title = (TextView) findViewById(R.id.detailActivity_title);
         description = (TextView) findViewById(R.id.detailActivity_description);
         date = (TextView) findViewById(R.id.detailActivity_date);
         time = (TextView)findViewById(R.id.detailActivity_time);
         place = (TextView)findViewById(R.id.detailActivity_place);
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
         progressDialog = ProgressDialog.show(this, "",
                 "Bitte warten...", true);
+        if(featureId!=-1){
+            presenter.onGetDetailsForActivity(featureId);
+        }
     }
 
     public void onViewError(String message){
@@ -140,7 +145,6 @@ public class DetailActivityActivity extends AppCompatActivity  {
                 b.putLong("tripId", tripId);
                 intent.putExtras(b);
                 startActivity(intent);
-                finish();
                 break;
             default:
                 super.onOptionsItemSelected(item);
@@ -189,21 +193,10 @@ public class DetailActivityActivity extends AppCompatActivity  {
 
     public void onSuccessDelete(){
         //TODO: toast
-        if(tripId!=-1) {
-            Intent intent = new Intent(this, ActivitiesActivity.class);
-            intent.putExtra("tripId", tripId);
-            startActivity(intent);
-        }
+
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, ActivitiesActivity.class);
-        intent.putExtra("tripId", tripId);
-        startActivity(intent);
-        finish();
-    }
 
     /*
     public void onTimeSet(int hour, int minute) {

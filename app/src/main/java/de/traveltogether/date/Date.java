@@ -30,43 +30,43 @@ public class Date {
 
             switch (month) {
                 case 1:
-                    monthAsWord = "Januar";
+                    monthAsWord = "Jan";
                     break;
                 case 2:
-                    monthAsWord = "Februar";
+                    monthAsWord = "Feb";
                     break;
                 case 3:
-                    monthAsWord = "März";
+                    monthAsWord = "Mär";
                     break;
                 case 4:
-                    monthAsWord = "April";
+                    monthAsWord = "Apr";
                     break;
                 case 5:
                     monthAsWord = "Mai";
                     break;
                 case 6:
-                    monthAsWord = "Juni";
+                    monthAsWord = "Jun";
                     break;
                 case 7:
-                    monthAsWord = "Juli";
+                    monthAsWord = "Jul";
                     break;
                 case 8:
-                    monthAsWord = "August";
+                    monthAsWord = "Aug";
                     break;
                 case 9:
-                    monthAsWord = "September";
+                    monthAsWord = "Sep";
                     break;
                 case 10:
-                    monthAsWord = "Oktober";
+                    monthAsWord = "Okt";
                     break;
                 case 11:
-                    monthAsWord = "November";
+                    monthAsWord = "Nov";
                     break;
                 case 12:
-                    monthAsWord = "Dezember";
+                    monthAsWord = "Dez";
                     break;
                 default:
-                    monthAsWord = "Januar";
+                    monthAsWord = "Jan";
                     break;
             }
     }

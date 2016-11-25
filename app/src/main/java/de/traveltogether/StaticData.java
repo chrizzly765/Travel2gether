@@ -1,5 +1,6 @@
 package de.traveltogether;
 
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class StaticData {
     static private int UserId;
     static public String currencyFormatDE = "#0.00";
     static public String currencySymbolDE = "€";
+    static public AppCompatActivity currentActivity;
 
     static public int getUserId() {
         return UserId;

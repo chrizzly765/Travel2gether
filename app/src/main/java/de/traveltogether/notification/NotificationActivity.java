@@ -26,7 +26,22 @@ public class NotificationActivity extends AppCompatActivity {
     INotificationPresenter presenter;
     Notification[] notifications;
     ProgressDialog progressDialog;
+    NotificationFragment fragment;
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.detach(fragment);
+        fragmentTransaction.commit();
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        presenter.onGetNotificationList();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +52,6 @@ public class NotificationActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         presenter= new NotificationPresenter(this);
         setContentView(R.layout.activity_notification);
-        presenter.onGetNotificationList();
         progressDialog = ProgressDialog.show(this, "",
                 "Benachrichtigungen werden geladen...", true);
     }
@@ -47,7 +61,7 @@ public class NotificationActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        NotificationFragment fragment = NotificationFragment.newInstance(_notifications, this);
+        fragment = NotificationFragment.newInstance(_notifications, this);
         fragmentTransaction.add(R.id.activity_notification_fragment_container, fragment);
         fragmentTransaction.commit();
         progressDialog.cancel();
@@ -67,12 +81,5 @@ public class NotificationActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-    /*@Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, TripListActivity.class);
-        startActivity(intent);
-        finish();
-    }*/
 
 }

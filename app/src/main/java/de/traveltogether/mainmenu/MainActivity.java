@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         personalStatisticAnimation = (AnimationDrawable) personalAnimationContainer.getBackground();
 
 
+        presenter.onGetParticipantsForTrip(tripId);
+
         //groupText = (TextView) findViewById(R.id.main_menu_group_text);
         //startDateText = (TextView) findViewById(R.id.main_menu_countdown);
 
@@ -97,10 +99,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         activities.setOnClickListener(this);
         ImageButton chat = (ImageButton)findViewById(R.id.main_menu_chat);
         chat.setOnClickListener(this);
+    }
 
+    @Override
+    protected void onStart(){
+        super.onStart();
 
-
-        presenter.onGetParticipantsForTrip(tripId);
         progressDialog = ProgressDialog.show(this, "",
                 "Bitte warten...", true);
 
@@ -265,7 +269,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 personalStatisticAnimation.stop();
             }
         }, timeoutPersonal);
-
         progressDialog.cancel();
     }
 
@@ -338,7 +341,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);
             startActivity(intent);
-            finish();
         }
         else if(v.getId()==R.id.main_menu_expences){
             Intent intent = new Intent(this, ExpenseActivity.class);
@@ -346,7 +348,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);
             startActivity(intent);
-            finish();
         }
         else if(v.getId()==R.id.main_menu_activities){
             Intent intent = new Intent(this, ActivitiesActivity.class);
@@ -354,7 +355,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);
             startActivity(intent);
-            finish();
         }
         else if(v.getId()==R.id.main_menu_chat){
             Intent intent = new Intent(this, ChatActivity.class);
@@ -369,7 +369,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);
             startActivity(intent);
-            finish();
         }
         else if(v.getId()==R.id.main_menu_packing){
             Intent intent = new Intent(this, PackingListActivity.class);
@@ -377,20 +376,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);
             startActivity(intent);
-            finish();
         }
     }
-
-
-    /*@Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, TripListActivity.class);
-        startActivity(intent);
-        finish();
-    }*/
 
     public void onSuccessGetTitle(String _title){
         title = _title;
         getSupportActionBar().setTitle(title);
+        progressDialog.cancel();
     }
 }

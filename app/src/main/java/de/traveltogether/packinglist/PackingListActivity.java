@@ -61,11 +61,26 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
         //ImageButton newTripBtn = (ImageButton) findViewById(R.id.fab_button);
         //newTripBtn.setOnClickListener(this);
         presenter = new PackingListPresenter(this);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        progressDialog = ProgressDialog.show(this, "",
+                "Packliste wird geladen...", true);
 
         presenter.onGetPackingObjects(tripId);
 
-        progressDialog = ProgressDialog.show(this, "",
-                "Packliste wird geladen...", true);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if(fragment!=null)
+        fragmentTransaction.detach(fragment);
+        fragmentTransaction.commit();
+        super.onSaveInstanceState(outState);
     }
 
     public void onViewPackingObjects(PackingObject[] _packingobjects){
@@ -79,7 +94,7 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
             //Fragment in Activity einbetten
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            PackingListFragment fragment = PackingListFragment.newInstance(_packingobjects);
+            fragment = PackingListFragment.newInstance(_packingobjects);
             fragmentTransaction.add(R.id.fragment_packing_list_container, fragment);
             fragmentTransaction.commit();
         }
@@ -93,7 +108,6 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
             Intent set = new Intent(this, NewPackingItemActivity.class);
             set.putExtra("tripId", tripId);
             startActivity(set);
-            finish();
         }
     }
 
@@ -111,13 +125,4 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("tripId", tripId);
-        startActivity(intent);
-        finish();
-    }
-
 }

@@ -99,16 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-        Intent tLIntent = new Intent(this, TripListActivity.class);
-        startActivity(tLIntent);
-    }
 
-    public Activity getActivity() {
-        return this;
-    }
-
-    public void onGetSaltSuccess(String _salt){
-        salt = _salt;
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -116,14 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if(intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_SUCCESS)){
                     //Registration success
                     String token = intent.getStringExtra("token");
-
-                    int length = password.getText().length();
-                    char [] pw = new char[length];
-                    password.getText().getChars(0,length, pw, 0);
-                    String hash = hashPassword(pw, salt);
-                    presenter.onLogin(email.getText().toString(), hash, token);
-
-
+                    presenter.onUpdateToken(token);
                 } else if(intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_ERROR)){
                     //Registration error
                     onViewError("Error in receiving token from GCM.");
@@ -157,6 +141,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 new IntentFilter(GCMRegistrationIntentService.REGISTRATION_ERROR));
 
 
+
+        Intent tLIntent = new Intent(this, TripListActivity.class);
+        startActivity(tLIntent);
+    }
+
+    public Activity getActivity() {
+        return this;
+    }
+
+    public void onGetSaltSuccess(String _salt){
+        salt = _salt;
+        int length = password.getText().length();
+
+        char [] pw = new char[length];
+        password.getText().getChars(0,length, pw, 0);
+
+        String hash = hashPassword(pw, salt);
+        presenter.onLogin(email.getText().toString(), hash);
     }
 
     public void onBackPressed(){

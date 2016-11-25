@@ -57,11 +57,8 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
         ImageButton newTripBtn = (ImageButton) findViewById(R.id.fab_button);
         newTripBtn.setOnClickListener(this);
 
-        progressDialog = ProgressDialog.show(this, "",
-                "Aktivitäten werden geladen...", true);
 
         presenter = new ActivityPresenter(this);
-        presenter.onGetFormerActivities(tripId);
 /*
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -72,6 +69,25 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if(fragment!=null)
+            fragmentTransaction.detach(fragment);
+        fragmentTransaction.commit();
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        progressDialog = ProgressDialog.show(this, "",
+                "Aktivitäten werden geladen...", true);
+        presenter.onGetFormerActivities(tripId);
+
+    }
+
+    @Override
     public void onClick(View v) {
         if (v.getId() == R.id.fab_button){
             Intent set = new Intent(this, NewActivityActivity.class);
@@ -79,7 +95,6 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
             bundle.putLong("tripId", tripId);
             set.putExtras(bundle);
             startActivity(set);
-            finish();
         }
     }
 
@@ -135,18 +150,11 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
         */
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        ActivityFragment fragment = ActivityFragment.newInstance(activities, presenter, tripId);
+        fragment = ActivityFragment.newInstance(activities, presenter, tripId);
         fragmentTransaction.add(R.id.fragment_activity_list_container, fragment);
         fragmentTransaction.commit();
         progressDialog.cancel();
 
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("tripId", tripId);
-        startActivity(intent);
-        finish();
-    }
 }
