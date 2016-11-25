@@ -16,6 +16,7 @@
         android:id="@+id/newTrip_title"
         android:inputType="textCapSentences"
         android:clickable="false"
+
         android:enabled="true"
         android:hint="Titel der Reise" />
 

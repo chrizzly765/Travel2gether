@@ -61,10 +61,12 @@ public class CommentListFragment extends ListFragment{
             }
             ViewGroup vg = getListView();
             int totalHeight = 0;
+            int unbounded = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+
             for (int i = 0; i < adapter.getCount(); i++) {
                 View listItem = adapter.getView(i, null, vg);
-                listItem.measure(0, 0);
-                totalHeight += 500;//(listItem.getMeasuredHeight());
+                listItem.measure(unbounded, unbounded);
+                totalHeight += listItem.getMeasuredHeight();
             }
 
             ViewGroup.LayoutParams par = getListView().getLayoutParams();

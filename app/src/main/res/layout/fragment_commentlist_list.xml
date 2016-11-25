@@ -15,7 +15,6 @@ android:layout_width="fill_parent"
 android:layout_height="wrap_content"
     tools:listitem="@android:layout/simple_expandable_list_item_2"
     android:divider="#000000"
-    android:paddingBottom="80dp"
     android:dividerHeight="0dp" />
 
 </RelativeLayout>

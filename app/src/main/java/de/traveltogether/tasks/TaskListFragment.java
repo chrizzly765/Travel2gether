@@ -2,7 +2,9 @@ package de.traveltogether.tasks;
 
 import android.app.ListFragment;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,15 +62,17 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);
 
+            Resources resources = getActivity().getResources();
+            DisplayMetrics metrics = resources.getDisplayMetrics();
+            int px = (int)(102 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
+            int unbounded = View.MeasureSpec.makeMeasureSpec(px, View.MeasureSpec.AT_MOST);
             ViewGroup vg = getListView();
             int totalHeight = 0;
             for (int i = 0; i < adapter.getCount(); i++) {
                 View listItem = adapter.getView(i, null, vg);
-                listItem.measure(0, 0);
-                Log.d("measured height", String.valueOf(listItem.getMeasuredHeight()));
-                totalHeight += 384;//listItem.getMeasuredHeight();
+                listItem.measure(unbounded, unbounded);
+                totalHeight += listItem.getMeasuredHeight();
             }
-            Log.d("total height", String.valueOf(totalHeight));
             ViewGroup.LayoutParams par = getListView().getLayoutParams();
             par.height = totalHeight + (getListView().getDividerHeight() * (adapter.getCount() - 1));
             getListView().setLayoutParams(par);

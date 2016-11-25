@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.date.DateFormat;
@@ -86,8 +88,8 @@ public class TripAdapter extends BaseAdapter {
 
         Context context = parent.getContext();
         Trip trip = (Trip)getItem(position);
-        holder.title.setText(trip.getTitle());
-        holder.destination.setText(trip.getDestination());
+        holder.title.setText(StringEscapeUtils.unescapeJava(trip.getTitle()));
+        holder.destination.setText(StringEscapeUtils.unescapeJava(trip.getDestination()));
         holder.date.setText(DateFormat.getInstance().getDateFromToInWords(trip.getStartDate(), trip.getEndDate()));
 
         holder.icon1.setVisibility(View.INVISIBLE);
