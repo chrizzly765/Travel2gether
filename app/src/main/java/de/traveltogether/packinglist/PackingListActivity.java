@@ -37,7 +37,7 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
 
     IPackingListPresenter presenter;
     private PackingObject[] packingobjects;
-    PackingFragment fragment;
+    PackingListFragment fragment;
     private Menu menu;
     ProgressDialog progressDialog;
     long tripId;
@@ -79,7 +79,7 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
             //Fragment in Activity einbetten
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            PackingFragment fragment = PackingFragment.newInstance(_packingobjects);
+            PackingListFragment fragment = PackingListFragment.newInstance(_packingobjects);
             fragmentTransaction.add(R.id.fragment_packing_list_container, fragment);
             fragmentTransaction.commit();
         }
