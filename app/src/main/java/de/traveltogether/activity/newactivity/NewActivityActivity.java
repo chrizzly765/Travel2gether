@@ -76,8 +76,9 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
 
         getSupportActionBar().setTitle("Neue Aktivität");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         Bundle b = getIntent().getExtras();
         if (b != null) {
@@ -201,6 +202,9 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
                 }
 
                 return true;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -259,7 +263,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         }
         else if (v.getId() == R.id.icon_empty){
             v.setSelected(!v.isSelected());
-            iconTag = R.mipmap.plane;
+            iconTag = R.drawable.ic_leer;
         }
         else if (v.getId() == R.id.icon_plane){
             v.setSelected(!v.isSelected());
@@ -346,7 +350,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         title.setText(activity.getTitle());
         description.setText(activity.getDescription());
         startDate.setText(activity.getDate());
-        //time.setText(activity.getTime());
         time.setText(TimeFormat.getInstance().getTimeWithoutSecondsWithoutWord(activity.getTime()));
         progressDialog.cancel();
     }
