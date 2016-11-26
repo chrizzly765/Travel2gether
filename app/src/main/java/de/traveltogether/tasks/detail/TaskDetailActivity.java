@@ -195,7 +195,7 @@ public class TaskDetailActivity extends DeleteActivity {
             presenter.onDeleteTask(task);
         }
         else {
-            Toast.makeText(getApplicationContext(), R.string.task_delete_warning, Toast.LENGTH_SHORT).show();
+            onViewError("Nur der Ersteller dieser Aufgabe darf die Aufgabe löschen.");
         }
     }
 
