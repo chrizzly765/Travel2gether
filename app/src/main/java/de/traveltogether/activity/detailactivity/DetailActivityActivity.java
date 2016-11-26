@@ -21,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import de.traveltogether.dialog.DeleteActivity;
 import de.traveltogether.time.TimeFormat;
 import java.util.List;
 
@@ -42,7 +43,7 @@ import de.traveltogether.model.Activity;
 import de.traveltogether.settings.SettingsActivity;
 //import de.traveltogether.triplist.newtrip.NewTripActivity;
 
-public class DetailActivityActivity extends AppCompatActivity  {
+public class DetailActivityActivity extends DeleteActivity {
     long featureId =-1;
     long tripId =-1;
     IDetailActivityPresenter presenter;
@@ -133,12 +134,7 @@ public class DetailActivityActivity extends AppCompatActivity  {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.delete:
-                if(detailActivity.getAuthor() == StaticData.getUserId()){
-                    presenter.onDeleteActivity(featureId);
-                }
-                else{
-                    onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.");
-                }
+                createDeleteDialog();
                 break;
             case R.id.edit:
                 Intent intent = new Intent(this,NewActivityActivity.class);
@@ -232,5 +228,14 @@ public class DetailActivityActivity extends AppCompatActivity  {
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
         finish();
+    }
+
+    public void delete(){
+        if(detailActivity.getAuthor() == StaticData.getUserId()){
+            presenter.onDeleteActivity(featureId);
+        }
+        else{
+            onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.");
+        }
     }
 }

@@ -20,13 +20,14 @@ import java.util.List;
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
+import de.traveltogether.dialog.DeleteActivity;
 import de.traveltogether.model.PackingItem;
 import de.traveltogether.model.PackingObject;
 import de.traveltogether.packinglist.PackingListActivity;
 import de.traveltogether.packinglist.newpackingitem.NewPackingItemActivity;
 import de.traveltogether.triplist.TripListActivity;
 
-public class PackingDetailActivity extends AppCompatActivity implements DialogInterface.OnClickListener{
+public class PackingDetailActivity extends DeleteActivity implements DialogInterface.OnClickListener{
 
     long featureId =-1;
     long tripId =-1;
@@ -124,12 +125,7 @@ public class PackingDetailActivity extends AppCompatActivity implements DialogIn
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.delete:
-                if(packingObject.getAuthor() == StaticData.getUserId()){
-                    presenter.onDeletePackingObject(packingObject.getId());
-                }
-                else{
-                    onViewError("Nur der Ersteller dieses Packelements darf das Packelement löschen.");
-                }
+                createDeleteDialog();
                 break;
             case R.id.edit:
                 Intent intent = new Intent(this, NewPackingItemActivity.class);
@@ -173,5 +169,14 @@ public class PackingDetailActivity extends AppCompatActivity implements DialogIn
         dialog.cancel();
 
         finish();
+    }
+
+    public void delete(){
+        if(packingObject.getAuthor() == StaticData.getUserId()){
+            presenter.onDeletePackingObject(packingObject.getId());
+        }
+        else{
+            onViewError("Nur der Ersteller dieses Packelements darf das Packelement löschen.");
+        }
     }
 }
