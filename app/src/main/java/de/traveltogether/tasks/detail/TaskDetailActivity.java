@@ -21,12 +21,13 @@ import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.date.Date;
+import de.traveltogether.dialog.DeleteActivity;
 import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Task;
 import de.traveltogether.tasks.TaskListActivity;
 import de.traveltogether.tasks.newtask.NewTaskActivity;
 
-public class TaskDetailActivity extends AppCompatActivity {
+public class TaskDetailActivity extends DeleteActivity {
 
     private TextView title;
     private TextView description;
@@ -155,12 +156,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.delete:
 
-                if(task.getAuthor() == StaticData.getUserId()){
-                    presenter.onDeleteTask(task);
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), R.string.task_delete_warning, Toast.LENGTH_SHORT).show();
-                }
+                createDeleteDialog();
                 break;
             case R.id.edit:
                 Intent intent = new Intent(this, NewTaskActivity.class);
@@ -194,5 +190,13 @@ public class TaskDetailActivity extends AppCompatActivity {
         finish();
     }
 
+    public void delete(){
+        if(task.getAuthor() == StaticData.getUserId()){
+            presenter.onDeleteTask(task);
+        }
+        else {
+            Toast.makeText(getApplicationContext(), R.string.task_delete_warning, Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }

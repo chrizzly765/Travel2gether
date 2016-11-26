@@ -27,6 +27,7 @@ import java.util.List;
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
+import de.traveltogether.dialog.DeleteActivity;
 import de.traveltogether.invitation.InvitationActivity;
 import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Participant;
@@ -35,7 +36,7 @@ import de.traveltogether.triplist.TripListActivity;
 import de.traveltogether.triplist.TripListFragment;
 import de.traveltogether.triplist.newtrip.NewTripActivity;
 
-public class InfoActivity extends AppCompatActivity implements View.OnClickListener {
+public class InfoActivity extends DeleteActivity implements View.OnClickListener {
     IInfoPresenter presenter;
     long tripId;
     Trip trip;
@@ -198,13 +199,7 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.delete:
-                if (trip.getAdminId() == StaticData.getUserId()) {
-                    presenter.onDeleteTrip(tripId);
-                }
-                else{
-                    onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.");
-
-                }
+                createDeleteDialog();
                 break;
             case R.id.edit:
                 Intent intent = new Intent(this, NewTripActivity.class);
@@ -227,5 +222,15 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(this, TripListActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void delete(){
+        if (trip.getAdminId() == StaticData.getUserId()) {
+            presenter.onDeleteTrip(tripId);
+        }
+        else{
+            onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.");
+
+        }
     }
 }

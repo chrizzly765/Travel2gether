@@ -1,4 +1,5 @@
 <resources>
+    <string name="delete_message">Wirklich löschen?</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="saved_hash">Saved Hash</string>

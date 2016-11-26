@@ -28,13 +28,14 @@ import java.util.List;
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
+import de.traveltogether.dialog.DeleteActivity;
 import de.traveltogether.expense.ExpenseActivity;
 import de.traveltogether.expense.ExpenseListFragment;
 import de.traveltogether.expense.newexpense.NewExpenseActivity;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Payer;
 
-public class ExpenseDetailActivity extends AppCompatActivity {
+public class ExpenseDetailActivity extends DeleteActivity{
     long featureId =-1;
     long tripId =-1;
     IExpenseDetailPresenter presenter;
@@ -147,12 +148,13 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.delete:
-                if(expense.getAuthor() == StaticData.getUserId()){
+                createDeleteDialog();
+                /*if(expense.getAuthor() == StaticData.getUserId()){
                     presenter.onDeleteExpense(expense.getId());
                 }
                 else{
                     onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.");
-                }
+                }*/
                 break;
             case R.id.edit:
                 Intent intent = new Intent(this, NewExpenseActivity.class);
@@ -190,4 +192,12 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         finish();
     }
 
+    public void delete(){
+        if(expense.getAuthor() == StaticData.getUserId()){
+            presenter.onDeleteExpense(expense.getId());
+        }
+        else{
+            onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.");
+        }
+    }
 }

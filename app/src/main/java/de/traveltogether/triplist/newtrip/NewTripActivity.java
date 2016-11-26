@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.datepicker.DatePickerFragment;
@@ -109,9 +111,9 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
                     presenter.onUpdateTrip(
                             new Trip(
                                     trip.getTripId(),
-                                    title.getText().toString(),
-                                    description.getText().toString(),
-                                    place.getText().toString(),
+                                    StringEscapeUtils.escapeJava(title.getText().toString()),
+                                    StringEscapeUtils.escapeJava(description.getText().toString()),
+                                    StringEscapeUtils.escapeJava(place.getText().toString()),
                                     startDate.getText().toString(),
                                     endDate.getText().toString(),
                                     trip.getAuthorId(),
@@ -121,11 +123,11 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 else {
                     presenter.onCreateTrip(
-                            title.getText().toString(),
-                            description.getText().toString(),
+                            StringEscapeUtils.escapeJava((title).getText().toString()),
+                            StringEscapeUtils.escapeJava(description.getText().toString()),
                             startDate.getText().toString(),
                             endDate.getText().toString(),
-                            place.getText().toString());
+                            StringEscapeUtils.escapeJava(place.getText().toString()));
                 }
                 break;
             default:
