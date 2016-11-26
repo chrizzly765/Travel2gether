@@ -38,4 +38,23 @@ public class TimeFormat {
         }
         return stringHour + ":" + stringMinute + " Uhr";
     }
+
+    public String getTimeWithoutSecondsWithoutWord(String time){
+        Time t = new Time(time);
+        String stringMinute= "";
+        String stringHour ="";
+        if (t.hour < 10) {
+            stringHour = "0" + Integer.toString(t.hour);
+        }
+        else {
+            stringHour = Integer.toString(t.hour);
+        }
+        if (t.minute < 10) {
+            stringMinute = "0" + Integer.toString(t.minute);
+        }
+        else {
+            stringMinute = Integer.toString(t.minute);
+        }
+        return stringHour + ":" + stringMinute;
+    }
 }

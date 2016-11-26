@@ -40,6 +40,9 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
     long tripId;
     Trip trip;
     ProgressDialog progressDialog;
+    InfoListFragment activeFragment;
+    InfoListFragment resignedFragment;
+    InfoListFragment invitedFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +57,31 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         if(tripId==-1){
             onViewError("TripId fehlt!");
         }
-        presenter.onGetInfoForTrip(tripId);
-        presenter.onGetParticipantsForTrip(tripId);
-        progressDialog = ProgressDialog.show(this, "",
-                "Info wird geladen...", true);
-
         findViewById(R.id.activity_info_button_add).setOnClickListener(this);
     }
 
+    @Override
+    protected void onStart(){
+        super.onStart();
+        progressDialog = ProgressDialog.show(this, "",
+                "Info wird geladen...", true);
+        presenter.onGetInfoForTrip(tripId);
+        presenter.onGetParticipantsForTrip(tripId);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if(activeFragment!=null)
+            fragmentTransaction.detach(activeFragment);
+        if(invitedFragment!=null)
+            fragmentTransaction.detach(invitedFragment);
+        if(resignedFragment!=null)
+            fragmentTransaction.detach(resignedFragment);
+        fragmentTransaction.commit();
+        super.onSaveInstanceState(outState);
+    }
 
     public void onViewError(String message) {
         progressDialog.cancel();
@@ -98,8 +118,8 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
             findViewById(R.id.activity_info_devider_active).setVisibility(View.VISIBLE);
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            InfoListFragment fragment = InfoListFragment.newInstance(activeParts);
-            fragmentTransaction.add(R.id.activity_info_fragment_container_active, fragment);
+            activeFragment = InfoListFragment.newInstance(activeParts);
+            fragmentTransaction.add(R.id.activity_info_fragment_container_active, activeFragment);
             fragmentTransaction.commit();
 
             RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)add.getLayoutParams();
@@ -115,8 +135,8 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
             findViewById(R.id.activity_info_devider_invited).setVisibility(View.VISIBLE);
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            InfoListFragment fragment = InfoListFragment.newInstance(invitedParts);
-            fragmentTransaction.add(R.id.activity_info_fragment_container_invited, fragment);
+            invitedFragment = InfoListFragment.newInstance(invitedParts);
+            fragmentTransaction.add(R.id.activity_info_fragment_container_invited, invitedFragment);
             fragmentTransaction.commit();
 
             RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)add.getLayoutParams();
@@ -132,8 +152,8 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
             findViewById(R.id.activity_info_devider_resigned).setVisibility(View.VISIBLE);
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            InfoListFragment fragment = InfoListFragment.newInstance(resignedParts);
-            fragmentTransaction.add(R.id.activity_info_fragment_container_resigned, fragment);
+            resignedFragment = InfoListFragment.newInstance(resignedParts);
+            fragmentTransaction.add(R.id.activity_info_fragment_container_resigned, resignedFragment);
             fragmentTransaction.commit();
 
             RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)add.getLayoutParams();
@@ -159,7 +179,6 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         bundle.putString("formerActivity", "info");
         intent.putExtras(bundle);
         startActivity(intent);
-        finish();
     }
 
 
@@ -191,7 +210,6 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(this, NewTripActivity.class);
                 intent.putExtra("tripId", tripId);
                 startActivity(intent);
-                finish();
                 break;
             default:
                 super.onOptionsItemSelected(item);
@@ -207,14 +225,6 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
         Intent intent = new Intent(this, TripListActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("tripId", tripId);
         startActivity(intent);
         finish();
     }

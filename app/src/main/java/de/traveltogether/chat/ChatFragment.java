@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
@@ -31,6 +32,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
     Comment[] comments;
     EditText inputField;
     ProgressDialog progressDialog;
+    CommentListFragment chatFragment;
+    View view;
 
     public ChatFragment () {
         // Required empty public constructor
@@ -54,6 +57,10 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
                 "Nachrichten werden geladen...", true);
     }
 
+    public void onRefresh(){
+        presenter.onGetCommentsForTrip(id);
+    }
+
     public void onViewComments(Comment[] _comments){
         progressDialog.cancel();
 
@@ -62,15 +69,21 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
         //Fragment in Activity einbetten
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        CommentListFragment fragment = CommentListFragment.newInstance(comments);
-        fragmentTransaction.add(R.id.fragment_comment_list_container, fragment);
+        if(chatFragment!=null) {
+            fragmentTransaction.remove(chatFragment);
+        }
+        chatFragment = CommentListFragment.newInstance(comments);
+        fragmentTransaction.add(R.id.fragment_comment_list_container, chatFragment);
         fragmentTransaction.commit();
+
+        ScrollView scrollView = (ScrollView)(view.findViewById(R.id.fragment_chat_scrollview));
+        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_comment, container, false);
+        view = inflater.inflate(R.layout.fragment_comment, container, false);
         inputField = (EditText)view.findViewById(R.id.fragment_comment_editText);
         ImageButton send = (ImageButton)view.findViewById(R.id.fragment_comment_button_send);
         send.setOnClickListener(this);

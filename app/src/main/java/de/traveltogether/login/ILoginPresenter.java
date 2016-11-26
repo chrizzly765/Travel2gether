@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
  */
 public interface ILoginPresenter {
 
-    public void onLogin(String email, String password, String _token);
+    public void onLogin(String email, String password);
     public void onSuccess(String message);
     public void onError(String message);
     public AppCompatActivity getView();
     public void onGetSalt(String email);
     public void onReturnSalt(String salt);
+    public void onUpdateToken(String token);
+
 }

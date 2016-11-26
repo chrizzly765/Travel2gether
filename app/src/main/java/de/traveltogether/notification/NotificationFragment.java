@@ -95,38 +95,32 @@ public class NotificationFragment extends ListFragment implements AdapterView.On
             Intent intent = new Intent(activity, InfoActivity.class);
             intent.putExtra("tripId", n.getFeatureOrTripId());
             startActivity(intent);
-            getActivity().finish();
         }
         else if(n.getType().equals(DataType.EXPENSE.toString())){
             Intent intent = new Intent(activity, ExpenseDetailActivity.class);
             intent.putExtra("featureId", n.getFeatureOrTripId());
             startActivity(intent);
-            getActivity().finish();
         }
         else if (n.getType().equals(DataType.ACTIVITY.toString())){
             Intent intent = new Intent(activity, DetailActivityActivity.class);
             intent.putExtra("featureId", n.getFeatureOrTripId());
             startActivity(intent);
-            getActivity().finish();
         }
         else if(n.getType().equals(DataType.TASK.toString())){
             Intent intent = new Intent(activity, TaskDetailActivity.class);
             intent.putExtra("featureId", n.getFeatureOrTripId());
             startActivity(intent);
-            getActivity().finish();
         }
         else if(n.getType().equals(DataType.CHAT.toString())){
             StaticTripData.setCurrentTripId(n.getFeatureOrTripId());
             Intent intent = new Intent(activity, ChatActivity.class);
             intent.putExtra("tripId", n.getFeatureOrTripId());
             startActivity(intent);
-            getActivity().finish();
         }
         else if(n.getType().equals(DataType.PACKINGOBJECT.toString())){
             Intent intent = new Intent(activity, PackingDetailActivity.class);
             intent.putExtra("featureId", n.getFeatureOrTripId());
             startActivity(intent);
-            getActivity().finish();
         }
 
     }

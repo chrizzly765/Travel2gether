@@ -60,13 +60,6 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
         endDate = (EditText) findViewById(R.id.newTrip_endDate);
         place = (EditText) findViewById(R.id.newTrip_place);
 
-        if(tripId != -1){
-
-            progressDialog = ProgressDialog.show(this, "",
-                    "Reisen werden geladen...", true);
-            presenter.onGetDetailsForTrip(tripId);
-        }
-
         ImageButton datePickerStartBtn = (ImageButton) findViewById(R.id.button_datepicker_start);
         datePickerStartBtn.setOnClickListener(this);
         EditText datePickerStartText = (EditText) findViewById(R.id.newTrip_startDate);
@@ -76,6 +69,18 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
         datePickerEndBtn.setOnClickListener(this);
         EditText datePickerEndText = (EditText) findViewById(R.id.newTrip_endDate);
         datePickerEndText.setOnClickListener(this);
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        if(tripId != -1){
+
+            progressDialog = ProgressDialog.show(this, "",
+                    "Reisen werden geladen...", true);
+            presenter.onGetDetailsForTrip(tripId);
+        }
 
     }
 
@@ -187,26 +192,6 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void onSuccessUpdateTrip(String message){
-        Intent intent = new Intent(this, InfoActivity.class);
-        intent.putExtra("tripId", tripId);
-        startActivity(intent);
         finish();
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(tripId!=-1){
-            Intent intent = new Intent(this, InfoActivity.class);
-            intent.putExtra("tripId", tripId);
-            startActivity(intent);
-        }
-        else{
-            Intent intent = new Intent(this, TripListActivity.class);
-            intent.putExtra("tripId", tripId);
-            startActivity(intent);
-        }
-        finish();
-
-
     }
 }

@@ -75,6 +75,20 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         }
 
         presenter = new NewPackingItemPresenter(this);
+
+        if(chosenParticipants == null){
+            chosenParticipants = new ArrayList<PackingItem>();
+        }
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragment = PackingItemSelectionFragment.newInstance(chosenParticipants);
+        fragmentTransaction.add(R.id.activity_new_packingobject_listcontainer, fragment);
+        fragmentTransaction.commit();
+    }
+
+
+    protected void onStart(){
+        super.onStart();
         if(featureId!=-1){
             getSupportActionBar().setTitle("Packelement bearbeiten");
             presenter.onGetDetailForPackingObject(featureId);
@@ -84,16 +98,6 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         else {
             getSupportActionBar().setTitle("Neues Packelement");
         }
-        if(chosenParticipants == null){
-            chosenParticipants = new ArrayList<PackingItem>();
-        }
-
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragment = PackingItemSelectionFragment.newInstance(chosenParticipants);
-        fragmentTransaction.add(R.id.activity_new_packingobject_listcontainer, fragment);
-        fragmentTransaction.commit();
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -140,7 +144,6 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                         for (PackingItem p : chosenParticipants) {
                             packingobject.addPackingItem(p);//TODO: add amount in field
                         }
-
                     }
                     presenter.onCreatePackingObject(packingobject);
 
@@ -170,7 +173,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         packingObject = _packingObject;
         tripId=packingObject.getTripId();
         title.setText(packingObject.getTitle());
-        number.setText(packingObject.getPackingItemsNumber());
+        number.setText(Integer.toString(packingObject.getPackingItemsNumber()));
         description.setText(packingObject.getDescription());
         for(PackingItem p: packingObject.getItems()){
             chosenParticipants.add(p);
@@ -189,13 +192,6 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-
-        Intent intent = new Intent(this, PackingDetailActivity.class);
-        Bundle b = new Bundle();
-        b.putLong("featureId", featureId);
-        b.putLong("tripId", tripId);
-        intent.putExtras(b);
-        startActivity(intent);
         finish();
     }
 
@@ -205,12 +201,6 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-
-        Intent intent = new Intent(this, PackingListActivity.class);
-        Bundle b = new Bundle();
-        b.putLong("tripId", tripId);
-        intent.putExtras(b);
-        startActivity(intent);
         finish();
     }
 
@@ -295,24 +285,6 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         fragment.refresh(chosenParticipants);
         fragmentTransaction.attach(fragment);
         fragmentTransaction.commit();
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(featureId!=-1){
-            Intent intent = new Intent(this, PackingDetailActivity.class);
-            Bundle b = new Bundle();
-            b.putLong("featureId", featureId);
-            b.putLong("tripId", tripId);
-            intent.putExtras(b);
-            startActivity(intent);
-        }
-        else {
-            Intent intent = new Intent(this, PackingListActivity.class);
-            intent.putExtra("tripId", tripId);
-            startActivity(intent);
-        }
-        finish();
     }
 
 }

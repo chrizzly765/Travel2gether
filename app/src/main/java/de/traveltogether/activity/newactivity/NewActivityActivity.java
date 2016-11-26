@@ -33,6 +33,7 @@ import de.traveltogether.model.Participant;
 import de.traveltogether.R;
 import de.traveltogether.datepicker.DatePickerFragment;
 import de.traveltogether.invitation.InvitationActivity;
+import de.traveltogether.time.TimeFormat;
 import de.traveltogether.timepicker.TimePickerFragment;
 
 import java.io.File;
@@ -66,6 +67,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     long featureId = -1;
     Spinner currencySpinner;
     ProgressDialog progressDialog;
+    Boolean isSelected = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,13 +84,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
             tripId = b.getLong("tripId", -1);
             featureId = b.getLong("featureId", -1);
         }
-/*
-        currencySpinner = (Spinner) findViewById(R.id.spinner_currency);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.currencies, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        currencySpinner.setAdapter(adapter);
-*/
         presenter = new NewActivityPresenter(this);
 
         datePicker =new DatePickerFragment();
@@ -100,46 +95,14 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         destination = (EditText) findViewById(R.id.newActivity_destination);
         startDate = (EditText) findViewById(R.id.newActivity_startDate);
         time = (EditText) findViewById(R.id.newActivity_time);
-        //participant = 13;
 
         if(featureId!=-1){
             getSupportActionBar().setTitle("Aktivität bearbeiten");
-            presenter.onGetDetailForActivity(featureId);
-            progressDialog = ProgressDialog.show(this, "",
-                    "Bitte warten...", true);
         }
-/*
-        Bundle b = getIntent().getExtras();
-        tripId = -1; // or other values
-        if (b != null) {
-            tripId = b.getLong("tripId");
+        else {
+            getSupportActionBar().setTitle("Neue Aktivität");
         }
-        if (b != null) {
-            tripId = b.getLong("tripId", -1);
-            featureId = b.getLong("featureId", -1);
-        }
-        */
 
-        /*
-        if(featureId!=-1){
-
-            presenter.onGetDetailForExpense(featureId);
-            progressDialog = ProgressDialog.show(this, "",
-                    "Bitte warten...", true);
-        }
-        */
-
-        //String inputDate = "14:00";
-        //timeFormat = new SimpleDateFormat("14:00");
-        //dateFormat = new SimpleDateFormat("14.02.16");
-        //dateFormat = new SimpleDateFormat();
-        //time = timeFormat.parse(inputDate);
-/*
-        cancel = (Button)findViewById(R.id.newActivity_button_cancel);
-        cancel.setOnClickListener(this);
-        save = (Button)findViewById(R.id.newActivity_button_save);
-        save.setOnClickListener(this);
-*/
         ImageButton datePickerStartBtn = (ImageButton) findViewById(R.id.button_datepicker_start);
         datePickerStartBtn.setOnClickListener(this);
         EditText datePickerStartText = (EditText) findViewById(R.id.newActivity_startDate);
@@ -150,18 +113,22 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         EditText datePickerTimeText = (EditText) findViewById(R.id.newActivity_time);
         datePickerTimeText.setOnClickListener(this);
 
-        ImageView iconBtnPlane = (ImageView) findViewById(R.id.icon_plane);
+
+        ImageButton iconBtnEmpty = (ImageButton) findViewById(R.id.icon_empty);
+        iconBtnEmpty.setOnClickListener(this);
+        ImageButton iconBtnPlane = (ImageButton) findViewById(R.id.icon_plane);
         iconBtnPlane.setOnClickListener(this);
-        ImageView iconBtnBeach = (ImageView) findViewById(R.id.icon_beach);
+        ImageButton iconBtnBeach = (ImageButton) findViewById(R.id.icon_beach);
         iconBtnBeach.setOnClickListener(this);
-        ImageView iconBtnCocktail = (ImageView) findViewById(R.id.icon_cocktail);
+        ImageButton iconBtnCocktail = (ImageButton) findViewById(R.id.icon_cocktail);
         iconBtnCocktail.setOnClickListener(this);
-        ImageView iconBtnBall = (ImageView) findViewById(R.id.icon_ball);
+        ImageButton iconBtnBall = (ImageButton) findViewById(R.id.icon_ball);
         iconBtnBall.setOnClickListener(this);
-        ImageView iconBtnFilm = (ImageView) findViewById(R.id.icon_film);
+        ImageButton iconBtnFilm = (ImageButton) findViewById(R.id.icon_film);
         iconBtnFilm.setOnClickListener(this);
-        ImageView iconBtnCoffee = (ImageView) findViewById(R.id.icon_coffee);
+        ImageButton iconBtnCoffee = (ImageButton) findViewById(R.id.icon_coffee);
         iconBtnCoffee.setOnClickListener(this);
+
         ImageView iconBtnFood = (ImageView) findViewById(R.id.icon_food);
         iconBtnFood.setOnClickListener(this);
         ImageView iconBtnGift = (ImageView) findViewById(R.id.icon_gift);
@@ -176,6 +143,17 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         iconBtnLandscape.setOnClickListener(this);
         ImageView iconBtnBus = (ImageView) findViewById(R.id.icon_bus);
         iconBtnBus.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        if(featureId!=-1) {
+            presenter.onGetDetailForActivity(featureId);
+            progressDialog = ProgressDialog.show(this, "",
+                    "Bitte warten...", true);
+        }
     }
 
 
@@ -234,9 +212,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-        Intent intent = new Intent(this, ActivitiesActivity.class);
-        intent.putExtra("tripId", tripId);
-        startActivity(intent);
         finish();
     }
 
@@ -256,6 +231,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
+        isSelected = true;
 /*
         if(v.getId()==R.id.newActivity_button_cancel){
             finish();
@@ -281,47 +257,63 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         else if (v.getId() == R.id.button_timepicker || v.getId() == R.id.newActivity_time){
             timePicker.show(getFragmentManager(), TimePickerFragment.ZEIT);
         }
-
+        else if (v.getId() == R.id.icon_empty){
+            v.setSelected(!v.isSelected());
+            iconTag = R.mipmap.plane;
+        }
         else if (v.getId() == R.id.icon_plane){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.plane;
         }
         else if (v.getId() == R.id.icon_beach){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.beach;
         }
         else if (v.getId() == R.id.icon_cocktail){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.cocktail;
         }
         else if (v.getId() == R.id.icon_ball){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.ball;
         }
         else if (v.getId() == R.id.icon_film){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.film;
         }
         else if (v.getId() == R.id.icon_coffee){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.coffee;
         }
         else if (v.getId() == R.id.icon_food){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.food;
         }
         else if (v.getId() == R.id.icon_gift){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.gift;
         }
         else if (v.getId() == R.id.icon_sight){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.sight;
         }
         else if (v.getId() == R.id.icon_casino){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.casino;
         }
         else if (v.getId() == R.id.icon_sport){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.sport;
         }
         else if (v.getId() == R.id.icon_landscape){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.landscape;
         }
         else if (v.getId() == R.id.icon_bus){
+            v.setSelected(!v.isSelected());
             iconTag = R.mipmap.bus;
         }
-
+        //isSelected = false;
     }
 
     public void onViewErrorMessage(String message){
@@ -345,12 +337,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-        Intent intent = new Intent(this, DetailActivityActivity.class);
-        Bundle b = new Bundle();
-        b.putLong("featureId", featureId);
-        b.putLong("tripId", tripId);
-        intent.putExtras(b);
-        startActivity(intent);
         finish();
     }
 
@@ -360,8 +346,8 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         title.setText(activity.getTitle());
         description.setText(activity.getDescription());
         startDate.setText(activity.getDate());
-        time.setText(activity.getTime());
-
+        //time.setText(activity.getTime());
+        time.setText(TimeFormat.getInstance().getTimeWithoutSecondsWithoutWord(activity.getTime()));
         progressDialog.cancel();
     }
 
@@ -399,44 +385,21 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     }
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
-            String stringHour = "";
-            String stringMinute = "";
-            if (hour < 10) {
-                stringHour = "0" + Integer.toString(hour);
-            }
-            else {
-                stringHour = Integer.toString(hour);
-            }
-            if (minute < 10) {
-                 stringMinute = "0" + Integer.toString(minute);
-            }
-            else {
-                stringMinute = Integer.toString(minute);
-            }
-
-            time.setText(stringHour + ":" + stringMinute);
-            Log.d("TimeTest", "Test: "  + hour + " " +  minute);
-            timePicker.setTime(hour, minute);
-    }
-    @Override
-    public void onBackPressed() {
-        if(featureId!=-1){
-            Intent intent = new Intent(this, DetailActivityActivity.class);
-            Bundle b = new Bundle();
-            b.putLong("featureId", featureId);
-            b.putLong("tripId", tripId);
-            intent.putExtras(b);
-            startActivity(intent);
+        String stringHour = "";
+        String stringMinute = "";
+        if (hour < 10) {
+            stringHour = "0" + Integer.toString(hour);
+        } else {
+            stringHour = Integer.toString(hour);
         }
-        else {
-            Intent intent = new Intent(this, ActivitiesActivity.class);
-            intent.putExtra("tripId", tripId);
-            startActivity(intent);
+        if (minute < 10) {
+            stringMinute = "0" + Integer.toString(minute);
+        } else {
+            stringMinute = Integer.toString(minute);
         }
-        finish();
+
+        time.setText(stringHour + ":" + stringMinute);
+        Log.d("TimeTest", "Test: " + hour + " " + minute);
+        timePicker.setTime(hour, minute);
     }
-
-
-
-
 }

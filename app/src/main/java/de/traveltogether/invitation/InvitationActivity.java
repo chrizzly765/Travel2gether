@@ -30,6 +30,7 @@ public class InvitationActivity extends AppCompatActivity{
     Person[] formerParticipants;
     long tripId;
     String formerActivity;
+    InvitationFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +48,23 @@ public class InvitationActivity extends AppCompatActivity{
             formerActivity = b.getString("formerActivity", "newTrip");
         }
         setContentView(R.layout.activity_invitation);
-
-
         presenter = new InvitePresenter(this);
-        presenter.onGetFormerParticipants(tripId);
-        /*FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        InvitationFragment fragment = InvitationFragment.newInstance();
-        fragmentTransaction.add(R.id.fragment_container, fragment);
-        fragmentTransaction.commit();
-        */
+    }
 
+    @Override
+    protected void onStart(){
+        super.onStart();
+        presenter.onGetFormerParticipants(tripId);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if(fragment!=null)
+            fragmentTransaction.detach(fragment);
+        fragmentTransaction.commit();
+        super.onSaveInstanceState(outState);
     }
 
 
@@ -70,15 +77,6 @@ public class InvitationActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_save:
-                if(formerActivity== "newTrip") {
-                    Intent tripList = new Intent(this, TripListActivity.class);
-                    startActivity(tripList);
-                }
-                else{
-                    Intent intent = new Intent(this, InfoActivity.class);
-                    intent.putExtra("tripId", tripId);
-                    startActivity(intent);
-                }
                 finish();
                 return true;
             default:
@@ -107,7 +105,7 @@ public class InvitationActivity extends AppCompatActivity{
         }
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        InvitationFragment fragment = InvitationFragment.newInstance(formerParticipants, presenter, tripId);
+        fragment = InvitationFragment.newInstance(formerParticipants, presenter, tripId);
         fragmentTransaction.add(R.id.fragment_invitation_container, fragment);
         fragmentTransaction.commit();
     }
@@ -118,16 +116,5 @@ public class InvitationActivity extends AppCompatActivity{
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(formerActivity!="newTrip"){
-            Intent intent = new Intent(this, InfoActivity.class);
-            intent.putExtra("tripId", tripId);
-            startActivity(intent);
-            finish();
-        }
-        //else do nothing
     }
 }

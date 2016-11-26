@@ -17,93 +17,81 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.8">
+            android:orientation="vertical"
+            android:layout_weight="0.8"
+            android:background="#ffffff">
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7">
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
                         <TextView
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:id="@+id/textView2"
-                            android:layout_gravity="center"
                             android:textColor="#1ddbc8"
-                            android:paddingTop="10dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_alignParentTop="true"
                             android:text="Tage"
                             android:textSize="12dp"
-                            android:gravity="center|center_vertical|center_horizontal"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:layout_gravity="right"
+                            android:gravity="bottom|right" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
                         <TextView
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:id="@+id/textView3"
-                            android:layout_gravity="center"
                             android:textColor="#1ddbc8"
-                            android:paddingTop="10dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_alignParentTop="true"
                             android:text="Stunden"
                             android:textSize="12dp"
-                            android:gravity="center_vertical|center_horizontal"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:gravity="bottom|center" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_weight="1"
-                        android:layout_gravity="center"
-                        android:gravity="center_vertical|center_horizontal">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:id="@+id/textView4"
                             android:textColor="#1ddbc8"
-                            android:paddingTop="10dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_alignParentTop="true"
                             android:text="Minuten"
                             android:textSize="12dp"
-                            android:gravity="right"
-                            android:layout_gravity="center_vertical"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:gravity="bottom" />
                     </LinearLayout>
-                </LinearLayout>
 
+                </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -118,68 +106,49 @@
                     android:textStyle="bold"
                     android:layout_marginTop="-5dp" />
 
+
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:paddingTop="15dp">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3">
 
-                <RelativeLayout
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_marginTop="10dp">
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_gravity="center_vertical|center_horizontal">
+
 
                     <ImageView
-                        android:layout_width="115dp"
-                        android:layout_height="115dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:id="@+id/main_menu_group_animation"
-                        android:layout_gravity="center|right"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="20dp" />
+                        android:layout_gravity="center_vertical|center_horizontal|center" />
+                </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0%"
-                        android:id="@+id/main_menu_group_text"
-                        android:layout_centerInParent="true"
-                        android:paddingTop="70dp"
-                        android:textColor="#00e6b6"
-                        android:textSize="18dp" />
-                </RelativeLayout>
-
-                <RelativeLayout
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_marginTop="10dp">
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_gravity="center_vertical|center_horizontal">
 
                     <ImageView
-                        android:layout_width="115dp"
-                        android:layout_height="115dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:id="@+id/main_menu_personal_animation"
-                        android:layout_gravity="center"
-                        android:layout_centerHorizontal="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="20dp" />
+                        android:layout_gravity="center_vertical|center_horizontal|center" />
+                </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0%"
-                        android:id="@+id/main_menu_personal_text"
-                        android:layout_centerInParent="true"
-                        android:paddingTop="70dp"
-                        android:textColor="#37a9e3"
-                        android:textSize="18dp" />
-                </RelativeLayout>
             </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"

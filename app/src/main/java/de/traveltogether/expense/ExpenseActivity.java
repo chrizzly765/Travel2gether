@@ -26,6 +26,7 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
     long tripId;
     IExpensePresenter presenter;
     ProgressDialog progressDialog;
+    ExpenseParticipantFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +45,27 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
+        presenter = new ExpensePresenter(this);
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
         progressDialog = ProgressDialog.show(this, "",
                 "Bitte warten...", true);
-        presenter = new ExpensePresenter(this);
         presenter.onGetExpenseList(tripId);
         presenter.onGetParticipantList(tripId);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if(fragment!=null)
+            fragmentTransaction.detach(fragment);
+        fragmentTransaction.commit();
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -57,7 +74,6 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
             Intent intent = new Intent(this, NewExpenseActivity.class);
             intent.putExtra("tripId", tripId);
             startActivity(intent);
-            finish();
         }
     }
 
@@ -81,7 +97,7 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         Participant[] activeParts =StaticTripData.getActiveParticipants();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        ExpenseParticipantFragment fragment = ExpenseParticipantFragment.newInstance(activeParts);
+        fragment = ExpenseParticipantFragment.newInstance(activeParts);
         fragmentTransaction.add(R.id.activity_expense_participants_container, fragment);
         fragmentTransaction.commit();
 
@@ -105,11 +121,4 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("tripId", tripId);
-        startActivity(intent);
-        finish();
-    }
 }

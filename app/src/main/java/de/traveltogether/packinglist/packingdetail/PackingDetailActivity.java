@@ -33,7 +33,7 @@ public class PackingDetailActivity extends AppCompatActivity implements DialogIn
     TextView count;
     IPackingDetailPresenter presenter;
     ProgressDialog progressDialog;
-
+    PackingDetailFragment fragment;
     PackingObject packingObject;
 
     @Override
@@ -47,17 +47,33 @@ public class PackingDetailActivity extends AppCompatActivity implements DialogIn
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
-        if(featureId!=-1){
-            presenter.onGetDetailsForPackingObject(featureId);
-        }
+
         title = (TextView) findViewById(R.id.activity_packing_detail_title);
         description = (TextView) findViewById(R.id.activity_packing_detail_description);
         count = (TextView)findViewById(R.id.activity_packing_detail_count);
         //amount = (TextView) findViewById(R.id.activity_expense_detail_amount);
         //paidBy = (TextView)findViewById(R.id.activity_expense_detail_paidby);
+
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.detach(fragment);
+        fragmentTransaction.commit();
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
         progressDialog = ProgressDialog.show(this, "",
                 "Bitte warten...", true);
-
+        if(featureId!=-1){
+            presenter.onGetDetailsForPackingObject(featureId);
+        }
     }
 
     public void onViewError(String message){
@@ -88,7 +104,7 @@ public class PackingDetailActivity extends AppCompatActivity implements DialogIn
     public void onViewPackingItems(List<PackingItem> _packingItemList){
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        PackingDetailFragment fragment = PackingDetailFragment.newInstance(_packingItemList);
+        fragment = PackingDetailFragment.newInstance(_packingItemList);
         fragmentTransaction.add(R.id.activity_packing_detail_list_container, fragment);
         fragmentTransaction.commit();
 
@@ -156,29 +172,6 @@ public class PackingDetailActivity extends AppCompatActivity implements DialogIn
     public void onClick(DialogInterface dialog, int which) {
         dialog.cancel();
 
-        if(tripId!=-1) {
-            Intent intent = new Intent(this, PackingListActivity.class);
-            intent.putExtra("tripId", tripId);
-            startActivity(intent);
-        }
-        else{
-            Intent intent = new Intent(this, TripListActivity.class);
-            startActivity(intent);
-        }
-        finish();
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(tripId!=-1) {
-            Intent intent = new Intent(this, PackingListActivity.class);
-            intent.putExtra("tripId", tripId);
-            startActivity(intent);
-        }
-        else{
-            Intent intent = new Intent(this, TripListActivity.class);
-            startActivity(intent);
-        }
         finish();
     }
 }

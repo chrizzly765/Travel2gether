@@ -1,7 +1,9 @@
 package de.traveltogether.comments;
 
 import android.app.ListFragment;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,13 +64,16 @@ public class CommentListFragment extends ListFragment{
             ViewGroup vg = getListView();
             int totalHeight = 0;
             int unbounded = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+            Resources resources = getActivity().getResources();
+            DisplayMetrics metrics = resources.getDisplayMetrics();
+            int px = (int)(80 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
 
             for (int i = 0; i < adapter.getCount(); i++) {
                 View listItem = adapter.getView(i, null, vg);
                 listItem.measure(unbounded, unbounded);
                 totalHeight += listItem.getMeasuredHeight();
             }
-
+            totalHeight = totalHeight + px;
             ViewGroup.LayoutParams par = getListView().getLayoutParams();
             par.height = totalHeight + (getListView().getDividerHeight() * (adapter.getCount() - 1));
             getListView().setLayoutParams(par);

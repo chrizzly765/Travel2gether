@@ -52,10 +52,10 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="http://www.imagik.de/traveltogether"
+                    android:host="www.imagik.de/traveltogether"
                     android:scheme="http" />
                 <data
-                    android:host="http://www.imagik.de/traveltogether"
+                    android:host="www.imagik.de/traveltogether"
                     android:scheme="https" />
             </intent-filter>
         </activity>

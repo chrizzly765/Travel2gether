@@ -62,9 +62,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
-        if(featureId!=-1){
-            presenter.onGetDetailsForTask(featureId);
-        }
+
 
         title = (TextView) findViewById(R.id.activity_task_detail_title);
         description = (TextView) findViewById(R.id.activity_task_detail_description);
@@ -75,7 +73,15 @@ public class TaskDetailActivity extends AppCompatActivity {
         icon = (ImageView) findViewById(R.id.activity_task_detail_list_item_icon);
         watch = (ImageView)findViewById(R.id.activity_task_detail_item_icon_watch);
 
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
         progressDialog = ProgressDialog.show(this, "", "Aufgabe wird geladen...", true);
+        if(featureId!=-1){
+            presenter.onGetDetailsForTask(featureId);
+        }
     }
 
     public void onViewError(String message){
@@ -163,7 +169,6 @@ public class TaskDetailActivity extends AppCompatActivity {
                 b.putLong("tripId", tripId);
                 intent.putExtras(b);
                 startActivity(intent);
-                finish();
                 break;
             default:
                 super.onOptionsItemSelected(item);
@@ -173,29 +178,10 @@ public class TaskDetailActivity extends AppCompatActivity {
     }
 
     public void onSuccessDelete(){
-
         tripId = task.getTripId();
         Toast.makeText(getApplicationContext(), R.string.task_deleted, Toast.LENGTH_SHORT).show();
         finish();
-        updateActivity(this);
     }
 
-    // TODO: exists twice! (NewTaskActivity)
-    public void updateActivity(Context c) {
 
-        Intent intent = new Intent(c, TaskListActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putLong("tripId", tripId);
-        intent.putExtras(bundle);
-        c.startActivity(intent);
-        finish();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, TaskListActivity.class);
-        intent.putExtra("tripId", tripId);
-        startActivity(intent);
-        finish();
-    }
 }

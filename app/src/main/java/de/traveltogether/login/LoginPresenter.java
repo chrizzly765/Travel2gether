@@ -13,8 +13,8 @@ public class LoginPresenter implements ILoginPresenter {
         interactor = new LoginInteractor();
     }
 
-    public void onLogin(String _email, String _password, String _token){
-        interactor.login(_email, _password, _token, this);
+    public void onLogin(String _email, String _password){
+        interactor.login(_email, _password, this);
     }
 
     public void onSuccess(String message){
@@ -24,8 +24,9 @@ public class LoginPresenter implements ILoginPresenter {
         view.onViewError(message);
     }
     public AppCompatActivity getView(){
-        return view;
+        return (AppCompatActivity)view;
     }
     public void onGetSalt(String email){interactor.getSalt(email, this);}
     public void onReturnSalt(String salt){view.onGetSaltSuccess(salt);}
+    public void onUpdateToken(String token){interactor.updateToken(token, this);}
 }

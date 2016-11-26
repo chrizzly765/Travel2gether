@@ -5,14 +5,22 @@
     tools:context="de.traveltogether.chat.ChatFragment">
 
     <ScrollView
+        android:id = "@+id/fragment_chat_scrollview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-    <RelativeLayout
-        android:id = "@+id/fragment_comment_list_container"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id = "@+id/fragment_comment_list_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"/>
+        </RelativeLayout>
 
     </ScrollView>
     <LinearLayout

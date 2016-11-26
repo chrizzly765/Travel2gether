@@ -78,7 +78,6 @@ public class ActivityFragment extends ListFragment implements AdapterView.OnItem
         detailActivity.putExtras(b); //Put your id to your next Intent
         */
         startActivity(intent);
-        getActivity().finish();
 
     }
 }

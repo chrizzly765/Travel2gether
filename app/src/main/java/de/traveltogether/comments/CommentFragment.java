@@ -49,6 +49,11 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
         super.onCreate(savedInstanceState);
 
         presenter = new CommentPresenter(this);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
         presenter.onGetCommentsForFeature(id);
     }
 
@@ -104,6 +109,20 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
     }
 
     public void onSuccessAddComment(){
+        presenter.onGetCommentsForFeature(id);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if(fragment!=null)
+            fragmentTransaction.detach(fragment);
+        fragmentTransaction.commit();
+        super.onSaveInstanceState(outState);
+    }
+
+    public void onRefresh(){
         presenter.onGetCommentsForFeature(id);
     }
 }

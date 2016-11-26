@@ -99,15 +99,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         addButton.setOnClickListener(this);
 
         shareEvenlySwitch = (Switch)findViewById(R.id.activity_new_expense_switch);
-        if(featureId!=-1){
-            getSupportActionBar().setTitle("Ausgabe bearbeiten");
-            presenter.onGetDetailForExpense(featureId);
-            progressDialog = ProgressDialog.show(this, "",
-                    "Bitte warten...", true);
-        }
-        else {
-            getSupportActionBar().setTitle("Neue Ausgabe");
-        }
+
         if(chosenParticipants == null){
             chosenParticipants = new ArrayList<Payer>();
         }
@@ -117,6 +109,20 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         fragment = ParticipantSelectionListFragment.newInstance(chosenParticipants);
         fragmentTransaction.add(R.id.activity_new_expense_listcontainer, fragment);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        if(featureId!=-1){
+            getSupportActionBar().setTitle("Ausgabe bearbeiten");
+            presenter.onGetDetailForExpense(featureId);
+            progressDialog = ProgressDialog.show(this, "",
+                    "Bitte warten...", true);
+        }
+        else {
+            getSupportActionBar().setTitle("Neue Ausgabe");
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -193,10 +199,6 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-        presenter.onGetParticipantsForTrip(tripId);
-        Intent intent = new Intent(this, ExpenseActivity.class);
-        intent.putExtra("tripId", tripId);
-        startActivity(intent);
         finish();
     }
 
@@ -319,9 +321,6 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-        Intent intent = new Intent(this, ExpenseActivity.class);
-        intent.putExtra("tripId", tripId);
-        startActivity(intent);
         finish();
     }
 
@@ -353,21 +352,4 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         progressDialog.cancel();
     }
 
-    @Override
-    public void onBackPressed() {
-        if(featureId!=-1){
-            Intent intent = new Intent(this, ExpenseDetailActivity.class);
-            Bundle b = new Bundle();
-            b.putLong("featureId", featureId);
-            b.putLong("tripId", tripId);
-            intent.putExtras(b);
-            startActivity(intent);
-        }
-        else {
-            Intent intent = new Intent(this, ExpenseActivity.class);
-            intent.putExtra("tripId", tripId);
-            startActivity(intent);
-        }
-        finish();
-    }
 }
