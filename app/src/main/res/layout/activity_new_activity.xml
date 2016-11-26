@@ -128,7 +128,6 @@
                 android:clickable="true"
                 android:background="@drawable/image_button_state" />
         </LinearLayout>
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
