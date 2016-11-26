@@ -24,7 +24,13 @@ public class TaskDetailInteractor implements ITaskDetailInteractor {
                 listener.onSuccessDelete();
             }
             else if (actionType == ActionType.DETAIL) {
-                listener.onSuccessGetDetails((Task) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TASK));
+                try {
+                    listener.onSuccessGetDetails((Task) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TASK));
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                    listener.onCloseActivity();
+                }
             }
         }
         else{

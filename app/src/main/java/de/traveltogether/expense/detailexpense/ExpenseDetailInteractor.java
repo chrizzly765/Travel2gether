@@ -29,7 +29,7 @@ public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
                     listener.onSuccessGetDetails((Expense) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.EXPENSE));
                 }
                 catch(Exception e){
-                    listener.onError("Auf diese Ausgabe kann leider nicht mehr zugegriffen werden.");
+                    //listener.onError("Auf diese Ausgabe kann leider nicht mehr zugegriffen werden.");
                     listener.onCloseActivity();
                 }
                 }

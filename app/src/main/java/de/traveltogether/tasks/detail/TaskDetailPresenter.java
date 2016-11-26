@@ -40,4 +40,8 @@ public class TaskDetailPresenter implements ITaskDetailPresenter {
     public void onSuccessDelete() {
         view.onSuccessDelete();
     }
+
+    public void onCloseActivity(){
+        view.onCloseActivity();
+    }
 }

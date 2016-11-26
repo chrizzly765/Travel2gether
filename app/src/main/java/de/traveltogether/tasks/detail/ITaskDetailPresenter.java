@@ -13,4 +13,5 @@ public interface ITaskDetailPresenter {
     //public void onDeleteTask(long id);
     public void onDeleteTask(Task task);
     public void onSuccessDelete();
+    public void onCloseActivity();
 }

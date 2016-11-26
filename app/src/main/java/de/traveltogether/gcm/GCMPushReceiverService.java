@@ -45,8 +45,15 @@ public class GCMPushReceiverService extends GcmListenerService{
         String date = data.getString("date");
         String message = data.getString("message");
         if(type.equals(DataType.CHAT.toString())){
-            if(StaticData.currentActivity!=null && StaticData.currentActivity.getClass() == ChatActivity.class){
-                ((ChatActivity)StaticData.currentActivity).update();
+            if(StaticData.currentActivity!=null && StaticData.currentActivity.getClass() == ChatActivity.class) {
+                ((ChatActivity) StaticData.currentActivity).update();
+                try {
+                    JSONObject obj = new JSONObject();
+                    obj.put("notificationId", id);
+                    HttpRequest req = new HttpRequest(DataType.NOTIFICATION, ActionType.UPDATE, obj.toString(), null);
+                } catch (Exception e) {
+                    Log.e(e.getClass().toString(), e.getMessage());
+                }
             }
             else {
                 sendNotification(message);

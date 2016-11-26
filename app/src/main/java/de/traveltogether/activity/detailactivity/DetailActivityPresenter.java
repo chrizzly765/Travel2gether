@@ -38,4 +38,8 @@ public class DetailActivityPresenter implements IDetailActivityPresenter {
         view.onSuccessDelete();
     }
 
+    public void onCloseActivity(){
+        view.onCloseActivity();
+    }
+
 }

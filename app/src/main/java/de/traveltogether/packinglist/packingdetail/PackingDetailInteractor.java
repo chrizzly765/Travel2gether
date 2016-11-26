@@ -56,7 +56,6 @@ public class PackingDetailInteractor implements IPackingDetailInteractor {
                 }
                 catch(Exception e){
                     e.printStackTrace();
-                    //listener.onError("Auf dieses Packelement kann nicht mehr zugegriffen werden.");
                     listener.onCloseActivity();
                 }
             }

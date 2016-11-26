@@ -24,7 +24,14 @@ public class DetailActivityInteractor implements IDetailActivityInteractor {
                 listener.onSuccessDelete();
             }
             else if (actionType == ActionType.DETAIL) {
-                listener.onSuccessGetDetails((Activity) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.ACTIVITY));
+                try {
+                    listener.onSuccessGetDetails((Activity) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.ACTIVITY));
+
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                    listener.onCloseActivity();
+                }
             }
         }
         else{

@@ -68,8 +68,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Datum"
+            android:textSize="11dp"
+            android:textColor="@android:color/secondary_text_light_nodisable"
             android:id="@+id/fragment_commentlist_list_item_date"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="6dp"/>
 
     </LinearLayout>
 

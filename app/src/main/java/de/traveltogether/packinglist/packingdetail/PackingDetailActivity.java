@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -157,14 +159,12 @@ public class PackingDetailActivity extends AppCompatActivity implements DialogIn
 
     public void onCloseActivity(){
         progressDialog.cancel();
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Auf dieses Packelement kann nicht mehr zugegriffen werden.");
-        builder.setTitle(getString(R.string.error));
-        builder.setNegativeButton(getString(R.string.ok), this);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        //finish();
+        Context context = getApplicationContext();
+        CharSequence text = "Dieses Packelement wurde gelöscht.";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+        finish();
     }
 
 

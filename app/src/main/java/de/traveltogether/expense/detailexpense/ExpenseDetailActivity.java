@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -17,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -168,13 +170,23 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     }
 
     public void onSuccessDelete(){
-        //TODO: toast
-
+        Context context = getApplicationContext();
+        CharSequence text = "Ausgabe erfolgreich gelöscht.";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
         finish();
     }
 
 
     public void onCloseActivity(){
+        progressDialog.cancel();
+
+        Context context = getApplicationContext();
+        CharSequence text = "Diese Ausgabe wurde gelöscht.";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
         finish();
     }
 
