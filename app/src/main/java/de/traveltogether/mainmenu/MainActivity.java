@@ -33,6 +33,7 @@ import de.traveltogether.model.Statistic;
 import de.traveltogether.model.Trip;
 import de.traveltogether.packinglist.PackingListActivity;
 import de.traveltogether.tasks.TaskListActivity;
+import de.traveltogether.time.TimeFormat;
 import de.traveltogether.triplist.TripListActivity;
 import 	java.util.Calendar;
 import java.util.Date;
@@ -117,8 +118,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         actionBar.setTitle(heading);
         actionBar.show();
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
     }
 
@@ -139,65 +141,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return super.onCreateOptionsMenu(menu);
     }
-
+*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
-            case R.id.delete_trip:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(getString(R.string.trip_delete_warning));
-                builder.setTitle(getString(R.string.trip_delete));
-                builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-                builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                        presenter.onDeleteTrip(tripId);
-                        Intent tripList = new Intent(getApplicationContext(), TripListActivity.class);
-                        startActivity(tripList);
-                        finish();
-
-                    }
-                });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                return true;
-            case R.id.change_admin:
-                return true;
-            case R.id.leave_trip:
-                AlertDialog.Builder adBuilder = new AlertDialog.Builder(this);
-                adBuilder.setMessage(getString(R.string.leave_trip_warning));
-                adBuilder.setTitle(getString(R.string.leave_trip));
-                adBuilder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-                adBuilder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                        presenter.onLeaveTrip(tripId,StaticData.getUserId());
-                        Intent tripList = new Intent(getApplicationContext(), TripListActivity.class);
-                        startActivity(tripList);
-                        finish();
-
-                    }
-                });
-
-                AlertDialog alertDialog = adBuilder.create();
-                alertDialog.show();
+            case android.R.id.home:
+                onBackPressed();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
 
-
         }
     }
-*/
+
     public void onViewError(String message){
         progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -234,16 +190,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String stringGroup = Long.toString(Math.round(statistic.getGroup() * 100)) + "%";
         String stringPersonal = Long.toString(Math.round(statistic.getPersonal() * 100)) + "%";
 
-/*
+
 
         TextView groupText = (TextView) findViewById(R.id.main_menu_group_text);
         groupText.setText(stringGroup);
         TextView personalText = (TextView) findViewById(R.id.main_menu_personal_text);
         personalText.setText(stringPersonal);
-        */
-        TextView startDateText = (TextView) findViewById(R.id.main_menu_countdown);
-        startDateText.setText(getCountdown(statistic.getStartDate()));
-        //startDateText.setText(DateFormat.getInstance().getDateAsCountdown(statistic.getStartDate()));
+
+
+        TextView startDateDays = (TextView) findViewById(R.id.main_menu_countdown_days);
+        startDateDays.setText(getCountdownDays(getCountdown(statistic.getStartDate())));
+        TextView startDateHours = (TextView) findViewById(R.id.main_menu_countdown_hours);
+        startDateHours.setText(getCountdownHours(getCountdown(statistic.getStartDate())));
+        TextView startDateMinutes = (TextView) findViewById(R.id.main_menu_countdown_minutes);
+        startDateMinutes.setText(getCountdownMinutes(getCountdown(statistic.getStartDate())));
 
         Log.d("startDateLog","statsitcLog1: " + statistic.getStartDate());
         Log.d("startDateLog","statsitcLog2: " + statistic.getGroup());
@@ -324,14 +284,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (days < 0){
-            TextView countdownText = (TextView) findViewById(R.id.main_menu_countdown);
-            countdownText.setTextColor(0xFFFF0000);
+            //TextView countdownText = (TextView) findViewById(R.id.main_menu_countdown);
+            //countdownText.setTextColor(0xFFFF0000);
         }
 
         //System.out.printf("%d days, %d hours, %d minutes and %d seconds\n", days, hours, minutes, seconds);
-        countdown = "    " + daysString + "    :    " + hoursString + "    :    " + minutesString + "    ";
+        countdown = daysString + ":" + hoursString + ":" + minutesString;
         return countdown;
     }
+
+    public String getCountdownDays (String countdown) {
+        //String string = "004-034556";
+        String[] parts = countdown.split(":");
+        String days = parts[0]; // 004
+        String hours = parts[1]; // 034556
+        String minutes = parts[2];
+        return days;
+    }
+
+    public String getCountdownHours (String countdown) {
+        //String string = "004-034556";
+        String[] parts = countdown.split(":");
+        String days = parts[0]; // 004
+        String hours = parts[1]; // 034556
+        String minutes = parts[2];
+        return ":   " + hours + "   :";
+    }
+
+    public String getCountdownMinutes (String countdown) {
+        //String string = "004-034556";
+        String[] parts = countdown.split(":");
+        String days = parts[0]; // 004
+        String hours = parts[1]; // 034556
+        String minutes = parts[2];
+        return minutes;
+    }
+
+
 
     @Override
     public void onClick(View v) {

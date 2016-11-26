@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import de.traveltogether.R;
 import de.traveltogether.activity.detailactivity.DetailActivityActivity;
@@ -39,14 +41,20 @@ public class ActivityFragment extends ListFragment implements AdapterView.OnItem
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container,savedInstanceState);
         view = inflater.inflate(R.layout.fragment_activity_list, container, false);
+
         return view;
+
     }
 
     public void onStart(){

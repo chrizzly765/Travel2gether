@@ -15,7 +15,9 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,75 +39,100 @@
                     android:layout_weight="1">
 
                     <LinearLayout
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="bottom">
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:id="@+id/textView2"
+                            android:id="@+id/main_menu_text_days"
                             android:textColor="#1ddbc8"
                             android:text="Tage"
                             android:textSize="12dp"
                             android:textStyle="bold"
                             android:layout_gravity="right"
                             android:gravity="bottom|right" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:id="@+id/textView3"
+                            android:id="@+id/main_menu_countdown_days"
+                            android:textColor="#1ddbc8"
+                            android:text="00"
+                            android:textSize="24dp"
+                            android:textStyle="bold"
+                            android:gravity="right|center"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="bottom">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:id="@+id/main_menu_text_hours"
                             android:textColor="#1ddbc8"
                             android:text="Stunden"
                             android:textSize="12dp"
                             android:textStyle="bold"
                             android:gravity="bottom|center" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:id="@+id/textView4"
+                            android:id="@+id/main_menu_countdown_hours"
+                            android:textColor="#1ddbc8"
+                            android:text=":   00   :"
+                            android:textSize="24dp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="bottom">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:id="@+id/main_menu_text_minutes"
                             android:textColor="#1ddbc8"
                             android:text="Minuten"
                             android:textSize="12dp"
                             android:textStyle="bold"
                             android:gravity="bottom" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:id="@+id/main_menu_countdown_minutes"
+                            android:textColor="#1ddbc8"
+                            android:text="00"
+                            android:textSize="24dp"
+                            android:textStyle="bold"
+                            android:gravity="left|center"
+                            android:layout_weight="1" />
                     </LinearLayout>
 
                 </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/main_menu_countdown"
-                    android:layout_gravity="center"
-                    android:textColor="#1ddbc8"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentTop="true"
-                    android:text="    00    :    00    :    00    "
-                    android:textSize="24dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="-5dp" />
-
 
             </LinearLayout>
 
@@ -115,7 +142,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.3">
 
-                <LinearLayout
+                <RelativeLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -125,13 +152,24 @@
 
 
                     <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
                         android:id="@+id/main_menu_group_animation"
-                        android:layout_gravity="center_vertical|center_horizontal|center" />
-                </LinearLayout>
+                        android:layout_gravity="center_vertical|center_horizontal|center"
+                        android:layout_centerInParent="true" />
 
-                <LinearLayout
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0%"
+                        android:id="@+id/main_menu_group_text"
+                        android:textColor="#00e6b6"
+                        android:textSize="18dp"
+                        android:gravity="center"
+                        android:paddingTop="40dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -140,11 +178,28 @@
                     android:layout_gravity="center_vertical|center_horizontal">
 
                     <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
                         android:id="@+id/main_menu_personal_animation"
-                        android:layout_gravity="center_vertical|center_horizontal|center" />
-                </LinearLayout>
+                        android:layout_gravity="center_vertical|center_horizontal|center"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="false" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="100%"
+                        android:id="@+id/main_menu_personal_text"
+                        android:textColor="#37a9e3"
+                        android:textSize="18dp"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:layout_alignParentBottom="false"
+                        android:layout_centerInParent="false"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="false"
+                        android:paddingTop="40dp" />
+                </RelativeLayout>
 
             </LinearLayout>
 

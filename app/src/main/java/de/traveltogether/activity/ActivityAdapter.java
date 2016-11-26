@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import android.graphics.BitmapFactory;
@@ -62,6 +63,7 @@ public class ActivityAdapter extends BaseAdapter  {
             convertView = inflater.inflate(R.layout.fragment_activity_list_item, parent, false);
             holder = new TripViewHolder();
 
+            holder.layout = (LinearLayout)convertView.findViewById(R.id.fragment_activity_list_item_background);
             holder.title = (TextView)convertView.findViewById(R.id.fragment_activity_list_item_title);
             holder.icon = (ImageView)convertView.findViewById(R.id.fragment_activity_list_item_icon);
             holder.destination=(TextView)convertView.findViewById(R.id.fragment_activity_list_item_place);
@@ -76,6 +78,14 @@ public class ActivityAdapter extends BaseAdapter  {
 
         Context context = parent.getContext();
         Activity activity = (Activity)getItem(position);
+
+        if (position%2 == 0) {
+            holder.layout.setBackgroundResource(R.mipmap.background_activity);
+        }
+        else {
+            holder.layout.setBackgroundResource(R.mipmap.background_activity_6);
+        }
+
         holder.title.setText(activity.getTitle());
         holder.icon.setBackgroundResource(activity.getIcon());
         //holder.date.setText(activity.getDate());
@@ -89,6 +99,7 @@ public class ActivityAdapter extends BaseAdapter  {
     static class TripViewHolder {
         TextView title, startDate, time, destination; //destination, startDate, endDate; //+ description
         ImageView icon;
+        LinearLayout layout;
 
     }
 }
