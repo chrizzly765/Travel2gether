@@ -63,8 +63,9 @@ public class DetailActivityActivity extends AppCompatActivity  {
 
         getSupportActionBar().setTitle("Aktivität");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         setContentView(R.layout.activity_detail_activity);
         featureId = getIntent().getLongExtra("featureId", -1);
@@ -132,6 +133,9 @@ public class DetailActivityActivity extends AppCompatActivity  {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             case R.id.delete:
                 if(detailActivity.getAuthor() == StaticData.getUserId()){
                     presenter.onDeleteActivity(featureId);
