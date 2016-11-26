@@ -29,7 +29,7 @@ public class DateFormat {
      */
     public String getDateWithoutYear(String date){
         Date d = new Date(date);
-        String s = "" + String.valueOf(d.day) + "."+ String.valueOf(d.month);
+        String s = "" + String.valueOf(d.day) + "."+ d.monthAsWord;
         return s;
     }
 
@@ -48,7 +48,7 @@ public class DateFormat {
             s = String.valueOf(b.day) + ". bis " + String.valueOf(e.day) + ". " + b.monthAsWord + " " + b.year;
         }
         else if(b.month!=e.month && b.year == e.year){
-            s = String.valueOf(b.day) + ". " + String.valueOf(b.month) +  " bis " + String.valueOf(e.day) + ". " + String.valueOf(e.month) + " " + b.year;
+            s = String.valueOf(b.day) + ". " + b.monthAsWord +  " bis " + String.valueOf(e.day) + ". " + e.monthAsWord + " " + b.year;
         }
         else{
             s = String.valueOf(b.day) + "." + String.valueOf(b.month) + "." + String.valueOf(b.year) + " bis " + String.valueOf(e.day) + "." + String.valueOf(e.month) + "." + String.valueOf(e.year);
