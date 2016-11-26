@@ -9,6 +9,8 @@ public class Payer {
 
     public int getId(){return personId;}
     public double getAmount(){return amount;}
+    public void setAmount(double _amount){ amount = _amount;}
+
 
 
     public Payer(int _payer){
