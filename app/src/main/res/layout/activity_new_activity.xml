@@ -123,7 +123,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:id="@+id/icon_empty"
-                android:src="@mipmap/plane"
+                android:src="@drawable/ic_leer"
                 android:contentDescription="@android:string/yes"
                 android:clickable="true"
                 android:background="@drawable/image_button_state" />

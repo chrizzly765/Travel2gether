@@ -64,7 +64,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
             Resources resources = getActivity().getResources();
             DisplayMetrics metrics = resources.getDisplayMetrics();
-            int px = (int)(102 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
+            int px = (int)(96 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
             int unbounded = View.MeasureSpec.makeMeasureSpec(px, View.MeasureSpec.AT_MOST);
             ViewGroup vg = getListView();
             int totalHeight = 0;
