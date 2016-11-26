@@ -32,7 +32,8 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState){
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.detach(fragment);
+        if(fragment != null)
+            fragmentTransaction.detach(fragment);
         fragmentTransaction.commit();
         super.onSaveInstanceState(outState);
     }
@@ -40,6 +41,8 @@ public class NotificationActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+        progressDialog = ProgressDialog.show(this, "",
+                "Benachrichtigungen werden geladen...", true);
         presenter.onGetNotificationList();
     }
 
@@ -52,8 +55,7 @@ public class NotificationActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         presenter= new NotificationPresenter(this);
         setContentView(R.layout.activity_notification);
-        progressDialog = ProgressDialog.show(this, "",
-                "Benachrichtigungen werden geladen...", true);
+
     }
 
     void onViewNotificationList(Notification[] _notifications){

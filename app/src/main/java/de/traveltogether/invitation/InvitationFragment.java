@@ -94,8 +94,7 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
         Person person = (Person) adapter.getItem(position);
         int receiverId = person.getPersonId();
         presenter.onInvite(receiverId, tripId);
-        view.setEnabled(false);
-        view.setActivated(false);
-        view.setClickable(false);
+        view.setOnClickListener(null);
+        view.findViewById(R.id.fragment_invitation_list_item_icon).setBackgroundResource(R.drawable.circledce641);
     }
 }

@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import de.traveltogether.time.TimeFormat;
 import java.util.List;
@@ -220,4 +222,15 @@ public class DetailActivityActivity extends AppCompatActivity  {
         timePicker.setTime(hour, minute);
     }
 */
+
+    public void onCloseActivity(){
+        progressDialog.cancel();
+
+        Context context = getApplicationContext();
+        CharSequence text = "Diese Aktivität wurde gelöscht.";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+        finish();
+    }
 }

@@ -139,7 +139,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                     return false;
                 }
                 if(chosenParticipants.size()<1){
-                    chosenParticipants.add(new Payer(currentPayerId));
+                    chosenParticipants.add(new Payer(currentPayerId, Double.parseDouble(amount.getText().toString())));
                 }
                 if(featureId!=-1){
                     expense.setTitle(title.getText().toString());
@@ -149,6 +149,9 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                     expense.setAssignedPayers(chosenParticipants);
                     expense.setLastUpdateBy(StaticData.getUserId());
 
+                    for(Payer p : expense.getAssignedPayers()){
+                        p.setAmount(Double.parseDouble(amount.getText().toString()) / expense.getAssignedPayers().size());
+                    }
 
                     presenter.onUpdateExpense(expense);
                 }

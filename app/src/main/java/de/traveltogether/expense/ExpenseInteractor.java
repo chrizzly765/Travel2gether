@@ -21,8 +21,13 @@ public class ExpenseInteractor implements IExpenseInteractor {
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if (dataType == DataType.TRIP && actionType == ActionType.GETPARTICIPANTS) {
             if (response.getError() == "false") {
-                Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
-                listener.onSuccessGetParticipants(participants);
+                try {
+                    Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
+                    listener.onSuccessGetParticipants(participants);
+                }
+                catch(Exception e){
+                    //TODO
+                }
             } else {
                 listener.onError(response.getMessage());
             }

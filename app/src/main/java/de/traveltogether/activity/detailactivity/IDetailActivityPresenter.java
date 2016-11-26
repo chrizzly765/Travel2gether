@@ -11,4 +11,5 @@ public interface IDetailActivityPresenter {
     public void onError(String message);
     public void onDeleteActivity(long id);
     public void onSuccessDelete();
+    public void onCloseActivity();
 }
