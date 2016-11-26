@@ -26,7 +26,8 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
     long tripId;
     IExpensePresenter presenter;
     ProgressDialog progressDialog;
-    ExpenseParticipantFragment fragment;
+    ExpenseListFragment fragment;
+    ExpenseParticipantFragment participantsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,8 +98,8 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         Participant[] activeParts =StaticTripData.getActiveParticipants();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragment = ExpenseParticipantFragment.newInstance(activeParts);
-        fragmentTransaction.add(R.id.activity_expense_participants_container, fragment);
+        participantsFragment = ExpenseParticipantFragment.newInstance(activeParts);
+        fragmentTransaction.add(R.id.activity_expense_participants_container, participantsFragment);
         fragmentTransaction.commit();
 
         progressDialog.cancel();
@@ -112,7 +113,7 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        ExpenseListFragment fragment = ExpenseListFragment.newInstance(expenses);
+        fragment = ExpenseListFragment.newInstance(expenses);
         fragmentTransaction.add(R.id.activity_expense_list_container, fragment);
         fragmentTransaction.commit();
 
