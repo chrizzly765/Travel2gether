@@ -34,7 +34,8 @@
             android:gravity="center_vertical"
             android:paddingLeft="30dp"
             android:paddingTop="12dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:id="@+id/fragment_activity_list_item_background">
 
             <LinearLayout
                 android:orientation="horizontal"

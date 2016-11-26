@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
@@ -51,14 +52,17 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
 
         getSupportActionBar().setTitle("Meine Aktivitäten");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         ImageButton newTripBtn = (ImageButton) findViewById(R.id.fab_button);
         newTripBtn.setOnClickListener(this);
 
 
         presenter = new ActivityPresenter(this);
+
+
 /*
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -105,10 +109,12 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
         inflater.inflate(R.menu.optionsmenu_detail, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
+*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+
+            /*
             case R.id.delete:
                 //TODO: DELETE
                 break;
@@ -117,14 +123,17 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
                 intent.putExtra("tripId", tripId);
                 startActivity(intent);
                 break;
+                */
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             default:
                 super.onOptionsItemSelected(item);
-                break;
         }
         return  true;
     }
 
-*/
+
     public void onViewError(String message) {
         progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

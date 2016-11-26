@@ -71,12 +71,21 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
             for (int i = 0; i < adapter.getCount(); i++) {
                 View listItem = adapter.getView(i, null, vg);
                 listItem.measure(unbounded, unbounded);
-                totalHeight += listItem.getMeasuredHeight();
+                int measuredHeight = listItem.getMeasuredHeight();
+                if(measuredHeight < px){
+                    measuredHeight = px;
+                }
+                totalHeight += measuredHeight;
             }
-            ViewGroup.LayoutParams par = getListView().getLayoutParams();
-            par.height = totalHeight + (getListView().getDividerHeight() * (adapter.getCount() - 1));
-            getListView().setLayoutParams(par);
-            getListView().requestLayout();
+            try {
+                ViewGroup.LayoutParams par = getListView().getLayoutParams();
+                par.height = totalHeight;
+                getListView().setLayoutParams(par);
+                getListView().requestLayout();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
