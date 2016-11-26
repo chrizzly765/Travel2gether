@@ -126,7 +126,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.commit();
         }
         else {
-            //findViewById(R.id.activity_task_list_open_empty).setVisibility(View.VISIBLE);
+            findViewById(R.id.activity_task_list_open_empty).setVisibility(View.VISIBLE);
             //onEmpty(R.id.activity_task_list_empty_txt_open);
         }
 
@@ -144,7 +144,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.commit();
         }
         else {
-            //findViewById(R.id.activity_task_list_progress_empty).setVisibility(View.VISIBLE);
+            findViewById(R.id.activity_task_list_progress_empty).setVisibility(View.VISIBLE);
             //onEmpty(R.id.activity_task_list_empty_txt_progress);
         }
 
@@ -162,7 +162,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.commit();
         }
         else {
-            //findViewById(R.id.activity_task_list_done_empty).setVisibility(View.VISIBLE);
+            findViewById(R.id.activity_task_list_done_empty).setVisibility(View.VISIBLE);
             //onEmpty(R.id.activity_task_list_empty_txt_done);
         }
         progressDialog.cancel();
