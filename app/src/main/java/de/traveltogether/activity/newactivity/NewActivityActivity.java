@@ -181,9 +181,10 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
                         destination.setText("Kein Ort");
                     }
                     if(featureId!=-1){
-                        activity.setTitle(title.getText().toString());
-                        activity.setDescription(description.getText().toString());
+                        activity.setTitle(StringEscapeUtils.escapeJava(title.getText().toString()));
+                        activity.setDescription(StringEscapeUtils.escapeJava(description.getText().toString()));
                         activity.setLastUpdateBy(StaticData.getUserId());
+
 
                         presenter.onUpdateActivity(activity);
                     }
@@ -196,13 +197,13 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
                     }
                     */
                         Activity activity = new Activity(
-                                title.getText().toString(),
+                                StringEscapeUtils.escapeJava(title.getText().toString()),
                                 id,//Integer.parseInt(id.getText().toString()),
                                 tripId,
-                                description.getText().toString(),
+                                StringEscapeUtils.escapeJava(description.getText().toString()),
                                 StaticData.getUserId(),
                                 iconTag,
-                                destination.getText().toString(),
+                                StringEscapeUtils.escapeJava(destination.getText().toString()),
                                 time.getText().toString(),
                                 startDate.getText().toString() );
 
@@ -324,32 +325,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
             currentImgBtn = imgBtn;
         }
 
-
-
-/*
-        if(v.getId()==R.id.newActivity_button_cancel){
-            finish();
-        }
-        else if (v.getId()==R.id.newActivity_button_save){
-
-            presenter.onCreateActivity(
-                    title.getText().toString(),
-                    id,//Integer.parseInt(id.getText().toString()),
-                    tripId,
-                    description.getText().toString(),
-                    participant,
-                    iconTag,
-                    destination.getText().toString(),
-                    time.getText().toString(),
-                    startDate.getText().toString());
-
-        }
-
-*/
-
-
-        //isSelected = false;
-
     }
 
     public void onViewErrorMessage(String message, String title){
@@ -380,8 +355,8 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     public void setValues(Activity _activity){
         activity =_activity;
         tripId = activity.getTripId();
-        title.setText(activity.getTitle());
-        description.setText(activity.getDescription());
+        title.setText(StringEscapeUtils.unescapeJava(activity.getTitle()));
+        description.setText(StringEscapeUtils.escapeJava(activity.getDescription()));
         startDate.setText(activity.getDate());
         time.setText(TimeFormat.getInstance().getTimeWithoutSecondsWithoutWord(activity.getTime()));
         progressDialog.cancel();

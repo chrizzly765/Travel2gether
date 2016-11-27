@@ -24,7 +24,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="0.8"
-            android:background="#ffffff">
+            android:background="#ffffff"
+            android:id="@+id/main_menu_progress_info">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -140,7 +141,8 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3">
+                android:layout_weight="0.3"
+                android:id="@+id/main_menu_progress_animation">
 
                 <RelativeLayout
                     android:orientation="horizontal"

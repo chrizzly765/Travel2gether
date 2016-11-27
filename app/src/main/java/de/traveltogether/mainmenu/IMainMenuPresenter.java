@@ -18,4 +18,6 @@ public interface IMainMenuPresenter {
     void onGetStatistics(long tripId, int userId);
     void onSuccessGetStatistics(Statistic statistic);
     void onGetTitleForTrip(long tripId);
+
+    void onSuccessGetTitle(String title);
 }

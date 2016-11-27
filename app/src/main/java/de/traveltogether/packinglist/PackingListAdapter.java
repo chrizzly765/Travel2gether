@@ -13,6 +13,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.Context;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.R;
 
 import de.traveltogether.StaticData;
@@ -84,7 +87,7 @@ public class PackingListAdapter extends BaseAdapter {
             holder = (PackingViewHolder)convertView.getTag();
         }
         PackingObject packingobject = (PackingObject)getItem(position);
-        holder.title.setText(packingobject.getTitle());
+        holder.title.setText(StringEscapeUtils.unescapeJava(packingobject.getTitle()));
         if((packingobject.getItemsPacked() == packingobject.getPackingItemsNumber()) && (packingobject.getItemsPacked()!=0)){
             holder.check.setImageResource(R.drawable.checkbox_filled);
         }

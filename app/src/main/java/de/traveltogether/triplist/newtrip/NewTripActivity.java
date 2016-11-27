@@ -144,12 +144,13 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
                                         trip.getLastUpdate()));
                     }
                     else {
-                        presenter.onCreateTrip(
-                                StringEscapeUtils.escapeJava((title).getText().toString()),
+                        new Trip(
+                                StringEscapeUtils.escapeJava(title.getText().toString()),
                                 StringEscapeUtils.escapeJava(description.getText().toString()),
+                                StringEscapeUtils.escapeJava(place.getText().toString()),
                                 startDate.getText().toString(),
-                                endDate.getText().toString(),
-                                StringEscapeUtils.escapeJava(place.getText().toString()));
+                                endDate.getText().toString())
+                        );
                     }
                 }
                 else{

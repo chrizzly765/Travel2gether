@@ -10,6 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.StaticTripData;
 import de.traveltogether.date.Date;
 import de.traveltogether.R;
@@ -76,7 +78,7 @@ public class TaskAdapter extends BaseAdapter {
 
         //Context context = parent.getContext();
         Task task = (Task)getItem(position);
-        holder.title.setText(task.getTitle());
+        holder.title.setText(StringEscapeUtils.unescapeJava(task.getTitle()));
         Date date = new Date(task.getDueDate());
 
         if(date.compareDateWithCurrent()) {
