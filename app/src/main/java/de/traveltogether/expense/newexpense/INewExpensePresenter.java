@@ -9,7 +9,7 @@ import de.traveltogether.model.Participant;
 public interface INewExpensePresenter {
     public void onGetParticipantsForTrip(long tripId);
     public void onSuccessGetParticipants(Participant[] participants);
-    public void onError(String message);
+    public void onError(String message, String title);
     public void onCreateExpense(Expense expense);
     public void onSuccessAddingExpense();
     public void onUpdateExpense(Expense expense);

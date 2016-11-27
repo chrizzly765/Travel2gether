@@ -93,7 +93,7 @@ public class ExpenseAdapter extends BaseAdapter {
             for(int i = 0; i<payers.size(); i++){
                 if(payers.get(i).getId() == expense.getPayer()){
                     i--;
-                    break;
+                    continue;
                 }
                 if(i==0){
                     int count;

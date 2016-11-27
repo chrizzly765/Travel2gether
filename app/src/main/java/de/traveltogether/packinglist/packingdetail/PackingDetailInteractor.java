@@ -65,7 +65,7 @@ public class PackingDetailInteractor implements IPackingDetailInteractor {
             }
         }
         else{
-            listener.onError(response.getMessage());
+            listener.onError(response.getMessage(), response.getMessage());
         }
     }
 

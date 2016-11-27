@@ -25,6 +25,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
@@ -135,52 +136,65 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_save:
-                progressDialog = ProgressDialog.show(this, "",
-                        "Bitte warten...", true);
-                if(title.getText().toString()=="" || amount.getText().toString()==""){
-                    onViewError("Bitte gib die Daten vollständig an");
-                    return false;
-                }
-                if(chosenParticipants.size()<1){
-                    chosenParticipants.add(new Payer(currentPayerId, Double.parseDouble(amount.getText().toString())));
-                }
-                if(featureId!=-1){
-                    expense.setTitle(title.getText().toString());
-                    expense.setDescription(description.getText().toString());
-                    expense.setPayer(currentPayerId);
-                    expense.setAmount(Double.parseDouble(amount.getText().toString()));
-                    expense.setAssignedPayers(chosenParticipants);
-                    expense.setLastUpdateBy(StaticData.getUserId());
 
-                    for(Payer p : expense.getAssignedPayers()){
-                        p.setAmount(Double.parseDouble(amount.getText().toString()) / expense.getAssignedPayers().size());
+                if(StringEscapeUtils.escapeJava(title.getText().toString()) != ""
+                        && StringEscapeUtils.escapeJava(amount.getText().toString())!=""){
+
+                    progressDialog = ProgressDialog.show(this, "",
+                            "Bitte warten...", true);
+
+                    // DEFAULT TEXT IF FIELDS ARE EMPTY
+                    if(StringEscapeUtils.escapeJava(description.getText().toString()) == ""){
+                        description.setText("Keine Beschreibung");
                     }
 
-                    presenter.onUpdateExpense(expense);
-                }
-                else {
-                    //int currency = currencySpinner.getSelectedItemPosition();
+
+                    if(chosenParticipants.size()<1){
+                        chosenParticipants.add(new Payer(currentPayerId, Double.parseDouble(amount.getText().toString())));
+                    }
+                    if(featureId!=-1){
+                        expense.setTitle(title.getText().toString());
+                        expense.setDescription(description.getText().toString());
+                        expense.setPayer(currentPayerId);
+                        expense.setAmount(Double.parseDouble(amount.getText().toString()));
+                        expense.setAssignedPayers(chosenParticipants);
+                        expense.setLastUpdateBy(StaticData.getUserId());
+
+                        for(Payer p : expense.getAssignedPayers()){
+                            p.setAmount(Double.parseDouble(amount.getText().toString()) / expense.getAssignedPayers().size());
+                        }
+
+                        presenter.onUpdateExpense(expense);
+                    }
+                    else {
+                        //int currency = currencySpinner.getSelectedItemPosition();
                     /*if(currencySpinner.getSelectedItem() == null){
                         currency = currencySpinner.getSelectedItem().toString();
                     }*/
-                    Expense expense = new Expense(
-                            title.getText().toString(),
-                            0,
-                            tripId,
-                            description.getText().toString(),
-                            StaticData.getUserId(),
-                            Double.parseDouble(amount.getText().toString()),
-                            currentPayerId,
-                            0);
-                    if(chosenParticipants!=null) {
-                        for (Payer p : chosenParticipants) {
-                            expense.addPayer(p.getId(), Double.parseDouble(amount.getText().toString()) / chosenParticipants.size());//TODO: add amount in field
+                        Expense expense = new Expense(
+                                title.getText().toString(),
+                                0,
+                                tripId,
+                                description.getText().toString(),
+                                StaticData.getUserId(),
+                                Double.parseDouble(amount.getText().toString()),
+                                currentPayerId,
+                                0);
+                        if(chosenParticipants!=null) {
+                            for (Payer p : chosenParticipants) {
+                                expense.addPayer(p.getId(), Double.parseDouble(amount.getText().toString()) / chosenParticipants.size());//TODO: add amount in field
+                            }
                         }
-                    }
                         presenter.onCreateExpense(expense);
+                    }
+                    return true;
+                }
+                else{
+                    onViewError("Bitte gib einen Titel und Betrag für deine Ausgabe ein.", "Pflichtfeld");
+                    return false;
                 }
 
-                return true;
+
             case android.R.id.home:
                 finish();
                 return true;
@@ -229,10 +243,10 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         currentPayerId = participants[0].getPersonId();
     }
 
-    public void onViewError(String message) {
+    public void onViewError(String message, String title) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
-        builder.setTitle(getString(R.string.error));
+        builder.setTitle(title);
         builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();

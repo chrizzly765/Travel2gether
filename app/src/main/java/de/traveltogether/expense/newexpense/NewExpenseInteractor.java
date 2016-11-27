@@ -77,7 +77,7 @@ public class NewExpenseInteractor implements INewExpenseInteractor {
                 listener.onSuccessUpdateExpense();
             }
         } else {
-            listener.onError(response.getMessage());
+            listener.onError(response.getMessage(), response.getMessage());
         }
     }
 

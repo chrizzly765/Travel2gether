@@ -85,11 +85,11 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
         }
     }
 
-    public void onViewError(String message){
+    public void onViewError(String message, String title){
         progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
-        builder.setTitle(getString(R.string.error));
+        builder.setTitle(title);
         builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
@@ -185,7 +185,7 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
             presenter.onDeletePackingObject(packingObject.getId());
         }
         else{
-            onViewError("Nur der Ersteller dieses Packelements darf das Packelement löschen.");
+            onViewError("Nur der Ersteller dieses Packelements darf das Packelement löschen.", "Sorry.");
         }
     }
 

@@ -14,7 +14,7 @@ public interface INewTaskPresenter {
 
     void onUpdateTask(Task task);
 
-    public void onError(String message);
+    public void onError(String message, String title);
     public void onSuccessCreate(String message);
 
     void onSuccessUpdate(String message);

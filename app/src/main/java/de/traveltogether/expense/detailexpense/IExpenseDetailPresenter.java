@@ -8,7 +8,7 @@ import de.traveltogether.model.Expense;
 public interface IExpenseDetailPresenter {
     public void onGetDetailsForExpense(long featureId);
     public void onSuccessGetDetails(Expense expense);
-    public void onError(String message);
+    public void onError(String message, String title);
     public void onDeleteExpense(long id);
     public void onSuccessDelete();
 

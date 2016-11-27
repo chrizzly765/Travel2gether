@@ -65,10 +65,10 @@ public class PackingDetailAdapter extends BaseAdapter {
         holder.name.setText(StaticTripData.getNameById(item.getAssignedPerson()));
         holder.box.setEnabled(false);
 
-        Log.d("adapter", item.getStatus()+ " "+ item.getAssignedPerson());
 
         //holder.box.setActivated(item.getStatus());
         if(item.getAssignedPerson() == StaticData.getUserId()){
+
             if(item.getStatus()==true){
                 holder.box.setBackgroundResource(R.drawable.checkbox_filled);
             }
@@ -78,6 +78,7 @@ public class PackingDetailAdapter extends BaseAdapter {
         }
         else{
             convertView.setOnClickListener(null);
+
             if(item.getStatus()==true){
                 holder.box.setBackgroundResource(R.drawable.checkbox_filled_grey);
             }

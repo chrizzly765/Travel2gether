@@ -65,7 +65,7 @@ public class ExpenseDetailActivity extends DeleteActivity{
             StaticTripData.setCurrentTripId(tripId);
         }
 
-        title = (TextView) findViewById(R.id.activity_expense_detail_title);
+        title = (TextView) findViewById(R.id.   activity_expense_detail_title);
         description = (TextView) findViewById(R.id.activity_expense_detail_description);
         amount = (TextView) findViewById(R.id.activity_expense_detail_amount);
         paidBy = (TextView)findViewById(R.id.activity_expense_detail_paidby);
@@ -91,11 +91,11 @@ public class ExpenseDetailActivity extends DeleteActivity{
         super.onSaveInstanceState(outState);
     }
 
-    public void onViewError(String message){
+    public void onViewError(String message, String title){
         progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
-        builder.setTitle(getString(R.string.error));
+        builder.setTitle(title);
         builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
@@ -203,7 +203,7 @@ public class ExpenseDetailActivity extends DeleteActivity{
             presenter.onDeleteExpense(expense.getId());
         }
         else{
-            onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.");
+            onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.", "Sorry.");
         }
     }
 }

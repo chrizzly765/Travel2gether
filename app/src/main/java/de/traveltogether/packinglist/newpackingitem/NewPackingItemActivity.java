@@ -113,48 +113,61 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_save:
-                progressDialog = ProgressDialog.show(this, "",
-                        "Bitte warten...", true);
-                if(title.getText().toString()=="" || number.getText().toString()=="") {
-                    onViewError("Bitte gib die Daten vollständig an");
+                if(StringEscapeUtils.escapeJava(title.getText().toString()) != ""){
+                    progressDialog = ProgressDialog.show(this, "",
+                            "Bitte warten...", true);
+
+                    // DEFAULT TEXT IF FIELDS ARE EMPTY
+                    if(StringEscapeUtils.escapeJava(description.getText().toString()) == ""){
+                        description.setText("Keine Beschreibung");
+                    }
+
+                    if(StringEscapeUtils.escapeJava(number.getText().toString()) == ""){
+                        number.setText("1");
+                    }
+                    if(chosenParticipants.size() > Integer.parseInt(number.getText().toString())){
+                        number.setText(String.valueOf(chosenParticipants.size()));
+                    }
+                    if(featureId!=-1){
+                        PackingObject packingobject = new PackingObject(StringEscapeUtils.escapeJava(title.getText().toString()),
+                                this.packingObject.getId(),
+                                tripId, StringEscapeUtils.escapeJava(description.getText().toString()),
+                                this.packingObject.getAuthor(),
+                                Integer.parseInt(number.getText().toString()));
+
+                        if(chosenParticipants!=null) {
+                            for (PackingItem p : chosenParticipants) {
+                                packingobject.addPackingItem(p);//TODO: add amount in field
+                            }
+                        }
+                        presenter.onUpdatePackingObject(packingobject);
+                    }
+                    else {
+                        PackingObject packingobject = new PackingObject(
+                                StringEscapeUtils.escapeJava(title.getText().toString()),
+                                0,
+                                tripId,
+                                StringEscapeUtils.escapeJava(description.getText().toString()),
+                                StaticData.getUserId(),
+                                Integer.parseInt(number.getText().toString())
+                        );
+                        if(chosenParticipants!=null) {
+                            PackingItem[] array= new PackingItem[chosenParticipants.size()];
+                            for (PackingItem p : chosenParticipants) {
+                                packingobject.addPackingItem(p);//TODO: add amount in field
+                            }
+                        }
+                        presenter.onCreatePackingObject(packingobject);
+
+                    }
+                    return true;
+                }
+                else{
+                    onViewError("Bitte gib einen Titel für dein Packelement ein.","Pflichtfeld");
                     return false;
                 }
-                if(chosenParticipants.size() > Integer.parseInt(number.getText().toString())){
-                    number.setText(String.valueOf(chosenParticipants.size()));
-                }
-                if(featureId!=-1){
-                    PackingObject packingobject = new PackingObject(StringEscapeUtils.escapeJava(title.getText().toString()),
-                            this.packingObject.getId(),
-                            tripId, StringEscapeUtils.escapeJava(description.getText().toString()),
-                            this.packingObject.getAuthor(),
-                            Integer.parseInt(number.getText().toString()));
 
-                    if(chosenParticipants!=null) {
-                        for (PackingItem p : chosenParticipants) {
-                            packingobject.addPackingItem(p);//TODO: add amount in field
-                        }
-                    }
-                    presenter.onUpdatePackingObject(packingobject);
-                }
-                else {
-                    PackingObject packingobject = new PackingObject(
-                            StringEscapeUtils.escapeJava(title.getText().toString()),
-                            0,
-                            tripId,
-                            StringEscapeUtils.escapeJava(description.getText().toString()),
-                            StaticData.getUserId(),
-                            Integer.parseInt(number.getText().toString())
-                    );
-                    if(chosenParticipants!=null) {
-                        PackingItem[] array= new PackingItem[chosenParticipants.size()];
-                        for (PackingItem p : chosenParticipants) {
-                            packingobject.addPackingItem(p);//TODO: add amount in field
-                        }
-                    }
-                    presenter.onCreatePackingObject(packingobject);
 
-                }
-                return true;
             case android.R.id.home:
                 finish();
                 return true;
@@ -163,11 +176,11 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         }
     }
 
-    public void onViewError(String message) {
-        progressDialog.cancel();
+    public void onViewError(String message, String title) {
+        //progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
-        builder.setTitle(getString(R.string.error));
+        builder.setTitle(title);
         builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
@@ -190,8 +203,12 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         //chosenParticipants = (List<PackingItem>)packingObject.getItems();
         chosenIds = new ArrayList<Integer>();
         for(PackingItem p:chosenParticipants){
-            chosenIds.add((int)p.getAssignedPerson());
+            for(int i = 0; i< participants.length; i++) {
+                if(p.getAssignedPerson() == participants[i].getPersonId())
+                    chosenIds.add(i);
+            }
         }
+        updateParticipantList();
         progressDialog.cancel();
     }
 
@@ -232,13 +249,9 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         final ArrayList<Integer> mSelectedItems = list;
 
         boolean[] checkedItems = new boolean[participantNames.length];
+
         for(int i = 0; i<checkedItems.length; i++){
-            if(list.contains(i)){
-                checkedItems[i] = true;
-            }
-            else{
-                checkedItems[i] = false;
-            }
+            checkedItems[i] = list.contains(i);
         }
         // Set the dialog title
         builder.setTitle("Wer packt ein?");
@@ -250,8 +263,9 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                     public void onClick(DialogInterface dialog, int which,
                                         boolean isChecked) {
                         if (isChecked) {
-                            // If the user checked the item, add it to the selected items
-                            mSelectedItems.add(which);
+                            if(!mSelectedItems.contains(which)) {
+                                mSelectedItems.add(which);
+                            }
                         } else if (mSelectedItems.contains(which)) {
                             // Else, if the item is already in the array, remove it
                             mSelectedItems.remove(which);
