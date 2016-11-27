@@ -14,4 +14,6 @@ public interface IProfileSettingsPresenter {
     public void onSuccessUpdateProfileInfos();
     public void onSuccessUpdatePasswort();
     public void onError(String message);
+    public void onReturnSalt(String salt);
+    public void onGetSalt(String email);
 }

@@ -47,4 +47,14 @@ public class ProfileSettingsPresenter implements IProfileSettingsPresenter {
     public void onError(String message) {
         view.onError(message);
     }
+
+    @Override
+    public void onReturnSalt(String salt) {
+        view.onSuccessGetSalt(salt);
+    }
+
+    @Override
+    public void onGetSalt(String email) {
+        interactor.getSalt(email, this);
+    }
 }

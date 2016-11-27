@@ -119,6 +119,7 @@
     <string name="no_entries">Keine Einträge vorhanden</string>
     <string name="change_profile">Daten ändern</string>
     <string name="change_pw">Passwort ändern</string>
+    <string name="cancel">Abbrechen</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

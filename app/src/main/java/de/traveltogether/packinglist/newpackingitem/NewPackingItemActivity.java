@@ -263,7 +263,9 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                     public void onClick(DialogInterface dialog, int which,
                                         boolean isChecked) {
                         if (isChecked) {
+                            if(!mSelectedItems.contains(which)) {
                                 mSelectedItems.add(which);
+                            }
                         } else if (mSelectedItems.contains(which)) {
                             // Else, if the item is already in the array, remove it
                             mSelectedItems.remove(which);

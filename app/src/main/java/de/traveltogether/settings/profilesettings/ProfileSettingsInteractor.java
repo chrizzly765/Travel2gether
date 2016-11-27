@@ -1,5 +1,7 @@
 package de.traveltogether.settings.profilesettings;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 import de.traveltogether.ActionType;
@@ -46,13 +48,25 @@ public class ProfileSettingsInteractor implements IProfileSettingsInteractor {
             JSONObject obj = new JSONObject();
             obj.put("personId", StaticData.getUserId());
             obj.put("salt", salt);
-            obj.put("hash", hash);
+            obj.put("password", hash);
             HttpRequest request = new HttpRequest(DataType.PERSON, ActionType.UPDATEPASSWORT, obj.toString(), this);
         } catch (Exception e) {
             //TODO
         }
     }
 
+    public void getSalt(String email, IProfileSettingsPresenter _listener){
+        try {
+            listener = _listener;
+            JSONObject obj = new JSONObject();
+            obj.put("email", email);
+            HttpRequest request = new HttpRequest(DataType.LOGIN, ActionType.GETSALT, obj.toString(), this);
+        }
+        catch(Exception e){
+            //TODO
+        }
+
+    }
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if (response.getError() == "false") {
@@ -63,7 +77,21 @@ public class ProfileSettingsInteractor implements IProfileSettingsInteractor {
 
             } else if (actionType == ActionType.UPDATEPASSWORT) {
                 listener.onSuccessUpdatePasswort();
-            }
+            }else if(actionType == ActionType.GETSALT){
+                String salt = "";
+                try {
+                    JSONObject json = new JSONObject(response.getData());
+                    salt = json.get("salt").toString().replace("\\u003d", "=").replace("\\n", "");
+                    Log.d("saltParsed", salt);
+                } catch (Exception e) {
+                    listener.onError("Error in getting salt");
+                    Log.d("Error: ", "Error in getting salt");
+                }
+                if (salt != "") {
+                    listener.onReturnSalt(salt);
+                } else {
+                    listener.onError("Error in getting salt");
+                }            }
         }else {
             listener.onError(response.getMessage());
         }
