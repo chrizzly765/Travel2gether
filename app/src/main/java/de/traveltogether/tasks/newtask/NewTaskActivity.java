@@ -100,9 +100,11 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
 
 
     public void onClick(View v) {
-        if (v.getId() == R.id.button_datepicker_new_task || v.getId() == R.id.activity_new_task_date){
-            clickedDatePickerBtn = (ImageButton) v;
-            datePicker.show(getFragmentManager(), DatePickerFragment.TAG);
+        if(v.getId() == R.id.button_datepicker_new_task) {
+            if (v.getId() == R.id.button_datepicker_new_task || v.getId() == R.id.activity_new_task_date) {
+                clickedDatePickerBtn = (ImageButton) v;
+                datePicker.show(getFragmentManager(), DatePickerFragment.TAG);
+            }
         }
     }
 

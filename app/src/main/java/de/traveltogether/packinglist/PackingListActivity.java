@@ -97,6 +97,8 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
             fragment = PackingListFragment.newInstance(_packingobjects);
             fragmentTransaction.add(R.id.fragment_packing_list_container, fragment);
             fragmentTransaction.commit();
+            findViewById(R.id.activity_packing_list_empty_text).setVisibility(View.INVISIBLE);
+
         }
         progressDialog.cancel();
 

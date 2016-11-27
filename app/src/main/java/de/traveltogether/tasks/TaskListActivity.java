@@ -124,6 +124,8 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentOpen = TaskListFragment.newInstance(arr);
             fragmentTransaction.add(R.id.activity_task_list_container_open, fragmentOpen);
             fragmentTransaction.commit();
+            findViewById(R.id.activity_task_list_open_empty).setVisibility(View.INVISIBLE);
+
         }
         else {
             findViewById(R.id.activity_task_list_open_empty).setVisibility(View.VISIBLE);
@@ -142,6 +144,8 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentProgress = TaskListFragment.newInstance(arr);
             fragmentTransaction.add(R.id.activity_task_list_container_progress, fragmentProgress);
             fragmentTransaction.commit();
+            findViewById(R.id.activity_task_list_progress_empty).setVisibility(View.INVISIBLE);
+
         }
         else {
             findViewById(R.id.activity_task_list_progress_empty).setVisibility(View.VISIBLE);
@@ -160,6 +164,8 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentDone = TaskListFragment.newInstance(arr);
             fragmentTransaction.add(R.id.activity_task_list_container_done, fragmentDone);
             fragmentTransaction.commit();
+            findViewById(R.id.activity_task_list_done_empty).setVisibility(View.INVISIBLE);
+
         }
         else {
             findViewById(R.id.activity_task_list_done_empty).setVisibility(View.VISIBLE);

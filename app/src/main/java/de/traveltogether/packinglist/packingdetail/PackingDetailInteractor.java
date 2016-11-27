@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
+import de.traveltogether.model.PackingItem;
 import de.traveltogether.model.PackingObject;
 import de.traveltogether.model.Response;
 import de.traveltogether.servercommunication.HttpRequest;
@@ -59,9 +60,23 @@ public class PackingDetailInteractor implements IPackingDetailInteractor {
                     listener.onCloseActivity();
                 }
             }
+            else if(actionType == ActionType.UPDATE){
+                //TODO
+            }
         }
         else{
             listener.onError(response.getMessage());
         }
     }
+
+    public void updatePackingItem(PackingItem item, IPackingDetailPresenter _listener) {
+        listener = _listener;
+        try {
+            String s = JsonDecode.getInstance().classToJson(item);
+            HttpRequest request = new HttpRequest(DataType.PACKINGITEM, ActionType.UPDATE, s, this);
+        } catch (Exception e) {
+            Log.e("DetailPackingInteractor", e.getMessage());
+        }
+    }
+
 }

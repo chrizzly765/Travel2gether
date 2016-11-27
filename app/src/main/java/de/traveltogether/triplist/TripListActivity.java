@@ -146,6 +146,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.add(R.id.fragment_trip_list_container_upcoming, fragment);
             fragmentTransaction.commit();
             fragmentUpcoming = fragment;
+            findViewById(R.id.activity_trip_list_upcoming_empty).setVisibility(View.INVISIBLE);
         }
         else{
             findViewById(R.id.activity_trip_list_upcoming_empty).setVisibility(View.VISIBLE);
@@ -165,6 +166,8 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
             //fragmentTransaction.attach(fragment);
             fragmentTransaction.commit();
             fragmentFormer = fragment;
+            findViewById(R.id.activity_trip_list_former_empty).setVisibility(View.INVISIBLE);
+
         }
         else{
             findViewById(R.id.activity_trip_list_former_empty).setVisibility(View.VISIBLE);
