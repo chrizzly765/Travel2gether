@@ -21,6 +21,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,11 +105,11 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
 
     public void onViewDetail(Trip _trip){
         trip = _trip;
-        ((TextView)findViewById(R.id.activity_info_title)).setText(trip.getTitle());
-        ((TextView)findViewById(R.id.activity_info_description)).setText(trip.getDescription());
+        ((TextView)findViewById(R.id.activity_info_title)).setText(StringEscapeUtils.unescapeJava(trip.getTitle()));
+        ((TextView)findViewById(R.id.activity_info_description)).setText(StringEscapeUtils.unescapeJava(trip.getDescription()));
         ((TextView)findViewById(R.id.activity_info_startdate)).setText(trip.getStartDate());
         ((TextView)findViewById(R.id.activity_info_enddate)).setText(trip.getEndDate());
-        ((TextView)findViewById(R.id.activity_info_destination)).setText(trip.getDestination());
+        ((TextView)findViewById(R.id.activity_info_destination)).setText(StringEscapeUtils.unescapeJava(trip.getDestination()));
     }
 
     public void onViewParticipants(Participant[] participants){

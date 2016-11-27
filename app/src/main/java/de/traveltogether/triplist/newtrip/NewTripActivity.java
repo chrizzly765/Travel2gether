@@ -213,9 +213,10 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
 
     public void onFillFields(Trip _trip){
         trip = _trip;
-        title.setText(trip.getTitle());
-        description.setText(trip.getDescription());
-        place.setText(trip.getDestination());
+
+        title.setText(StringEscapeUtils.unescapeJava(trip.getTitle()));
+        description.setText(StringEscapeUtils.unescapeJava(trip.getDescription()));
+        place.setText(StringEscapeUtils.unescapeJava(trip.getDestination()));
         startDate.setText(trip.getStartDate());
         endDate.setText(trip.getEndDate());
         progressDialog.cancel();

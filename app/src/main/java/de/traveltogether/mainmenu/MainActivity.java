@@ -21,6 +21,8 @@ import android.widget.Toast;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
@@ -69,9 +71,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             adminId = b.getInt("adminId");
                 setActionBar(title);
         }
-        if(title==""){
-            presenter.onGetTitleForTrip(tripId);
-        }
 
         StaticTripData.setCurrentTripId(tripId);
         groupAnimationContainer = (ImageView) findViewById(R.id.main_menu_group_animation);
@@ -115,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void setActionBar(String heading) {
         ActionBar actionBar = getSupportActionBar();
         //actionBar.setHomeButtonEnabled(true);
-        actionBar.setTitle(heading);
+        actionBar.setTitle(StringEscapeUtils.unescapeJava(heading));
         actionBar.show();
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
@@ -366,11 +365,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtras(bundle);
             startActivity(intent);
         }
-    }
-
-    public void onSuccessGetTitle(String _title){
-        title = _title;
-        getSupportActionBar().setTitle(title);
-        progressDialog.cancel();
     }
 }

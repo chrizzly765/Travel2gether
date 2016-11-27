@@ -32,7 +32,7 @@ public class PackingItem {
     public PackingItem(int _personAssigned) {
         personId = _personAssigned;
         number = 1;
-        //id = 0;
+        id = -1;
         status = false;
     }
 
