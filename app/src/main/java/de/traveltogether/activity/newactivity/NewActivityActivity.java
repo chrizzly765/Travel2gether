@@ -67,7 +67,8 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     long featureId = -1;
     Spinner currencySpinner;
     ProgressDialog progressDialog;
-    Boolean isSelected = true;
+    private ImageButton currentImgBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -236,9 +237,85 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         dialog.show();
     }
 
+
     @Override
     public void onClick(View v) {
-        isSelected = true;
+
+        if (v.getId() == R.id.button_datepicker_start || v.getId()==R.id.newActivity_startDate){
+            datePicker.show(getFragmentManager(), DatePickerFragment.TAG);
+        }
+
+        else if (v.getId() == R.id.button_timepicker || v.getId() == R.id.newActivity_time){
+            timePicker.show(getFragmentManager(), TimePickerFragment.ZEIT);
+        }
+        else {
+            final ImageButton imgBtn = (ImageButton) v;
+
+            if (currentImgBtn != null) {
+                currentImgBtn.setSelected(false);
+
+                if (v.getId() == R.id.icon_empty){
+                    //iconTag = R.mipmap.ic_leer;
+                }
+                else if (v.getId() == R.id.icon_plane){
+                    v.setSelected(!v.isSelected());
+                    iconTag = R.mipmap.plane;
+                }
+                else if (v.getId() == R.id.icon_beach){
+                    v.setSelected(!v.isSelected());
+                    iconTag = R.mipmap.beach;
+                }
+                else if (v.getId() == R.id.icon_cocktail){
+                    v.setSelected(!v.isSelected());
+                    iconTag = R.mipmap.cocktail;
+                }
+                else if (v.getId() == R.id.icon_ball){
+                    v.setSelected(!v.isSelected());
+                    iconTag = R.mipmap.ball;
+                }
+                else if (v.getId() == R.id.icon_film){
+                    v.setSelected(!v.isSelected());
+                    iconTag = R.mipmap.film;
+                }
+                else if (v.getId() == R.id.icon_coffee){
+                    v.setSelected(!v.isSelected());
+                    iconTag = R.mipmap.coffee;
+                }
+                else if (v.getId() == R.id.icon_food){
+                    v.setSelected(!v.isSelected());
+                    iconTag = R.mipmap.food;
+                }
+                else if (v.getId() == R.id.icon_gift){
+                    v.setSelected(!v.isSelected());
+                    iconTag = R.mipmap.gift;
+                }
+                else if (v.getId() == R.id.icon_sight){
+                    v.setSelected(!v.isSelected());
+                    iconTag = R.mipmap.sight;
+                }
+                else if (v.getId() == R.id.icon_casino){
+                    v.setSelected(!v.isSelected());
+                    iconTag = R.mipmap.casino;
+                }
+                else if (v.getId() == R.id.icon_sport){
+                    v.setSelected(!v.isSelected());
+                    iconTag = R.mipmap.sport;
+                }
+                else if (v.getId() == R.id.icon_landscape){
+                    v.setSelected(!v.isSelected());
+                    iconTag = R.mipmap.landscape;
+                }
+                else if (v.getId() == R.id.icon_bus){
+                    v.setSelected(!v.isSelected());
+                    iconTag = R.mipmap.bus;
+                }
+            }
+            imgBtn.setSelected(true);
+            currentImgBtn = imgBtn;
+        }
+
+
+
 /*
         if(v.getId()==R.id.newActivity_button_cancel){
             finish();
@@ -257,70 +334,12 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
                     startDate.getText().toString());
 
         }
-*/      if (v.getId() == R.id.button_datepicker_start || v.getId()==R.id.newActivity_startDate){
-            datePicker.show(getFragmentManager(), DatePickerFragment.TAG);
-        }
 
-        else if (v.getId() == R.id.button_timepicker || v.getId() == R.id.newActivity_time){
-            timePicker.show(getFragmentManager(), TimePickerFragment.ZEIT);
-        }
-        else if (v.getId() == R.id.icon_empty){
-            v.setSelected(!v.isSelected());
-            //iconTag = R.mipmap.ic_leer;
-        }
-        else if (v.getId() == R.id.icon_plane){
-            v.setSelected(!v.isSelected());
-            iconTag = R.mipmap.plane;
-        }
-        else if (v.getId() == R.id.icon_beach){
-            v.setSelected(!v.isSelected());
-            iconTag = R.mipmap.beach;
-        }
-        else if (v.getId() == R.id.icon_cocktail){
-            v.setSelected(!v.isSelected());
-            iconTag = R.mipmap.cocktail;
-        }
-        else if (v.getId() == R.id.icon_ball){
-            v.setSelected(!v.isSelected());
-            iconTag = R.mipmap.ball;
-        }
-        else if (v.getId() == R.id.icon_film){
-            v.setSelected(!v.isSelected());
-            iconTag = R.mipmap.film;
-        }
-        else if (v.getId() == R.id.icon_coffee){
-            v.setSelected(!v.isSelected());
-            iconTag = R.mipmap.coffee;
-        }
-        else if (v.getId() == R.id.icon_food){
-            v.setSelected(!v.isSelected());
-            iconTag = R.mipmap.food;
-        }
-        else if (v.getId() == R.id.icon_gift){
-            v.setSelected(!v.isSelected());
-            iconTag = R.mipmap.gift;
-        }
-        else if (v.getId() == R.id.icon_sight){
-            v.setSelected(!v.isSelected());
-            iconTag = R.mipmap.sight;
-        }
-        else if (v.getId() == R.id.icon_casino){
-            v.setSelected(!v.isSelected());
-            iconTag = R.mipmap.casino;
-        }
-        else if (v.getId() == R.id.icon_sport){
-            v.setSelected(!v.isSelected());
-            iconTag = R.mipmap.sport;
-        }
-        else if (v.getId() == R.id.icon_landscape){
-            v.setSelected(!v.isSelected());
-            iconTag = R.mipmap.landscape;
-        }
-        else if (v.getId() == R.id.icon_bus){
-            v.setSelected(!v.isSelected());
-            iconTag = R.mipmap.bus;
-        }
+*/
+
+
         //isSelected = false;
+
     }
 
     public void onViewErrorMessage(String message){
