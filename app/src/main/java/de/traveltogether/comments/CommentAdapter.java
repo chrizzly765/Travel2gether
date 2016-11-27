@@ -10,6 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
@@ -76,7 +78,7 @@ public class CommentAdapter extends BaseAdapter {
             //TODO: Problem!!
         }
         holder.date.setText(comment.getDate());
-        holder.content.setText(comment.getText());
+        holder.content.setText(StringEscapeUtils.unescapeJava(comment.getText()));
         ((ImageView)holder.icon.findViewById(R.id.fragment_commentlist_list_item_icon_circle))
                 .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById((int)comment.getId())));
         ((TextView)holder.icon.findViewById(R.id.fragment_commentlist_list_item_icon_initial))

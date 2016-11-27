@@ -14,8 +14,10 @@ public class NewTripPresenter implements INewTripPresenter {
     }
 
     @Override
-    public void onCreateTrip(String title, String description, String startdate, String enddate, String place) {
-        interactor.createTrip(title,description,startdate,enddate,place,this);
+    //public void onCreateTrip(String title, String description, String startdate, String enddate, String place) {
+    public void onCreateTrip( Trip trip) {
+        //interactor.createTrip(title,description,startdate,enddate,place,this);
+        interactor.createTrip(trip, this);
     }
 
     @Override

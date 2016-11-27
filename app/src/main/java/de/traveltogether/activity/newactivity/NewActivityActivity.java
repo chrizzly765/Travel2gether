@@ -25,6 +25,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.StaticData;
 import de.traveltogether.activity.ActivitiesActivity;
 import de.traveltogether.activity.detailactivity.DetailActivityActivity;
@@ -176,8 +178,8 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
                     return false;
                 }
                 if(featureId!=-1){
-                    activity.setTitle(title.getText().toString());
-                    activity.setDescription(description.getText().toString());
+                    activity.setTitle(StringEscapeUtils.escapeJava(title.getText().toString()));
+                    activity.setDescription(StringEscapeUtils.escapeJava(description.getText().toString()));
                     activity.setLastUpdateBy(StaticData.getUserId());
 
                     presenter.onUpdateActivity(activity);
@@ -191,13 +193,13 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
                     }
                     */
                     Activity activity = new Activity(
-                            title.getText().toString(),
+                            StringEscapeUtils.escapeJava(title.getText().toString()),
                             id,//Integer.parseInt(id.getText().toString()),
                             tripId,
-                            description.getText().toString(),
+                            StringEscapeUtils.escapeJava(description.getText().toString()),
                             StaticData.getUserId(),
                             iconTag,
-                            destination.getText().toString(),
+                            StringEscapeUtils.escapeJava(destination.getText().toString()),
                             time.getText().toString(),
                             startDate.getText().toString() );
 
@@ -370,8 +372,8 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     public void setValues(Activity _activity){
         activity =_activity;
         tripId = activity.getTripId();
-        title.setText(activity.getTitle());
-        description.setText(activity.getDescription());
+        title.setText(StringEscapeUtils.unescapeJava(activity.getTitle()));
+        description.setText(StringEscapeUtils.escapeJava(activity.getDescription()));
         startDate.setText(activity.getDate());
         time.setText(TimeFormat.getInstance().getTimeWithoutSecondsWithoutWord(activity.getTime()));
         progressDialog.cancel();

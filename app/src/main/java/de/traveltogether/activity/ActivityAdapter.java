@@ -12,6 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import android.graphics.BitmapFactory;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.R;
 import de.traveltogether.date.DateFormat;
 import de.traveltogether.model.Activity;
@@ -95,10 +98,10 @@ public class ActivityAdapter extends BaseAdapter  {
         }
 
 
-        holder.title.setText(activity.getTitle());
+        holder.title.setText(StringEscapeUtils.unescapeJava(activity.getTitle()));
         holder.icon.setBackgroundResource(activity.getIcon());
         //holder.date.setText(activity.getDate());
-        holder.destination.setText(activity.getDestination());
+        holder.destination.setText(StringEscapeUtils.unescapeJava(activity.getDestination()));
         holder.startDate.setText(DateFormat.getInstance().getDateInWords(activity.getDate()));
         //holder.time.setText(activity.getTime());
         holder.time.setText(TimeFormat.getInstance().getTimeWithoutSecondsWithWord(activity.getTime()));

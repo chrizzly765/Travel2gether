@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.comments.CommentListFragment;
@@ -94,7 +96,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.fragment_comment_button_send){
-            String text = inputField.getText().toString();
+            String text = StringEscapeUtils.escapeJava(inputField.getText().toString());
             presenter.onSendCommentForTrip(id, StaticData.getUserId(), text);
 
             //Text löschen wenn Eingabe fertig

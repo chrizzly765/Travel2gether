@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             adminId = b.getInt("adminId");
                 setActionBar(title);
         }
+        /*if(title==""){
+            presenter.onGetTitleForTrip(tripId);
+        }*/
 
         StaticTripData.setCurrentTripId(tripId);
         groupAnimationContainer = (ImageView) findViewById(R.id.main_menu_group_animation);
@@ -365,5 +368,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtras(bundle);
             startActivity(intent);
         }
+    }
+
+    public void onSuccessGetTitle(String _title){
+        title = _title;
+        getSupportActionBar().setTitle(StringEscapeUtils.unescapeJava(title));
+        progressDialog.cancel();
     }
 }

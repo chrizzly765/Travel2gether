@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.model.Comment;
@@ -93,7 +95,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.fragment_comment_button_send){
-            String text = inputField.getText().toString();
+            String text = StringEscapeUtils.escapeJava(inputField.getText().toString());
             if(text.equals("")){
                 return;
             }
