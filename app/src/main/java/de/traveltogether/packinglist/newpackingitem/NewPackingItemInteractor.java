@@ -45,7 +45,7 @@ public class NewPackingItemInteractor implements INewPackingItemInteractor {
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if(response.getError() == "true"){
-            listener.onError(response.getMessage());
+            listener.onError(response.getMessage(), response.getMessage());
         }
         else{
             if(actionType == ActionType.UPDATE){

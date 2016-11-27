@@ -76,7 +76,7 @@ public class NewActivityInteractor implements INewActivityInteractor {
                 listener.onSuccessUpdateActivity();
             }
         } else {
-            listener.onError(response.getMessage());
+            listener.onError(response.getMessage(), response.getMessage());
         }
         /*
         if(response.getError()=="false"){

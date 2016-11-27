@@ -18,6 +18,8 @@ import android.content.DialogInterface;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.ArrayList;
 
 
@@ -111,48 +113,61 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_save:
-                progressDialog = ProgressDialog.show(this, "",
-                        "Bitte warten...", true);
-                if(title.getText().toString()=="" || number.getText().toString()=="") {
-                    onViewError("Bitte gib die Daten vollständig an");
+                if(StringEscapeUtils.escapeJava(title.getText().toString()) != ""){
+                    progressDialog = ProgressDialog.show(this, "",
+                            "Bitte warten...", true);
+
+                    // DEFAULT TEXT IF FIELDS ARE EMPTY
+                    if(StringEscapeUtils.escapeJava(description.getText().toString()) == ""){
+                        description.setText("Keine Beschreibung");
+                    }
+
+                    if(StringEscapeUtils.escapeJava(number.getText().toString()) == ""){
+                        number.setText("1");
+                    }
+                    if(chosenParticipants.size() > Integer.parseInt(number.getText().toString())){
+                        number.setText(String.valueOf(chosenParticipants.size()));
+                    }
+                    if(featureId!=-1){
+                        PackingObject packingobject = new PackingObject(title.getText().toString(),
+                                this.packingObject.getId(),
+                                tripId, description.getText().toString(),
+                                this.packingObject.getAuthor(),
+                                Integer.parseInt(number.getText().toString()));
+
+                        if(chosenParticipants!=null) {
+                            for (PackingItem p : chosenParticipants) {
+                                packingobject.addPackingItem(p);//TODO: add amount in field
+                            }
+                        }
+                        presenter.onUpdatePackingObject(packingobject);
+                    }
+                    else {
+                        PackingObject packingobject = new PackingObject(
+                                title.getText().toString(),
+                                0,
+                                tripId,
+                                description.getText().toString(),
+                                StaticData.getUserId(),
+                                Integer.parseInt(number.getText().toString())
+                        );
+                        if(chosenParticipants!=null) {
+                            PackingItem[] array= new PackingItem[chosenParticipants.size()];
+                            for (PackingItem p : chosenParticipants) {
+                                packingobject.addPackingItem(p);//TODO: add amount in field
+                            }
+                        }
+                        presenter.onCreatePackingObject(packingobject);
+
+                    }
+                    return true;
+                }
+                else{
+                    onViewError("Bitte gib einen Titel für dein Packelement ein.","Pflichtfeld");
                     return false;
                 }
-                if(chosenParticipants.size() > Integer.parseInt(number.getText().toString())){
-                    number.setText(String.valueOf(chosenParticipants.size()));
-                }
-                if(featureId!=-1){
-                    PackingObject packingobject = new PackingObject(title.getText().toString(),
-                            this.packingObject.getId(),
-                            tripId, description.getText().toString(),
-                            this.packingObject.getAuthor(),
-                            Integer.parseInt(number.getText().toString()));
 
-                    if(chosenParticipants!=null) {
-                        for (PackingItem p : chosenParticipants) {
-                            packingobject.addPackingItem(p);//TODO: add amount in field
-                        }
-                    }
-                    presenter.onUpdatePackingObject(packingobject);
-                }
-                else {
-                    PackingObject packingobject = new PackingObject(
-                            title.getText().toString(),
-                            0,
-                            tripId,
-                            description.getText().toString(),
-                            StaticData.getUserId(),
-                            Integer.parseInt(number.getText().toString())
-                    );
-                    if(chosenParticipants!=null) {
-                        PackingItem[] array= new PackingItem[chosenParticipants.size()];
-                        for (PackingItem p : chosenParticipants) {
-                            packingobject.addPackingItem(p);//TODO: add amount in field
-                        }
-                    }
-                    presenter.onCreatePackingObject(packingobject);
 
-                }
-                return true;
             case android.R.id.home:
                 finish();
                 return true;
@@ -161,11 +176,11 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         }
     }
 
-    public void onViewError(String message) {
-        progressDialog.cancel();
+    public void onViewError(String message, String title) {
+        //progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
-        builder.setTitle(getString(R.string.error));
+        builder.setTitle(title);
         builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();

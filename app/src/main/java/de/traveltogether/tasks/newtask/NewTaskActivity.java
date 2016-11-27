@@ -21,6 +21,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.ArrayList;
 
 import de.traveltogether.R;
@@ -119,36 +121,50 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_save:
-                progressDialog = ProgressDialog.show(this, "",
-                        "Bitte warten...", true);
-                if(featureId == -1) {
+                if(StringEscapeUtils.escapeJava(title.getText().toString()) != ""){
+                    progressDialog = ProgressDialog.show(this, "",
+                            "Bitte warten...", true);
 
-                    Task task = new Task(
-                            title.getText().toString(),
-                            0,
-                            tripId,
-                            description.getText().toString(),
-                            StaticData.getUserId(),
-                            date.getText().toString(),
-                            currentPersonId,
-                            (int) status.getSelectedItemId() + 1
-                    );
+                    // DEFAULT TEXT IF FIELDS ARE EMPTY
+                    if(StringEscapeUtils.escapeJava(description.getText().toString()) == ""){
+                        description.setText("Keine Beschreibung");
+                    }
 
-                    presenter.onCreateTask(task);
+
+                    if(featureId == -1) {
+
+                        Task task = new Task(
+                                title.getText().toString(),
+                                0,
+                                tripId,
+                                description.getText().toString(),
+                                StaticData.getUserId(),
+                                date.getText().toString(),
+                                currentPersonId,
+                                (int) status.getSelectedItemId() + 1
+                        );
+
+                        presenter.onCreateTask(task);
+                    }
+                    else if(featureId != -1) {
+
+                        task.setTitle(title.getText().toString());
+                        task.setDueDate(date.getText().toString());
+                        task.setDescription(description.getText().toString());
+                        task.setPersonId(currentPersonId);
+                        task.setState((int) status.getSelectedItemId() + 1);
+                        task.setLastUpdateBy(StaticData.getUserId());
+
+                        presenter.onUpdateTask(task);
+                    }
+
+                    return true;
                 }
-                else if(featureId != -1) {
-
-                    task.setTitle(title.getText().toString());
-                    task.setDueDate(date.getText().toString());
-                    task.setDescription(description.getText().toString());
-                    task.setPersonId(currentPersonId);
-                    task.setState((int) status.getSelectedItemId() + 1);
-                    task.setLastUpdateBy(StaticData.getUserId());
-
-                    presenter.onUpdateTask(task);
+                else{
+                    onViewError("Bitte gib einen Titel für deine Aufgabe ein.", "Pflichtfeld");
+                    return false;
                 }
 
-                return true;
             case android.R.id.home:
                 finish();
                 return true;
@@ -186,12 +202,12 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         finish();
     }
 
-    public void onViewError(String message) {
+    public void onViewError(String message, String title) {
 
-        progressDialog.cancel();
+        //progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
-        builder.setTitle(getString(R.string.error));
+        builder.setTitle(title);
         builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();

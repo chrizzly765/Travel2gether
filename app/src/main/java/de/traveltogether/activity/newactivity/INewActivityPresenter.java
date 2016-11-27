@@ -13,7 +13,7 @@ import de.traveltogether.model.Participant;
 public interface INewActivityPresenter {
     //public void onGetParticipantsForTrip(long tripId);
     //public void onSuccessGetParticipants(Participant[] participants);
-    public void onError(String message);
+    public void onError(String message, String title);
     public void onCreateActivity(long tripId, Activity activity);
     public void onSuccessAddingActivity();
     public void onUpdateActivity(Activity activity);

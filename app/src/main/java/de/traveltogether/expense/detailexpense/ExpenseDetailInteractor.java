@@ -35,7 +35,7 @@ public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
                 }
         }
         else{
-            listener.onError(response.getMessage());
+            listener.onError(response.getMessage(), response.getMessage());
         }
     }
 
