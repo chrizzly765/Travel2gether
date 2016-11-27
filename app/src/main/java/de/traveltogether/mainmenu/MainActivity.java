@@ -10,8 +10,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,21 +24,24 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 
 import de.traveltogether.dialog.progressdialog.ProgressDialogFragment;
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.activity.ActivitiesActivity;
 import de.traveltogether.chat.ChatActivity;
+import de.traveltogether.date.DateFormat;
 import de.traveltogether.expense.ExpenseActivity;
 import de.traveltogether.info.InfoActivity;
 import de.traveltogether.model.Statistic;
 import de.traveltogether.model.Trip;
 import de.traveltogether.packinglist.PackingListActivity;
 import de.traveltogether.tasks.TaskListActivity;
-
+import de.traveltogether.time.TimeFormat;
+import de.traveltogether.triplist.TripListActivity;
 import 	java.util.Calendar;
 import java.util.Date;
-
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     long tripId;
@@ -116,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void setActionBar(String heading) {
         ActionBar actionBar = getSupportActionBar();
         //actionBar.setHomeButtonEnabled(true);
-        actionBar.setTitle(heading);
+        actionBar.setTitle(StringEscapeUtils.unescapeJava(heading));
         actionBar.show();
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);

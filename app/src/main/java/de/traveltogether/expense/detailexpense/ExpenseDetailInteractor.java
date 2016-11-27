@@ -32,10 +32,10 @@ public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
                     //listener.onError("Auf diese Ausgabe kann leider nicht mehr zugegriffen werden.");
                     listener.onCloseActivity();
                 }
-                }
+            }
         }
         else{
-            listener.onError(response.getMessage());
+            listener.onError(response.getMessage(), response.getMessage());
         }
     }
 

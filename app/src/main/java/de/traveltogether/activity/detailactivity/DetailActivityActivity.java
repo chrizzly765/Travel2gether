@@ -92,11 +92,11 @@ public class DetailActivityActivity extends DeleteActivity {
         }
     }
 
-    public void onViewError(String message){
+    public void onViewError(String message, String title){
         progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
-        builder.setTitle(getString(R.string.error));
+        builder.setTitle(title);
         builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
@@ -104,7 +104,8 @@ public class DetailActivityActivity extends DeleteActivity {
         });
 
         AlertDialog dialog = builder.create();
-        dialog.cancel();
+        dialog.show();
+
         tripId=detailActivity.getTripId();
     }
 
@@ -239,7 +240,7 @@ public class DetailActivityActivity extends DeleteActivity {
             presenter.onDeleteActivity(featureId);
         }
         else{
-            onViewError("Nur der Ersteller dieser Aktivität darf die Aktivität löschen.");
+            onViewError("Nur der Ersteller dieser Aktivität darf die Aktivität löschen.", "Sorry.");
         }
     }
 }

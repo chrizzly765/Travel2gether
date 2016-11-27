@@ -67,8 +67,5 @@ public class MainMenuPresenter implements IMainMenuPresenter {
         interactor.getTitleForTrip(tripId, this);
     }
 
-    @Override
-    public void onSuccessGetTitle(String title){
-        view.onSuccessGetTitle(title);
-    }
+
 }

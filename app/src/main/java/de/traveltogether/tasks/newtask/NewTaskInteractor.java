@@ -48,7 +48,7 @@ public class NewTaskInteractor implements INewTaskInteractor {
             }
         }
         else{
-            listener.onError(response.getMessage());
+            listener.onError(response.getMessage(), response.getMessage());
         }
     }
 

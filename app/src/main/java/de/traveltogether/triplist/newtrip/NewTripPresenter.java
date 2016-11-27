@@ -19,8 +19,8 @@ public class NewTripPresenter implements INewTripPresenter {
     }
 
     @Override
-    public void onError(String message) {
-        view.onViewErrorMessage(message);
+    public void onError(String message, String title) {
+        view.onViewErrorMessage(message, title);
     }
 
     @Override

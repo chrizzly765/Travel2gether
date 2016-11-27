@@ -89,6 +89,7 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
+                finish();
             }
         });
 

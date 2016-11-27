@@ -118,29 +118,42 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-                progressDialog = ProgressDialog.show(this, "",
-                        "Bitte warten...", true);
-                if(tripId!=-1){
-                    presenter.onUpdateTrip(
-                            new Trip(
-                                    trip.getTripId(),
-                                    StringEscapeUtils.escapeJava(title.getText().toString()),
-                                    StringEscapeUtils.escapeJava(description.getText().toString()),
-                                    StringEscapeUtils.escapeJava(place.getText().toString()),
-                                    startDate.getText().toString(),
-                                    endDate.getText().toString(),
-                                    trip.getAuthorId(),
-                                    trip.getAdminId(),
-                                    StaticData.getUserId(),
-                                    trip.getLastUpdate()));
+                if(StringEscapeUtils.escapeJava(title.getText().toString()) != ""){
+                    progressDialog = ProgressDialog.show(this, "",
+                            "Bitte warten...", true);
+                    // DEFAULT TEXT IF FIELDS ARE EMPTY
+                    if(StringEscapeUtils.escapeJava(description.getText().toString()) == ""){
+                        description.setText("Keine Beschreibung");
+                    }
+                    if(StringEscapeUtils.escapeJava(place.getText().toString()) == ""){
+                        place.setText("Kein Ort");
+                    }
+
+                    if(tripId!=-1){
+                        presenter.onUpdateTrip(
+                                new Trip(
+                                        trip.getTripId(),
+                                        StringEscapeUtils.escapeJava(title.getText().toString()),
+                                        StringEscapeUtils.escapeJava(description.getText().toString()),
+                                        StringEscapeUtils.escapeJava(place.getText().toString()),
+                                        startDate.getText().toString(),
+                                        endDate.getText().toString(),
+                                        trip.getAuthorId(),
+                                        trip.getAdminId(),
+                                        StaticData.getUserId(),
+                                        trip.getLastUpdate()));
+                    }
+                    else {
+                        presenter.onCreateTrip(
+                                StringEscapeUtils.escapeJava((title).getText().toString()),
+                                StringEscapeUtils.escapeJava(description.getText().toString()),
+                                startDate.getText().toString(),
+                                endDate.getText().toString(),
+                                StringEscapeUtils.escapeJava(place.getText().toString()));
+                    }
                 }
-                else {
-                    presenter.onCreateTrip(
-                            StringEscapeUtils.escapeJava((title).getText().toString()),
-                            StringEscapeUtils.escapeJava(description.getText().toString()),
-                            startDate.getText().toString(),
-                            endDate.getText().toString(),
-                            StringEscapeUtils.escapeJava(place.getText().toString()));
+                else{
+                    onViewErrorMessage("Bitte gib einen Titel für deine Reise ein.", "Pflichtfeld");
                 }
                 break;
             case android.R.id.home:
@@ -153,11 +166,11 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
         return  true;
     }
 
-    public void onViewErrorMessage(String message){
-        progressDialog.cancel();
+    public void onViewErrorMessage(String message, String title){
+        //progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
-        builder.setTitle(getString(R.string.error));
+        builder.setTitle(title);
         builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
@@ -200,9 +213,10 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
 
     public void onFillFields(Trip _trip){
         trip = _trip;
-        title.setText(trip.getTitle());
-        description.setText(trip.getDescription());
-        place.setText(trip.getDestination());
+
+        title.setText(StringEscapeUtils.unescapeJava(trip.getTitle()));
+        description.setText(StringEscapeUtils.unescapeJava(trip.getDescription()));
+        place.setText(StringEscapeUtils.unescapeJava(trip.getDestination()));
         startDate.setText(trip.getStartDate());
         endDate.setText(trip.getEndDate());
         progressDialog.cancel();

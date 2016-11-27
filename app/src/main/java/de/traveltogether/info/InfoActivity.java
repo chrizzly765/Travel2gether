@@ -21,6 +21,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +60,7 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
         presenter = new InfoPresenter(this);
         tripId = this.getIntent().getLongExtra("tripId", -1);
         if(tripId==-1){
-            onViewError("TripId fehlt!");
+            onViewError("TripId fehlt!", "Etwas ist schiefgelaufen.");
         }
         findViewById(R.id.activity_info_button_add).setOnClickListener(this);
     }
@@ -86,11 +88,11 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
         super.onSaveInstanceState(outState);
     }
 
-    public void onViewError(String message) {
+    public void onViewError(String message, String title) {
         progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
-        builder.setTitle(getString(R.string.error));
+        builder.setTitle(title);
         builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
@@ -103,11 +105,11 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
 
     public void onViewDetail(Trip _trip){
         trip = _trip;
-        ((TextView)findViewById(R.id.activity_info_title)).setText(trip.getTitle());
-        ((TextView)findViewById(R.id.activity_info_description)).setText(trip.getDescription());
+        ((TextView)findViewById(R.id.activity_info_title)).setText(StringEscapeUtils.unescapeJava(trip.getTitle()));
+        ((TextView)findViewById(R.id.activity_info_description)).setText(StringEscapeUtils.unescapeJava(trip.getDescription()));
         ((TextView)findViewById(R.id.activity_info_startdate)).setText(trip.getStartDate());
         ((TextView)findViewById(R.id.activity_info_enddate)).setText(trip.getEndDate());
-        ((TextView)findViewById(R.id.activity_info_destination)).setText(trip.getDestination());
+        ((TextView)findViewById(R.id.activity_info_destination)).setText(StringEscapeUtils.unescapeJava(trip.getDestination()));
     }
 
     public void onViewParticipants(Participant[] participants){
@@ -234,7 +236,7 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
             presenter.onDeleteTrip(tripId);
         }
         else{
-            onViewError("Nur der Ersteller dieser Reise darf die Reise löschen.");
+            onViewError("Nur der Ersteller dieser Reise darf die Reise löschen.", "Sorry.");
 
         }
     }
