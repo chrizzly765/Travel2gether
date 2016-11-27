@@ -314,32 +314,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
             currentImgBtn = imgBtn;
         }
 
-
-
-/*
-        if(v.getId()==R.id.newActivity_button_cancel){
-            finish();
-        }
-        else if (v.getId()==R.id.newActivity_button_save){
-
-            presenter.onCreateActivity(
-                    title.getText().toString(),
-                    id,//Integer.parseInt(id.getText().toString()),
-                    tripId,
-                    description.getText().toString(),
-                    participant,
-                    iconTag,
-                    destination.getText().toString(),
-                    time.getText().toString(),
-                    startDate.getText().toString());
-
-        }
-
-*/
-
-
-        //isSelected = false;
-
     }
 
     public void onViewErrorMessage(String message){

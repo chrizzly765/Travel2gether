@@ -147,7 +147,11 @@
         </activity>
         <activity
             android:name=".notification.NotificationActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainmenu.MainActivity" />
+        </activity>
         <activity
             android:name=".register.RegisterActivity"
             android:noHistory="true"

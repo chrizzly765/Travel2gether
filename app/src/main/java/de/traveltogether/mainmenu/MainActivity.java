@@ -1,6 +1,7 @@
 package de.traveltogether.mainmenu;
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,34 +10,32 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 
+import de.traveltogether.dialog.progressdialog.ProgressDialogFragment;
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.activity.ActivitiesActivity;
 import de.traveltogether.chat.ChatActivity;
-import de.traveltogether.date.DateFormat;
 import de.traveltogether.expense.ExpenseActivity;
 import de.traveltogether.info.InfoActivity;
 import de.traveltogether.model.Statistic;
 import de.traveltogether.model.Trip;
 import de.traveltogether.packinglist.PackingListActivity;
 import de.traveltogether.tasks.TaskListActivity;
-import de.traveltogether.time.TimeFormat;
-import de.traveltogether.triplist.TripListActivity;
+
 import 	java.util.Calendar;
 import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     long tripId;
@@ -87,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //groupText = (TextView) findViewById(R.id.main_menu_group_text);
         //startDateText = (TextView) findViewById(R.id.main_menu_countdown);
+        LinearLayout progressInfo = (LinearLayout)findViewById(R.id.main_menu_progress_info);
+        progressInfo.setOnClickListener(this);
 
         ImageButton info = (ImageButton)findViewById(R.id.main_menu_info);
         info.setOnClickListener(this);
@@ -190,8 +191,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String stringGroup = Long.toString(Math.round(statistic.getGroup() * 100)) + "%";
         String stringPersonal = Long.toString(Math.round(statistic.getPersonal() * 100)) + "%";
 
-
-
         TextView groupText = (TextView) findViewById(R.id.main_menu_group_text);
         groupText.setText(stringGroup);
         TextView personalText = (TextView) findViewById(R.id.main_menu_personal_text);
@@ -243,79 +242,103 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int _year = Integer.parseInt(s[2]);
 
         String countdown = "";
+        countdown = "00:00:00";
 
-        Calendar thatDay = Calendar.getInstance();
-        thatDay.setTime(new Date(0));
-        thatDay.set(Calendar.DAY_OF_MONTH,_day);
-        thatDay.set(Calendar.MONTH, _month-1); // 0-11 so 1 less
-        thatDay.set(Calendar.YEAR, _year);
+        if (_year != 0000) {
 
-        //Log.d("CountdownTest", "Countdown: " + thatDay);
+            Calendar thatDay = Calendar.getInstance();
+            thatDay.setTime(new Date(0));
+            thatDay.set(Calendar.DAY_OF_MONTH, _day);
+            thatDay.set(Calendar.MONTH, _month - 1); // 0-11 so 1 less
+            thatDay.set(Calendar.YEAR, _year);
 
-        Calendar today = Calendar.getInstance();
-        long diff =  thatDay.getTimeInMillis() - today.getTimeInMillis();
-        long diffSec = diff / 1000;
+            //Log.d("CountdownTest", "Countdown: " + thatDay);
 
-        long days = diffSec / SECONDS_IN_A_DAY;
-        long secondsDay = diffSec % SECONDS_IN_A_DAY;
-        long seconds = secondsDay % 60;
-        long minutes = (secondsDay / 60) % 60;
-        long hours = (secondsDay / 3600); // % 24 not needed
+            Calendar today = Calendar.getInstance();
+            long diff = thatDay.getTimeInMillis() - today.getTimeInMillis();
+            long diffSec = diff / 1000;
 
-        if (minutes >= 0 && minutes <= 9 ){
-            minutesString = "0" + String.valueOf(minutes);
+            long days = diffSec / SECONDS_IN_A_DAY;
+            long secondsDay = diffSec % SECONDS_IN_A_DAY;
+            long seconds = secondsDay % 60;
+            long minutes = (secondsDay / 60) % 60;
+            long hours = (secondsDay / 3600); // % 24 not needed
+
+            if (minutes < 0) {
+                if (Math.abs(minutes) >= 0 && Math.abs(minutes) <= 9) {
+                    minutesString = "0" + String.valueOf(Math.abs(minutes));
+                } else {
+                    minutesString = String.valueOf(Math.abs(minutes));
+                }
+            } else if (minutes >= 0 && minutes <= 9) {
+                minutesString = "0" + String.valueOf(minutes);
+            } else {
+                minutesString = String.valueOf(minutes);
+            }
+            // Log.d("hoursTest", "hours: " + hours);
+
+            if (hours - 1 < 0) {
+                if (Math.abs(hours - 1) >= 0 && Math.abs(hours - 1) <= 9) {
+                    hoursString = "0" + String.valueOf(Math.abs(hours - 1));
+                } else {
+                    hoursString = String.valueOf(Math.abs(hours - 1));
+                }
+            } else if (hours - 1 >= 0 && hours - 1 <= 9) {
+                hoursString = "0" + String.valueOf(hours - 1);
+            } else {
+                hoursString = String.valueOf(hours - 1);
+            }
+
+            if (days < 0) {
+                if (Math.abs(days) >= 0 && Math.abs(days) <= 9) {
+                    daysString = "-   " + "0" + String.valueOf(Math.abs(days));
+                } else {
+                    daysString = "-   " + String.valueOf(Math.abs(days));
+                }
+
+            } else if (days >= 0 && days <= 9) {
+                daysString = "0" + String.valueOf(days);
+            } else {
+                daysString = String.valueOf(days);
+            }
+
+            if (days < 0) {
+                TextView daysText = (TextView) findViewById(R.id.main_menu_text_days);
+                daysText.setTextColor(0xFFFF0000);
+                TextView hourseText = (TextView) findViewById(R.id.main_menu_text_hours);
+                hourseText.setTextColor(0xFFFF0000);
+                TextView minutesText = (TextView) findViewById(R.id.main_menu_text_minutes);
+                minutesText.setTextColor(0xFFFF0000);
+                TextView daysCountdown = (TextView) findViewById(R.id.main_menu_countdown_days);
+                daysCountdown.setTextColor(0xFFFF0000);
+                TextView hourseCountdown = (TextView) findViewById(R.id.main_menu_countdown_hours);
+                hourseCountdown.setTextColor(0xFFFF0000);
+                TextView minutesCountdown = (TextView) findViewById(R.id.main_menu_countdown_minutes);
+                minutesCountdown.setTextColor(0xFFFF0000);
+            }
+
+            //System.out.printf("%d days, %d hours, %d minutes and %d seconds\n", days, hours, minutes, seconds);
+            countdown = daysString + ":" + hoursString + ":" + minutesString;
+
         }
-        else {
-            minutesString = String.valueOf(minutes);
-        }
-       // Log.d("hoursTest", "hours: " + hours);
-        if (hours-1 >= 0 && hours-1 <= 9 ){
-            hoursString = "0" + String.valueOf(hours-1);
-        }
-        else {
-            hoursString = String.valueOf(hours-1);
-        }
 
-        if (days >= 0 && days <= 9 ){
-            daysString = "0" + String.valueOf(days);
-        }
-        else {
-            daysString = String.valueOf(days);
-        }
-
-        if (days < 0){
-            //TextView countdownText = (TextView) findViewById(R.id.main_menu_countdown);
-            //countdownText.setTextColor(0xFFFF0000);
-        }
-
-        //System.out.printf("%d days, %d hours, %d minutes and %d seconds\n", days, hours, minutes, seconds);
-        countdown = daysString + ":" + hoursString + ":" + minutesString;
         return countdown;
     }
 
     public String getCountdownDays (String countdown) {
-        //String string = "004-034556";
         String[] parts = countdown.split(":");
-        String days = parts[0]; // 004
-        String hours = parts[1]; // 034556
-        String minutes = parts[2];
+        String days = parts[0];
         return days;
     }
 
     public String getCountdownHours (String countdown) {
-        //String string = "004-034556";
         String[] parts = countdown.split(":");
-        String days = parts[0]; // 004
-        String hours = parts[1]; // 034556
-        String minutes = parts[2];
+        String hours = parts[1];
         return ":   " + hours + "   :";
     }
 
     public String getCountdownMinutes (String countdown) {
-        //String string = "004-034556";
         String[] parts = countdown.split(":");
-        String days = parts[0]; // 004
-        String hours = parts[1]; // 034556
         String minutes = parts[2];
         return minutes;
     }
@@ -324,6 +347,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+
         if(v.getId()==R.id.main_menu_info){
             Intent intent = new Intent(this, InfoActivity.class);
             Bundle bundle = new Bundle();
@@ -366,7 +390,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtras(bundle);
             startActivity(intent);
         }
+        else if(v.getId()==R.id.main_menu_progress_info){
+            Intent intent = new Intent(this, TaskListActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("tripId", tripId);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            /*
+            FragmentManager fm = getFragmentManager();
+            ProgressDialogFragment dialogFragment = new ProgressDialogFragment();
+            dialogFragment.show(fm, "Sample Fragment");
+            */
+        }
     }
+
+
 
     public void onSuccessGetTitle(String _title){
         title = _title;
