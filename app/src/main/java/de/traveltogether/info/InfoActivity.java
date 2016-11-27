@@ -229,7 +229,7 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
             presenter.onDeleteTrip(tripId);
         }
         else{
-            onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.");
+            onViewError("Nur der Ersteller dieser Reise darf die Reise löschen.");
 
         }
     }

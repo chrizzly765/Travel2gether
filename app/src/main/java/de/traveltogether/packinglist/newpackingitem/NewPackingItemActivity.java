@@ -109,6 +109,8 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_save:
+                progressDialog = ProgressDialog.show(this, "",
+                        "Bitte warten...", true);
                 if(title.getText().toString()=="" || number.getText().toString()=="") {
                     onViewError("Bitte gib die Daten vollständig an");
                     return false;
@@ -192,6 +194,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+        progressDialog.cancel();
         finish();
     }
 
@@ -201,6 +204,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+        progressDialog.cancel();
         finish();
     }
 

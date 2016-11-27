@@ -239,7 +239,7 @@ public class DetailActivityActivity extends DeleteActivity {
             presenter.onDeleteActivity(featureId);
         }
         else{
-            onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.");
+            onViewError("Nur der Ersteller dieser Aktivität darf die Aktivität löschen.");
         }
     }
 }

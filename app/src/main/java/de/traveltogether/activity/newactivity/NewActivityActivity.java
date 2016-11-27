@@ -168,6 +168,8 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         switch(item.getItemId()){
             case R.id.action_save:
 
+                progressDialog = ProgressDialog.show(this, "",
+                        "Bitte warten...", true);
                 if(title.getText().toString()==""){
                     onViewError("Bitte gib die Daten vollständig an");
                     return false;
@@ -216,6 +218,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+        progressDialog.cancel();
         finish();
     }
 
@@ -341,6 +344,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+        progressDialog.cancel();
         finish();
     }
 
