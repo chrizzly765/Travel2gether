@@ -150,7 +150,7 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
                                 StringEscapeUtils.escapeJava(place.getText().toString()),
                                 startDate.getText().toString(),
                                 endDate.getText().toString())
-                        );
+                        ;
                     }
                 }
                 else{

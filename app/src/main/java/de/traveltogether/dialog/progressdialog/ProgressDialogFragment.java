@@ -27,14 +27,14 @@ public class ProgressDialogFragment extends DialogFragment {
     private TextView title;
 
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    /*public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_progress_dialog, container, false);
         getDialog().setTitle("Fortschrittsanzeige");
 
         //title = (TextView) getActivity().findViewById(R.id.activity_task_detail_title);
         //title.setText(getTasksDone());
         return rootView;
-    }
+    }*/
 
     public String getTasksDone (){
         String result = "";
