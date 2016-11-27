@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id = "@+id/change_profile"
+        android:enabled="true"
+        android:title="@string/change_profile"
+        />
+    <item android:id = "@+id/change_pw"
+        android:enabled="true"
+        android:title="@string/change_pw"
+        />
+    <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/ic_check"
+        android:title="save"
+        app:showAsAction="always" />
+</menu>

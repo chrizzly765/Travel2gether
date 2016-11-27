@@ -60,6 +60,19 @@ public class PackingItemSelectionFragment extends ListFragment {
         else {
             adapter.refresh(array);
         }
+
+        ViewGroup vg = getListView();
+        int totalHeight = 0;
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View listItem = adapter.getView(i, null, vg);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams par = getListView().getLayoutParams();
+        par.height = totalHeight + (getListView().getDividerHeight() * (adapter.getCount() - 1));
+        getListView().setLayoutParams(par);
+        getListView().requestLayout();
     }
 
     @Override
@@ -85,6 +98,19 @@ public class PackingItemSelectionFragment extends ListFragment {
             adapter = new PackingItemSelectionAdapter(getActivity(), packingItems);
             setListAdapter(adapter);
         }
+
+        ViewGroup vg = getListView();
+            int totalHeight = 0;
+            for (int i = 0; i < adapter.getCount(); i++) {
+                View listItem = adapter.getView(i, null, vg);
+                listItem.measure(0, 0);
+                totalHeight += listItem.getMeasuredHeight();
+            }
+
+            ViewGroup.LayoutParams par = getListView().getLayoutParams();
+            par.height = totalHeight + (getListView().getDividerHeight() * (adapter.getCount() - 1));
+            getListView().setLayoutParams(par);
+            getListView().requestLayout();
 
     }
 

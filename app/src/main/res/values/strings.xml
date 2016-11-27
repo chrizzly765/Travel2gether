@@ -117,6 +117,8 @@
     <string name="please_wait">Bitte warten ...</string>
     <string name="please_choose">Bitte wählen ...</string>
     <string name="no_entries">Keine Einträge vorhanden</string>
+    <string name="change_profile">Daten ändern</string>
+    <string name="change_pw">Passwort ändern</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

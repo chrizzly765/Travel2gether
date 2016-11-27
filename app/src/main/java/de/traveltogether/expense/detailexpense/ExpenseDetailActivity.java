@@ -65,7 +65,7 @@ public class ExpenseDetailActivity extends DeleteActivity{
             StaticTripData.setCurrentTripId(tripId);
         }
 
-        title = (TextView) findViewById(R.id.activity_expense_detail_title);
+        title = (TextView) findViewById(R.id.   activity_expense_detail_title);
         description = (TextView) findViewById(R.id.activity_expense_detail_description);
         amount = (TextView) findViewById(R.id.activity_expense_detail_amount);
         paidBy = (TextView)findViewById(R.id.activity_expense_detail_paidby);
