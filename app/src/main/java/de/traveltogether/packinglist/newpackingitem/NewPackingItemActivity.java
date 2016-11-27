@@ -55,8 +55,10 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_packing_item);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         Bundle b = getIntent().getExtras();
         if (b != null) {
             tripId = b.getLong("tripId", -1);
@@ -150,6 +152,9 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                     presenter.onCreatePackingObject(packingobject);
 
                 }
+                return true;
+            case android.R.id.home:
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

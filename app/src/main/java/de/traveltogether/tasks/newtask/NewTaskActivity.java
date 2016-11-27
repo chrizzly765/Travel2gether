@@ -56,9 +56,11 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setTitle(R.string.new_task);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         Bundle b = getIntent().getExtras();
         if (b != null) {
             tripId = b.getLong("tripId", -1);
@@ -146,6 +148,9 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
                     presenter.onUpdateTask(task);
                 }
 
+                return true;
+            case android.R.id.home:
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

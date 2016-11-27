@@ -49,10 +49,12 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
-        getSupportActionBar().setTitle("Info");
+        getSupportActionBar().setTitle("Reiseinfo");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         presenter = new InfoPresenter(this);
         tripId = this.getIntent().getLongExtra("tripId", -1);
         if(tripId==-1){
@@ -206,6 +208,9 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
                 intent.putExtra("tripId", tripId);
                 startActivity(intent);
                 break;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 super.onOptionsItemSelected(item);
                 break;

@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         thatDay.set(Calendar.MONTH, _month-1); // 0-11 so 1 less
         thatDay.set(Calendar.YEAR, _year);
 
-        Log.d("CountdownTest", "Countdown: " + thatDay);
+        //Log.d("CountdownTest", "Countdown: " + thatDay);
 
         Calendar today = Calendar.getInstance();
         long diff =  thatDay.getTimeInMillis() - today.getTimeInMillis();
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else {
             minutesString = String.valueOf(minutes);
         }
-        Log.d("hoursTest", "hours: " + hours);
+       // Log.d("hoursTest", "hours: " + hours);
         if (hours-1 >= 0 && hours-1 <= 9 ){
             hoursString = "0" + String.valueOf(hours-1);
         }

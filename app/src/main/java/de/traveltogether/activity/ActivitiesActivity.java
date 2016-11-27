@@ -113,19 +113,8 @@ public class ActivitiesActivity extends AppCompatActivity implements View.OnClic
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
-            /*
-            case R.id.delete:
-                //TODO: DELETE
-                break;
-            case R.id.edit:
-                Intent intent = new Intent(this, NewActivityActivity.class);
-                intent.putExtra("tripId", tripId);
-                startActivity(intent);
-                break;
-                */
             case android.R.id.home:
-                onBackPressed();
+                finish();
                 return true;
             default:
                 super.onOptionsItemSelected(item);

@@ -44,6 +44,9 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         presenter = new PackingDetailPresenter(this);
         setContentView(R.layout.activity_packing_detail);
         featureId = getIntent().getLongExtra("featureId", -1);
@@ -137,6 +140,9 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
                 startActivity(intent);
                 finish();
                 break;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 super.onOptionsItemSelected(item);
                 break;

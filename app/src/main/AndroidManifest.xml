@@ -24,27 +24,48 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".packinglist.PackingListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainmenu.MainActivity" />
+        </activity>
         <activity
             android:name=".mainmenu.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".triplist.TripListActivity" />
+                android:value=".mainmenu.MainActivity" />
         </activity>
         <activity
             android:name=".tasks.TaskListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainmenu.MainActivity" />
+        </activity>
+
         <activity
             android:name=".expense.ExpenseActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainmenu.MainActivity" />
+        </activity>
         <activity
             android:name=".expense.detailexpense.ExpenseDetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainmenu.MainActivity" />
+        </activity>
         <activity
             android:name=".expense.newexpense.NewExpenseActivity"
             android:noHistory="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainmenu.MainActivity" />
+        </activity>
         <activity
             android:name=".login.LoginActivity"
             android:screenOrientation="portrait"
@@ -66,29 +87,49 @@
         <activity
             android:name=".packinglist.newpackingitem.NewPackingItemActivity"
             android:noHistory="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainmenu.MainActivity" />
+        </activity>
         <activity
             android:name=".packinglist.packingdetail.PackingDetailActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainmenu.MainActivity" />
+        </activity>
         <activity
             android:name=".tasks.newtask.NewTaskActivity"
             android:noHistory="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainmenu.MainActivity" />
+        </activity>
         <activity
             android:name=".tasks.detail.TaskDetailActivity"
             android:noHistory="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainmenu.MainActivity" />
+        </activity>
         <activity
             android:name=".triplist.newtrip.NewTripActivity"
             android:noHistory="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainmenu.MainActivity" />
+        </activity>
         <activity
             android:name=".activity.newactivity.NewActivityActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.ActivitiesActivity" />
+                android:value=".mainmenu.MainActivity" />
         </activity>
         <activity
             android:name=".participantlist.ParticipantListActivity"
@@ -99,7 +140,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".info.InfoActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainmenu.MainActivity" />
+        </activity>
         <activity
             android:name=".notification.NotificationActivity"
             android:screenOrientation="portrait" />
@@ -128,6 +173,9 @@
 
                 <data android:mimeType="*/*" />
             </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainmenu.MainActivity" />
         </activity>
 
         <receiver
@@ -169,7 +217,7 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.ActivitiesActivity" />
+                android:value=".mainmenu.MainActivity" />
         </activity>
     </application>
 

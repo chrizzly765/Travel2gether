@@ -39,8 +39,9 @@ public class InvitationActivity extends AppCompatActivity{
 
         getSupportActionBar().setTitle("Mitreisende hinzufügen");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         tripId = -1; // or other values
         if (b != null) {
@@ -77,6 +78,9 @@ public class InvitationActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_save:
+                finish();
+                return true;
+            case android.R.id.home:
                 finish();
                 return true;
             default:

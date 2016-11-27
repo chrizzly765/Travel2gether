@@ -50,6 +50,17 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
 
         tripId = getIntent().getLongExtra("tripId", -1);
 
+        if(tripId != -1) {
+            getSupportActionBar().setTitle("Reiseinfo bearbeiten");
+        }
+        else {
+            getSupportActionBar().setTitle("Neue Reise");
+        }
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         presenter = new NewTripPresenter(this);
         datePicker =new DatePickerFragment();
         setContentView(R.layout.activity_new_trip);
@@ -132,6 +143,9 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
                             StringEscapeUtils.escapeJava(place.getText().toString()));
                 }
                 break;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 super.onOptionsItemSelected(item);
                 break;
