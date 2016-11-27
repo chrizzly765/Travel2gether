@@ -58,8 +58,8 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         super.onStart();
         progressDialog = ProgressDialog.show(this, "",
                 "Bitte warten...", true);
-        presenter.onGetExpenseList(tripId);
         presenter.onGetParticipantList(tripId);
+        presenter.onGetExpenseList(tripId);
     }
 
     @Override
@@ -105,8 +105,6 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         participantsFragment = ExpenseParticipantFragment.newInstance(activeParts);
         fragmentTransaction.add(R.id.activity_expense_participants_container, participantsFragment);
         fragmentTransaction.commit();
-
-        progressDialog.cancel();
 
         //RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_expense_participants_container);
         //ViewGroup.LayoutParams params = layout.getLayoutParams();

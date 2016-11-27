@@ -39,7 +39,7 @@ public class HashFactory {
             SecretKey key = skf.generateSecret(spec);
             byte[] res = key.getEncoded();
             String str = convertByteToString(res);
-            return str;
+            return str.replace("\u003d", "").replace("\\n", "").replace("\\u003d", "");
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new RuntimeException(e);
         }

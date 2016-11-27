@@ -1,6 +1,7 @@
 package de.traveltogether.settings.profilesettings;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,11 +9,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +33,10 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     Menu optionsMenu;
     TextView email;
     TextView name;
+    TextView errorText;
     String salt;
     View passwordDialogView;
+    AlertDialog passwordDialog;
 
 
     @Override
@@ -150,20 +155,14 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         passwordDialogView = inflater.inflate(R.layout.dialog_change_password, null);
-        builder.setView(passwordDialogView);
-        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                if (changePassword())
-                    dialog.cancel();
-                else {
-                    ((EditText) passwordDialogView.findViewById(R.id.dialog_change_password_oldpw)).setText("");
-                    ((EditText) passwordDialogView.findViewById(R.id.dialog_change_password_newpw)).setText("");
-                    ((EditText) passwordDialogView.findViewById(R.id.dialog_change_password_wdhpw)).setText("");
-                }
+        errorText = (TextView)passwordDialogView.findViewById(R.id.dialog_change_password_error);
 
+        builder.setView(passwordDialogView);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
             }
         });
-        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
@@ -171,8 +170,34 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
         builder.setTitle(getString(R.string.change_pw));
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        passwordDialog = builder.create();
+        Button b = (Button)passwordDialog.getButton(Dialog.BUTTON_POSITIVE);
+
+        passwordDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+
+            @Override
+            public void onShow(DialogInterface dialog) {
+
+                Button b = passwordDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                b.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        if (changePassword())
+                            passwordDialog.dismiss();
+                        else {
+                            ((EditText) passwordDialogView.findViewById(R.id.dialog_change_password_oldpw)).setText("");
+                            ((EditText) passwordDialogView.findViewById(R.id.dialog_change_password_newpw)).setText("");
+                            ((EditText) passwordDialogView.findViewById(R.id.dialog_change_password_wdhpw)).setText("");
+
+                        }
+                    }
+                });
+            }
+        });
+        passwordDialog.setCanceledOnTouchOutside(false);
+        passwordDialog.setCancelable(false);
+        passwordDialog.show();
     }
 
     public boolean changePassword() {
@@ -183,22 +208,28 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         newPW = ((EditText)passwordDialogView.findViewById(R.id.dialog_change_password_newpw)).getText().toString();
         wdhPW = ((EditText)passwordDialogView.findViewById(R.id.dialog_change_password_wdhpw)).getText().toString();
 
-        if (newPW != wdhPW) {
-            onError("Die Passwörter stimmen nicht überein.");
+        if (!newPW.equals(wdhPW)) {
+            errorText.setText("Die Passwörter stimmen nicht überein.");
             return false;
         }
         SharedPreferences sharedPref = getSharedPreferences("TravelTogetherPrefs",Context.MODE_PRIVATE );
-        String oldHash = sharedPref.getString(getString(R.string.saved_hash), "");
+        String oldHash = sharedPref.getString(getString(R.string.saved_hash), "").replace(" ", "").replace("\u003d", "").replace("\\n", "");;
         int length = oldPW.length();
         char [] pw = new char[length];
         oldPW.getChars(0,length, pw, 0);
-        String enteredHash = hashPassword(pw, salt);
-        if(enteredHash!=oldHash){
-            onError("Das eingegebene Passwort ist falsch.");
+        String enteredHash = hashPassword(pw, salt).replace("\u003d", "").replace("\\n", "");;
+        if(!enteredHash.equals(oldHash)){
+            Log.d("hash", enteredHash + " "+ oldHash);
+            Log.d("length", enteredHash.length() +" "+ oldHash.length());
+            errorText.setText("Das eingegebene Passwort ist falsch.");
             return false;
         }
         salt = HashFactory.getNextSalt();
         length = newPW.length();
+        if(length<7){
+            errorText.setText("Das eingegebene Passwort ist zu kurz.");
+            return false;
+        }
         char [] newpw = new char[length];
         String newHash = hashPassword(newpw, salt);
         presenter.onUpdatePasswort(salt, newHash);

@@ -65,8 +65,9 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         progressDialog = ProgressDialog.show(this, "",
                 "Reisen werden geladen...", true);
         presenter = new TripListPresenter(this);
-        presenter.onGetNotiCount();
         presenter.onGetTrips();
+        presenter.onGetNotiCount();
+
     }
 
     @Override

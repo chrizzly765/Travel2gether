@@ -5,6 +5,12 @@
     android:layout_height="match_parent"
     tools:context="de.traveltogether.expense.newexpense.NewExpenseActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -140,4 +146,6 @@
             android:src="@mipmap/ic_add" />
 
     </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
