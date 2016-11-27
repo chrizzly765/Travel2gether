@@ -65,15 +65,25 @@ public class PackingDetailAdapter extends BaseAdapter {
         holder.name.setText(StaticTripData.getNameById(item.getAssignedPerson()));
         holder.box.setEnabled(false);
 
-        if(item.getStatus()==true){
-            holder.box.setBackgroundResource(R.drawable.checkbox_filled);
+        Log.d("adapter", item.getStatus()+ " "+ item.getAssignedPerson());
+
+        //holder.box.setActivated(item.getStatus());
+        if(item.getAssignedPerson() == StaticData.getUserId()){
+            if(item.getStatus()==true){
+                holder.box.setBackgroundResource(R.drawable.checkbox_filled);
+            }
+            else{
+                holder.box.setBackgroundResource(R.drawable.checkbox_empty);
+            }
         }
         else{
-            holder.box.setBackgroundResource(R.drawable.checkbox_empty);
-        }
-        //holder.box.setActivated(item.getStatus());
-        if(item.getAssignedPerson() != StaticData.getUserId()){
-            holder.box.setOnClickListener(null);
+            convertView.setOnClickListener(null);
+            if(item.getStatus()==true){
+                holder.box.setBackgroundResource(R.drawable.checkbox_filled_grey);
+            }
+            else{
+                holder.box.setBackgroundResource(R.drawable.checkbox_empty_grey);
+            }
         }
         ((TextView)holder.icon.findViewById(R.id.fragment_packing_detail_list_item_initial)).setText(holder.name.getText().toString().substring(0,1));
         ((ImageView)holder.icon.findViewById(R.id.fragment_packing_detail_list_item_circle)).setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(item.getAssignedPerson())));
