@@ -8,7 +8,7 @@ import de.traveltogether.model.Trip;
  */
 public interface IInfoPresenter {
     public void onGetInfoForTrip(long tripId);
-    public void onError(String message);
+    public void onError(String message, String Title);
     public void onSuccessGetDetail(Trip trip);
     public void onGetParticipantsForTrip(long tripId);
     public void onSuccessGetParticipants(Participant[] participants);

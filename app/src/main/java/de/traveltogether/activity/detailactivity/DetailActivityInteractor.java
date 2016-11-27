@@ -35,7 +35,7 @@ public class DetailActivityInteractor implements IDetailActivityInteractor {
             }
         }
         else{
-            listener.onError(response.getMessage());
+            listener.onError(response.getMessage(), response.getMessage());
         }
     }
 

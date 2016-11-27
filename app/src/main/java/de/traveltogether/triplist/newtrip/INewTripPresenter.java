@@ -7,7 +7,7 @@ import de.traveltogether.model.Trip;
  */
 public interface INewTripPresenter {
     public void onCreateTrip(String title, String description, String startdate, String enddate, String place);
-    public void onError(String message);
+    public void onError(String message, String title);
     public void onSuccess(String message, long tripId);
     public void onGetDetailsForTrip(long tripId);
     public void onSuccessGetDetails(Trip trip);

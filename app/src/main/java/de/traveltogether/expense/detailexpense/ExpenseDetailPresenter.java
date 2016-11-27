@@ -25,8 +25,8 @@ public class ExpenseDetailPresenter implements IExpenseDetailPresenter {
     }
 
     @Override
-    public void onError(String message) {
-        view.onViewError(message);
+    public void onError(String message, String title) {
+        view.onViewError(message, title);
     }
 
     @Override

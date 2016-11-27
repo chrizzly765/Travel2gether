@@ -9,7 +9,7 @@ import de.traveltogether.model.PackingObject;
 public interface IPackingDetailPresenter {
     public void onGetDetailsForPackingObject(long featureId);
     public void onSuccessGetDetails(PackingObject packingObject);
-    public void onError(String message);
+    public void onError(String message, String title);
     public void onDeletePackingObject(long id);
     public void onSuccessDelete();
     public void onUpdatePackingItem(PackingItem item);

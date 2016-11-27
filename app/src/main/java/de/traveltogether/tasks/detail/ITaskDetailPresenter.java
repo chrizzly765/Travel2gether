@@ -9,7 +9,7 @@ public interface ITaskDetailPresenter {
 
     public void onGetDetailsForTask(long featureId);
     public void onSuccessGetDetails(Task task);
-    public void onError(String message);
+    public void onError(String message, String title);
     //public void onDeleteTask(long id);
     public void onDeleteTask(Task task);
     public void onSuccessDelete();

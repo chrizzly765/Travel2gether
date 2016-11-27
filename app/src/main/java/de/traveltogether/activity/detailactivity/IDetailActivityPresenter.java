@@ -8,7 +8,7 @@ import de.traveltogether.model.Activity;
 public interface IDetailActivityPresenter {
     public void onGetDetailsForActivity(long featureId);
     public void onSuccessGetDetails(Activity activity);
-    public void onError(String message);
+    public void onError(String message, String title);
     public void onDeleteActivity(long id);
     public void onSuccessDelete();
     public void onCloseActivity();

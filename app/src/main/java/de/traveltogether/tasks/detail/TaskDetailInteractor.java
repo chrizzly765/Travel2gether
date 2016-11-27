@@ -34,7 +34,7 @@ public class TaskDetailInteractor implements ITaskDetailInteractor {
             }
         }
         else{
-            listener.onError(response.getMessage());
+            listener.onError(response.getMessage(), response.getMessage());
         }
     }
 
