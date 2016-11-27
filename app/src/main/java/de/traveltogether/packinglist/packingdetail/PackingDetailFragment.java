@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import de.traveltogether.R;
 import de.traveltogether.model.PackingItem;
@@ -74,12 +75,11 @@ public class PackingDetailFragment extends ListFragment implements AdapterView.O
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.d("Fragment", "onitemclick");
         if(((PackingItem)adapter.getItem(position)).getStatus() == true){
-            ((ImageView)(adapter.getView(position, null, getListView()).findViewById(R.id.fragment_packing_detail_list_item_checkBox))).setBackgroundResource(R.drawable.checkbox_empty);
+            ((LinearLayout)view).findViewById(R.id.fragment_packing_detail_list_item_checkBox).setBackgroundResource(R.drawable.checkbox_empty);
         }
         else{
-            ((ImageView)(adapter.getView(position, null, getListView()).findViewById(R.id.fragment_packing_detail_list_item_checkBox))).setBackgroundResource(R.drawable.checkbox_filled);
+            ((LinearLayout)view).findViewById(R.id.fragment_packing_detail_list_item_checkBox).setBackgroundResource(R.drawable.checkbox_filled);
         }
-
         ((PackingDetailActivity)getActivity()).setPackingItemClicked(position);
     }
 }

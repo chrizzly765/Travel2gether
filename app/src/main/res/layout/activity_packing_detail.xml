@@ -12,31 +12,27 @@
         android:layout_margin="@dimen/activity_horizontal_margin"
         >
 
-        <LinearLayout
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:orientation="horizontal"
-            android:id="@+id/activity_packing_detail_countbox"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/checkbox_empty_blue">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="@color/colorWhite"
-                android:textSize="18dp"
-                android:id="@+id/activity_packing_detail_count"/>
-        </LinearLayout>
+
+        <TextView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:text="1"
+            android:background="@drawable/checkbox_empty_blue"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:layout_alignParentTop="true"
+
+            android:textSize="18dp"
+            android:id="@+id/activity_packing_detail_count"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/activity_packing_detail_countbox"
+            android:layout_toRightOf="@+id/activity_packing_detail_count"
             android:layout_marginStart="8dp"
             android:id="@+id/activity_packing_detail_title"
             android:layout_alignParentTop="true"
-            android:text="Title"
+            android:text=""
             android:textSize="21dp"
             android:layout_alignParentEnd="true"
             android:clickable = "false"
