@@ -16,9 +16,10 @@ public class NewTripInteractor implements INewTripInteractor {
     INewTripPresenter listener;
 
     @Override
-    public void createTrip(String title, String description, String startdate, String enddate, String place, INewTripPresenter _listener) {
+    //public void createTrip(String title, String description, String startdate, String enddate, String place, INewTripPresenter _listener) {public void createTrip(String title, String description, String startdate, String enddate, String place, INewTripPresenter _listener) {
+    public void createTrip(Trip trip, INewTripPresenter _listener) {
         listener = _listener;
-        Trip trip = new Trip(title, description, place, startdate,enddate);
+        //Trip trip = new Trip(title, description, place, startdate,enddate);
         String json = JsonDecode.getInstance().classToJson(trip);
         HttpRequest request = new HttpRequest(DataType.TRIP, ActionType.ADD, json, this);
     }

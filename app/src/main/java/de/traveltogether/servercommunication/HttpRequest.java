@@ -2,6 +2,7 @@ package de.traveltogether.servercommunication;
 
 import android.util.Log;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONObject;
 
 import de.traveltogether.ActionType;

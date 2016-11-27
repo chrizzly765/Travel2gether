@@ -197,6 +197,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String stringGroup = Long.toString(Math.round(statistic.getGroup() * 100)) + "%";
         String stringPersonal = Long.toString(Math.round(statistic.getPersonal() * 100)) + "%";
 
+
+
         TextView groupText = (TextView) findViewById(R.id.main_menu_group_text);
         groupText.setText(stringGroup);
         TextView personalText = (TextView) findViewById(R.id.main_menu_personal_text);
@@ -353,7 +355,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-
         if(v.getId()==R.id.main_menu_info){
             Intent intent = new Intent(this, InfoActivity.class);
             Bundle bundle = new Bundle();
@@ -412,9 +413,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+
     public void onSuccessGetTitle(String _title){
         title = _title;
-        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setTitle(StringEscapeUtils.unescapeJava(title));
         progressDialog.cancel();
     }
 }

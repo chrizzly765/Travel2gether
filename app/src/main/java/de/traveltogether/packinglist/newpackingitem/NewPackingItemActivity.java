@@ -129,9 +129,9 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                         number.setText(String.valueOf(chosenParticipants.size()));
                     }
                     if(featureId!=-1){
-                        PackingObject packingobject = new PackingObject(title.getText().toString(),
+                        PackingObject packingobject = new PackingObject(StringEscapeUtils.escapeJava(title.getText().toString()),
                                 this.packingObject.getId(),
-                                tripId, description.getText().toString(),
+                                tripId, StringEscapeUtils.escapeJava(description.getText().toString()),
                                 this.packingObject.getAuthor(),
                                 Integer.parseInt(number.getText().toString()));
 
@@ -144,10 +144,10 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                     }
                     else {
                         PackingObject packingobject = new PackingObject(
-                                title.getText().toString(),
+                                StringEscapeUtils.escapeJava(title.getText().toString()),
                                 0,
                                 tripId,
-                                description.getText().toString(),
+                                StringEscapeUtils.escapeJava(description.getText().toString()),
                                 StaticData.getUserId(),
                                 Integer.parseInt(number.getText().toString())
                         );
@@ -194,9 +194,9 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
     public void onSuccessGetDetail(PackingObject _packingObject){
         packingObject = _packingObject;
         tripId=packingObject.getTripId();
-        title.setText(packingObject.getTitle());
+        title.setText(StringEscapeUtils.unescapeJava(packingObject.getTitle()));
         number.setText(Integer.toString(packingObject.getPackingItemsNumber()));
-        description.setText(packingObject.getDescription());
+        description.setText(StringEscapeUtils.unescapeJava(packingObject.getDescription()));
         for(PackingItem p: packingObject.getItems()){
             chosenParticipants.add(p);
         }

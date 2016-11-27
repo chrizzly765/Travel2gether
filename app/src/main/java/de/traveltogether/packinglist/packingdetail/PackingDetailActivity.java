@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.List;
 
 import de.traveltogether.R;
@@ -101,10 +103,10 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
     public void onViewDetails(PackingObject _packingobject){
         packingObject = _packingobject;
         tripId=packingObject.getTripId();
-        getSupportActionBar().setTitle(packingObject.getTitle());
-        title.setText(packingObject.getTitle());
+        getSupportActionBar().setTitle(StringEscapeUtils.unescapeJava(packingObject.getTitle()));
+        title.setText(StringEscapeUtils.unescapeJava(packingObject.getTitle()));
         count.setText(String.valueOf(packingObject.getPackingItemsNumber()));
-        description.setText(packingObject.getDescription());
+        description.setText(StringEscapeUtils.unescapeJava(packingObject.getDescription()));
         onViewPackingItems(packingObject.getItems());
     }
 

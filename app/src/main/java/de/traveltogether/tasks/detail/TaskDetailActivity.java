@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
@@ -107,9 +109,9 @@ public class TaskDetailActivity extends DeleteActivity {
     public void onViewDetails(Task _task){
         task = _task;
         tripId = task.getTripId();
-        getSupportActionBar().setTitle(task.getTitle());
-        title.setText(task.getTitle());
-        description.setText(task.getDescription());
+        getSupportActionBar().setTitle(StringEscapeUtils.unescapeJava(task.getTitle()));
+        title.setText(StringEscapeUtils.unescapeJava(task.getTitle()));
+        description.setText(StringEscapeUtils.unescapeJava(task.getDescription()));
 
         switch (task.getState()) {
             case 1: colorStatus = Color.RED; break;

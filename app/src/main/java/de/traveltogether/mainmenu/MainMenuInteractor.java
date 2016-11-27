@@ -95,6 +95,9 @@ public class MainMenuInteractor implements IMainMenuInteractor {
                     listener.onError(response.getMessage());
                 }
             }
+            if(actionType==ActionType.GETTITLE){
+                listener.onSuccessGetTitle(response.getData());
+            }
         }
         else{
             listener.onError(response.getMessage());

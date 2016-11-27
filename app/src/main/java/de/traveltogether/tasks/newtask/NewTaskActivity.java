@@ -134,10 +134,10 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
                     if(featureId == -1) {
 
                         Task task = new Task(
-                                title.getText().toString(),
+                                StringEscapeUtils.escapeJava(title.getText().toString()),
                                 0,
                                 tripId,
-                                description.getText().toString(),
+                                StringEscapeUtils.escapeJava(description.getText().toString()),
                                 StaticData.getUserId(),
                                 date.getText().toString(),
                                 currentPersonId,
@@ -148,9 +148,9 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
                     }
                     else if(featureId != -1) {
 
-                        task.setTitle(title.getText().toString());
+                        task.setTitle(StringEscapeUtils.escapeJava(title.getText().toString()));
                         task.setDueDate(date.getText().toString());
-                        task.setDescription(description.getText().toString());
+                        task.setDescription(StringEscapeUtils.escapeJava(description.getText().toString()));
                         task.setPersonId(currentPersonId);
                         task.setState((int) status.getSelectedItemId() + 1);
                         task.setLastUpdateBy(StaticData.getUserId());
@@ -263,8 +263,8 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
 
         task = _task;
         tripId=task.getTripId();
-        title.setText(task.getTitle());
-        description.setText(task.getDescription());
+        title.setText(StringEscapeUtils.unescapeJava(task.getTitle()));
+        description.setText(StringEscapeUtils.unescapeJava(task.getDescription()));
         date.setText(task.getDueDate());
         currentPersonId = task.getPersonId();
         status.setSelection(task.getState()-1);
