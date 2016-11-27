@@ -51,7 +51,7 @@ public class PackingDetailAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.fragment_packing_detail_list_item, parent, false);
             holder = new PackingDetailViewHolder();
             holder.name = (TextView)convertView.findViewById(R.id.fragment_packing_detail_list_item_name);
-            holder.box = (CheckBox)convertView.findViewById(R.id.fragment_packing_detail_list_item_checkBox);
+            holder.box = (ImageView)convertView.findViewById(R.id.fragment_packing_detail_list_item_checkBox);
             holder.icon = (FrameLayout)convertView.findViewById(R.id.fragment_packing_detail_list_item_icon);
 
             convertView.setTag(holder);
@@ -63,9 +63,17 @@ public class PackingDetailAdapter extends BaseAdapter {
         Context context = parent.getContext();
         PackingItem item = (PackingItem) getItem(position);
         holder.name.setText(StaticTripData.getNameById(item.getAssignedPerson()));
-        holder.box.setActivated(item.getStatus());
-        if(item.getAssignedPerson() == StaticData.getUserId()){
-            holder.box.setEnabled(true);
+        holder.box.setEnabled(false);
+
+        if(item.getStatus()==true){
+            holder.box.setBackgroundResource(R.drawable.checkbox_filled);
+        }
+        else{
+            holder.box.setBackgroundResource(R.drawable.checkbox_empty);
+        }
+        //holder.box.setActivated(item.getStatus());
+        if(item.getAssignedPerson() != StaticData.getUserId()){
+            holder.box.setOnClickListener(null);
         }
         ((TextView)holder.icon.findViewById(R.id.fragment_packing_detail_list_item_initial)).setText(holder.name.getText().toString().substring(0,1));
         ((ImageView)holder.icon.findViewById(R.id.fragment_packing_detail_list_item_circle)).setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(item.getAssignedPerson())));
@@ -76,7 +84,7 @@ public class PackingDetailAdapter extends BaseAdapter {
 
     public class PackingDetailViewHolder {
         TextView name;
-        CheckBox box;
+        ImageView box;
         FrameLayout icon;
     }
 }

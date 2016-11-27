@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -150,12 +151,12 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
     }
 
     public void onSuccessDelete(){
-        //TODO: toast
-        if(tripId!=-1) {
-            Intent intent = new Intent(this, PackingListActivity.class);
-            intent.putExtra("tripId", tripId);
-            startActivity(intent);
-        }
+        progressDialog.cancel();
+        Context context = getApplicationContext();
+        CharSequence text = "Packelement erfolgreich gelöscht.";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
         finish();
     }
 
@@ -184,5 +185,12 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
         else{
             onViewError("Nur der Ersteller dieses Packelements darf das Packelement löschen.");
         }
+    }
+
+    public void setPackingItemClicked(int pos){
+        Log.d("packingdetail", "setItemclicked");
+        PackingItem item = packingObject.getItems().get(pos);
+        item.toggleStatus();
+        presenter.onUpdatePackingItem(packingObject.getItems().get(pos));
     }
 }
