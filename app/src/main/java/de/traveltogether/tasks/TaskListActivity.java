@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -41,8 +42,9 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
 
         getSupportActionBar().setTitle(R.string.tasks);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         Bundle b = getIntent().getExtras();
         tripId = -1;
@@ -189,5 +191,16 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                super.onOptionsItemSelected(item);
+        }
+        return  true;
     }
 }

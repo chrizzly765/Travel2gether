@@ -54,8 +54,10 @@ public class ExpenseDetailActivity extends DeleteActivity{
 
         getSupportActionBar().setTitle("Ausgabe");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         presenter = new ExpenseDetailPresenter(this);
         featureId = getIntent().getLongExtra("featureId", -1);
         tripId = getIntent().getLongExtra("tripId", -1);
@@ -111,6 +113,7 @@ public class ExpenseDetailActivity extends DeleteActivity{
         expense = _expense;
         title.setText(expense.getTitle());
         tripId=expense.getTripId();
+        getSupportActionBar().setTitle(expense.getTitle());
         description.setText(expense.getDescription());
         amount.setText(df.format(expense.getAmount()) + getResources().getStringArray(R.array.currencies)[expense.getCurrencyId()].substring(0,1));
         paidBy.setText(StaticTripData.getNameById(expense.getPayer()));
@@ -164,6 +167,9 @@ public class ExpenseDetailActivity extends DeleteActivity{
                 intent.putExtras(b);
                 startActivity(intent);
                 break;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 super.onOptionsItemSelected(item);
                 break;

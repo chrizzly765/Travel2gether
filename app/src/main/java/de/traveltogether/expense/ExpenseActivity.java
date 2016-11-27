@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -21,6 +22,7 @@ import de.traveltogether.expense.newexpense.NewExpenseActivity;
 import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
+import de.traveltogether.triplist.newtrip.NewTripActivity;
 
 public class ExpenseActivity extends AppCompatActivity implements View.OnClickListener{
     long tripId;
@@ -34,8 +36,9 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Ausgaben");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         setContentView(R.layout.activity_expense);
         ImageButton add= (ImageButton)findViewById(R.id.activity_expense_button_add);
@@ -120,6 +123,18 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         if(progressDialog.isShowing()) {
             progressDialog.cancel();
         }
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                super.onOptionsItemSelected(item);
+                break;
+        }
+        return  true;
     }
 
 }
