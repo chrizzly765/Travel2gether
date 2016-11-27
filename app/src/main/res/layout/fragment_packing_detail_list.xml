@@ -14,7 +14,10 @@
         android:id="@android:id/list"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
-        android:padding="0dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:dividerHeight="8dp"
+        android:divider="#00000000"
         tools:listitem="fragment_packing_detail_list_item"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"/>

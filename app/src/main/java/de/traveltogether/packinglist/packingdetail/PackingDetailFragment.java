@@ -7,9 +7,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 
 import de.traveltogether.R;
 import de.traveltogether.model.PackingItem;
@@ -18,7 +21,7 @@ import de.traveltogether.model.PackingItem;
 import java.util.List;
 
 
-public class PackingDetailFragment extends ListFragment {
+public class PackingDetailFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
     List<PackingItem> items;
     PackingDetailAdapter adapter;
@@ -61,9 +64,22 @@ public class PackingDetailFragment extends ListFragment {
             }
             adapter = new PackingDetailAdapter(getActivity(),array);
             setListAdapter(adapter);
+            getListView().setOnItemClickListener(this);
         }
 
     }
 
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.d("Fragment", "onitemclick");
+        if(((PackingItem)adapter.getItem(position)).getStatus() == true){
+            ((ImageView)(adapter.getView(position, null, getListView()).findViewById(R.id.fragment_packing_detail_list_item_checkBox))).setBackgroundResource(R.drawable.checkbox_empty);
+        }
+        else{
+            ((ImageView)(adapter.getView(position, null, getListView()).findViewById(R.id.fragment_packing_detail_list_item_checkBox))).setBackgroundResource(R.drawable.checkbox_filled);
+        }
+
+        ((PackingDetailActivity)getActivity()).setPackingItemClicked(position);
+    }
 }

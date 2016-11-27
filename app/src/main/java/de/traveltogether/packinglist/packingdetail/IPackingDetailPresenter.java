@@ -1,5 +1,6 @@
 package de.traveltogether.packinglist.packingdetail;
 
+import de.traveltogether.model.PackingItem;
 import de.traveltogether.model.PackingObject;
 
 /**
@@ -11,6 +12,7 @@ public interface IPackingDetailPresenter {
     public void onError(String message);
     public void onDeletePackingObject(long id);
     public void onSuccessDelete();
+    public void onUpdatePackingItem(PackingItem item);
 
     void onCloseActivity();
 }

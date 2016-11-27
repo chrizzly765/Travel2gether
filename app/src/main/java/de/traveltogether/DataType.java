@@ -84,5 +84,9 @@ public enum DataType {
     STATISTIC{
         @Override
         public String toString(){return "Statistic";}
+    },
+    PACKINGITEM{
+        @Override
+        public String toString(){return "PackingItem";}
     }
 }

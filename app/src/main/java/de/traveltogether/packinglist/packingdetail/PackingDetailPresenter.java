@@ -1,5 +1,6 @@
 package de.traveltogether.packinglist.packingdetail;
 
+import de.traveltogether.model.PackingItem;
 import de.traveltogether.model.PackingObject;
 
 /**
@@ -43,4 +44,9 @@ public class PackingDetailPresenter implements IPackingDetailPresenter{
     public void onCloseActivity(){
         view.onCloseActivity();
     };
+
+    public void onUpdatePackingItem(PackingItem item){
+        interactor.updatePackingItem(item, this);
+    }
+
 }
