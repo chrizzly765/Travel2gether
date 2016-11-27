@@ -18,7 +18,7 @@
             android:orientation="horizontal"
             android:id="@+id/activity_packing_detail_countbox"
             android:layout_alignParentStart="true"
-            android:background="@drawable/checkbox_filled_blue">
+            android:background="@drawable/checkbox_empty_blue">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
