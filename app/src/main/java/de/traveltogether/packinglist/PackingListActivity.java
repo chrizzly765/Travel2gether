@@ -52,8 +52,10 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
         }
         getSupportActionBar().setTitle("Packliste");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         ImageButton button = (ImageButton)findViewById(R.id.activity_packing_list_button_add);
         button.setOnClickListener(this);
         //MenuItem optionsBtn = (MenuItem) findViewById(R.id.open_options);
@@ -126,5 +128,17 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                super.onOptionsItemSelected(item);
+                break;
+        }
+        return  true;
     }
 }

@@ -205,7 +205,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
 
                 return true;
             case android.R.id.home:
-                onBackPressed();
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -266,7 +266,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         }
         else if (v.getId() == R.id.icon_empty){
             v.setSelected(!v.isSelected());
-            iconTag = R.drawable.ic_leer;
+            //iconTag = R.mipmap.ic_leer;
         }
         else if (v.getId() == R.id.icon_plane){
             v.setSelected(!v.isSelected());

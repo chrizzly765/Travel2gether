@@ -2,6 +2,7 @@ package de.traveltogether.activity;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +86,14 @@ public class ActivityAdapter extends BaseAdapter  {
         else {
             holder.layout.setBackgroundResource(R.mipmap.background_activity_6);
         }
+
+        if (position == (getCount()-1)){
+            holder.layout.setBackgroundResource(R.mipmap.background_activity_end);
+        }
+        if ( (position == (getCount()-1) && !(position%2 == 0) ) ){
+            holder.layout.setBackgroundResource(R.mipmap.background_activity_6_end);
+        }
+
 
         holder.title.setText(activity.getTitle());
         holder.icon.setBackgroundResource(activity.getIcon());

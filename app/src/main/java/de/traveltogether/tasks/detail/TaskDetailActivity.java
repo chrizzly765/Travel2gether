@@ -54,8 +54,11 @@ public class TaskDetailActivity extends DeleteActivity {
         setContentView(R.layout.activity_task_detail);
         getSupportActionBar().setTitle("Aufgabe");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+
         presenter = new TaskDetailPresenter(this);
         featureId = getIntent().getLongExtra("featureId", -1);
 
@@ -166,6 +169,9 @@ public class TaskDetailActivity extends DeleteActivity {
                 intent.putExtras(b);
                 startActivity(intent);
                 break;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 super.onOptionsItemSelected(item);
                 break;

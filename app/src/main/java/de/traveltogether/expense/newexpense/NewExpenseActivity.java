@@ -70,8 +70,9 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         setContentView(R.layout.activity_new_expense);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
+        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         Bundle b = getIntent().getExtras();
         if (b != null) {
@@ -179,6 +180,9 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                         presenter.onCreateExpense(expense);
                 }
 
+                return true;
+            case android.R.id.home:
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
