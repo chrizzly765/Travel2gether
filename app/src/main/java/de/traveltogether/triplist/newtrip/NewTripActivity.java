@@ -107,6 +107,8 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
+                progressDialog = ProgressDialog.show(this, "",
+                        "Bitte warten...", true);
                 if(tripId!=-1){
                     presenter.onUpdateTrip(
                             new Trip(
@@ -165,6 +167,7 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
         b.putLong("tripId", tripId); //Your id
         invite.putExtras(b); //Put your id to your next Intent
         startActivity(invite);
+        progressDialog.cancel();
         finish();
     }
 
@@ -192,6 +195,7 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void onSuccessUpdateTrip(String message){
+        progressDialog.cancel();
         finish();
     }
 }

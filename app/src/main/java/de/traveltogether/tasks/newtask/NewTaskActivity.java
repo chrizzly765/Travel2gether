@@ -117,7 +117,8 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_save:
-
+                progressDialog = ProgressDialog.show(this, "",
+                        "Bitte warten...", true);
                 if(featureId == -1) {
 
                     Task task = new Task(
@@ -169,12 +170,14 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
 
     public void onSuccessAddingTask(){
         Toast.makeText(getApplicationContext(), R.string.task_added, Toast.LENGTH_SHORT).show();
+        progressDialog.cancel();
         finish();
     }
 
     public void onSuccessUpdateTask(){
         tripId = task.getTripId();
         Toast.makeText(getApplicationContext(), R.string.task_updated, Toast.LENGTH_SHORT).show();
+        progressDialog.cancel();
         finish();
     }
 
