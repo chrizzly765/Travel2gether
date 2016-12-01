@@ -60,7 +60,7 @@
     <string name="invited_to_trip">%1$s hat dich eingeladen der Reise %2$s beizutreten</string>
     <string name="join">Beitreten</string>
     <string name="decline">Ablehnen</string>
-    <string name="invitation_text">Du wurdest eingeladen, an einer TravelTogether Reise teilzunehmen. http://www.imagik.de/traveltogether</string>
+    <string name="invitation_text">Du wurdest eingeladen, an einer TravelTogether Reise teilzunehmen. https://www.druckstdu.de/?</string>
     <string name="title_invititation_choose">Andere zur Reise einladen</string>
     <string name="invite_success">Erfolgreich eingeladen</string>
     <string name="invitation">Einladung</string>

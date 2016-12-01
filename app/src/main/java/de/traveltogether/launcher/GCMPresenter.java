@@ -7,7 +7,7 @@ package de.traveltogether.launcher;
 public class GCMPresenter implements IGCMPresenter {
     LauncherActivity view;
     IGCMInteractor interactor;
-    public GCMPresenter (LauncherActivity activity){
+    public GCMPresenter (LauncherActivity activity) {
         view = activity;
         interactor = new GCMInteractor();
     }
@@ -15,5 +15,10 @@ public class GCMPresenter implements IGCMPresenter {
     @Override
     public void onUpdateToken(String token) {
         interactor.updateToken(token, this);
+    }
+
+    @Override
+    public void onSendInvitation(long tripId, int author) {
+        interactor.sendInvitation(tripId, author, this);
     }
 }

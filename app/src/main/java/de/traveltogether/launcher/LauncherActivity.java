@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import de.traveltogether.gcm.GCMRegistrationIntentService;
 import de.traveltogether.login.ILoginPresenter;
 import de.traveltogether.login.LoginActivity;
 import de.traveltogether.login.LoginPresenter;
+import de.traveltogether.notification.NotificationActivity;
 import de.traveltogether.triplist.TripListActivity;
 
 import static de.traveltogether.servercommunication.HashFactory.hashPassword;
@@ -44,6 +46,7 @@ public class LauncherActivity extends AppCompatActivity {
             editor.commit();*/
             userId = sharedPref.getInt(getString(R.string.saved_user_id), -1);
             if(userId != -1){
+                StaticData.setUserId(userId);
                 mRegistrationBroadcastReceiver = new BroadcastReceiver() {
                     @Override
                     public void onReceive(Context context, Intent intent) {
@@ -58,8 +61,21 @@ public class LauncherActivity extends AppCompatActivity {
                         }
                     }
                 };
+                try {
+                    Uri data= getIntent().getData();
+                    long tripId = Long.valueOf(data.getQueryParameter("tripId"));
+                    int author = Integer.valueOf(data.getQueryParameter("author"));
+                    presenter.onSendInvitation(tripId, author);
+                    Intent intent = new Intent(this, NotificationActivity.class);
+                    startActivity(intent);
+                    finish();
+                    Log.d("launcher", "sent invitation");
+                    return;
+                }
+                catch (Exception e){
+                    Log.d("Launcher", "No intent data");
+                }
                 Intent tl = new Intent(this, TripListActivity.class);
-                StaticData.setUserId(userId);
                 startActivity(tl);
             }
             else{

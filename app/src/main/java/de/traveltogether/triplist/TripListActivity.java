@@ -173,6 +173,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         else{
             findViewById(R.id.activity_trip_list_former_empty).setVisibility(View.VISIBLE);
         }
+        progressDialog.cancel();
         presenter.onGetNotiCount();
     }
 

@@ -32,6 +32,22 @@ public class GCMInteractor implements IGCMInteractor {
     }
 
     @Override
+    public void sendInvitation(long tripId,int author, IGCMPresenter _listener) {
+        try {
+            listener = _listener;
+            JSONObject obj = new JSONObject();
+            obj.put("receiverId", StaticData.getUserId());
+            obj.put("author", author);
+            obj.put("tripId", tripId);
+
+            HttpRequest request = new HttpRequest(DataType.INVITATION, ActionType.INVITE, obj.toString(), this);
+        }
+        catch(Exception e){
+            //TODO
+        }
+    }
+
+    @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
 
     }
