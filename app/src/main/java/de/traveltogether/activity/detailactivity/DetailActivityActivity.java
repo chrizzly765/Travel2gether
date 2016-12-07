@@ -71,8 +71,11 @@ public class DetailActivityActivity extends DeleteActivity {
         setContentView(R.layout.activity_detail_activity);
         featureId = getIntent().getLongExtra("featureId", -1);
         tripId = getIntent().getLongExtra("tripId", -1);
-        if(tripId!=-1){
+        if(tripId>0){
             StaticTripData.setCurrentTripId(tripId);
+        }
+        if(StaticTripData.getActiveParticipants().length == 0){
+            presenter.onGetParticipantsForTrip(tripId);
         }
         title = (TextView) findViewById(R.id.detailActivity_title);
         description = (TextView) findViewById(R.id.detailActivity_description);

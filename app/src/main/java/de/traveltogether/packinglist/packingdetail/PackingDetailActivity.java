@@ -56,6 +56,9 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
+        if(StaticTripData.getActiveParticipants().length == 0){
+            presenter.onGetParticipantsForTrip(tripId);
+        }
 
         title = (TextView) findViewById(R.id.activity_packing_detail_title);
         description = (TextView) findViewById(R.id.activity_packing_detail_description);
@@ -93,6 +96,7 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
         builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
+                finish();
             }
         });
 

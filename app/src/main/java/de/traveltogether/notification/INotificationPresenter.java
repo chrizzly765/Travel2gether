@@ -11,5 +11,6 @@ public interface INotificationPresenter {
     void onGetNotificationList();
     void onViewNotificationList(Notification[] notifications);
     void onSetNotificationRead(long notificationId);
+    void onSuccessSetNotificationRead();
     void onError(String message);
 }

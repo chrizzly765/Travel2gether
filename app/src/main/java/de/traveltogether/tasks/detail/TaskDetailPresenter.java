@@ -44,4 +44,10 @@ public class TaskDetailPresenter implements ITaskDetailPresenter {
     public void onCloseActivity(){
         view.onCloseActivity();
     }
+
+    @Override
+    public void onGetParticipantsForTrip(long tripId) {
+        interactor.getParticipantsForTrip(tripId, this);
+
+    }
 }

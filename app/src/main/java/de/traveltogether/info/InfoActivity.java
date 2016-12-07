@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -62,6 +63,9 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
         if(tripId==-1){
             onViewError("TripId fehlt!", "Etwas ist schiefgelaufen.");
         }
+        if(StaticTripData.getActiveParticipants().length == 0){
+            presenter.onGetParticipantsForTrip(tripId);
+        }
         findViewById(R.id.activity_info_button_add).setOnClickListener(this);
     }
 
@@ -71,7 +75,6 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
         progressDialog = ProgressDialog.show(this, "",
                 "Info wird geladen...", true);
         presenter.onGetInfoForTrip(tripId);
-        presenter.onGetParticipantsForTrip(tripId);
     }
 
     @Override
@@ -96,6 +99,7 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
         builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
+                finish();
             }
         });
 
@@ -110,10 +114,12 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
         ((TextView)findViewById(R.id.activity_info_startdate)).setText(trip.getStartDate());
         ((TextView)findViewById(R.id.activity_info_enddate)).setText(trip.getEndDate());
         ((TextView)findViewById(R.id.activity_info_destination)).setText(StringEscapeUtils.unescapeJava(trip.getDestination()));
+        presenter.onGetParticipantsForTrip(tripId);
+
     }
 
     public void onViewParticipants(Participant[] participants){
-
+        Log.d("info", "view participants");
         Participant[] activeParts = StaticTripData.getActiveParticipants();
         Participant[] invitedParts = StaticTripData.getInvitedParticipants();
         Participant[] resignedParts = StaticTripData.getResignedParticipants();

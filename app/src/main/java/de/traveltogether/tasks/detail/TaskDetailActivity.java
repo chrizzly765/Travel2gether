@@ -68,6 +68,9 @@ public class TaskDetailActivity extends DeleteActivity {
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
+        if(StaticTripData.getActiveParticipants().length==0){
+            presenter.onGetParticipantsForTrip(tripId);
+        }
 
 
         title = (TextView) findViewById(R.id.activity_task_detail_title);

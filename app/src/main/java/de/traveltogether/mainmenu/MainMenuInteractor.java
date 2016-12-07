@@ -50,7 +50,7 @@ public class MainMenuInteractor implements IMainMenuInteractor {
 
     @Override
     public void getParticipantsForTrip(long tripId, IMainMenuPresenter _listener) {
-        /*listener = _listener;
+        listener = _listener;
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("tripId", tripId);
@@ -59,7 +59,7 @@ public class MainMenuInteractor implements IMainMenuInteractor {
         catch(Exception e){
             Log.e(e.getClass().toString(), e.getMessage());
         }
-*/
+
     }
 
     @Override

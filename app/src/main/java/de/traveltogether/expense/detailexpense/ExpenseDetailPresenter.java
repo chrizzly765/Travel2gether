@@ -40,5 +40,10 @@ public class ExpenseDetailPresenter implements IExpenseDetailPresenter {
     }
 
     @Override
+    public void onGetParticipantsForTrip(long tripId) {
+        interactor.getParticipantsForTrip(tripId, this);
+    }
+
+    @Override
     public void onCloseActivity(){view.onCloseActivity();}
 }

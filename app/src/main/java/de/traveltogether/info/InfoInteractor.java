@@ -63,11 +63,17 @@ public class InfoInteractor implements IInfoInteractor{
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if(response.getError() == "true"){
-            listener.onError(response.getMessage(), response.getMessage());
+            listener.onError("Kein Zugriff", response.getMessage());
         }
         else {
             if (actionType == ActionType.DETAIL) {
-                listener.onSuccessGetDetail((Trip)JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP));
+                if(!response.getData().equals("{}")) {
+                    Trip trip = (Trip)JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP);
+                    listener.onSuccessGetDetail((Trip) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP));
+                }
+                else {
+                    listener.onError("Kein Zugriff", "Die Reise wurde gelöscht.");
+                }
             } else if (actionType == ActionType.GETPARTICIPANTS) {
                 Participant[] participants = ((ParticipantList)JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
                 StaticTripData.setParticipants(participants);

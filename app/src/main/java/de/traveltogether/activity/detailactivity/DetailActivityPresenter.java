@@ -42,4 +42,9 @@ public class DetailActivityPresenter implements IDetailActivityPresenter {
         view.onCloseActivity();
     }
 
+    @Override
+    public void onGetParticipantsForTrip(long tripId) {
+        interactor.getParticipantsForTrip(tripId, this);
+    }
+
 }

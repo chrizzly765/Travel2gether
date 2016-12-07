@@ -12,4 +12,6 @@ public interface IDetailActivityPresenter {
     public void onDeleteActivity(long id);
     public void onSuccessDelete();
     public void onCloseActivity();
+    void onGetParticipantsForTrip(long tripId);
+
 }

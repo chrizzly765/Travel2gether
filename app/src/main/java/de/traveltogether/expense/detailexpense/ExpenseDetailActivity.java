@@ -64,7 +64,9 @@ public class ExpenseDetailActivity extends DeleteActivity{
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
-
+        if(StaticTripData.getActiveParticipants().length == 0){
+            presenter.onGetParticipantsForTrip(tripId);
+        }
         title = (TextView) findViewById(R.id.   activity_expense_detail_title);
         description = (TextView) findViewById(R.id.activity_expense_detail_description);
         amount = (TextView) findViewById(R.id.activity_expense_detail_amount);

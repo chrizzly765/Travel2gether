@@ -87,14 +87,14 @@ public class ActivityAdapter extends BaseAdapter  {
             holder.layout.setBackgroundResource(R.mipmap.background_activity);
         }
         else {
-            holder.layout.setBackgroundResource(R.mipmap.background_activity_6);
+            holder.layout.setBackgroundResource(R.mipmap.background_activity_2);
         }
 
         if (position == (getCount()-1)){
             holder.layout.setBackgroundResource(R.mipmap.background_activity_end);
         }
         if ( (position == (getCount()-1) && !(position%2 == 0) ) ){
-            holder.layout.setBackgroundResource(R.mipmap.background_activity_6_end);
+            holder.layout.setBackgroundResource(R.mipmap.background_activity_end_2);
         }
 
 

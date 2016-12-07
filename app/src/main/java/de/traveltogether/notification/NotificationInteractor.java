@@ -84,6 +84,9 @@ public class NotificationInteractor implements INotificationInteractor {
                     listener.onViewNotificationList(new Notification[0]);
                 }
             }
+            else if(dataType.equals(DataType.NOTIFICATION) && actionType == ActionType.UPDATE){
+                listener.onSuccessSetNotificationRead();
+            }
         }
     }
     class NotificationList{

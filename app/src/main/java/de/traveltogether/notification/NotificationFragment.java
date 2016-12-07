@@ -36,6 +36,7 @@ public class NotificationFragment extends ListFragment implements AdapterView.On
     private Notification[] notifications;
     View view;
     NotificationActivity activity;
+    Notification currentNotification;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -89,39 +90,8 @@ public class NotificationFragment extends ListFragment implements AdapterView.On
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Notification n = (Notification) adapter.getItem(position);
+        ((NotificationActivity)getActivity()).currentNotification = n;
         activity.presenter.onSetNotificationRead(n.getId());
         view.setBackgroundResource(R.drawable.rectangle);
-        if (n.getType().equals(DataType.TRIP.toString())){
-            Intent intent = new Intent(activity, InfoActivity.class);
-            intent.putExtra("tripId", n.getFeatureOrTripId());
-            startActivity(intent);
-        }
-        else if(n.getType().equals(DataType.EXPENSE.toString())){
-            Intent intent = new Intent(activity, ExpenseDetailActivity.class);
-            intent.putExtra("featureId", n.getFeatureOrTripId());
-            startActivity(intent);
-        }
-        else if (n.getType().equals(DataType.ACTIVITY.toString())){
-            Intent intent = new Intent(activity, DetailActivityActivity.class);
-            intent.putExtra("featureId", n.getFeatureOrTripId());
-            startActivity(intent);
-        }
-        else if(n.getType().equals(DataType.TASK.toString())){
-            Intent intent = new Intent(activity, TaskDetailActivity.class);
-            intent.putExtra("featureId", n.getFeatureOrTripId());
-            startActivity(intent);
-        }
-        else if(n.getType().equals(DataType.CHAT.toString())){
-            StaticTripData.setCurrentTripId(n.getFeatureOrTripId());
-            Intent intent = new Intent(activity, ChatActivity.class);
-            intent.putExtra("tripId", n.getFeatureOrTripId());
-            startActivity(intent);
-        }
-        else if(n.getType().equals(DataType.PACKINGOBJECT.toString())){
-            Intent intent = new Intent(activity, PackingDetailActivity.class);
-            intent.putExtra("featureId", n.getFeatureOrTripId());
-            startActivity(intent);
-        }
-
     }
 }

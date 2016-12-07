@@ -11,6 +11,6 @@ public interface IExpenseDetailPresenter {
     public void onError(String message, String title);
     public void onDeleteExpense(long id);
     public void onSuccessDelete();
-
+    public void onGetParticipantsForTrip(long tripId);
     void onCloseActivity();
 }

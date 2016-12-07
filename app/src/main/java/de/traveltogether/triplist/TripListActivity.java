@@ -62,6 +62,14 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
     protected void onStart(){
         Log.e("onStart", "start");
         super.onStart();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if(fragmentFormer!=null)
+            fragmentTransaction.detach(fragmentFormer);
+        if(fragmentUpcoming!=null)
+            fragmentTransaction.detach(fragmentUpcoming);
+        fragmentTransaction.commit();
+
         progressDialog = ProgressDialog.show(this, "",
                 "Reisen werden geladen...", true);
         presenter = new TripListPresenter(this);
@@ -217,4 +225,6 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+
 }

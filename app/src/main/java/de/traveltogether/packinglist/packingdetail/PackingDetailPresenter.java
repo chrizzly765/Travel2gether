@@ -49,4 +49,9 @@ public class PackingDetailPresenter implements IPackingDetailPresenter{
         interactor.updatePackingItem(item, this);
     }
 
+    @Override
+    public void onGetParticipantsForTrip(long tripId) {
+        interactor.getParticipantsForTrip(tripId, this);
+    }
+
 }

@@ -14,6 +14,9 @@ public class StaticTripData {
     static private StaticInteractor interactor = new StaticInteractor();
 
     static public Participant[] getAllParticipants(){
+        if(participants==null || participants.length==0){
+            return new Participant[0];
+        }
         return participants;
     }
     static public void setParticipants(Participant[] _participants){
@@ -28,6 +31,9 @@ public class StaticTripData {
 
     static public Participant[] getActiveParticipants(){
         ArrayList<Participant> activeParticipants = new ArrayList<Participant>();
+        if(participants==null || participants.length==0){
+            return new Participant[0];
+        }
         for(Participant p:participants){
             if(p.getState().equals(ParticipantState.JOINED.toString().toLowerCase())){
                 activeParticipants.add(p);
@@ -38,6 +44,9 @@ public class StaticTripData {
 
     static public Participant[] getInvitedParticipants(){
         ArrayList<Participant> invitedParticipants = new ArrayList<Participant>();
+        if(participants==null || participants.length==0){
+            return new Participant[0];
+        }
         for(Participant p:participants){
             if(p.getState().equals(ParticipantState.INVITED.toString().toLowerCase())){
                 invitedParticipants.add(p);
@@ -48,6 +57,9 @@ public class StaticTripData {
 
     static public Participant[] getResignedParticipants(){
         ArrayList<Participant> resignedParticipants = new ArrayList<Participant>();
+        if(participants==null || participants.length==0){
+            return new Participant[0];
+        }
         for(Participant p:participants){
             if(p.getState().equals(ParticipantState.RESIGNED.toString().toLowerCase())){
                 resignedParticipants.add(p);

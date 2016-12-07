@@ -6,8 +6,9 @@ import org.json.JSONObject;
 
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
-import de.traveltogether.expense.IExpenseInteractor;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.model.Expense;
+import de.traveltogether.model.Participant;
 import de.traveltogether.model.Response;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
@@ -33,8 +34,15 @@ public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
                     listener.onCloseActivity();
                 }
             }
+            else if (actionType == ActionType.GETPARTICIPANTS) {
+                Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
+                StaticTripData.setParticipants(participants);
+            }
         }
         else{
+            if (actionType == ActionType.DETAIL) {
+                listener.onCloseActivity();
+            }
             listener.onError(response.getMessage(), response.getMessage());
         }
     }
@@ -63,5 +71,22 @@ public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
         catch(Exception e){
             Log.e("DetailExpenseInteractor", e.getMessage());
         }
+    }
+
+    @Override
+    public void getParticipantsForTrip(long tripId, IExpenseDetailPresenter _listener) {
+        listener = _listener;
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("tripId", tripId);
+        }
+        catch(Exception e){
+
+        }
+        HttpRequest req = new HttpRequest(DataType.TRIP, ActionType.GETPARTICIPANTS, obj.toString(), this);
+
+    }
+    class ParticipantList{
+        public Participant[] list;
     }
 }

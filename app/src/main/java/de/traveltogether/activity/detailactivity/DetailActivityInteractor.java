@@ -6,7 +6,9 @@ import org.json.JSONObject;
 
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
+import de.traveltogether.StaticTripData;
 import de.traveltogether.model.Activity;
+import de.traveltogether.model.Participant;
 import de.traveltogether.model.Response;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
@@ -33,8 +35,14 @@ public class DetailActivityInteractor implements IDetailActivityInteractor {
                     listener.onCloseActivity();
                 }
             }
+            else if(actionType == ActionType.GETPARTICIPANTS){
+                StaticTripData.setParticipants(((ParticipantList)JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list);
+            }
         }
         else{
+            if (actionType == ActionType.DETAIL) {
+                listener.onCloseActivity();
+            }
             listener.onError(response.getMessage(), response.getMessage());
         }
     }
@@ -64,6 +72,21 @@ public class DetailActivityInteractor implements IDetailActivityInteractor {
         catch(Exception e){
             Log.e("DetailActiInteractor", e.getMessage());
         }
+    }
+
+    public void getParticipantsForTrip(long tripId, IDetailActivityPresenter _listener) {
+        listener = _listener;
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("tripId", tripId);
+            HttpRequest request = new HttpRequest(DataType.TRIP, ActionType.GETPARTICIPANTS, jsonObject.toString(), this);
+        }
+        catch(Exception e){
+            Log.e(e.getClass().toString(), e.getMessage());
+        }
+    }
+    class ParticipantList {
+        public Participant[] list;
     }
 
 }

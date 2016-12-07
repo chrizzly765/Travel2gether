@@ -37,6 +37,11 @@ public class NotificationPresenter implements INotificationPresenter {
     }
 
     @Override
+    public void onSuccessSetNotificationRead() {
+        view.onSuccessSetNotificationRead();
+    }
+
+    @Override
     public void onError(String message) {
         view.onViewErrorMessage(message);
     }

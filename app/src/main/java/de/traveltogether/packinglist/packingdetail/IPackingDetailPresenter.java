@@ -13,6 +13,6 @@ public interface IPackingDetailPresenter {
     public void onDeletePackingObject(long id);
     public void onSuccessDelete();
     public void onUpdatePackingItem(PackingItem item);
-
+    void onGetParticipantsForTrip(long tripId);
     void onCloseActivity();
 }
