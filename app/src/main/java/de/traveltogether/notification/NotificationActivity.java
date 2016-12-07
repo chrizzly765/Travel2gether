@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +24,7 @@ import de.traveltogether.activity.detailactivity.DetailActivityActivity;
 import de.traveltogether.chat.ChatActivity;
 import de.traveltogether.expense.detailexpense.ExpenseDetailActivity;
 import de.traveltogether.info.InfoActivity;
+import de.traveltogether.login.LoginActivity;
 import de.traveltogether.model.Notification;
 import de.traveltogether.model.Response;
 import de.traveltogether.packinglist.packingdetail.PackingDetailActivity;
@@ -52,6 +55,19 @@ public class NotificationActivity extends AppCompatActivity {
         super.onStart();
         progressDialog = ProgressDialog.show(this, "",
                 "Benachrichtigungen werden geladen...", true);
+        if(StaticData.getUserId()==0){
+            SharedPreferences sharedPref = getSharedPreferences("TravelTogetherPrefs", Context.MODE_PRIVATE );
+            int userId;
+            userId = sharedPref.getInt(getString(R.string.saved_user_id), -1);
+            if(userId!=-1){
+                StaticData.setUserId(userId);
+            }
+            else{
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
         presenter.onGetNotificationList();
     }
 
