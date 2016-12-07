@@ -2,22 +2,14 @@ package de.traveltogether.activity.detailactivity;
 
 
 import android.app.AlertDialog;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,24 +17,14 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import de.traveltogether.dialog.DeleteActivity;
 import de.traveltogether.time.TimeFormat;
-import java.util.List;
 
 import de.traveltogether.R;
 //import de.traveltogether.activity.newactivity.NewActivityActivity;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
-import de.traveltogether.activity.ActivityFragment;
-import de.traveltogether.activity.ActivitiesActivity;
-import de.traveltogether.activity.detailactivity.DetailActivityFragment;
-import de.traveltogether.activity.detailactivity.DetailActivityPresenter;
 //import de.traveltogether.expense.detailexpense.IExpenseDetailPresenter;
 import de.traveltogether.activity.newactivity.NewActivityActivity;
-import de.traveltogether.mainmenu.MainActivity;
-import de.traveltogether.model.Expense;
-import de.traveltogether.model.Payer;
-import de.traveltogether.model.Trip;
 import de.traveltogether.model.Activity;
-import de.traveltogether.settings.SettingsActivity;
 //import de.traveltogether.triplist.newtrip.NewTripActivity;
 
 public class DetailActivityActivity extends DeleteActivity {

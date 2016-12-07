@@ -30,6 +30,22 @@ public class Activity extends AbstractListObject {
         return time;
     }
 
+    public void setDestination(String dest){
+        destination = dest;
+    }
+
+    public void setDate(String d){
+        date = d;
+    }
+
+    public void setTime(String t){
+        time = t;
+    }
+
+    public void setIcon(int i){
+        icon = i;
+    }
+
     //TODO: implement description, icon, destination, time and date as optional
     public Activity(String _title, int _id, long _tripId, String _description, int _author, int _icon, String _destination, String _time, String  _date) {
         super(_title, _id, _tripId, _description, _author);

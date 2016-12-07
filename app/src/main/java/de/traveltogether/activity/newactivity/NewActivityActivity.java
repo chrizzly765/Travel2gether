@@ -185,6 +185,10 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
                     if(featureId!=-1){
                         activity.setTitle(StringEscapeUtils.escapeJava(title.getText().toString()));
                         activity.setDescription(StringEscapeUtils.escapeJava(description.getText().toString()));
+                        activity.setDestination(StringEscapeUtils.escapeJava(destination.getText().toString()));
+                        activity.setTime(time.getText().toString());
+                        activity.setDate(startDate.getText().toString());
+                        activity.setIcon(iconTag);
                         activity.setLastUpdateBy(StaticData.getUserId());
 
 
@@ -362,6 +366,14 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         description.setText(StringEscapeUtils.unescapeJava(activity.getDescription()));
         startDate.setText(activity.getDate());
         time.setText(TimeFormat.getInstance().getTimeWithoutSecondsWithoutWord(activity.getTime()));
+        try {
+            currentImgBtn = (ImageButton) findViewById(activity.getIcon());
+            currentImgBtn.setSelected(true);
+        }
+        catch(Exception e){
+            //do nothing
+        }
+        iconTag = activity.getIcon();
         progressDialog.cancel();
     }
 
