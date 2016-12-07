@@ -356,7 +356,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         activity =_activity;
         tripId = activity.getTripId();
         title.setText(StringEscapeUtils.unescapeJava(activity.getTitle()));
-        description.setText(StringEscapeUtils.escapeJava(activity.getDescription()));
+        description.setText(StringEscapeUtils.unescapeJava(activity.getDescription()));
         startDate.setText(activity.getDate());
         time.setText(TimeFormat.getInstance().getTimeWithoutSecondsWithoutWord(activity.getTime()));
         progressDialog.cancel();

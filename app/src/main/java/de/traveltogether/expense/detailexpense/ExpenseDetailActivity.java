@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
@@ -111,10 +112,10 @@ public class ExpenseDetailActivity extends DeleteActivity{
         DecimalFormat df = new DecimalFormat(StaticData.currencyFormatDE);
 
         expense = _expense;
-        title.setText(expense.getTitle());
+        title.setText(StringEscapeUtils.unescapeJava(expense.getTitle()));
         tripId=expense.getTripId();
-        getSupportActionBar().setTitle(expense.getTitle());
-        description.setText(expense.getDescription());
+        getSupportActionBar().setTitle(StringEscapeUtils.unescapeJava(expense.getTitle()));
+        description.setText(StringEscapeUtils.unescapeJava(expense.getDescription()));
         amount.setText(df.format(expense.getAmount()) + getResources().getStringArray(R.array.currencies)[expense.getCurrencyId()].substring(0,1));
         paidBy.setText(StaticTripData.getNameById(expense.getPayer()));
 

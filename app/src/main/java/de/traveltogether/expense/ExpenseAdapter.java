@@ -10,6 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
@@ -65,7 +67,7 @@ public class ExpenseAdapter extends BaseAdapter {
 
         Context context = parent.getContext();
         Expense expense = (Expense) getItem(position);
-        holder.title.setText(expense.getTitle());
+        holder.title.setText(StringEscapeUtils.unescapeJava(expense.getTitle()));
         DecimalFormat df = new DecimalFormat(StaticData.currencyFormatDE);
         String amount = String.valueOf(df.format(expense.getAmount())) + " " + StaticData.currencySymbolDE; //getRe (R.array.currencies)[expense.getCurrencyId()].substring(0,1))
                 holder.amount.setText(amount);
