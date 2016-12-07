@@ -99,7 +99,9 @@ public class ActivityAdapter extends BaseAdapter  {
 
 
         holder.title.setText(StringEscapeUtils.unescapeJava(activity.getTitle()));
-        holder.icon.setBackgroundResource(activity.getIcon());
+        if(activity.getIcon()!= R.mipmap.ic_leer) {
+            holder.icon.setBackgroundResource(activity.getIcon());
+        }
         //holder.date.setText(activity.getDate());
         holder.destination.setText(StringEscapeUtils.unescapeJava(activity.getDestination()));
         holder.startDate.setText(DateFormat.getInstance().getDateInWords(activity.getDate()));

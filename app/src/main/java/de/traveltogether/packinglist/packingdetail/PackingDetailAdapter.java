@@ -68,7 +68,6 @@ public class PackingDetailAdapter extends BaseAdapter {
 
         //holder.box.setActivated(item.getStatus());
         if(item.getAssignedPerson() == StaticData.getUserId()){
-
             if(item.getStatus()==true){
                 holder.box.setBackgroundResource(R.drawable.checkbox_filled);
             }
@@ -77,7 +76,7 @@ public class PackingDetailAdapter extends BaseAdapter {
             }
         }
         else{
-            convertView.setOnClickListener(null);
+            //convertView.setOnClickListener(null);
 
             if(item.getStatus()==true){
                 holder.box.setBackgroundResource(R.drawable.checkbox_filled_grey);

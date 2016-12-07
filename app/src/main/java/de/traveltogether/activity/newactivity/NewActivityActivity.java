@@ -158,6 +158,8 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
             progressDialog = ProgressDialog.show(this, "",
                     "Bitte warten...", true);
         }
+        currentImgBtn = (ImageButton) findViewById(R.id.icon_empty);
+        iconTag = R.mipmap.ic_leer;
     }
 
 
@@ -264,63 +266,64 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
 
             if (currentImgBtn != null) {
                 currentImgBtn.setSelected(false);
-
-                if (v.getId() == R.id.icon_empty){
-                    //iconTag = R.mipmap.ic_leer;
-                }
-                else if (v.getId() == R.id.icon_plane){
-                    v.setSelected(!v.isSelected());
-                    iconTag = R.mipmap.plane;
-                }
-                else if (v.getId() == R.id.icon_beach){
-                    v.setSelected(!v.isSelected());
-                    iconTag = R.mipmap.beach;
-                }
-                else if (v.getId() == R.id.icon_cocktail){
-                    v.setSelected(!v.isSelected());
-                    iconTag = R.mipmap.cocktail;
-                }
-                else if (v.getId() == R.id.icon_ball){
-                    v.setSelected(!v.isSelected());
-                    iconTag = R.mipmap.ball;
-                }
-                else if (v.getId() == R.id.icon_film){
-                    v.setSelected(!v.isSelected());
-                    iconTag = R.mipmap.film;
-                }
-                else if (v.getId() == R.id.icon_coffee){
-                    v.setSelected(!v.isSelected());
-                    iconTag = R.mipmap.coffee;
-                }
-                else if (v.getId() == R.id.icon_food){
-                    v.setSelected(!v.isSelected());
-                    iconTag = R.mipmap.food;
-                }
-                else if (v.getId() == R.id.icon_gift){
-                    v.setSelected(!v.isSelected());
-                    iconTag = R.mipmap.gift;
-                }
-                else if (v.getId() == R.id.icon_sight){
-                    v.setSelected(!v.isSelected());
-                    iconTag = R.mipmap.sight;
-                }
-                else if (v.getId() == R.id.icon_casino){
-                    v.setSelected(!v.isSelected());
-                    iconTag = R.mipmap.casino;
-                }
-                else if (v.getId() == R.id.icon_sport){
-                    v.setSelected(!v.isSelected());
-                    iconTag = R.mipmap.sport;
-                }
-                else if (v.getId() == R.id.icon_landscape){
-                    v.setSelected(!v.isSelected());
-                    iconTag = R.mipmap.landscape;
-                }
-                else if (v.getId() == R.id.icon_bus){
-                    v.setSelected(!v.isSelected());
-                    iconTag = R.mipmap.bus;
-                }
             }
+
+            if (v.getId() == R.id.icon_empty){
+                iconTag = R.mipmap.ic_leer;
+            }
+            else if (v.getId() == R.id.icon_plane){
+                v.setSelected(!v.isSelected());
+                iconTag = R.mipmap.plane;
+            }
+            else if (v.getId() == R.id.icon_beach){
+                v.setSelected(!v.isSelected());
+                iconTag = R.mipmap.beach;
+            }
+            else if (v.getId() == R.id.icon_cocktail){
+                v.setSelected(!v.isSelected());
+                iconTag = R.mipmap.cocktail;
+            }
+            else if (v.getId() == R.id.icon_ball){
+                v.setSelected(!v.isSelected());
+                iconTag = R.mipmap.ball;
+            }
+            else if (v.getId() == R.id.icon_film){
+                v.setSelected(!v.isSelected());
+                iconTag = R.mipmap.film;
+            }
+            else if (v.getId() == R.id.icon_coffee){
+                v.setSelected(!v.isSelected());
+                iconTag = R.mipmap.coffee;
+            }
+            else if (v.getId() == R.id.icon_food){
+                v.setSelected(!v.isSelected());
+                iconTag = R.mipmap.food;
+            }
+            else if (v.getId() == R.id.icon_gift){
+                v.setSelected(!v.isSelected());
+                iconTag = R.mipmap.gift;
+            }
+            else if (v.getId() == R.id.icon_sight){
+                v.setSelected(!v.isSelected());
+                iconTag = R.mipmap.sight;
+            }
+            else if (v.getId() == R.id.icon_casino){
+                v.setSelected(!v.isSelected());
+                iconTag = R.mipmap.casino;
+            }
+            else if (v.getId() == R.id.icon_sport){
+                v.setSelected(!v.isSelected());
+                iconTag = R.mipmap.sport;
+            }
+            else if (v.getId() == R.id.icon_landscape){
+                v.setSelected(!v.isSelected());
+                iconTag = R.mipmap.landscape;
+            }
+            else if (v.getId() == R.id.icon_bus){
+                v.setSelected(!v.isSelected());
+                iconTag = R.mipmap.bus;
+            }
+
             imgBtn.setSelected(true);
             currentImgBtn = imgBtn;
         }

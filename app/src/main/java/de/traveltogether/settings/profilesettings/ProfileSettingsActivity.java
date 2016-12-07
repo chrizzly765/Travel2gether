@@ -86,7 +86,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             case R.id.change_profile:
                 showOption(R.id.action_save);
                 hideOption(R.id.change_profile);
-                hideOption(R.id.change_pw);
+                //hideOption(R.id.change_pw);
                 email.setEnabled(true);
                 name.setEnabled(true);
                 break;
@@ -94,10 +94,10 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 presenter.onUpdateProfileInfos(new Person(StaticData.getUserId(), email.getText().toString(), name.getText().toString()));
                 progressDialog.show();
                 break;
-            case R.id.change_pw:
-                presenter.onGetSalt(email.getText().toString());
-                progressDialog.show();
-                break;
+//            case R.id.change_pw:
+//                presenter.onGetSalt(email.getText().toString());
+//                progressDialog.show();
+//                break;
             case android.R.id.home:
                 finish();
                 return true;
@@ -129,7 +129,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     public void onSuccessUpdateProfileInfos() {
         hideOption(R.id.action_save);
         showOption(R.id.change_profile);
-        showOption(R.id.change_pw);
+        //showOption(R.id.change_pw);
         email.setEnabled(false);
         name.setEnabled(false);
         progressDialog.cancel();

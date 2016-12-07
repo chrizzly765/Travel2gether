@@ -5,10 +5,10 @@
         android:enabled="true"
         android:title="@string/change_profile"
         />
-    <item android:id = "@+id/change_pw"
+    <!--item android:id = "@+id/change_pw"
         android:enabled="true"
         android:title="@string/change_pw"
-        />
+        /-->
     <item
         android:id="@+id/action_save"
         android:icon="@drawable/ic_check"
