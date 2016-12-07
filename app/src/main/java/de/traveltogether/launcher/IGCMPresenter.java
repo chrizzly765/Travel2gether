@@ -6,4 +6,5 @@ package de.traveltogether.launcher;
 
 public interface IGCMPresenter {
     public void onUpdateToken(String token);
+    public void onSendInvitation(long tripId, int author);
 }

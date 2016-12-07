@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import de.traveltogether.R;
+import de.traveltogether.StaticData;
 import de.traveltogether.model.Person;
 
 import static android.content.Intent.createChooser;
@@ -83,7 +84,7 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
 
     public void onClick(View v) {
             Intent invite = new Intent(Intent.ACTION_SEND);
-            invite.putExtra(Intent.EXTRA_TEXT, getString(R.string.invitation_text));
+            invite.putExtra(Intent.EXTRA_TEXT, getString(R.string.invitation_text) + "tripId=" + tripId + "&author=" + StaticData.getUserId());
             invite.setType("text/plain");
             startActivity(createChooser(invite, getString(R.string.title_invititation_choose)));
     }

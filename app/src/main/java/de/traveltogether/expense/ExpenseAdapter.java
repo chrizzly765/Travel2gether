@@ -90,47 +90,46 @@ public class ExpenseAdapter extends BaseAdapter {
                 }
             }
 
+            int counter = 0;
             for(int i = 0; i<payers.size(); i++){
-                if(payers.get(i).getId() == expense.getPayer()){
-                    i--;
-                    continue;
-                }
-                if(i==0){
-                    int count;
-                    if(payedByIsPayer)
-                        count = 4;
-                    else count = 3;
+                if(payers.get(i).getId() != expense.getPayer()){
+                    if (counter == 0) {
+                        int count;
+                        if (payedByIsPayer)
+                            count = 4;
+                        else count = 3;
 
-                    if(payers.size()>count){
-                        holder.icon1.setVisibility(View.VISIBLE);
-                        holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_dotdotdot_1).setVisibility(View.VISIBLE);
-                        ((ImageView) holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_circle_1))
-                                .setBackgroundResource(R.drawable.circle_light_grey);
-                        holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_initial_1).setVisibility(View.INVISIBLE);
-                    }
-                    else {
-                        holder.icon1.setVisibility(View.VISIBLE);
-                        ((TextView) holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_initial_1))
+                        if (payers.size() > count) {
+                            holder.icon1.setVisibility(View.VISIBLE);
+                            holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_dotdotdot_1).setVisibility(View.VISIBLE);
+                            ((ImageView) holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_circle_1))
+                                    .setBackgroundResource(R.drawable.circle_light_grey);
+                            holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_initial_1).setVisibility(View.INVISIBLE);
+                        } else {
+                            holder.icon1.setVisibility(View.VISIBLE);
+                            ((TextView) holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_initial_1))
+                                    .setText(StaticTripData.getNameById(payers.get(i).getId()).substring(0, 1));
+                            (holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_circle_1))
+                                    .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(payers.get(i).getId())));
+                        }
+                    } else if (counter == 1) {
+                        holder.icon2.setVisibility(View.VISIBLE);
+                        ((TextView) holder.icon2.findViewById(R.id.fragment_expense_list_item_icon_initial_2))
                                 .setText(StaticTripData.getNameById(payers.get(i).getId()).substring(0, 1));
-                        (holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_circle_1))
+                        (holder.icon2.findViewById(R.id.fragment_expense_list_item_icon_circle_2))
                                 .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(payers.get(i).getId())));
-                    }
-                }
-                else if(i==1){
-                    holder.icon2.setVisibility(View.VISIBLE);
-                    ((TextView)holder.icon2.findViewById(R.id.fragment_expense_list_item_icon_initial_2))
-                            .setText(StaticTripData.getNameById(payers.get(i).getId()).substring(0,1));
-                    (holder.icon2.findViewById(R.id.fragment_expense_list_item_icon_circle_2))
-                            .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(payers.get(i).getId())));
 
 
-                }else if(i==2){
-                    holder.icon3.setVisibility(View.VISIBLE);
-                        ((TextView)holder.icon3.findViewById(R.id.fragment_expense_list_item_icon_initial_3))
-                                .setText(StaticTripData.getNameById(payers.get(i).getId()).substring(0,1));
+                    } else if (counter == 2) {
+                        holder.icon3.setVisibility(View.VISIBLE);
+                        ((TextView) holder.icon3.findViewById(R.id.fragment_expense_list_item_icon_initial_3))
+                                .setText(StaticTripData.getNameById(payers.get(i).getId()).substring(0, 1));
                         (holder.icon3.findViewById(R.id.fragment_expense_list_item_icon_circle_3))
                                 .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(payers.get(i).getId())));
                     }
+                    counter++;
+
+                }
             }
 
         }

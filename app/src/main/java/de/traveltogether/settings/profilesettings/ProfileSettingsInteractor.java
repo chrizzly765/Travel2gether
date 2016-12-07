@@ -47,9 +47,10 @@ public class ProfileSettingsInteractor implements IProfileSettingsInteractor {
         try {
             JSONObject obj = new JSONObject();
             obj.put("personId", StaticData.getUserId());
-            obj.put("salt", salt);
+            obj.put("salt", salt.replace("\\u003d", "=").replace("\\n", ""));
             obj.put("password", hash);
-            HttpRequest request = new HttpRequest(DataType.PERSON, ActionType.UPDATEPASSWORT, obj.toString(), this);
+            String s = obj.toString();
+            HttpRequest request = new HttpRequest(DataType.PERSON, ActionType.UPDATEPASSWORD, s, this);
         } catch (Exception e) {
             //TODO
         }
@@ -75,7 +76,7 @@ public class ProfileSettingsInteractor implements IProfileSettingsInteractor {
             } else if (actionType == ActionType.UPDATE) {
                 listener.onSuccessUpdateProfileInfos();
 
-            } else if (actionType == ActionType.UPDATEPASSWORT) {
+            } else if (actionType == ActionType.UPDATEPASSWORD) {
                 listener.onSuccessUpdatePasswort();
             }else if(actionType == ActionType.GETSALT){
                 String salt = "";

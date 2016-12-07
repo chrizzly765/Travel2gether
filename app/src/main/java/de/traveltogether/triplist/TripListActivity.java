@@ -65,8 +65,8 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         progressDialog = ProgressDialog.show(this, "",
                 "Reisen werden geladen...", true);
         presenter = new TripListPresenter(this);
-        presenter.onGetNotiCount();
         presenter.onGetTrips();
+
     }
 
     @Override
@@ -106,6 +106,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
             default: notiItem.setIcon(R.drawable.ic_noti_higher);
                 break;
         }
+        progressDialog.cancel();
 
     }
 
@@ -173,7 +174,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
             findViewById(R.id.activity_trip_list_former_empty).setVisibility(View.VISIBLE);
         }
         progressDialog.cancel();
-
+        presenter.onGetNotiCount();
     }
 
 

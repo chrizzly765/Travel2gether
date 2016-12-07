@@ -9,4 +9,5 @@ import de.traveltogether.IInteractor;
 
 public interface IGCMInteractor extends IInteractor {
     public void updateToken(String token, IGCMPresenter listener);
+    public void sendInvitation(long tripId, int author, IGCMPresenter listener);
 }

@@ -68,19 +68,7 @@
             android:name=".login.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.imagik.de/traveltogether"
-                    android:scheme="http" />
-                <data
-                    android:host="www.imagik.de/traveltogether"
-                    android:scheme="https" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".packinglist.newpackingitem.NewPackingItemActivity"
@@ -161,6 +149,19 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.druckstdu.de"
+                    android:scheme="http" />
+                <data
+                    android:host="www.druckstdu.de"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
         <activity
