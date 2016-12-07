@@ -21,6 +21,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.dialog.DeleteActivity;
 import de.traveltogether.time.TimeFormat;
 import java.util.List;
@@ -116,13 +118,13 @@ public class DetailActivityActivity extends DeleteActivity {
         progressDialog.cancel();
         detailActivity = _activity;
         tripId=_activity.getTripId();
-        getSupportActionBar().setTitle(detailActivity.getTitle());
-        title.setText(detailActivity.getTitle());
-        description.setText(detailActivity.getDescription());
+        getSupportActionBar().setTitle(StringEscapeUtils.unescapeJava(detailActivity.getTitle()));
+        title.setText(StringEscapeUtils.unescapeJava(detailActivity.getTitle()));
+        description.setText(StringEscapeUtils.unescapeJava(detailActivity.getDescription()));
         date.setText(detailActivity.getDate());
         //time.setText(detailActivity.getTime());
         time.setText(TimeFormat.getInstance().getTimeWithoutSecondsWithWord(detailActivity.getTime()));
-        place.setText(detailActivity.getDestination());
+        place.setText(StringEscapeUtils.unescapeJava(detailActivity.getDestination()));
 
        // onViewPayers(detailActivity.getAssignedPayers());
 

@@ -153,8 +153,8 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                         chosenParticipants.add(new Payer(currentPayerId, Double.parseDouble(amount.getText().toString())));
                     }
                     if(featureId!=-1){
-                        expense.setTitle(title.getText().toString());
-                        expense.setDescription(description.getText().toString());
+                        expense.setTitle(StringEscapeUtils.escapeJava(title.getText().toString()));
+                        expense.setDescription(StringEscapeUtils.escapeJava(description.getText().toString()));
                         expense.setPayer(currentPayerId);
                         expense.setAmount(Double.parseDouble(amount.getText().toString()));
                         expense.setAssignedPayers(chosenParticipants);
@@ -172,10 +172,10 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                         currency = currencySpinner.getSelectedItem().toString();
                     }*/
                         Expense expense = new Expense(
-                                title.getText().toString(),
+                                StringEscapeUtils.escapeJava(title.getText().toString()),
                                 0,
                                 tripId,
-                                description.getText().toString(),
+                                StringEscapeUtils.escapeJava(description.getText().toString()),
                                 StaticData.getUserId(),
                                 Double.parseDouble(amount.getText().toString()),
                                 currentPayerId,
@@ -352,8 +352,8 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
     public void setValues(Expense _expense){
         expense =_expense;
         tripId = expense.getTripId();
-        title.setText(expense.getTitle());
-        description.setText(expense.getDescription());
+        title.setText(StringEscapeUtils.unescapeJava(expense.getTitle()));
+        description.setText(StringEscapeUtils.unescapeJava(expense.getDescription()));
         amount.setText(String.valueOf(expense.getAmount()));
         currentPayerId = expense.getPayer();
 
