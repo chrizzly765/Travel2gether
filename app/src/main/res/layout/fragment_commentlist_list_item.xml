@@ -3,43 +3,53 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:weightSum="1">
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:visibility="visible"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_weight="0.891"
-        android:id = "@+id/fragment_commentlist_list_item_icon">
+    android:weightSum="1"
+    android:paddingLeft="8dp">
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="8dp"
-            android:id="@+id/fragment_commentlist_list_item_icon_circle"
-            android:background="@drawable/circle" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="A"
-            android:layout_gravity="center_horizontal|center"
-            android:textColor = "#FFFFFF"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="4dp"
-            android:textSize="18dp"
-            android:id="@+id/fragment_commentlist_list_item_icon_initial"
-            android:layout_alignParentStart="true"
-            />
-    </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_height="match_parent"
+            android:id = "@+id/fragment_commentlist_list_item_icon"
+            android:layout_gravity="center_vertical|center_horizontal|center">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/fragment_commentlist_list_item_icon_circle"
+                android:background="@drawable/circle"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical|center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:textColor = "#FFFFFF"
+                android:textSize="18dp"
+                android:id="@+id/fragment_commentlist_list_item_icon_initial"
+                android:layout_alignParentStart="false"
+                android:layout_centerHorizontal="false"
+                android:layout_centerVertical="false" />
+        </FrameLayout>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="6dp"
-        android:layout_weight="0.2"
         android:layout_marginLeft="8dp"
-        android:id="@+id/fragment_commentlist_list_item_infos">
+        android:id="@+id/fragment_commentlist_list_item_infos"
+        android:layout_weight="0.1">
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

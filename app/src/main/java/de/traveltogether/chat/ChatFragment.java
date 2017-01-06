@@ -81,8 +81,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
         fragmentTransaction.add(R.id.fragment_comment_list_container, chatFragment);
         fragmentTransaction.commit();
 
-        ScrollView scrollView = (ScrollView)(view.findViewById(R.id.fragment_comment_scrollview));
-        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+        //ScrollView scrollView = (ScrollView)(view.findViewById(R.id.fragment_comment_scrollview));
+        //scrollView.fullScroll(ScrollView.FOCUS_DOWN);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
