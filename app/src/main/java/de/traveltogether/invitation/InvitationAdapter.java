@@ -66,7 +66,7 @@ import de.traveltogether.model.Person;
 
         Context context = parent.getContext();
         Person person = (Person)getItem(position);
-        if(person!=null) {
+        if(person.getUserName()!=null) {
             holder.name.setText(person.getUserName());
             holder.initial.setText(person.getUserName().substring(0, 1));
         }

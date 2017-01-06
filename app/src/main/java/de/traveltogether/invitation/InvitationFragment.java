@@ -39,11 +39,6 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,10 +56,7 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
 
     public void onStart(){
         super.onStart();
-        if(formerParticipants==null || formerParticipants.length==0 ){
-            //TODO: show empty participant list?
-        }
-        else {
+        if(!(formerParticipants==null || formerParticipants.length==0 )){
             adapter = new InvitationAdapter(getActivity(), formerParticipants);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);
@@ -97,6 +89,7 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
         v.setEnabled(false);
         v.setClickable(false);
         startActivity(createChooser(invite, getString(R.string.title_invititation_choose)));
+        getActivity().finish();
     }
 
     @Override
