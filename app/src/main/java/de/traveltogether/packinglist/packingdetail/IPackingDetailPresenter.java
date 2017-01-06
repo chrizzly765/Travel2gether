@@ -14,5 +14,6 @@ public interface IPackingDetailPresenter {
     public void onSuccessDelete();
     public void onUpdatePackingItem(PackingItem item);
     void onGetParticipantsForTrip(long tripId);
+    public void onSuccessGetParticipants();
     void onCloseActivity();
 }

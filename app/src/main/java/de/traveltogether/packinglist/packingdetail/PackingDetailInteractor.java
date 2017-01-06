@@ -67,6 +67,7 @@ public class PackingDetailInteractor implements IPackingDetailInteractor {
             }
             else if(actionType == ActionType.GETPARTICIPANTS){
                 StaticTripData.setParticipants(((ParticipantList)JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list);
+                listener.onSuccessGetParticipants();
             }
         }
         else{

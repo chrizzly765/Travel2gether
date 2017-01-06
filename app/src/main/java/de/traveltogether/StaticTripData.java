@@ -86,9 +86,11 @@ public class StaticTripData {
 
 
     static public String getColorById(int id){
-        for (Participant p:participants){
-            if(p.getPersonId() == id){
-                return p.getColor();
+        if(participants!=null) {
+            for (Participant p : participants) {
+                if (p.getPersonId() == id) {
+                    return p.getColor();
+                }
             }
         }
         return "";

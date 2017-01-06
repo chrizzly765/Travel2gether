@@ -53,9 +53,7 @@ public class NotificationActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        progressDialog = ProgressDialog.show(this, "",
-                "Benachrichtigungen werden geladen...", true);
-        if(StaticData.getUserId()==0){
+        if(StaticData.getUserId()<=0){
             SharedPreferences sharedPref = getSharedPreferences("TravelTogetherPrefs", Context.MODE_PRIVATE );
             int userId;
             userId = sharedPref.getInt(getString(R.string.saved_user_id), -1);
@@ -68,7 +66,11 @@ public class NotificationActivity extends AppCompatActivity {
                 finish();
             }
         }
-        presenter.onGetNotificationList();
+        else {
+            presenter.onGetNotificationList();
+            progressDialog = ProgressDialog.show(this, "",
+                    "Benachrichtigungen werden geladen...", true);
+        }
     }
 
     @Override
@@ -124,6 +126,9 @@ public class NotificationActivity extends AppCompatActivity {
 
     public void onSuccessSetNotificationRead(){
         Notification n = currentNotification;
+        if(n == null){
+            return;
+        }
         if (n.getType().equals(DataType.TRIP.toString())){
             Intent intent = new Intent(this, InfoActivity.class);
             intent.putExtra("tripId", n.getFeatureOrTripId());

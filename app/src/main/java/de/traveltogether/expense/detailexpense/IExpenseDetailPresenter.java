@@ -13,4 +13,5 @@ public interface IExpenseDetailPresenter {
     public void onSuccessDelete();
     public void onGetParticipantsForTrip(long tripId);
     void onCloseActivity();
+    public void onSuccessGetParticipants();
 }

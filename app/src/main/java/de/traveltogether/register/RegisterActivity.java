@@ -66,10 +66,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 return;
             }
             if(password.getText().length()<7) {
+                Log.d("pw length", password.getText().length() + " ");
                 onViewErrorMessage(getString(R.string.pw_minimum_length));
                 return;
             }
-            if(password.getText().toString() == repeatPassword.getText().toString()){
+            if(password.getText().toString() != repeatPassword.getText().toString()){
                 onViewErrorMessage(getString(R.string.pw_repeat_error));
                 return;
             }
@@ -128,15 +129,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         else if (v.getId()== R.id.login_Text2){
             //Intent login = new Intent(this, LoginActivity.class);
             //startActivity(login);
-            progressDialog.cancel();
             finish();
         }
-        progressDialog.cancel();
-
+        if(progressDialog!=null) {
+            progressDialog.cancel();
+        }
     }
 
     public void onViewSuccessMessage(String message){
-        progressDialog.cancel();
+        if(progressDialog!=null) {
+            progressDialog.cancel();
+        }
         registerBtn.setEnabled(true);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.mail_was_sent);
@@ -156,7 +159,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void onViewErrorMessage(String message){
-        progressDialog.cancel();
+        if(progressDialog != null) {
+            progressDialog.cancel();
+        }
         registerBtn.setEnabled(true);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);

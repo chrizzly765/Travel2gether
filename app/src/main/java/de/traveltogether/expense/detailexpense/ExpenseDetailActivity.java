@@ -65,9 +65,7 @@ public class ExpenseDetailActivity extends DeleteActivity{
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
-        if(StaticTripData.getActiveParticipants().length == 0){
-            presenter.onGetParticipantsForTrip(tripId);
-        }
+
         title = (TextView) findViewById(R.id.   activity_expense_detail_title);
         description = (TextView) findViewById(R.id.activity_expense_detail_description);
         amount = (TextView) findViewById(R.id.activity_expense_detail_amount);
@@ -110,10 +108,18 @@ public class ExpenseDetailActivity extends DeleteActivity{
     }
 
     public void onViewDetails(Expense _expense){
-
-        DecimalFormat df = new DecimalFormat(StaticData.currencyFormatDE);
-
         expense = _expense;
+
+        if(StaticTripData.getActiveParticipants().length == 0){
+            presenter.onGetParticipantsForTrip(expense.getTripId());
+            return;
+        }
+        viewDetails();
+
+    }
+
+    public void viewDetails(){
+        DecimalFormat df = new DecimalFormat(StaticData.currencyFormatDE);
         title.setText(StringEscapeUtils.unescapeJava(expense.getTitle()));
         tripId=expense.getTripId();
         getSupportActionBar().setTitle(StringEscapeUtils.unescapeJava(expense.getTitle()));
@@ -130,7 +136,6 @@ public class ExpenseDetailActivity extends DeleteActivity{
                 .setText(StaticTripData.getNameById(expense.getPayer()).substring(0,1));
 
         onViewPayers(expense.getAssignedPayers());
-
     }
 
     public void onViewPayers(List<Payer> payerList){

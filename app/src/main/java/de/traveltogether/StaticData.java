@@ -13,7 +13,7 @@ import de.traveltogether.participantlist.ParticipantState;
  * Created by Anna-Lena on 29.05.2016.
  */
 public class StaticData {
-    static private int UserId;
+    static private int UserId = -1;
     static public String currencyFormatDE = "#0.00";
     static public String currencySymbolDE = "€";
     static public AppCompatActivity currentActivity;

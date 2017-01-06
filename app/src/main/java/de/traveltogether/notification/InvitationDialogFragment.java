@@ -52,6 +52,7 @@ public class InvitationDialogFragment extends DialogFragment implements DialogIn
         {
             Log.d("invitation", "decline");
             activity.presenter.onAnswerInvitation(notification.getFeatureOrTripId(), ActionType.DECLINE);
+            activity.currentNotification = notification;
             activity.presenter.onSetNotificationRead(notification.getId());
             dialog.cancel();
         }
@@ -59,6 +60,7 @@ public class InvitationDialogFragment extends DialogFragment implements DialogIn
         {
             Log.d("invitation", "accept");
             activity.presenter.onAnswerInvitation(notification.getFeatureOrTripId(), ActionType.ACCEPT);
+            activity.currentNotification = notification;
             activity.presenter.onSetNotificationRead(notification.getId());
             dialog.cancel();
         }

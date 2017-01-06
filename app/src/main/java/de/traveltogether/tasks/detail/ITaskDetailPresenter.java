@@ -15,5 +15,6 @@ public interface ITaskDetailPresenter {
     public void onSuccessDelete();
     public void onCloseActivity();
     public void onGetParticipantsForTrip(long tripId);
+    public void onSuccessGetParticipants();
 
 }

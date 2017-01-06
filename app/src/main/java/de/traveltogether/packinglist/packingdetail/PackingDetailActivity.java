@@ -56,9 +56,7 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
-        if(StaticTripData.getActiveParticipants().length == 0){
-            presenter.onGetParticipantsForTrip(tripId);
-        }
+
 
         title = (TextView) findViewById(R.id.activity_packing_detail_title);
         description = (TextView) findViewById(R.id.activity_packing_detail_description);
@@ -106,6 +104,19 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
 
     public void onViewDetails(PackingObject _packingobject){
         packingObject = _packingobject;
+        if(StaticTripData.getActiveParticipants().length == 0){
+            presenter.onGetParticipantsForTrip(packingObject.getTripId());
+            return;
+        }
+        tripId=packingObject.getTripId();
+        getSupportActionBar().setTitle(StringEscapeUtils.unescapeJava(packingObject.getTitle()));
+        title.setText(StringEscapeUtils.unescapeJava(packingObject.getTitle()));
+        count.setText(String.valueOf(packingObject.getPackingItemsNumber()));
+        description.setText(StringEscapeUtils.unescapeJava(packingObject.getDescription()));
+        onViewPackingItems(packingObject.getItems());
+    }
+
+    public void onSuccessGetParticipants(){
         tripId=packingObject.getTripId();
         getSupportActionBar().setTitle(StringEscapeUtils.unescapeJava(packingObject.getTitle()));
         title.setText(StringEscapeUtils.unescapeJava(packingObject.getTitle()));

@@ -37,6 +37,7 @@ public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
             else if (actionType == ActionType.GETPARTICIPANTS) {
                 Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
                 StaticTripData.setParticipants(participants);
+                listener.onSuccessGetParticipants();
             }
         }
         else{

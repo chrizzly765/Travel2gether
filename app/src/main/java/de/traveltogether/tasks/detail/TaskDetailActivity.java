@@ -68,9 +68,7 @@ public class TaskDetailActivity extends DeleteActivity {
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
-        if(StaticTripData.getActiveParticipants().length==0){
-            presenter.onGetParticipantsForTrip(tripId);
-        }
+
 
 
         title = (TextView) findViewById(R.id.activity_task_detail_title);
@@ -112,6 +110,14 @@ public class TaskDetailActivity extends DeleteActivity {
     public void onViewDetails(Task _task){
         task = _task;
         tripId = task.getTripId();
+        if(StaticTripData.getActiveParticipants().length==0){
+            presenter.onGetParticipantsForTrip(tripId);
+            return;
+        }
+        viewDetails();
+    }
+
+    public void viewDetails(){
         getSupportActionBar().setTitle(StringEscapeUtils.unescapeJava(task.getTitle()));
         title.setText(StringEscapeUtils.unescapeJava(task.getTitle()));
         description.setText(StringEscapeUtils.unescapeJava(task.getDescription()));

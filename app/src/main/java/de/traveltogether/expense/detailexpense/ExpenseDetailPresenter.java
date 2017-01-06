@@ -46,4 +46,9 @@ public class ExpenseDetailPresenter implements IExpenseDetailPresenter {
 
     @Override
     public void onCloseActivity(){view.onCloseActivity();}
+
+    @Override
+    public void onSuccessGetParticipants() {
+        view.viewDetails();
+    }
 }

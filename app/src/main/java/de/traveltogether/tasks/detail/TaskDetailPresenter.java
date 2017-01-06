@@ -50,4 +50,9 @@ public class TaskDetailPresenter implements ITaskDetailPresenter {
         interactor.getParticipantsForTrip(tripId, this);
 
     }
+
+    @Override
+    public void onSuccessGetParticipants() {
+        view.viewDetails();
+    }
 }
