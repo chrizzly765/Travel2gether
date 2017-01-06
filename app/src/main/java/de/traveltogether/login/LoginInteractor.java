@@ -110,7 +110,6 @@ import static de.traveltogether.servercommunication.HashFactory.hashPassword;
             } else if (dataType == DataType.LOGIN && actionType == ActionType.LOGIN) {
                 //save hash in shared prefs
                 int userId = -1;
-
                 try {
                     JSONObject json = new JSONObject(response.getData());
                     userId = json.getInt("personId");
