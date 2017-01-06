@@ -20,6 +20,7 @@
             android:layout_marginTop="8dp"
             android:textSize="18dp"
             android:layout_weight="0.5"
+            android:lines="1"
             android:id="@+id/fragment_expense_list_item_title" />
 
         <LinearLayout

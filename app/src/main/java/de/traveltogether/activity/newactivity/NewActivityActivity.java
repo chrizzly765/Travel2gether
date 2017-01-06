@@ -364,6 +364,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         tripId = activity.getTripId();
         title.setText(StringEscapeUtils.unescapeJava(activity.getTitle()));
         description.setText(StringEscapeUtils.unescapeJava(activity.getDescription()));
+        destination.setText(StringEscapeUtils.unescapeJava(activity.getDestination()));
         startDate.setText(activity.getDate());
         time.setText(TimeFormat.getInstance().getTimeWithoutSecondsWithoutWord(activity.getTime()));
         try {
