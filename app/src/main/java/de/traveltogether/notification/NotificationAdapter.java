@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import de.traveltogether.DataType;
 import de.traveltogether.R;
 import de.traveltogether.model.Notification;
@@ -72,7 +74,7 @@ public class NotificationAdapter extends BaseAdapter {
 
         Context context = parent.getContext();
         Notification not = (Notification) getItem(position);
-        holder.title.setText(not.getMessage());
+        holder.title.setText(StringEscapeUtils.unescapeJava(not.getMessage()));
         holder.date.setText(not.getReceiveDate());
         if( not.getType().equals(DataType.EXPENSE.toString())){
             holder.icon.setImageResource(R.drawable.ic_expense);
