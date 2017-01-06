@@ -90,6 +90,7 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
         builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
+                setResult(RESULT_CANCELED);
                 finish();
             }
         });
@@ -223,6 +224,7 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
                 ad.show();
                 break;
             case android.R.id.home:
+                setResult(RESULT_CANCELED);
                 finish();
                 return true;
             default:

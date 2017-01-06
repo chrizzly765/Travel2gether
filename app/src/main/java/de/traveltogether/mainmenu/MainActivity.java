@@ -410,8 +410,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         progressDialog.cancel();
+        if(resultCode==RESULT_OK) {
+            finish();
+        }
         super.onActivityResult(requestCode, resultCode, data);
-        finish();
     }
 
 
