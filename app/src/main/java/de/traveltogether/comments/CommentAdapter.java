@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ImageButton;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
@@ -23,6 +24,7 @@ import de.traveltogether.model.Comment;
 public class CommentAdapter extends BaseAdapter {
     private Comment[] comments;
     private final LayoutInflater inflater;
+    ImageButton btnSend;
 
     public CommentAdapter(Context context, Comment[] _comments) {
         inflater = LayoutInflater.from(context);
@@ -77,7 +79,24 @@ public class CommentAdapter extends BaseAdapter {
         else{
             //TODO: Problem!!
         }
+
         holder.date.setText(comment.getDate());
+/*
+        if(!(StringEscapeUtils.unescapeJava(comment.getText().toString()) == "")){
+            holder.content.setText(StringEscapeUtils.unescapeJava(comment.getText()));
+        }
+*/
+
+/*
+        if(StringEscapeUtils.unescapeJava(comment.getText().toString()) == ""){
+            //holder.content.setText("Leer");
+            btnSend.findViewById(R.id.fragment_comment_button_send).setVisibility(View.INVISIBLE);
+        }
+        else {
+            btnSend.findViewById(R.id.fragment_comment_button_send).setVisibility(View.VISIBLE);
+            holder.content.setText(StringEscapeUtils.unescapeJava(comment.getText()));
+        }
+*/
         holder.content.setText(StringEscapeUtils.unescapeJava(comment.getText()));
         ((ImageView)holder.icon.findViewById(R.id.fragment_commentlist_list_item_icon_circle))
                 .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById((int)comment.getId())));

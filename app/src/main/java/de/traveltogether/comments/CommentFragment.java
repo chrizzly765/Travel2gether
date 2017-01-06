@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
     ICommentPresenter presenter;
     Comment[] comments;
     EditText inputField;
+    ImageButton send;
     CommentListFragment fragment;
 
     public CommentFragment() {
@@ -87,9 +89,15 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_comment, container, false);
         inputField = (EditText)view.findViewById(R.id.fragment_comment_editText);
-        ImageButton send = (ImageButton)view.findViewById(R.id.fragment_comment_button_send);
+
+        send = (ImageButton)view.findViewById(R.id.fragment_comment_button_send);
+        send.setVisibility(View.INVISIBLE);
         send.setOnClickListener(this);
+
         return view;
+
+
+
     }
 
     @Override
@@ -100,7 +108,6 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
                 return;
             }
             presenter.onSendCommentForFeature(id, StaticData.getUserId(), text);
-
             //Text löschen wenn Eingabe fertig
             inputField.setText("");
 
@@ -108,6 +115,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
             InputMethodManager in = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             in.hideSoftInputFromWindow(inputField.getApplicationWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
         }
+
     }
 
     public void onSuccessAddComment(){
