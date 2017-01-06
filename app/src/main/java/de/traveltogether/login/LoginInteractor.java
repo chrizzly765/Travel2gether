@@ -11,16 +11,17 @@ import de.traveltogether.DataType;
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.model.Login;
+import de.traveltogether.servercommunication.HashFactory;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 import de.traveltogether.model.Response;
 
-/**
- * Created by Anna-Lena on 12.05.2016.
- */
-public class LoginInteractor implements ILoginInteractor {
-    ILoginPresenter listener;
-    String hash;
+import static de.traveltogether.servercommunication.HashFactory.hashPassword;
+
+
+ class LoginInteractor implements ILoginInteractor {
+    private ILoginPresenter listener;
+    private String hash;
 
     public void login(String _email, String _hash, ILoginPresenter _listener){
         listener = _listener;
@@ -60,8 +61,34 @@ public class LoginInteractor implements ILoginInteractor {
         }
     }
 
+    @Override
+    public void forgotPassword(String email, ILoginPresenter _listener) {
+        listener = _listener;
+        try{
+            RandomString rs = new RandomString(7);
+            String newPW =   rs.nextString();
+            String salt = HashFactory.getNextSalt();
+            int length = newPW.length();
+            char [] newpw = new char[length];
+            newPW.getChars(0, length, newpw, 0);
+            String newHash = hashPassword(newpw, salt);
+            newHash = newHash.replace("/", "");
+
+            JSONObject json = new JSONObject();
+            json.put("email", email);
+            json.put("plainPassword", newPW);
+            json.put("password", newHash);
+            json.put("salt", salt.replace("\\u003d", "=").replace("\\n", ""));
+            String data = json.toString().replace("\\n", "\n");
+            HttpRequest request = new HttpRequest(DataType.PERSON, ActionType.FORGOTPASSWORD, data, this);
+        }
+        catch (Exception e){
+            Log.e(e.getClass().toString(),e.getMessage());
+        }
+    }
+
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType){
-        if(response.getError()=="true"){
+        if(response.getError().equals("true")){
             listener.onError(response.getMessage());
         }
         else {
@@ -75,7 +102,7 @@ public class LoginInteractor implements ILoginInteractor {
                     listener.onError("Error in getting salt");
                     Log.d("Error: ", "Error in getting salt");
                 }
-                if (salt != "") {
+                if (!salt.equals("")) {
                     listener.onReturnSalt(salt);
                 } else {
                     listener.onError("Error in getting salt");
@@ -109,6 +136,9 @@ public class LoginInteractor implements ILoginInteractor {
             } else if (dataType == DataType.PERSON && actionType == ActionType.UPDATEDEVICEID) {
                 Log.d("LoginInteractor", "DeviceId updated");
                 //TODO: do we have to do something?
+            }
+            else if (dataType == DataType.PERSON && actionType == ActionType.FORGOTPASSWORD){
+                listener.onSuccessForgotPassword();
             }
         }
     }

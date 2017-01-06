@@ -3,14 +3,12 @@ package de.traveltogether.info;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Trip;
 
-/**
- * Created by Anna-Lena on 12.05.2016.
- */
-public class InfoPresenter implements  IInfoPresenter {
-    InfoActivity view;
-    IInfoInteractor interactor;
 
-    public InfoPresenter(InfoActivity activity){
+class InfoPresenter implements  IInfoPresenter {
+    private InfoActivity view;
+    private IInfoInteractor interactor;
+
+    InfoPresenter(InfoActivity activity){
         view= activity;
         interactor = new InfoInteractor();
     }
@@ -49,5 +47,10 @@ public class InfoPresenter implements  IInfoPresenter {
     @Override
     public void onSuccessDeleteTrip() {
         view.onSuccessDeleteTrip();
+    }
+
+    @Override
+    public void onLeaveTrip(long tripId) {
+        interactor.leaveTrip(tripId, this);
     }
 }

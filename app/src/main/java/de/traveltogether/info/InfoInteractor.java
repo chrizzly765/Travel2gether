@@ -14,11 +14,9 @@ import de.traveltogether.model.Trip;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
-/**
- * Created by Anna-Lena on 12.05.2016.
- */
-public class InfoInteractor implements IInfoInteractor{
-    IInfoPresenter listener;
+
+ class InfoInteractor implements IInfoInteractor{
+    private IInfoPresenter listener;
 
     @Override
     public void getInfoForTripId(long tripId, IInfoPresenter _listener) {
@@ -28,7 +26,7 @@ public class InfoInteractor implements IInfoInteractor{
             obj.put("tripId", tripId);
         }
         catch(Exception e){
-
+            Log.e(e.getClass().toString(),e.getMessage());
         }
         HttpRequest req = new HttpRequest(DataType.TRIP, ActionType.DETAIL, obj.toString(), this);
 
@@ -42,7 +40,7 @@ public class InfoInteractor implements IInfoInteractor{
             obj.put("tripId", tripId);
         }
         catch(Exception e){
-
+            Log.e(e.getClass().toString(),e.getMessage());
         }
         HttpRequest req = new HttpRequest(DataType.TRIP, ActionType.GETPARTICIPANTS, obj.toString(), this);
     }
@@ -61,14 +59,27 @@ public class InfoInteractor implements IInfoInteractor{
     }
 
     @Override
+    public void leaveTrip(long tripId, IInfoPresenter listener) {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("tripId", tripId);
+            jsonObject.put("personId", StaticData.getUserId());
+            HttpRequest request = new HttpRequest(DataType.TRIP, ActionType.RESIGN, jsonObject.toString(), this);
+        }
+        catch (Exception e){
+            Log.e(e.getClass().toString(), e.getMessage());
+        }
+    }
+
+    @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if(response.getError() == "true"){
+        if(response.getError().equals("true")){
             listener.onError("Kein Zugriff", response.getMessage());
         }
         else {
             if (actionType == ActionType.DETAIL) {
                 if(!response.getData().equals("{}")) {
-                    Trip trip = (Trip)JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP);
+                    Trip trip = JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP);
                     listener.onSuccessGetDetail((Trip) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP));
                 }
                 else {
@@ -85,7 +96,7 @@ public class InfoInteractor implements IInfoInteractor{
         }
     }
 
-    class ParticipantList{
+    private class ParticipantList{
         public Participant[] list;
     }
 }

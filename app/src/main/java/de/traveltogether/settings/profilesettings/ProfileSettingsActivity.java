@@ -35,6 +35,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     TextView name;
     TextView errorText;
     String salt;
+    String newHash;
     View passwordDialogView;
     AlertDialog passwordDialog;
 
@@ -94,10 +95,10 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 presenter.onUpdateProfileInfos(new Person(StaticData.getUserId(), email.getText().toString(), name.getText().toString()));
                 progressDialog.show();
                 break;
-//            case R.id.change_pw:
-//                presenter.onGetSalt(email.getText().toString());
-//                progressDialog.show();
-//                break;
+            case R.id.change_pw:
+                presenter.onGetSalt(email.getText().toString());
+                progressDialog.show();
+                break;
             case android.R.id.home:
                 finish();
                 return true;
@@ -123,7 +124,10 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
     public void onSuccessUpdatePasswort() {
         Toast.makeText(getApplicationContext(), "Passwort erfolgreich geändert.", Toast.LENGTH_SHORT).show();
-
+        SharedPreferences sharedPref = getSharedPreferences("TravelTogetherPrefs",Context.MODE_PRIVATE );
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.saved_hash), newHash);
+        editor.commit();
     }
 
     public void onSuccessUpdateProfileInfos() {
@@ -217,10 +221,9 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         int length = oldPW.length();
         char [] pw = new char[length];
         oldPW.getChars(0,length, pw, 0);
-        String enteredHash = hashPassword(pw, salt).replace("\u003d", "").replace("\\n", "");;
+        String enteredHash = hashPassword(pw, salt);
+
         if(!enteredHash.equals(oldHash)){
-            Log.d("hash", enteredHash + " "+ oldHash);
-            Log.d("length", enteredHash.length() +" "+ oldHash.length());
             errorText.setText("Das eingegebene Passwort ist falsch.");
             return false;
         }
@@ -231,7 +234,11 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             return false;
         }
         char [] newpw = new char[length];
-        String newHash = hashPassword(newpw, salt);
+        newPW.getChars(0, length, newpw, 0);
+        newHash = hashPassword(newpw, salt);
+        newHash = newHash.replace("/", "");
+        Log.d("hash", newHash);
+
         presenter.onUpdatePasswort(salt, newHash);
 
         return true;

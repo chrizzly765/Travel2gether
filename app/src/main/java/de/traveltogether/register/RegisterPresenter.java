@@ -2,14 +2,11 @@ package de.traveltogether.register;
 
 import android.util.Log;
 
-/**
- * Created by Anna-Lena on 27.05.2016.
- */
-public class RegisterPresenter implements IRegisterPresenter {
+class RegisterPresenter implements IRegisterPresenter {
     private RegisterActivity registerActivity;
     private IRegisterInteractor registerInteractor;
 
-    public RegisterPresenter(RegisterActivity _registerActivity){
+    RegisterPresenter(RegisterActivity _registerActivity){
         registerActivity = _registerActivity;
         registerInteractor = new RegisterInteractor();
     }
@@ -22,10 +19,22 @@ public class RegisterPresenter implements IRegisterPresenter {
     }
 
     public void onError(String message){
-        registerActivity.onViewErrorMessage(message);
+
+        try {
+            registerActivity.onViewErrorMessage(message);
+        }
+        catch(Exception e){
+            Log.e(e.getClass().toString(), e.getMessage());
+        }
     }
 
     public void onSuccess(String message){
-        registerActivity.onViewSuccessMessage(message);
+
+        try {
+            registerActivity.onViewSuccessMessage(message);
+        }
+        catch(Exception e){
+            Log.e(e.getClass().toString(), e.getMessage());
+        }
     }
 }

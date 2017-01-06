@@ -156,6 +156,11 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.commit();
             fragmentUpcoming = fragment;
             findViewById(R.id.activity_trip_list_upcoming_empty).setVisibility(View.INVISIBLE);
+            RelativeLayout devider = (RelativeLayout)findViewById(R.id.activity_trip_list_devider_former);
+
+            RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)devider.getLayoutParams();
+            lp.addRule(RelativeLayout.BELOW, R.id.fragment_trip_list_container_upcoming);
+            devider.setLayoutParams(lp);
         }
         else{
             findViewById(R.id.activity_trip_list_upcoming_empty).setVisibility(View.VISIBLE);

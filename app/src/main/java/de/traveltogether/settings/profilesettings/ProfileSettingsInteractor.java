@@ -12,12 +12,9 @@ import de.traveltogether.model.Response;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
-/**
- * Created by Anna-Lena on 27.11.2016.
- */
 
-public class ProfileSettingsInteractor implements IProfileSettingsInteractor {
-    IProfileSettingsPresenter listener;
+ class ProfileSettingsInteractor implements IProfileSettingsInteractor {
+    private IProfileSettingsPresenter listener;
 
     public void getProfileInfos(IProfileSettingsPresenter _listener) {
         listener = _listener;
@@ -49,7 +46,7 @@ public class ProfileSettingsInteractor implements IProfileSettingsInteractor {
             obj.put("personId", StaticData.getUserId());
             obj.put("salt", salt.replace("\\u003d", "=").replace("\\n", ""));
             obj.put("password", hash);
-            String s = obj.toString();
+            String s = obj.toString().replace("\\n", "\n").replace("\\/", "/");
             HttpRequest request = new HttpRequest(DataType.PERSON, ActionType.UPDATEPASSWORD, s, this);
         } catch (Exception e) {
             //TODO
@@ -70,7 +67,7 @@ public class ProfileSettingsInteractor implements IProfileSettingsInteractor {
     }
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if (response.getError() == "false") {
+        if (response.getError().equals("false")) {
             if (actionType == ActionType.DETAIL) {
                 listener.onSuccessGetProfileInfos((Person) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.PERSON));
             } else if (actionType == ActionType.UPDATE) {
@@ -88,7 +85,7 @@ public class ProfileSettingsInteractor implements IProfileSettingsInteractor {
                     listener.onError("Error in getting salt");
                     Log.d("Error: ", "Error in getting salt");
                 }
-                if (salt != "") {
+                if (!salt.equals("")) {
                     listener.onReturnSalt(salt);
                 } else {
                     listener.onError("Error in getting salt");

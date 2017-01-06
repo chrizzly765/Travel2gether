@@ -3,15 +3,13 @@ package de.traveltogether.info;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Trip;
 
-/**
- * Created by Anna-Lena on 12.05.2016.
- */
-public interface IInfoPresenter {
-    public void onGetInfoForTrip(long tripId);
-    public void onError(String message, String Title);
-    public void onSuccessGetDetail(Trip trip);
-    public void onGetParticipantsForTrip(long tripId);
-    public void onSuccessGetParticipants(Participant[] participants);
-    public void onDeleteTrip(long tripId);
-    public void onSuccessDeleteTrip();
+interface IInfoPresenter {
+     void onGetInfoForTrip(long tripId);
+     void onError(String message, String Title);
+     void onSuccessGetDetail(Trip trip);
+     void onGetParticipantsForTrip(long tripId);
+     void onSuccessGetParticipants(Participant[] participants);
+     void onDeleteTrip(long tripId);
+     void onSuccessDeleteTrip();
+     void onLeaveTrip(long tripId);
 }

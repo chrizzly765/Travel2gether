@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -184,37 +185,52 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent (this, InvitationActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putLong("tripId", tripId);
-        bundle.putString("formerActivity", "info");
-        intent.putExtras(bundle);
-        startActivity(intent);
+            Intent intent = new Intent (this, InvitationActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("tripId", tripId);
+            bundle.putString("formerActivity", "info");
+            intent.putExtras(bundle);
+            startActivity(intent);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.optionsmenu_detail, menu);
-        if(trip!=null) {
-            if (trip.getAdminId() == StaticData.getUserId()) {
-                menu.getItem(R.id.delete).setEnabled(true);
-            }
-        }
+        inflater.inflate(R.menu.optionsmenu_trip, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.delete:
+            case R.id.trip_delete:
                 createDeleteDialog();
                 break;
             case R.id.edit:
                 Intent intent = new Intent(this, NewTripActivity.class);
                 intent.putExtra("tripId", tripId);
                 startActivity(intent);
+                break;
+            case R.id.leave_trip:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(R.string.leave_text);
+                builder.setTitle(R.string.leave_message);
+                builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+                builder.setNegativeButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        presenter.onLeaveTrip(tripId);
+                        dialog.cancel();
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                });
+                AlertDialog ad = builder.create();
+                ad.show();
                 break;
             case android.R.id.home:
                 finish();
@@ -232,9 +248,11 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-        Intent intent = new Intent(this, TripListActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, TripListActivity.class);
+        //startActivity(intent);
+        setResult(RESULT_OK, null);
         finish();
+
     }
 
     public void delete(){

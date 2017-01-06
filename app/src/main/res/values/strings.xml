@@ -1,5 +1,7 @@
 <resources>
     <string name="delete_message">Wirklich löschen?</string>
+    <string name="leave_message">Wirklich verlassen?</string>
+    <string name="leave_text">Möchtest du die Reise wirklich verlassen?</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="saved_hash">Saved Hash</string>
@@ -16,8 +18,11 @@
     <string name="sign_up">Registrieren</string>
     <string name="name">Name</string>
     <string name="repeat_password">Passwort wiederholen</string>
+    <string name="forgot_password">Passwort vergessen</string>
     <string name="login_success">Erfolgreich angemeldet.</string>
     <string name="login_error">Fehler beim anmelden. Bitte versuche es erneut.</string>
+    <string name="forgot_pw_title">E-Mail eingeben</string>
+    <string name="forgot_pw_text">Gib deine E-Mail Adresse ein und wir senden dir dein neues Passwort zu.</string>
 
     <!-- RegistrationActivity -->
     <string name="pw_minimum_length">Das Passwort muss aus mindestens 7 Zeichen bestehen.</string>

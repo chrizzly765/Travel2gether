@@ -41,6 +41,7 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
     }
 
@@ -80,13 +81,22 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
             getListView().setLayoutParams(par);
             getListView().requestLayout();
         }
+
+    }
+
+    public void onResume(){
+        super.onResume();
+        view.findViewById(de.traveltogether.R.id.fragment_button_invite).setOnClickListener(this);
+        view.findViewById(de.traveltogether.R.id.fragment_text_invite).setOnClickListener(this);
     }
 
     public void onClick(View v) {
-            Intent invite = new Intent(Intent.ACTION_SEND);
-            invite.putExtra(Intent.EXTRA_TEXT, getString(R.string.invitation_text) + "tripId=" + tripId + "&author=" + StaticData.getUserId());
-            invite.setType("text/plain");
-            startActivity(createChooser(invite, getString(R.string.title_invititation_choose)));
+        Intent invite = new Intent(Intent.ACTION_SEND);
+        invite.putExtra(Intent.EXTRA_TEXT, getString(R.string.invitation_text) + "tripId=" + tripId + "&author=" + StaticData.getUserId());
+        invite.setType("text/plain");
+        v.setEnabled(false);
+        v.setClickable(false);
+        startActivity(createChooser(invite, getString(R.string.title_invititation_choose)));
     }
 
     @Override

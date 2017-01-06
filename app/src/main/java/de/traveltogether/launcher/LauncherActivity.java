@@ -30,8 +30,6 @@ public class LauncherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new GCMPresenter(this);
-        ProgressDialog progressDialog = ProgressDialog.show(this, "",
-                "Bitte warten...", true);
         setContentView(R.layout.activity_launcher);
         Log.d("Launcher","start");
 
@@ -89,6 +87,6 @@ public class LauncherActivity extends AppCompatActivity {
             Intent login = new Intent(this, LoginActivity.class);
             startActivity(login);
         }
-        progressDialog.cancel();
+        //progressDialog.cancel();
     }
 }

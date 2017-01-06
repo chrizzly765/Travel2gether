@@ -15,11 +15,11 @@ import de.traveltogether.model.Person;
  * Created by Anna-Lena on 12.06.2016.
  * Schnittstelle zwischen UI und Daten des Invitationfrag
  */
-public class InvitationAdapter extends BaseAdapter {
+ class InvitationAdapter extends BaseAdapter {
     private final Person[] formerParticipants;
     private final LayoutInflater inflater;
 
-    public InvitationAdapter(Context context, Person[] persons) {
+     InvitationAdapter(Context context, Person[] persons) {
         inflater = LayoutInflater.from(context);
         formerParticipants = persons;
     }
@@ -66,13 +66,14 @@ public class InvitationAdapter extends BaseAdapter {
 
         Context context = parent.getContext();
         Person person = (Person)getItem(position);
-        holder.name.setText(person.getUserName());
-        holder.initial.setText(person.getUserName().substring(0,1));
-
+        if(person!=null) {
+            holder.name.setText(person.getUserName());
+            holder.initial.setText(person.getUserName().substring(0, 1));
+        }
         return convertView;
     }
 
-    static class TripViewHolder {
+    private static class TripViewHolder {
         ImageView grayIcon;
         TextView name, initial;
     }

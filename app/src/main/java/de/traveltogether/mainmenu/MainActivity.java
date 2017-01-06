@@ -107,14 +107,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         activities.setOnClickListener(this);
         ImageButton chat = (ImageButton)findViewById(R.id.main_menu_chat);
         chat.setOnClickListener(this);
+        progressDialog = ProgressDialog.show(this, "",
+                "Bitte warten...", true);
     }
 
     @Override
     protected void onStart(){
         super.onStart();
 
-        progressDialog = ProgressDialog.show(this, "",
-                "Bitte warten...", true);
+        //progressDialog = ProgressDialog.show(this, "",
+        //        "Bitte warten...", true);
 
         presenter.onGetStatistics(tripId,StaticData.getUserId());
     }
@@ -360,7 +362,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Bundle bundle = new Bundle();
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);
-            startActivity(intent);
+            startActivityForResult(intent, 0);
         }
         else if(v.getId()==R.id.main_menu_expences){
             Intent intent = new Intent(this, ExpenseActivity.class);
@@ -411,7 +413,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        progressDialog.cancel();
+        super.onActivityResult(requestCode, resultCode, data);
+        finish();
+    }
 
 
     public void onSuccessGetTitle(String _title){

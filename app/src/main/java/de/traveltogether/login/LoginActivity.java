@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +24,6 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import de.traveltogether.R;
 import de.traveltogether.gcm.GCMRegistrationIntentService;
 import de.traveltogether.register.RegisterActivity;
-import de.traveltogether.servercommunication.HashFactory;
 import de.traveltogether.triplist.TripListActivity;
 
 import static de.traveltogether.servercommunication.HashFactory.hashPassword;
@@ -34,10 +34,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected TextView registerBtn;
     protected EditText email;
     protected EditText password;
+    TextView forgotPwButton;
     protected ILoginPresenter presenter;
     String salt;
     ProgressDialog progressDialog;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
+    AlertDialog passwordDialog;
 
 
     @Override
@@ -52,6 +54,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         email = (EditText)findViewById(R.id.loginEmail);
         password = (EditText)findViewById(R.id.loginPassword);
+        forgotPwButton = (TextView)findViewById(R.id.forgot_pw_text);
+        forgotPwButton.setOnClickListener(this);
 
     }
 
@@ -64,10 +68,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 onViewError(getString(R.string.invalid_mailadress));
                 return;
             }
+            if(password.getText().length()<7){
+                onViewError(getString(R.string.pw_minimum_length));
+                return;
+            }
             v.setEnabled(false);
             progressDialog = ProgressDialog.show(this, "",
                     "Bitte warten...", true);
             presenter.onGetSalt(email.getText().toString());
+        }else if(v.getId() == R.id.forgot_pw_text){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.forgot_pw_title);
+            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            final View dialogView = inflater.inflate(R.layout.dialog_forgot_password, null);
+            if(email.getText()!=null && email.getText().toString().length()>0) {
+                ((EditText) dialogView.findViewById(R.id.dialog_forgot_pw_email)).setText(email.getText().toString());
+            }
+            builder.setView(dialogView);
+            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    presenter.onForgotPassword(((EditText)dialogView.findViewById(R.id.dialog_forgot_pw_email)).getText().toString());
+                }
+            });
+            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+
+            passwordDialog = builder.create();
+            passwordDialog.show();
         }
     }
 
@@ -163,5 +193,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void onBackPressed(){
         moveTaskToBack(true);
+    }
+
+    public void onSuccessForgotPassword(){
+        passwordDialog.cancel();
+        Toast.makeText(getApplicationContext(), "Ein neues Passwort wurde dir zugesendet.", Toast.LENGTH_LONG).show();
     }
 }
