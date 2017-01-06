@@ -1,6 +1,7 @@
 package de.traveltogether.servercommunication;
 
 import android.util.Base64;
+import android.util.Log;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -45,13 +46,13 @@ public class HashFactory {
         }
     }
 
-    public static String convertByteToString(byte[] b) {
+    static String convertByteToString(byte[] b) {
         String s = "";
         try {
             String str = Base64.encodeToString(b, 0);
             return str;//new String(b);
         } catch (Exception e) {
-
+            Log.e(e.getClass().toString(), e.getMessage());
         }
         return "";
     }

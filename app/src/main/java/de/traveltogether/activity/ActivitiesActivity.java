@@ -4,36 +4,25 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import de.traveltogether.R;
-import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.activity.newactivity.NewActivityActivity;
-import de.traveltogether.mainmenu.MainActivity;
-import de.traveltogether.model.Trip;
 import de.traveltogether.model.Activity;
-import de.traveltogether.settings.SettingsActivity;
-import de.traveltogether.triplist.newtrip.NewTripActivity;
 
 public class ActivitiesActivity extends AppCompatActivity implements View.OnClickListener{
-    IActivityPresenter presenter;
-    Activity[] formerActivities;
-    ActivityFragment fragment;
-    public long tripId;
-    ProgressDialog progressDialog;
+    private IActivityPresenter presenter;
+    private Activity[] formerActivities;
+    private ActivityFragment fragment;
+    private long tripId;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

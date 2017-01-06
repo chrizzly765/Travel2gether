@@ -7,8 +7,8 @@ import de.traveltogether.model.Task;
  */
 public class TaskDetailPresenter implements ITaskDetailPresenter {
 
-    TaskDetailActivity view;
-    ITaskDetailInteractor interactor;
+    private TaskDetailActivity view;
+    private ITaskDetailInteractor interactor;
 
     public TaskDetailPresenter(TaskDetailActivity _view){
         view= _view;

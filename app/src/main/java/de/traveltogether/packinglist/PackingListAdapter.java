@@ -1,14 +1,9 @@
 package de.traveltogether.packinglist;
 
-import android.content.res.Resources;
-import android.media.Image;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,14 +18,7 @@ import de.traveltogether.StaticTripData;
 import de.traveltogether.model.PackingObject;
 
 
-
-
-import java.util.List;
-
-/**
- * Created by Maria on 18.09.2016
- */
-public class PackingListAdapter extends BaseAdapter {
+class PackingListAdapter extends BaseAdapter {
 
     private PackingObject[] packingobjectList;
     private final LayoutInflater inflater;

@@ -2,16 +2,14 @@ package de.traveltogether.activity.detailactivity;
 
 import de.traveltogether.model.Activity;
 
-/**
- * Created by Isa on 05.10.2016.
- */
+
 public interface IDetailActivityPresenter {
-    public void onGetDetailsForActivity(long featureId);
-    public void onSuccessGetDetails(Activity activity);
-    public void onError(String message, String title);
-    public void onDeleteActivity(long id);
-    public void onSuccessDelete();
-    public void onCloseActivity();
+    void onGetDetailsForActivity(long featureId);
+    void onSuccessGetDetails(Activity activity);
+    void onError(String message, String title);
+    void onDeleteActivity(long id);
+    void onSuccessDelete();
+    void onCloseActivity();
     void onGetParticipantsForTrip(long tripId);
 
 }

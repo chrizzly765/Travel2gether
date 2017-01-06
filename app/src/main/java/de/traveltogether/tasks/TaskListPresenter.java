@@ -5,13 +5,11 @@ import android.util.Log;
 
 import de.traveltogether.model.Task;
 
-/**
- * Created by Anna-Lena on 12.05.2016.
- */
+
 public class TaskListPresenter implements ITaskListPresenter {
 
-    TaskListActivity view;
-    ITaskListInteractor interactor;
+    private TaskListActivity view;
+    private ITaskListInteractor interactor;
 
     public TaskListPresenter(TaskListActivity _view) {
         view = _view;

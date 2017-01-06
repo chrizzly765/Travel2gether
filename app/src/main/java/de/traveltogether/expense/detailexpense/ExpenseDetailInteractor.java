@@ -4,6 +4,8 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.StaticTripData;
@@ -17,11 +19,11 @@ import de.traveltogether.servercommunication.JsonDecode;
  * Created by Anna-Lena on 15.09.2016.
  */
 public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
-    IExpenseDetailPresenter listener;
+    private IExpenseDetailPresenter listener;
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if(response.getError()!="true"){
+        if(!response.getError().equals("true")){
             if(actionType == ActionType.DELETE){
                 listener.onSuccessDelete();
             }
@@ -82,7 +84,7 @@ public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
             obj.put("tripId", tripId);
         }
         catch(Exception e){
-
+            Log.e(e.getClass().toString(), e.getMessage());
         }
         HttpRequest req = new HttpRequest(DataType.TRIP, ActionType.GETPARTICIPANTS, obj.toString(), this);
 

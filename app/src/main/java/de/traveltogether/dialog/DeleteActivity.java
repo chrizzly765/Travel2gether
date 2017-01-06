@@ -18,9 +18,9 @@ public abstract class DeleteActivity extends AppCompatActivity {
         }*/
     }
 
-    public void createDeleteDialog(){
+    protected void createDeleteDialog(){
         DeleteDialogFragment.createDialog(this);
     }
 
-    public abstract void delete();
+    protected abstract void delete();
 }

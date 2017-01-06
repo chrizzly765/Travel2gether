@@ -4,13 +4,13 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
-import de.traveltogether.StaticData;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Response;
 import de.traveltogether.model.Statistic;
-import de.traveltogether.model.Trip;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
@@ -18,7 +18,7 @@ import de.traveltogether.servercommunication.JsonDecode;
  * Created by Anna-Lena on 12.05.2016.
  */
 public class MainMenuInteractor implements IMainMenuInteractor {
-    IMainMenuPresenter listener;
+    private IMainMenuPresenter listener;
 
     @Override
     public void deleteTrip(IMainMenuPresenter _listener, Long tripId) {
@@ -64,7 +64,7 @@ public class MainMenuInteractor implements IMainMenuInteractor {
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if(response.getError() == "false"){
+        if(response.getError().equals("false")){
             if(dataType== DataType.TRIP && actionType == ActionType.DELETE) {
                 listener.onSuccessDeletingTrip();
                 return;
@@ -85,7 +85,7 @@ public class MainMenuInteractor implements IMainMenuInteractor {
                 }
             }*/
             if(dataType==DataType.TRIP && actionType==ActionType.GETSTATISTIC){
-                if(response.getError()!="true") {
+                if(!response.getError().equals("true")) {
                     listener.onSuccessGetStatistics((Statistic) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.STATISTIC));
                     //Statistic statistics = ((Statistic) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.STATISTIC));
                     //listener.onSuccessGetStatistics(statistics);
@@ -127,12 +127,12 @@ public class MainMenuInteractor implements IMainMenuInteractor {
             HttpRequest request = new HttpRequest(DataType.TRIP, ActionType.GETTITLE, obj.toString(), this);
         }
         catch (Exception e){
-
+            Log.e(e.getClass().toString(), e.getMessage());
         }
     }
 
 
-    class ParticipantList {
+    private class ParticipantList {
         public Participant[] list;
     }
 

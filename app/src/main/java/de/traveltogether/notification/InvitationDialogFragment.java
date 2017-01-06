@@ -2,16 +2,12 @@ package de.traveltogether.notification;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.os.Bundle;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.util.Log;
 
 import de.traveltogether.ActionType;
 import de.traveltogether.R;
-import de.traveltogether.invitation.IInvitePresenter;
 import de.traveltogether.model.Notification;
 
 /**
@@ -23,8 +19,8 @@ import de.traveltogether.model.Notification;
  */
 public class InvitationDialogFragment extends DialogFragment implements DialogInterface.OnClickListener{
     public static final String TAG = InvitationDialogFragment.class.getSimpleName();
-    Notification notification;
-    NotificationActivity activity;
+    private Notification notification;
+    private NotificationActivity activity;
 
     public InvitationDialogFragment() {
         // Required empty public constructor

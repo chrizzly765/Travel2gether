@@ -6,7 +6,7 @@ import java.util.Calendar;
  * Created by Anna-Lena on 22.09.2016.
  */
 public class DateFormat {
-    static DateFormat instance;
+    private static DateFormat instance;
 
     public static DateFormat getInstance(){
         if(instance != null){
@@ -18,15 +18,11 @@ public class DateFormat {
         }
     }
 
-    public DateFormat(){
+    private DateFormat(){
         instance = this;
     }
 
-    /**
-     * Gets String that represents a date of structure "DD.MM.YYYY"
-     * returns String that represents date of structure "DD.MM"
-     * @param date
-     */
+
     public String getDateWithoutYear(String date){
         Date d = new Date(date);
         String s = "" + String.valueOf(d.day) + "."+ d.monthAsWord;
@@ -69,12 +65,7 @@ public class DateFormat {
         return String.valueOf(d.day) + ". " + d.monthAsWord;
     }
 
-    /**
-     * Method to compare two Datestrings of format dd.mm.yyyy
-     * @param date1
-     * @param date2
-     * @return int Returns 1 if date1 later than date2, 0 if they are equal, -1 if date2 is later than date1
-     */
+
     public int compareDates(String date1, String date2){
         Date d1 = new Date(date1);
         Date d2 = new Date(date2);

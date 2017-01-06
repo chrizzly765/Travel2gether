@@ -6,16 +6,12 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
@@ -27,48 +23,39 @@ import android.widget.Toast;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
+import java.util.Objects;
+
 import de.traveltogether.StaticData;
-import de.traveltogether.activity.ActivitiesActivity;
-import de.traveltogether.activity.detailactivity.DetailActivityActivity;
 import de.traveltogether.model.Activity;
-import de.traveltogether.model.Participant;
 import de.traveltogether.R;
 import de.traveltogether.datepicker.DatePickerFragment;
-import de.traveltogether.invitation.InvitationActivity;
 import de.traveltogether.time.TimeFormat;
 import de.traveltogether.timepicker.TimePickerFragment;
-
-import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.text.ParseException;
 
 /**
  * Created by Isa on 13.08.2016.
  */
 public class NewActivityActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
-    INewActivityPresenter presenter;
-    DatePickerFragment datePicker;
-    TimePickerFragment timePicker;
-    ImageView iconBtn;
-    EditText title;
-    int id;
-    long tripId = -1;
-    EditText description;
-    EditText destination;
-    int iconTag;
-    ImageView icon;
-    EditText startDate;
-    EditText time;
-    int participant;
-    Button cancel;
-    Button save;
-    Activity activity;
-    long featureId = -1;
-    Spinner currencySpinner;
-    ProgressDialog progressDialog;
+    private INewActivityPresenter presenter;
+    private DatePickerFragment datePicker;
+    private TimePickerFragment timePicker;
+    private ImageView iconBtn;
+    private EditText title;
+    private int id;
+    private long tripId = -1;
+    private EditText description;
+    private EditText destination;
+    private int iconTag;
+    private ImageView icon;
+    private EditText startDate;
+    private EditText time;
+    private int participant;
+    private Button cancel;
+    private Button save;
+    private Activity activity;
+    private long featureId = -1;
+    private Spinner currencySpinner;
+    private ProgressDialog progressDialog;
     private ImageButton currentImgBtn;
 
 
@@ -172,14 +159,14 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_save:
-                if(StringEscapeUtils.escapeJava(title.getText().toString()) != ""){
+                if(!StringEscapeUtils.escapeJava(title.getText().toString()).equals("")){
                     progressDialog = ProgressDialog.show(this, "",
                             "Bitte warten...", true);
                     // DEFAULT TEXT IF FIELDS ARE EMPTY
-                    if(StringEscapeUtils.escapeJava(description.getText().toString()) == ""){
+                    if(StringEscapeUtils.escapeJava(description.getText().toString()).equals("")){
                         description.setText("Keine Beschreibung");
                     }
-                    if(StringEscapeUtils.escapeJava(destination.getText().toString()) == ""){
+                    if(StringEscapeUtils.escapeJava(destination.getText().toString()).equals("")){
                         destination.setText("Kein Ort");
                     }
                     if(featureId!=-1){

@@ -1,7 +1,6 @@
 package de.traveltogether.expense;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +17,12 @@ import de.traveltogether.StaticTripData;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Payer;
 
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
-public class ExpenseAdapter extends BaseAdapter {
-    Expense[] expenses;
-    LayoutInflater inflater;
+class ExpenseAdapter extends BaseAdapter {
+    private Expense[] expenses;
+    private LayoutInflater inflater;
 
     public ExpenseAdapter(Context context, Expense[] _expenses) {
         inflater = LayoutInflater.from(context);

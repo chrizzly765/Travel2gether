@@ -4,6 +4,8 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.model.Response;
@@ -16,7 +18,7 @@ import de.traveltogether.servercommunication.JsonDecode;
  */
 public class NewTaskInteractor implements INewTaskInteractor {
 
-    INewTaskPresenter listener;
+    private INewTaskPresenter listener;
 
     @Override
     public void createTask(Task task, INewTaskPresenter _listener) {
@@ -35,7 +37,7 @@ public class NewTaskInteractor implements INewTaskInteractor {
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if(response.getError()=="false"){
+        if(response.getError().equals("false")){
             //long taskId = ((Task) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TASK)).getId();
             if (actionType == ActionType.ADD) {
                 listener.onSuccessCreate(response.getMessage());

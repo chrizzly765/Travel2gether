@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,7 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
 
     private TripAdapter adapter;
     private Trip[] trips;
-    View view;
+    private View view;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -65,10 +64,7 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
 
     public void onStart(){
         super.onStart();
-        if(trips==null || trips.length==0 ){
-            //TODO: show new trip listitem
-        }
-        else {
+        if(!(trips==null || trips.length==0) ){
             adapter = new TripAdapter(getActivity(), trips);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);

@@ -4,9 +4,10 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
-import de.traveltogether.StaticData;
 import de.traveltogether.model.PackingObject;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
@@ -18,7 +19,7 @@ import de.traveltogether.model.Response;
  */
 public class PackingListInteractor implements IPackingListInteractor {
 
-    IPackingListPresenter listener;
+    private IPackingListPresenter listener;
 
     @Override
     public void getPackingObjects(long tripId, IPackingListPresenter _listener) {
@@ -28,14 +29,14 @@ public class PackingListInteractor implements IPackingListInteractor {
             obj.put("tripId", tripId);
         }
         catch(Exception e){
-
+            Log.e(e.getClass().toString(), e.getMessage());
         }
         HttpRequest req = new HttpRequest(DataType.PACKINGOBJECT, ActionType.LIST, obj.toString(), this);
     }
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if(response.getError() == "true"){
+        if(response.getError().equals("true")){
             listener.onError(response.getMessage());
         }
         else{

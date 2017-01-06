@@ -2,7 +2,6 @@ package de.traveltogether.expense.detailexpense;
 
         import android.content.Context;
         import android.graphics.Color;
-        import android.support.v7.widget.RecyclerView;
         import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
@@ -12,20 +11,16 @@ package de.traveltogether.expense.detailexpense;
         import android.widget.ImageView;
         import android.widget.TextView;
 
-        import org.w3c.dom.Text;
-
         import de.traveltogether.R;
         import de.traveltogether.StaticData;
         import de.traveltogether.StaticTripData;
-        import de.traveltogether.model.Expense;
         import de.traveltogether.model.Payer;
 
         import java.text.DecimalFormat;
-        import java.util.List;
 
-public class ExpenseDetailAdapter extends BaseAdapter {
-    Payer[] payers;
-    LayoutInflater inflater;
+class ExpenseDetailAdapter extends BaseAdapter {
+    private Payer[] payers;
+    private LayoutInflater inflater;
 
     public ExpenseDetailAdapter(Context context, Payer[] _payers) {
         inflater = LayoutInflater.from(context);

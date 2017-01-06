@@ -6,8 +6,8 @@ import de.traveltogether.model.PackingObject;
  * Created by Anna-Lena on 12.05.2016.
  */
 public class NewPackingItemPresenter implements INewPackingItemPresenter {
-    NewPackingItemActivity view;
-    INewPackingItemInteractor interactor;
+    private NewPackingItemActivity view;
+    private INewPackingItemInteractor interactor;
 
     public NewPackingItemPresenter(NewPackingItemActivity _view){
         view = _view;

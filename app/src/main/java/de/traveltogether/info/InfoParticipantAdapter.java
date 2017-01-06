@@ -1,8 +1,6 @@
 package de.traveltogether.info;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +13,9 @@ import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.model.Participant;
 
-import java.util.List;
 
-
-public class InfoParticipantAdapter extends BaseAdapter {
-    Participant[] participants;
+class InfoParticipantAdapter extends BaseAdapter {
+    private Participant[] participants;
     private final LayoutInflater inflater;
 
     public InfoParticipantAdapter(Context context, Participant[] _participants) {

@@ -3,12 +3,9 @@ package de.traveltogether.tasks.newtask;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +21,7 @@ import android.widget.Toast;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
@@ -31,27 +29,25 @@ import de.traveltogether.StaticTripData;
 import de.traveltogether.datepicker.DatePickerFragment;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Task;
-import de.traveltogether.tasks.TaskListActivity;
-import de.traveltogether.tasks.detail.TaskDetailActivity;
 
 public class NewTaskActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener, View.OnClickListener {
 
-    INewTaskPresenter presenter;
-    TextView title;
-    TextView description;
-    TextView date;
-    Spinner assignedTo;
-    Spinner status;
-    Task task;
-    long tripId = -1;
-    long featureId = -1;
-    Participant[] participants;
-    ArrayList<String> participantNames;
-    int currentPersonId;
-    ProgressDialog progressDialog;
+    private INewTaskPresenter presenter;
+    private TextView title;
+    private TextView description;
+    private TextView date;
+    private Spinner assignedTo;
+    private Spinner status;
+    private Task task;
+    private long tripId = -1;
+    private long featureId = -1;
+    private Participant[] participants;
+    private ArrayList<String> participantNames;
+    private int currentPersonId;
+    private ProgressDialog progressDialog;
 
-    DatePickerFragment datePicker;
-    ImageButton clickedDatePickerBtn;
+    private DatePickerFragment datePicker;
+    private ImageButton clickedDatePickerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,12 +117,12 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_save:
-                if(StringEscapeUtils.escapeJava(title.getText().toString()) != ""){
+                if(!StringEscapeUtils.escapeJava(title.getText().toString()).equals("")){
                     progressDialog = ProgressDialog.show(this, "",
                             "Bitte warten...", true);
 
                     // DEFAULT TEXT IF FIELDS ARE EMPTY
-                    if(StringEscapeUtils.escapeJava(description.getText().toString()) == ""){
+                    if(StringEscapeUtils.escapeJava(description.getText().toString()).equals("")){
                         description.setText("Keine Beschreibung");
                     }
 
@@ -218,7 +214,7 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         dialog.show();
     }
 
-    public void onViewParticipants(Participant[] _participants){
+    private void onViewParticipants(Participant[] _participants){
 
         participants = _participants;
         participantNames = new ArrayList<>();
@@ -235,7 +231,7 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         currentPersonId = participants[0].getPersonId();
     }
 
-    public void onViewParticipants(Participant[] _participants, Task task){
+    private void onViewParticipants(Participant[] _participants, Task task){
 
         participants = _participants;
         participantNames = new ArrayList<>();

@@ -4,7 +4,7 @@ package de.traveltogether.model;
  * Created by Anna-Lena on 12.05.2016.
  */
 public class PackingItem {
-    long id;
+    private long id;
     private int personId;
     private boolean status = false;
     //private long id = 0;

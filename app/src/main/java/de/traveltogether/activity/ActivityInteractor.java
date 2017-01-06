@@ -4,12 +4,11 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
-import de.traveltogether.StaticData;
-import android.os.Bundle;
 import de.traveltogether.model.Activity;
-import de.traveltogether.model.Trip;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 import de.traveltogether.model.Response;
@@ -18,7 +17,7 @@ import de.traveltogether.model.Response;
  * Created by Anna-Lena on 28.07.2016.
  */
 public class ActivityInteractor implements IActivityInteractor {
-    IActivityPresenter listener;
+    private IActivityPresenter listener;
 
     @Override
     public void getFormerActivities(long tripId, IActivityPresenter _listener) {
@@ -36,7 +35,7 @@ public class ActivityInteractor implements IActivityInteractor {
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
 
-        if (response.getError() == "true") {
+        if (response.getError().equals("true")) {
             Log.e("Error in Interactor", response.getMessage());
             listener.onError(response.getMessage());
         } else {

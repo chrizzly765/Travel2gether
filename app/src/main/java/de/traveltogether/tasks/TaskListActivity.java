@@ -12,28 +12,23 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticTripData;
-import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Task;
 import de.traveltogether.tasks.newtask.NewTaskActivity;
 
 public class TaskListActivity extends AppCompatActivity implements View.OnClickListener {
 
-    long tripId;
-    ITaskListPresenter presenter;
-    ProgressDialog progressDialog;
-    TaskListFragment fragmentOpen;
-    TaskListFragment fragmentProgress;
-    TaskListFragment fragmentDone;
+    private long tripId;
+    private ITaskListPresenter presenter;
+    private ProgressDialog progressDialog;
+    private TaskListFragment fragmentOpen;
+    private TaskListFragment fragmentProgress;
+    private TaskListFragment fragmentDone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

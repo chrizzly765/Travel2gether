@@ -2,7 +2,6 @@ package de.traveltogether.servercommunication;
 
 import android.util.Log;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONObject;
 
 import de.traveltogether.ActionType;
@@ -20,7 +19,7 @@ public class HttpRequest  implements IHttpRequest{
     private String jsonString;
     private IInteractor listener;
 
-    public String getUrl() {
+    private String getUrl() {
         return "http://www.imagik.de/traveltogether/main.php";
     }
 

@@ -1,7 +1,6 @@
 package de.traveltogether.mainmenu;
 
 import android.app.AlertDialog;
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,11 +9,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,7 +19,6 @@ import android.widget.Toast;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 
-import de.traveltogether.dialog.progressdialog.ProgressDialogFragment;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import de.traveltogether.R;
@@ -31,34 +26,33 @@ import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.activity.ActivitiesActivity;
 import de.traveltogether.chat.ChatActivity;
-import de.traveltogether.date.DateFormat;
 import de.traveltogether.expense.ExpenseActivity;
 import de.traveltogether.info.InfoActivity;
 import de.traveltogether.model.Statistic;
 import de.traveltogether.model.Trip;
 import de.traveltogether.packinglist.PackingListActivity;
 import de.traveltogether.tasks.TaskListActivity;
-import de.traveltogether.time.TimeFormat;
-import de.traveltogether.triplist.TripListActivity;
+
 import 	java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    long tripId;
-    String title;
+    private long tripId;
+    private String title;
     //TextView groupText;
-    TextView personalText;
-    TextView startDateText;
-    int adminId;
-    IMainMenuPresenter presenter;
-    ProgressDialog progressDialog;
-    AnimationDrawable groupStatisticAnimation;
-    AnimationDrawable personalStatisticAnimation;
-    Statistic statistic;
-    Trip trip;
-    ImageView groupAnimationContainer;
-    ImageView personalAnimationContainer;
-    static int SECONDS_IN_A_DAY = 24 * 60 * 60;
+    private TextView personalText;
+    private TextView startDateText;
+    private int adminId;
+    private IMainMenuPresenter presenter;
+    private ProgressDialog progressDialog;
+    private AnimationDrawable groupStatisticAnimation;
+    private AnimationDrawable personalStatisticAnimation;
+    private Statistic statistic;
+    private Trip trip;
+    private ImageView groupAnimationContainer;
+    private ImageView personalAnimationContainer;
+    private static int SECONDS_IN_A_DAY = 24 * 60 * 60;
     //TextView startDateText;
 
     @Override
@@ -74,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             adminId = b.getInt("adminId");
                 setActionBar(title);
         }
-        if(title==""){
+        if(title.equals("")){
             presenter.onGetTitleForTrip(tripId);
         }
 
@@ -121,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         presenter.onGetStatistics(tripId,StaticData.getUserId());
     }
 
-    public void setActionBar(String heading) {
+    private  void setActionBar(String heading) {
         ActionBar actionBar = getSupportActionBar();
         //actionBar.setHomeButtonEnabled(true);
         actionBar.setTitle(StringEscapeUtils.unescapeJava(heading));
@@ -241,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         progressDialog.cancel();
     }
 
-    public String getCountdown (String startDate) {
+    private  String getCountdown (String startDate) {
         String minutesString;
         String hoursString;
         String daysString;
@@ -254,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String countdown = "";
         countdown = "00:00:00";
 
-        if (_year != 0000) {
+        if (_year != 0) {
 
             Calendar thatDay = Calendar.getInstance();
             thatDay.setTime(new Date(0));
@@ -335,19 +329,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return countdown;
     }
 
-    public String getCountdownDays (String countdown) {
+    private  String getCountdownDays (String countdown) {
         String[] parts = countdown.split(":");
         String days = parts[0];
         return days;
     }
 
-    public String getCountdownHours (String countdown) {
+    private  String getCountdownHours (String countdown) {
         String[] parts = countdown.split(":");
         String hours = parts[1];
         return ":   " + hours + "   :";
     }
 
-    public String getCountdownMinutes (String countdown) {
+    private  String getCountdownMinutes (String countdown) {
         String[] parts = countdown.split(":");
         String minutes = parts[2];
         return minutes;

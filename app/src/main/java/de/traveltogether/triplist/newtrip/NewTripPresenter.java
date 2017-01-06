@@ -7,7 +7,7 @@ import de.traveltogether.model.Trip;
  */
 public class NewTripPresenter implements INewTripPresenter {
     private NewTripActivity view;
-    INewTripInteractor interactor;
+    private INewTripInteractor interactor;
     public NewTripPresenter(NewTripActivity _view){
         view = _view;
         interactor = new NewTripInteractor();

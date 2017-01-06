@@ -1,14 +1,10 @@
 package de.traveltogether.mainmenu;
 
-import de.traveltogether.model.Participant;
 import de.traveltogether.model.Statistic;
-import de.traveltogether.model.Trip;
 
-/**
- * Created by Anna-Lena on 12.05.2016.
- */
-public interface IMainMenuPresenter {
-    public void onDeleteTrip(Long tripId);
+
+interface IMainMenuPresenter {
+     void onDeleteTrip(Long tripId);
     void onError(String message);
     void onSuccessDeletingTrip();
     void onLeaveTrip(long tripId, String userId);

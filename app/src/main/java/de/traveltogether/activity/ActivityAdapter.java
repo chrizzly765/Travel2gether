@@ -2,7 +2,6 @@ package de.traveltogether.activity;
 
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +10,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import android.graphics.BitmapFactory;
-
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import de.traveltogether.R;
 import de.traveltogether.date.DateFormat;
 import de.traveltogether.model.Activity;
-import de.traveltogether.model.Trip;
 import de.traveltogether.time.TimeFormat;
 
 
-public class ActivityAdapter extends BaseAdapter  {
+class ActivityAdapter extends BaseAdapter  {
     private Activity[] formerActivities;
     private final LayoutInflater inflater;
 

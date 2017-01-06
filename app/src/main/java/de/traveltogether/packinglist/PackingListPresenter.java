@@ -8,8 +8,8 @@ import android.util.Log;
  */
 public class PackingListPresenter implements IPackingListPresenter {
 
-    PackingListActivity view;
-    IPackingListInteractor interactor;
+    private PackingListActivity view;
+    private IPackingListInteractor interactor;
 
     public PackingListPresenter(PackingListActivity _view){
         view = _view;

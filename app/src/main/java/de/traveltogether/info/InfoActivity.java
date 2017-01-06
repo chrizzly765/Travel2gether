@@ -4,20 +4,15 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,29 +20,24 @@ import android.widget.Toast;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.dialog.DeleteActivity;
 import de.traveltogether.invitation.InvitationActivity;
-import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Trip;
-import de.traveltogether.triplist.TripListActivity;
-import de.traveltogether.triplist.TripListFragment;
 import de.traveltogether.triplist.newtrip.NewTripActivity;
 
 public class InfoActivity extends DeleteActivity implements View.OnClickListener {
-    IInfoPresenter presenter;
-    long tripId;
-    Trip trip;
-    ProgressDialog progressDialog;
-    InfoListFragment activeFragment;
-    InfoListFragment resignedFragment;
-    InfoListFragment invitedFragment;
+    private IInfoPresenter presenter;
+    private long tripId;
+    private Trip trip;
+    private ProgressDialog progressDialog;
+    private InfoListFragment activeFragment;
+    private InfoListFragment resignedFragment;
+    private InfoListFragment invitedFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

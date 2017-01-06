@@ -4,8 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 
 
 public class LoginPresenter implements ILoginPresenter {
-    protected LoginActivity view;
-    protected ILoginInteractor interactor;
+    private  LoginActivity view;
+    private  ILoginInteractor interactor;
     LoginPresenter(LoginActivity _view){
         view = _view;
         interactor = new LoginInteractor();

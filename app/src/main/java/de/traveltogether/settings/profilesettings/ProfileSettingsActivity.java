@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,16 +27,16 @@ import de.traveltogether.servercommunication.HashFactory;
 import static de.traveltogether.servercommunication.HashFactory.hashPassword;
 
 public class ProfileSettingsActivity extends AppCompatActivity {
-    IProfileSettingsPresenter presenter;
-    ProgressDialog progressDialog;
-    Menu optionsMenu;
-    TextView email;
-    TextView name;
-    TextView errorText;
-    String salt;
-    String newHash;
-    View passwordDialogView;
-    AlertDialog passwordDialog;
+    private IProfileSettingsPresenter presenter;
+    private ProgressDialog progressDialog;
+    private Menu optionsMenu;
+    private TextView email;
+    private TextView name;
+    private TextView errorText;
+    private String salt;
+    private String newHash;
+    private View passwordDialogView;
+    private AlertDialog passwordDialog;
 
 
     @Override

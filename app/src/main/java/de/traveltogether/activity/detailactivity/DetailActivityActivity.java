@@ -28,15 +28,15 @@ import de.traveltogether.model.Activity;
 //import de.traveltogether.triplist.newtrip.NewTripActivity;
 
 public class DetailActivityActivity extends DeleteActivity {
-    long featureId =-1;
-    long tripId =-1;
-    IDetailActivityPresenter presenter;
-    TextView title;
-    TextView description;
-    TextView date;
-    TextView time;
-    TextView place;
-    ProgressDialog progressDialog;
+    private long featureId =-1;
+    private long tripId =-1;
+    private IDetailActivityPresenter presenter;
+    private TextView title;
+    private TextView description;
+    private TextView date;
+    private TextView time;
+    private TextView place;
+    private ProgressDialog progressDialog;
 
 
     Activity detailActivity;

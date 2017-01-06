@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
@@ -29,13 +28,13 @@ import de.traveltogether.model.Comment;
  * A simple {@link android.app.Fragment} subclass.
  */
 public class ChatFragment extends Fragment implements View.OnClickListener, ICommentView {
-    long id;
-    ICommentPresenter presenter;
-    Comment[] comments;
-    EditText inputField;
-    ProgressDialog progressDialog;
-    CommentListFragment chatFragment;
-    View view;
+    private long id;
+    private ICommentPresenter presenter;
+    private Comment[] comments;
+    private EditText inputField;
+    private ProgressDialog progressDialog;
+    private CommentListFragment chatFragment;
+    private View view;
 
     public ChatFragment () {
         // Required empty public constructor

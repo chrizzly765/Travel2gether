@@ -1,7 +1,5 @@
 package de.traveltogether.expense.newexpense;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.view.LayoutInflater;
@@ -9,11 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import de.traveltogether.R;
-import de.traveltogether.model.Participant;
 import de.traveltogether.model.Payer;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -22,7 +18,7 @@ public class ParticipantSelectionListFragment extends ListFragment {
 
     private ParticipantSelectionListAdapter adapter;
     private Payer[] payer;
-    View view;
+    private View view;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -88,10 +84,7 @@ public class ParticipantSelectionListFragment extends ListFragment {
 
     public void onStart(){
         super.onStart();
-        if(payer==null || payer.length==0 ){
-            //TODO: show new trip listitem
-        }
-        else {
+        if(!(payer==null || payer.length==0 )){
             adapter = new ParticipantSelectionListAdapter(getActivity(), payer);
             setListAdapter(adapter);
             ViewGroup vg = getListView();

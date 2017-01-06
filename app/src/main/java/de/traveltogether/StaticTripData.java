@@ -10,7 +10,7 @@ import de.traveltogether.participantlist.ParticipantState;
  */
 public class StaticTripData {
     static private Participant[] participants;
-    static long currentTripId;
+    private static long currentTripId;
     static private StaticInteractor interactor = new StaticInteractor();
 
     static public Participant[] getAllParticipants(){

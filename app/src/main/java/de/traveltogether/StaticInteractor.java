@@ -27,6 +27,7 @@ public class StaticInteractor implements IInteractor {
             HttpRequest request = new HttpRequest(DataType.TRIP, ActionType.GETPARTICIPANTS, obj.toString(), this);
         }
         catch (Exception e){
+            Log.e(e.getClass().toString(), e.getMessage());
         }
     }
 

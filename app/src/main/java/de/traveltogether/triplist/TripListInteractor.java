@@ -1,14 +1,14 @@
 package de.traveltogether.triplist;
 
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.StaticData;
-import de.traveltogether.model.Expense;
 import de.traveltogether.model.Trip;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
@@ -18,7 +18,7 @@ import de.traveltogether.model.Response;
  * Created by Anna-Lena on 12.05.2016.
  */
 public class TripListInteractor implements ITripListInteractor {
-    ITripListPresenter listener;
+    private ITripListPresenter listener;
 
     @Override
     public void getTrips(ITripListPresenter _listener) {
@@ -28,7 +28,7 @@ public class TripListInteractor implements ITripListInteractor {
             obj.put("personId", StaticData.getUserId());
         }
         catch(Exception e){
-
+            Log.e(e.getClass().toString(), e.getMessage());
         }
         HttpRequest req = new HttpRequest(DataType.TRIP, ActionType.LIST, obj.toString(), this);
     }
@@ -42,14 +42,14 @@ public class TripListInteractor implements ITripListInteractor {
             obj.put("personId", StaticData.getUserId());
         }
         catch(Exception e){
-
+            Log.e(e.getClass().toString(), e.getMessage());
         }
         HttpRequest req = new HttpRequest(DataType.NOTIFICATION, ActionType.GETNOTICOUNT, obj.toString(), this);
 
     }
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if(response.getError() == "true"){
+        if(response.getError().equals("true")){
             listener.onError(response.getMessage());
         }
         else {

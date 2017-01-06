@@ -1,13 +1,10 @@
 package de.traveltogether.packinglist.packingdetail;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,12 +14,10 @@ import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.model.PackingItem;
 
-import java.util.List;
+class PackingDetailAdapter extends BaseAdapter {
 
-public class PackingDetailAdapter extends BaseAdapter {
-
-    PackingItem[] items;
-    LayoutInflater inflater;
+    private PackingItem[] items;
+    private LayoutInflater inflater;
 
     public PackingDetailAdapter(Context context, PackingItem[] _items) {
         inflater = LayoutInflater.from(context);

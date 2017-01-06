@@ -4,7 +4,7 @@ package de.traveltogether.time;
  * Created by Isa on 07.10.2016.
  */
 public class TimeFormat {
-    static TimeFormat instance;
+    private static TimeFormat instance;
 
     public static TimeFormat getInstance(){
         if(instance != null){
@@ -16,7 +16,7 @@ public class TimeFormat {
         }
     }
 
-    public TimeFormat(){
+    private TimeFormat(){
         instance = this;
     }
 

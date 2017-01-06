@@ -4,14 +4,14 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Response;
 import de.traveltogether.model.Task;
-import de.traveltogether.packinglist.packingdetail.IPackingDetailPresenter;
-import de.traveltogether.packinglist.packingdetail.PackingDetailInteractor;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
@@ -20,10 +20,10 @@ import de.traveltogether.servercommunication.JsonDecode;
  */
 public class TaskDetailInteractor implements ITaskDetailInteractor {
 
-    ITaskDetailPresenter listener;
+    private ITaskDetailPresenter listener;
 
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if(response.getError()!="true"){
+        if(!response.getError().equals("true")){
             if(actionType == ActionType.DELETE){
                 listener.onSuccessDelete();
             }

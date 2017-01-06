@@ -1,16 +1,8 @@
 package de.traveltogether.activity.newactivity;
 
-import android.widget.ImageView;
-
-import java.text.SimpleDateFormat;
-import java.util.SimpleTimeZone;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
-import de.traveltogether.activity.detailactivity.IDetailActivityPresenter;
 import de.traveltogether.model.Activity;
-import de.traveltogether.model.Trip;
-import de.traveltogether.model.Participant;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 import de.traveltogether.model.Response;
@@ -19,11 +11,11 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-/**
- * Created by Isa on 13.08.2016.
- */
+import java.util.Objects;
+
+
 public class NewActivityInteractor implements INewActivityInteractor {
-    INewActivityPresenter listener;
+    private  INewActivityPresenter listener;
 
     @Override
     public void createActivity(long tripId, Activity activity, INewActivityPresenter _listener) {
@@ -67,7 +59,7 @@ public class NewActivityInteractor implements INewActivityInteractor {
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
 
-        if (response.getError() == "false") {
+        if (response.getError().equals("false")) {
             if (dataType == DataType.ACTIVITY && actionType == ActionType.ADD) {
                 listener.onSuccessAddingActivity();
             } else if (dataType == DataType.ACTIVITY && actionType == ActionType.DETAIL) {

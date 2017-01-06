@@ -4,8 +4,7 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
@@ -19,7 +18,7 @@ import de.traveltogether.servercommunication.JsonDecode;
  * Created by Anna-Lena on 16.05.2016.
  */
 public class NotificationInteractor implements INotificationInteractor {
-    INotificationPresenter listener;
+    private INotificationPresenter listener;
 
 
     @Override
@@ -70,7 +69,7 @@ public class NotificationInteractor implements INotificationInteractor {
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if(response.getError()=="true"){
+        if(response.getError().equals("true")){
             listener.onError(response.getMessage());
         }
         else{

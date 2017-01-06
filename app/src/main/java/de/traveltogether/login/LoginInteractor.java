@@ -115,12 +115,10 @@ import static de.traveltogether.servercommunication.HashFactory.hashPassword;
                     userId = json.getInt("personId");
 
                 } catch (Exception e) {
-                    //TODO:ask explicitly for personId?
                     Log.d("Error: ", e.getMessage());
                 }
 
                 SharedPreferences sharedPref = listener.getView().getSharedPreferences("TravelTogetherPrefs", Context.MODE_PRIVATE);
-                //SharedPreferences sharedPref = listener.getView().getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString(listener.getView().getString(R.string.saved_hash), hash);
                 if (userId != -1) {
@@ -129,12 +127,10 @@ import static de.traveltogether.servercommunication.HashFactory.hashPassword;
                 } else {
                     listener.onError("Fehler beim Anmelden. Bitte versuche es erneut.");//TODO: String Ersetzen
                 }
-                //editor.apply();
                 boolean saved = editor.commit();
                 listener.onSuccess(response.getMessage());
             } else if (dataType == DataType.PERSON && actionType == ActionType.UPDATEDEVICEID) {
                 Log.d("LoginInteractor", "DeviceId updated");
-                //TODO: do we have to do something?
             }
             else if (dataType == DataType.PERSON && actionType == ActionType.FORGOTPASSWORD){
                 listener.onSuccessForgotPassword();

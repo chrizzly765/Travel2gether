@@ -1,16 +1,11 @@
 package de.traveltogether.expense.newexpense;
 
-import de.traveltogether.expense.detailexpense.ExpenseDetailPresenter;
-import de.traveltogether.expense.detailexpense.IExpenseDetailPresenter;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
 
-/**
- * Created by Anna-Lena on 12.05.2016.
- */
 public class NewExpensePresenter implements INewExpensePresenter {
-    NewExpenseActivity view;
-    INewExpenseInteractor interactor;
+    private NewExpenseActivity view;
+    private INewExpenseInteractor interactor;
 
     public NewExpensePresenter (NewExpenseActivity _view){
         view= _view;

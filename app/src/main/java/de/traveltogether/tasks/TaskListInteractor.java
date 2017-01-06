@@ -3,9 +3,11 @@ package de.traveltogether.tasks;
 import android.util.Log;
 
 import org.json.JSONObject;
+
+import java.util.Objects;
+
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
-import de.traveltogether.StaticData;
 import de.traveltogether.model.Response;
 import de.traveltogether.model.Task;
 import de.traveltogether.servercommunication.HttpRequest;
@@ -16,7 +18,7 @@ import de.traveltogether.servercommunication.JsonDecode;
  */
 public class TaskListInteractor implements ITaskListInteractor {
 
-    ITaskListPresenter listener;
+    private ITaskListPresenter listener;
 
     @Override
     public void getTasks(Long tripId, ITaskListPresenter _listener) {
@@ -26,14 +28,14 @@ public class TaskListInteractor implements ITaskListInteractor {
             obj.put("tripId", tripId);
         }
         catch(Exception e){
-
+            Log.e(e.getClass().toString(), e.getMessage());
         }
         HttpRequest req = new HttpRequest(DataType.TASK, ActionType.LIST, obj.toString(), this);
     }
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if(response.getError() == "true"){
+        if(response.getError().equals("true")){
             listener.onError(response.getMessage());
         }
         else{

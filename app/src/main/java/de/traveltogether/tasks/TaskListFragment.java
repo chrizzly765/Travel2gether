@@ -5,24 +5,20 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import de.traveltogether.R;
-import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Task;
 import de.traveltogether.tasks.detail.TaskDetailActivity;
-
-import java.util.List;
 
 public class TaskListFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
     private TaskAdapter adapter;
     private Task[] tasks;
-    View view;
+    private View view;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -54,10 +50,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
     public void onStart(){
         super.onStart();
-        if(tasks==null || tasks.length==0 ){
-            //TODO: show new task listitem
-        }
-        else {
+        if(!(tasks==null || tasks.length==0) ){
             adapter = new TaskAdapter(getActivity(), tasks);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);

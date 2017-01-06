@@ -1,24 +1,18 @@
 package de.traveltogether.expense;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import de.traveltogether.R;
-import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
-
-import java.util.List;
 
 
 public class ExpenseParticipantFragment extends ListFragment{
-    Participant[] participants;
-    ExpenseParticipantAdapter adapter;
+    private Participant[] participants;
+    private ExpenseParticipantAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the

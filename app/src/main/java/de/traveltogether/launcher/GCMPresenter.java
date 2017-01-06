@@ -5,8 +5,8 @@ package de.traveltogether.launcher;
  */
 
 public class GCMPresenter implements IGCMPresenter {
-    LauncherActivity view;
-    IGCMInteractor interactor;
+    private LauncherActivity view;
+    private IGCMInteractor interactor;
     public GCMPresenter (LauncherActivity activity) {
         view = activity;
         interactor = new GCMInteractor();

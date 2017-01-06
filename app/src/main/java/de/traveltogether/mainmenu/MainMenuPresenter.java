@@ -1,15 +1,13 @@
 package de.traveltogether.mainmenu;
 
-import de.traveltogether.model.Participant;
 import de.traveltogether.model.Statistic;
-import de.traveltogether.model.Trip;
 
 /**
  * Created by Anna-Lena on 12.05.2016.
  */
 public class MainMenuPresenter implements IMainMenuPresenter {
-    MainActivity view;
-    IMainMenuInteractor interactor;
+    private MainActivity view;
+    private IMainMenuInteractor interactor;
 
     public MainMenuPresenter(MainActivity _view){
         view=_view;

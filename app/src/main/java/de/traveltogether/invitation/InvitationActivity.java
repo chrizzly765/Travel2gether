@@ -5,32 +5,22 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import de.traveltogether.R;
-import de.traveltogether.StaticData;
-import de.traveltogether.info.InfoActivity;
-import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Person;
-import de.traveltogether.triplist.TripListActivity;
-
-import static android.content.Intent.createChooser;
 
 public class InvitationActivity extends AppCompatActivity{
 
-    IInvitePresenter presenter;
-    Person[] formerParticipants;
-    long tripId;
-    String formerActivity;
-    InvitationFragment fragment;
+    private IInvitePresenter presenter;
+    private Person[] formerParticipants;
+    private long tripId;
+    private String formerActivity;
+    private InvitationFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

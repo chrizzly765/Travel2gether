@@ -1,11 +1,6 @@
 package de.traveltogether.activity.newactivity;
 
-import android.widget.ImageView;
-
-import java.text.SimpleDateFormat;
-
 import de.traveltogether.model.Activity;
-import de.traveltogether.model.Participant;
 
 /**
  * Created by Isa on 13.08.2016.

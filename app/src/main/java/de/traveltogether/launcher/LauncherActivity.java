@@ -1,6 +1,5 @@
 package de.traveltogether.launcher;
 
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -10,16 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.util.Objects;
+
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.gcm.GCMRegistrationIntentService;
-import de.traveltogether.login.ILoginPresenter;
 import de.traveltogether.login.LoginActivity;
-import de.traveltogether.login.LoginPresenter;
 import de.traveltogether.notification.NotificationActivity;
 import de.traveltogether.triplist.TripListActivity;
-
-import static de.traveltogether.servercommunication.HashFactory.hashPassword;
 
 public class LauncherActivity extends AppCompatActivity {
 
@@ -37,7 +34,7 @@ public class LauncherActivity extends AppCompatActivity {
         //SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         String hash = "";
         hash = sharedPref.getString(getString(R.string.saved_hash), "");
-        if(hash != ""){
+        if(!hash.equals("")){
             int userId;
             /*SharedPreferences.Editor editor = sharedPref.edit();
             editor.remove(getString(R.string.saved_user_id));

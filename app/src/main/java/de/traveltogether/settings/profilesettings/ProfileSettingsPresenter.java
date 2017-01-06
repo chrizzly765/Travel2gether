@@ -7,8 +7,8 @@ import de.traveltogether.model.Person;
  */
 
 public class ProfileSettingsPresenter implements IProfileSettingsPresenter {
-    ProfileSettingsActivity view;
-    IProfileSettingsInteractor interactor;
+    private ProfileSettingsActivity view;
+    private IProfileSettingsInteractor interactor;
     public ProfileSettingsPresenter(ProfileSettingsActivity activity){
         view=activity;
         interactor = new ProfileSettingsInteractor();

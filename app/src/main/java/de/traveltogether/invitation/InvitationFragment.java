@@ -21,10 +21,10 @@ import static android.content.Intent.createChooser;
 */
 public class InvitationFragment extends ListFragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
-    Person[] formerParticipants;
-    InvitationAdapter adapter;
-    View view;
-    IInvitePresenter presenter;
+    private Person[] formerParticipants;
+    private InvitationAdapter adapter;
+    private View view;
+    private IInvitePresenter presenter;
     long tripId;
 
     public InvitationFragment() {

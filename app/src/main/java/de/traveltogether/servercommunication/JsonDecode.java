@@ -5,12 +5,10 @@ import com.google.gson.Gson;
 
 import de.traveltogether.DataType;
 
-/**
- * Created by Anna-Lena on 16.05.2016.
- */
+
 public class JsonDecode {
     private static JsonDecode instance;
-    Gson gson;
+    private Gson gson;
 
     public static JsonDecode getInstance(){
         if(instance ==null){
@@ -19,7 +17,7 @@ public class JsonDecode {
         return instance;
     }
 
-    public JsonDecode() {
+    private JsonDecode() {
         gson = new Gson();
     }
 
@@ -28,7 +26,7 @@ public class JsonDecode {
      * @param str json string
      * @param type DataType which has same name as class in which it should be converted
      * @param <T> the resulting object type
-     * @return
+     * @return object of type t
      */
     public <T> T jsonToClass(String str, DataType type){
 

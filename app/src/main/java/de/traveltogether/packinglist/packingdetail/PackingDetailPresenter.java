@@ -3,12 +3,10 @@ package de.traveltogether.packinglist.packingdetail;
 import de.traveltogether.model.PackingItem;
 import de.traveltogether.model.PackingObject;
 
-/**
- * Created by Maria Dreher on 07.10.2016.
- */
+
 public class PackingDetailPresenter implements IPackingDetailPresenter{
-    PackingDetailActivity view;
-    IPackingDetailInteractor interactor;
+    private PackingDetailActivity view;
+    private IPackingDetailInteractor interactor;
 
     public PackingDetailPresenter(PackingDetailActivity _view){
         view = _view;

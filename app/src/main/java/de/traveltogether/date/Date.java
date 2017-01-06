@@ -1,7 +1,5 @@
 package de.traveltogether.date;
 
-import android.util.Log;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 

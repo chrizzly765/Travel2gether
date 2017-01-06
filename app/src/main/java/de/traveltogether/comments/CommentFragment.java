@@ -3,20 +3,14 @@ package de.traveltogether.comments;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ListFragment;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
@@ -24,15 +18,12 @@ import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.model.Comment;
 
-/**
- * A simple {@link android.app.Fragment} subclass.
- */
 public class CommentFragment extends Fragment implements View.OnClickListener, ICommentView {
-    long id;
-    ICommentPresenter presenter;
-    Comment[] comments;
-    EditText inputField;
-    CommentListFragment fragment;
+    private long id;
+    private ICommentPresenter presenter;
+    private Comment[] comments;
+    private EditText inputField;
+    private CommentListFragment fragment;
 
     public CommentFragment() {
         // Required empty public constructor

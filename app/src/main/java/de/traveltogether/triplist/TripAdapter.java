@@ -1,7 +1,6 @@
 package de.traveltogether.triplist;
 
 import android.content.Context;
-import android.provider.Telephony;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -17,14 +15,10 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.date.DateFormat;
-import de.traveltogether.model.Participant;
 import de.traveltogether.model.ParticipantShort;
 import de.traveltogether.model.Trip;
 
-/**
- * Created by Anna-Lena on 12.06.2016.
- */
-public class TripAdapter extends BaseAdapter {
+class TripAdapter extends BaseAdapter {
     private Trip[] tripList;
     private final LayoutInflater inflater;
 

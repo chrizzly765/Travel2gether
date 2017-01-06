@@ -1,9 +1,6 @@
 package de.traveltogether.time;
 
-/**
- * Created by Isa on 07.10.2016.
- */
-public class Time {
+class Time {
     int hour;
     int minute;
     int second;

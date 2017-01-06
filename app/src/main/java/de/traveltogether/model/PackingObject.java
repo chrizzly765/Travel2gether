@@ -9,9 +9,9 @@ import java.util.List;
 public class PackingObject extends AbstractListObject {
 
     //protected String category = "";
-    protected int number;
-    protected int itemsPacked;
-    protected int[] personsAssigned;
+    private int number;
+    private int itemsPacked;
+    private int[] personsAssigned;
     private List<PackingItem> items = new ArrayList<PackingItem>();
 
     public int getPackingItemsNumber(){

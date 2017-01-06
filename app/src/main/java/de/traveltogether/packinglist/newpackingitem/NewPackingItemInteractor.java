@@ -4,6 +4,8 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.model.PackingObject;
@@ -15,7 +17,7 @@ import de.traveltogether.servercommunication.JsonDecode;
  * Created by Anna-Lena on 12.05.2016.
  */
 public class NewPackingItemInteractor implements INewPackingItemInteractor {
-    INewPackingItemPresenter listener;
+    private INewPackingItemPresenter listener;
 
     @Override
     public void createPackingObject(PackingObject packingObject, INewPackingItemPresenter _listener) {
@@ -44,7 +46,7 @@ public class NewPackingItemInteractor implements INewPackingItemInteractor {
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if(response.getError() == "true"){
+        if(response.getError().equals("true")){
             listener.onError(response.getMessage(), response.getMessage());
         }
         else{

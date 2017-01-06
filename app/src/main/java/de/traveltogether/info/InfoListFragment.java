@@ -1,12 +1,7 @@
 package de.traveltogether.info;
 
 import android.app.ListFragment;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +9,9 @@ import android.view.ViewGroup;
 import de.traveltogether.R;
 import de.traveltogether.model.Participant;
 
-import java.util.List;
-
 public class InfoListFragment extends ListFragment {
-    InfoParticipantAdapter adapter;
-    Participant[] participants;
+    private InfoParticipantAdapter adapter;
+    private Participant[] participants;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the

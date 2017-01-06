@@ -4,6 +4,8 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.model.Expense;
@@ -16,7 +18,7 @@ import de.traveltogether.servercommunication.JsonDecode;
  * Created by Anna-Lena on 12.05.2016.
  */
 public class NewExpenseInteractor implements INewExpenseInteractor {
-    INewExpensePresenter listener;
+    private INewExpensePresenter listener;
 
     @Override
     public void getParticipantsForTrip(long tripId, INewExpensePresenter _listener) {
@@ -65,7 +67,7 @@ public class NewExpenseInteractor implements INewExpenseInteractor {
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if (response.getError() == "false") {
+        if (response.getError().equals("false")) {
             if (dataType == DataType.TRIP && actionType == ActionType.GETPARTICIPANTS) {
                 Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
                 listener.onSuccessGetParticipants(participants);

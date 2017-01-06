@@ -1,7 +1,6 @@
 package de.traveltogether.packinglist.newpackingitem;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +14,8 @@ import de.traveltogether.StaticTripData;
 import de.traveltogether.model.PackingItem;
 
 import java.text.DecimalFormat;
-import java.util.List;
 
-public class PackingItemSelectionAdapter extends BaseAdapter {
+class PackingItemSelectionAdapter extends BaseAdapter {
     private PackingItem[] packingItems;
     private final LayoutInflater inflater;
 

@@ -4,14 +4,11 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -21,9 +18,7 @@ import android.widget.Toast;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.util.ArrayList;
-
-
-
+import java.util.Objects;
 
 
 import de.traveltogether.StaticData;
@@ -32,25 +27,23 @@ import de.traveltogether.StaticTripData;
 import de.traveltogether.model.PackingItem;
 import de.traveltogether.model.PackingObject;
 import de.traveltogether.model.Participant;
-import de.traveltogether.packinglist.PackingListActivity;
-import de.traveltogether.packinglist.packingdetail.PackingDetailActivity;
 
 public class NewPackingItemActivity extends AppCompatActivity implements View.OnClickListener {
 
-    INewPackingItemPresenter presenter;
-    EditText title;
-    EditText number;
-    EditText description;
-    long tripId = -1;
-    long featureId =-1;
-    Participant[] participants;
-    String[] participantNames;
-    ArrayList<Integer> chosenIds = new ArrayList<Integer>();
-    ArrayList<PackingItem> chosenParticipants;
-    PackingObject packingObject;
-    ImageButton addButton;
-    PackingItemSelectionFragment fragment;
-    ProgressDialog progressDialog;
+    private INewPackingItemPresenter presenter;
+    private EditText title;
+    private EditText number;
+    private EditText description;
+    private long tripId = -1;
+    private long featureId =-1;
+    private Participant[] participants;
+    private String[] participantNames;
+    private ArrayList<Integer> chosenIds = new ArrayList<Integer>();
+    private ArrayList<PackingItem> chosenParticipants;
+    private PackingObject packingObject;
+    private ImageButton addButton;
+    private PackingItemSelectionFragment fragment;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,16 +106,16 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_save:
-                if(StringEscapeUtils.escapeJava(title.getText().toString()) != ""){
+                if(!StringEscapeUtils.escapeJava(title.getText().toString()).equals("")){
                     progressDialog = ProgressDialog.show(this, "",
                             "Bitte warten...", true);
 
                     // DEFAULT TEXT IF FIELDS ARE EMPTY
-                    if(StringEscapeUtils.escapeJava(description.getText().toString()) == ""){
+                    if(StringEscapeUtils.escapeJava(description.getText().toString()).equals("")){
                         description.setText("Keine Beschreibung");
                     }
 
-                    if(StringEscapeUtils.escapeJava(number.getText().toString()) == ""){
+                    if(StringEscapeUtils.escapeJava(number.getText().toString()).equals("")){
                         number.setText("1");
                     }
                     if(chosenParticipants.size() > Integer.parseInt(number.getText().toString())){

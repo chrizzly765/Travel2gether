@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.StaticData;
-import de.traveltogether.login.ILoginPresenter;
 import de.traveltogether.model.Response;
 import de.traveltogether.servercommunication.HttpRequest;
 
@@ -14,7 +13,7 @@ import de.traveltogether.servercommunication.HttpRequest;
  */
 
 public class GCMInteractor implements IGCMInteractor {
-    IGCMPresenter listener;
+    private IGCMPresenter listener;
     @Override
     public void updateToken(String token, IGCMPresenter _listener) {
         try {

@@ -6,9 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,9 +22,7 @@ import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.date.Date;
 import de.traveltogether.dialog.DeleteActivity;
-import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Task;
-import de.traveltogether.tasks.TaskListActivity;
 import de.traveltogether.tasks.newtask.NewTaskActivity;
 
 public class TaskDetailActivity extends DeleteActivity {
@@ -48,7 +44,7 @@ public class TaskDetailActivity extends DeleteActivity {
     private long tripId;
 
     private ITaskDetailPresenter presenter;
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

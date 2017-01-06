@@ -17,10 +17,8 @@ import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.model.Comment;
 
-/**
- * Created by Anna-Lena on 12.06.2016.
- */
-public class CommentAdapter extends BaseAdapter {
+
+class CommentAdapter extends BaseAdapter {
     private Comment[] comments;
     private final LayoutInflater inflater;
 

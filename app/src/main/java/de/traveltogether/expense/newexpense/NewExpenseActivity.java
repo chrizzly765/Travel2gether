@@ -1,14 +1,11 @@
 package de.traveltogether.expense.newexpense;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ListFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,51 +16,42 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.w3c.dom.Text;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
-import de.traveltogether.expense.ExpenseActivity;
-import de.traveltogether.expense.detailexpense.ExpenseDetailActivity;
-import de.traveltogether.expense.detailexpense.ExpenseDetailPresenter;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Payer;
-import de.traveltogether.notification.NotificationActivity;
-import de.traveltogether.settings.SettingsActivity;
 
 public class NewExpenseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener{
 
-    INewExpensePresenter presenter;
-    EditText title;
-    EditText amount;
-    EditText description;
-    Spinner currencySpinner;
-    Spinner payedBySpinner;
-    int currentPayerId;
-    ImageButton addButton;
-    long tripId;
-    long featureId;
-    Participant[] participants;
-    String[] participantNames;
-    ArrayList<Integer> chosenIds = new ArrayList<Integer>();
-    ArrayList<Payer> chosenParticipants;
-    ProgressDialog progressDialog;
-    Switch shareEvenlySwitch;
-    ParticipantSelectionListFragment fragment;
-    Expense expense;
+    private INewExpensePresenter presenter;
+    private EditText title;
+    private EditText amount;
+    private EditText description;
+    private Spinner currencySpinner;
+    private Spinner payedBySpinner;
+    private int currentPayerId;
+    private ImageButton addButton;
+    private long tripId;
+    private long featureId;
+    private Participant[] participants;
+    private String[] participantNames;
+    private ArrayList<Integer> chosenIds = new ArrayList<Integer>();
+    private ArrayList<Payer> chosenParticipants;
+    private ProgressDialog progressDialog;
+    private Switch shareEvenlySwitch;
+    private ParticipantSelectionListFragment fragment;
+    private Expense expense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,14 +125,14 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         switch(item.getItemId()){
             case R.id.action_save:
 
-                if(StringEscapeUtils.escapeJava(title.getText().toString()) != ""
-                        && StringEscapeUtils.escapeJava(amount.getText().toString())!=""){
+                if(!StringEscapeUtils.escapeJava(title.getText().toString()).equals("")
+                        && !StringEscapeUtils.escapeJava(amount.getText().toString()).equals("")){
 
                     progressDialog = ProgressDialog.show(this, "",
                             "Bitte warten...", true);
 
                     // DEFAULT TEXT IF FIELDS ARE EMPTY
-                    if(StringEscapeUtils.escapeJava(description.getText().toString()) == ""){
+                    if(StringEscapeUtils.escapeJava(description.getText().toString()).equals("")){
                         description.setText("Keine Beschreibung");
                     }
 

@@ -7,7 +7,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -26,21 +25,19 @@ import de.traveltogether.StaticTripData;
 import de.traveltogether.dialog.DeleteActivity;
 import de.traveltogether.model.PackingItem;
 import de.traveltogether.model.PackingObject;
-import de.traveltogether.packinglist.PackingListActivity;
 import de.traveltogether.packinglist.newpackingitem.NewPackingItemActivity;
-import de.traveltogether.triplist.TripListActivity;
 
 public class PackingDetailActivity extends DeleteActivity implements DialogInterface.OnClickListener{
 
-    long featureId =-1;
-    long tripId =-1;
-    TextView title;
-    TextView description;
-    TextView count;
-    IPackingDetailPresenter presenter;
-    ProgressDialog progressDialog;
-    PackingDetailFragment fragment;
-    PackingObject packingObject;
+    private long featureId =-1;
+    private long tripId =-1;
+    private TextView title;
+    private TextView description;
+    private TextView count;
+    private IPackingDetailPresenter presenter;
+    private ProgressDialog progressDialog;
+    private PackingDetailFragment fragment;
+    private PackingObject packingObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

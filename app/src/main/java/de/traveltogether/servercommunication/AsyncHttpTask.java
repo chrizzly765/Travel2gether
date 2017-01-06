@@ -15,10 +15,10 @@ import java.net.URL;
 /**
  * Created by Anna-Lena on 28.05.2016.
  */
-public class AsyncHttpTask extends AsyncTask<String, String, String> {
-    HttpURLConnection connection;
+class AsyncHttpTask extends AsyncTask<String, String, String> {
+    private HttpURLConnection connection;
     String result= "";
-    IHttpRequest caller;
+    private IHttpRequest caller;
 
     public AsyncHttpTask(IHttpRequest _caller){
         caller= _caller;
@@ -52,8 +52,6 @@ public class AsyncHttpTask extends AsyncTask<String, String, String> {
             stream.close();
             connection.disconnect();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         catch(Exception e){

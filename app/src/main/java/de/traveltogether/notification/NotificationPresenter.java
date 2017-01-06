@@ -8,8 +8,8 @@ import de.traveltogether.model.Notification;
  */
 public class NotificationPresenter implements INotificationPresenter {
 
-    INotificationInteractor interactor;
-    NotificationActivity view;
+    private INotificationInteractor interactor;
+    private NotificationActivity view;
 
     public NotificationPresenter(NotificationActivity _view){
         view= _view;

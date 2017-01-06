@@ -30,16 +30,16 @@ import static de.traveltogether.servercommunication.HashFactory.hashPassword;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
-    protected Button loginBtn;
-    protected TextView registerBtn;
-    protected EditText email;
-    protected EditText password;
-    TextView forgotPwButton;
-    protected ILoginPresenter presenter;
-    String salt;
-    ProgressDialog progressDialog;
+    private  Button loginBtn;
+    private  TextView registerBtn;
+    private  EditText email;
+    private  EditText password;
+    private TextView forgotPwButton;
+    private  ILoginPresenter presenter;
+    private String salt;
+    private ProgressDialog progressDialog;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
-    AlertDialog passwordDialog;
+    private AlertDialog passwordDialog;
 
 
     @Override

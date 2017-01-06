@@ -1,30 +1,21 @@
 package de.traveltogether.expense.detailexpense;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.app.ListFragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import de.traveltogether.R;
-import de.traveltogether.expense.detailexpense.ExpenseDetailActivity;
 import de.traveltogether.expense.detailexpense.ExpenseDetailAdapter;
-import de.traveltogether.model.Expense;
 import de.traveltogether.model.Payer;
 
 import java.util.List;
 
 
 public class ExpenseDetailFragment extends ListFragment {
-    List<Payer> payers;
-    ExpenseDetailAdapter adapter;
+    private List<Payer> payers;
+    private ExpenseDetailAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the

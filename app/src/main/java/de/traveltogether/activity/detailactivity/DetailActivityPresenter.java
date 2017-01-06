@@ -2,12 +2,9 @@ package de.traveltogether.activity.detailactivity;
 
 import de.traveltogether.model.Activity;
 
-/**
- * Created by Isa on 05.10.2016.
- */
 public class DetailActivityPresenter implements IDetailActivityPresenter {
-    DetailActivityActivity view;
-    IDetailActivityInteractor interactor;
+    private DetailActivityActivity view;
+    private IDetailActivityInteractor interactor;
 
     public DetailActivityPresenter(DetailActivityActivity _view){
         view= _view;

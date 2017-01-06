@@ -8,11 +8,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import java.util.Calendar;
 
-import android.support.v4.app.Fragment;
-
-
-import de.traveltogether.R;
-
 public class TimePickerFragment extends DialogFragment {
     public static final String ZEIT = TimePickerFragment.class.getSimpleName();
     private TimePickerDialog.OnTimeSetListener listener;

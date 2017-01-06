@@ -7,8 +7,8 @@ import de.traveltogether.model.Participant;
  * Created by Anna-Lena on 12.05.2016.
  */
 public class ExpensePresenter implements IExpensePresenter{
-    ExpenseActivity view;
-    IExpenseInteractor interactor;
+    private ExpenseActivity view;
+    private IExpenseInteractor interactor;
 
     public ExpensePresenter(ExpenseActivity _view){
         view = _view;

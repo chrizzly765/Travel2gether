@@ -1,16 +1,13 @@
 package de.traveltogether.activity;
 
-import android.util.Log;
-
 import de.traveltogether.model.Activity;
-import de.traveltogether.model.Trip;
 
 /**
  * Created by Anna-Lena on 28.07.2016.
  */
 public class ActivityPresenter implements IActivityPresenter {
-    ActivitiesActivity view;
-    IActivityInteractor interactor;
+    private ActivitiesActivity view;
+    private IActivityInteractor interactor;
 
     public ActivityPresenter(ActivitiesActivity _view){
         view = _view;

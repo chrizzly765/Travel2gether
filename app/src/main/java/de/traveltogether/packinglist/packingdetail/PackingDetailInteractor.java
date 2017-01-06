@@ -4,6 +4,8 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.StaticTripData;
@@ -14,11 +16,9 @@ import de.traveltogether.model.Response;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
-/**
- * Created by Maria Dreher on 07.10.2016.
- */
+
 public class PackingDetailInteractor implements IPackingDetailInteractor {
-    IPackingDetailPresenter listener;
+    private IPackingDetailPresenter listener;
 
     @Override
     public void getDetailsForPackingObject(long featureId, IPackingDetailPresenter _listener) {
@@ -48,7 +48,7 @@ public class PackingDetailInteractor implements IPackingDetailInteractor {
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if(response.getError()!="true"){
+        if(!response.getError().equals("true")){
             if(actionType == ActionType.DELETE){
                 listener.onSuccessDelete();
             }
@@ -61,9 +61,6 @@ public class PackingDetailInteractor implements IPackingDetailInteractor {
                     e.printStackTrace();
                     listener.onCloseActivity();
                 }
-            }
-            else if(actionType == ActionType.UPDATE){
-                //TODO
             }
             else if(actionType == ActionType.GETPARTICIPANTS){
                 StaticTripData.setParticipants(((ParticipantList)JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list);

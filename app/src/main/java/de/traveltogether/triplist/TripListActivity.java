@@ -4,25 +4,20 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import de.traveltogether.R;
@@ -33,14 +28,14 @@ import de.traveltogether.settings.SettingsActivity;
 import de.traveltogether.triplist.newtrip.NewTripActivity;
 
 public class TripListActivity extends AppCompatActivity implements View.OnClickListener {
-    ITripListPresenter presenter;
+    private ITripListPresenter presenter;
     private Trip[] trips;
-    TripListFragment fragmentUpcoming;
-    TripListFragment fragmentFormer;
+    private TripListFragment fragmentUpcoming;
+    private TripListFragment fragmentFormer;
 
     private Menu menu;
     ProgressDialog progressDialog;
-    MenuItem notiItem;
+    private MenuItem notiItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

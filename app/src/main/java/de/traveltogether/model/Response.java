@@ -1,12 +1,10 @@
 package de.traveltogether.model;
 
-/**
- * Created by Anna-Lena on 27.05.2016.
- */
+
 public class Response {
-    String error;
-    String message;
-    String data;
+    private String error;
+    private String message;
+    private String data;
 
     public String getError(){
         return error;

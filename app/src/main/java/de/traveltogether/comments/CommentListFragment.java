@@ -16,8 +16,8 @@ import de.traveltogether.model.Comment;
  */
 public class CommentListFragment extends ListFragment{
 
-    Comment[] comments;
-    CommentAdapter adapter;
+    private Comment[] comments;
+    private CommentAdapter adapter;
 
 
     /**

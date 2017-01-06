@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,28 +20,28 @@ import android.widget.Toast;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
+import java.util.Objects;
+
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.datepicker.DatePickerFragment;
-import de.traveltogether.info.InfoActivity;
 import de.traveltogether.invitation.InvitationActivity;
 import de.traveltogether.model.Trip;
-import de.traveltogether.triplist.TripListActivity;
 
 public class NewTripActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
-    INewTripPresenter presenter;
-    DatePickerFragment datePicker;
-    ImageButton clickedDatePickerBtn;
-    EditText title;
-    EditText description;
-    EditText startDate;
-    EditText endDate;
-    EditText place;
-    Button cancel;
-    Button save;
-    long tripId;
-    Trip trip;
-    ProgressDialog progressDialog;
+    private INewTripPresenter presenter;
+    private DatePickerFragment datePicker;
+    private ImageButton clickedDatePickerBtn;
+    private EditText title;
+    private EditText description;
+    private EditText startDate;
+    private EditText endDate;
+    private EditText place;
+    private Button cancel;
+    private Button save;
+    private long tripId;
+    private Trip trip;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,14 +117,14 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-                if(StringEscapeUtils.escapeJava(title.getText().toString()) != ""){
+                if(!StringEscapeUtils.escapeJava(title.getText().toString()).equals("")){
                     progressDialog = ProgressDialog.show(this, "",
                             "Bitte warten...", true);
                     // DEFAULT TEXT IF FIELDS ARE EMPTY
-                    if(StringEscapeUtils.escapeJava(description.getText().toString()) == ""){
+                    if(StringEscapeUtils.escapeJava(description.getText().toString()).equals("")){
                         description.setText("Keine Beschreibung");
                     }
-                    if(StringEscapeUtils.escapeJava(place.getText().toString()) == ""){
+                    if(StringEscapeUtils.escapeJava(place.getText().toString()).equals("")){
                         place.setText("Kein Ort");
                     }
 

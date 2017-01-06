@@ -1,27 +1,20 @@
 package de.traveltogether.expense.newexpense;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
-
-import java.text.DecimalFormat;
-import java.util.Currency;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
-import de.traveltogether.model.Participant;
 import de.traveltogether.model.Payer;
 
-public class ParticipantSelectionListAdapter extends BaseAdapter {
+class ParticipantSelectionListAdapter extends BaseAdapter {
     private Payer[] payer;
     private final LayoutInflater inflater;
 

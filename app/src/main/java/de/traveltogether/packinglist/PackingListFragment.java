@@ -13,14 +13,12 @@ import de.traveltogether.R;
 import de.traveltogether.model.PackingObject;
 import de.traveltogether.packinglist.packingdetail.PackingDetailActivity;
 
-import java.util.List;
-
 
 public class PackingListFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
     private PackingObject[] packingObjects;
-    PackingListAdapter adapter;
-    View view;
+    private PackingListAdapter adapter;
+    private View view;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -51,10 +49,8 @@ public class PackingListFragment extends ListFragment implements AdapterView.OnI
 
     public void onStart(){
         super.onStart();
-        if(packingObjects==null || packingObjects.length==0 ){
-            //TODO: show new trip listitem
-        }
-        else {
+        if(!(packingObjects==null || packingObjects.length==0) ){
+
             adapter = new PackingListAdapter(getActivity(), packingObjects);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);

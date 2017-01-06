@@ -18,7 +18,7 @@ import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.model.Task;
 
-public class TaskAdapter extends BaseAdapter {
+class TaskAdapter extends BaseAdapter {
 
     private Task[] taskList;
     private final LayoutInflater inflater;

@@ -7,23 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import de.traveltogether.R;
 import de.traveltogether.activity.detailactivity.DetailActivityActivity;
-import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Activity;
-import de.traveltogether.model.Trip;
 
 
 public class ActivityFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
-    ActivityAdapter adapter;
-    Activity[] formerActivities;
-    View view;
-    IActivityPresenter presenter;
-    long tripId;
+    private ActivityAdapter adapter;
+    private Activity[] formerActivities;
+    private View view;
+    private IActivityPresenter presenter;
+    private long tripId;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).

@@ -15,25 +15,23 @@ import de.traveltogether.servercommunication.JsonDecode;
  * Created by Anna-Lena on 15.06.2016.
  */
 public class CommentInteractor implements ICommentInteractor {
-    ICommentPresenter listener;
+    private ICommentPresenter listener;
+
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if(response.getError()=="true"){
-
-        }
-        else if(dataType == DataType.CHAT){
-            if(actionType== ActionType.LIST) {
-                String data = response.getData();
-                CommentList commentList = (CommentList) JsonDecode.getInstance().jsonToArray(data, CommentList.class);
-                if (listener != null) {
-                    listener.onSuccessCommentList(commentList.list);
+        if(response.getError().equals("false")) {
+            if (dataType == DataType.CHAT) {
+                if (actionType == ActionType.LIST) {
+                    String data = response.getData();
+                    CommentList commentList = (CommentList) JsonDecode.getInstance().jsonToArray(data, CommentList.class);
+                    if (listener != null) {
+                        listener.onSuccessCommentList(commentList.list);
+                    }
+                } else if (actionType == ActionType.ADD) {
+                    listener.onSuccessAddComment();
                 }
             }
-            else if(actionType==ActionType.ADD){
-                listener.onSuccessAddComment();
-            }
         }
-
     }
 
     @Override
@@ -74,7 +72,7 @@ public class CommentInteractor implements ICommentInteractor {
             HttpRequest httpRequest = new HttpRequest(DataType.COMMENT, ActionType.ADD, json.toString(), this);
         }
         catch(Exception e){
-
+            Log.e(e.getClass().toString(), e.getMessage());
         }
     }
 
@@ -89,7 +87,7 @@ public class CommentInteractor implements ICommentInteractor {
             HttpRequest httpRequest = new HttpRequest(DataType.CHAT, ActionType.ADD, json.toString(), this);
         }
         catch(Exception e){
-
+            Log.e(e.getClass().toString(), e.getMessage());
         }
     }
 

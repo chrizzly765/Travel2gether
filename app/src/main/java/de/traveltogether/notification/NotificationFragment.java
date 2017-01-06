@@ -1,9 +1,6 @@
 package de.traveltogether.notification;
 
-import android.app.AlertDialog;
 import android.app.ListFragment;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,17 +10,8 @@ import android.widget.AdapterView;
 
 import de.traveltogether.DataType;
 import de.traveltogether.R;
-import de.traveltogether.StaticTripData;
-import de.traveltogether.activity.detailactivity.DetailActivityActivity;
-import de.traveltogether.chat.ChatActivity;
-import de.traveltogether.expense.detailexpense.ExpenseDetailActivity;
-import de.traveltogether.info.InfoActivity;
-import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Notification;
-import de.traveltogether.model.Trip;
 import de.traveltogether.notification.NotificationAdapter;
-import de.traveltogether.packinglist.packingdetail.PackingDetailActivity;
-import de.traveltogether.tasks.detail.TaskDetailActivity;
 
 /**
  * A fragment representing a list of Items.
@@ -34,8 +22,8 @@ public class NotificationFragment extends ListFragment implements AdapterView.On
 
     private NotificationAdapter adapter;
     private Notification[] notifications;
-    View view;
-    NotificationActivity activity;
+    private View view;
+    private NotificationActivity activity;
     Notification currentNotification;
 
     /**

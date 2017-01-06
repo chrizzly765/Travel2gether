@@ -1,8 +1,6 @@
 package de.traveltogether.servercommunication;
 
-/**
- * Created by Anna-Lena on 16.05.2016.
- */
-public interface IHttpRequest {
-    public void setResponse(String response);
+
+interface IHttpRequest {
+     void setResponse(String response);
 }

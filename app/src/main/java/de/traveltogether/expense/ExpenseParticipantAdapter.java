@@ -2,28 +2,23 @@ package de.traveltogether.expense;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.provider.Telephony;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
-import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
 
 import java.text.DecimalFormat;
-import java.util.List;
 
-public class ExpenseParticipantAdapter extends BaseAdapter {
-    Participant[] participants;
-    LayoutInflater inflater;
+class ExpenseParticipantAdapter extends BaseAdapter {
+    private Participant[] participants;
+    private LayoutInflater inflater;
 
     public ExpenseParticipantAdapter(Context context, Participant[] _participants) {
         inflater = LayoutInflater.from(context);

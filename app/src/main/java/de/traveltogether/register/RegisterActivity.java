@@ -34,12 +34,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     //private static final String TAG = RegisterActivity.class.getSimpleName();
 
     private IRegisterPresenter presenter;
-    protected Button registerBtn;
-    protected EditText name;
-    protected EditText email;
-    protected EditText password;
-    protected EditText repeatPassword;
-    protected String salt;
+    private Button registerBtn;
+    private EditText name;
+    private EditText email;
+    private EditText password;
+    private EditText repeatPassword;
+    private String salt;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     ProgressDialog progressDialog;
 

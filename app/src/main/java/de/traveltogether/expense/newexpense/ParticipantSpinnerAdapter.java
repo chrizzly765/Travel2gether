@@ -1,20 +1,15 @@
 package de.traveltogether.expense.newexpense;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 
 import de.traveltogether.model.Participant;
 
-/**
- * Created by Anna-Lena on 11.09.2016.
- */
-public class ParticipantSpinnerAdapter extends ArrayAdapter {
-    Participant[] participants;
+
+class ParticipantSpinnerAdapter extends ArrayAdapter {
+    private Participant[] participants;
 
     public ParticipantSpinnerAdapter(Context context, int resource, Participant[] _participants) {
         super(context, resource);

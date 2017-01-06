@@ -4,6 +4,8 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.StaticTripData;
@@ -13,15 +15,12 @@ import de.traveltogether.model.Response;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
-/**
- * Created by Isa on 05.10.2016.
- */
 public class DetailActivityInteractor implements IDetailActivityInteractor {
-    IDetailActivityPresenter listener;
+    private IDetailActivityPresenter listener;
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if(response.getError()!="true"){
+        if(!response.getError().equals("true")){
             if(actionType == ActionType.DELETE){
                 listener.onSuccessDelete();
             }

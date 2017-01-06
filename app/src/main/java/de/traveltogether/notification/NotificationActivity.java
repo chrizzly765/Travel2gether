@@ -10,12 +10,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
-import org.json.JSONObject;
-
-import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
@@ -26,18 +22,15 @@ import de.traveltogether.expense.detailexpense.ExpenseDetailActivity;
 import de.traveltogether.info.InfoActivity;
 import de.traveltogether.login.LoginActivity;
 import de.traveltogether.model.Notification;
-import de.traveltogether.model.Response;
 import de.traveltogether.packinglist.packingdetail.PackingDetailActivity;
-import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.tasks.detail.TaskDetailActivity;
-import de.traveltogether.triplist.TripListActivity;
 
 public class NotificationActivity extends AppCompatActivity {
 
     INotificationPresenter presenter;
-    Notification[] notifications;
-    ProgressDialog progressDialog;
-    NotificationFragment fragment;
+    private Notification[] notifications;
+    private ProgressDialog progressDialog;
+    private NotificationFragment fragment;
     public Notification currentNotification;
 
     @Override

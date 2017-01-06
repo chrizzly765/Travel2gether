@@ -6,8 +6,8 @@ import de.traveltogether.model.Comment;
  * Created by Anna-Lena on 15.06.2016.
  */
 public class CommentPresenter implements ICommentPresenter {
-    ICommentInteractor interactor;
-    ICommentView view;
+    private ICommentInteractor interactor;
+    private ICommentView view;
     public CommentPresenter(ICommentView commentFragment){
         view = commentFragment;
         interactor = new CommentInteractor();

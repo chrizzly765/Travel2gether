@@ -2,6 +2,8 @@ package de.traveltogether.register;
 
 import android.util.Log;
 
+import java.util.Objects;
+
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.model.Registration;
@@ -15,7 +17,7 @@ import de.traveltogether.model.Response;
 public class RegisterInteractor implements IRegisterInteractor, Runnable{
 
     //private static final String TAG = RegisterInteractor.class.getSimpleName();
-    IRegisterPresenter listener;
+    private IRegisterPresenter listener;
 
     @Override
     public void register(String name, String email, String password, String salt, String token, IRegisterPresenter _listener) {
@@ -26,7 +28,7 @@ public class RegisterInteractor implements IRegisterInteractor, Runnable{
     }
 
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType){
-        if(response.getError()=="true"){
+        if(response.getError().equals("true")){
             Log.d("error", "");
             listener.onError(response.getMessage());
         }

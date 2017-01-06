@@ -1,21 +1,13 @@
 package de.traveltogether.activity.newactivity;
 
-import android.widget.ImageView;
-
-import java.text.SimpleDateFormat;
-
-import de.traveltogether.ActionType;
-import de.traveltogether.DataType;
 import de.traveltogether.model.Activity;
-import de.traveltogether.model.Participant;
-import de.traveltogether.model.Response;
 
 /**
  * Created by Isa on 13.08.2016.
  */
 public class NewActivityPresenter implements INewActivityPresenter {
     private NewActivityActivity view;
-    INewActivityInteractor interactor;
+    private INewActivityInteractor interactor;
 
     public NewActivityPresenter(NewActivityActivity _view){
         view = _view;

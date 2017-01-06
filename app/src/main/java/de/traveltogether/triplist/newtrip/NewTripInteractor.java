@@ -1,6 +1,10 @@
 package de.traveltogether.triplist.newtrip;
 
+import android.util.Log;
+
 import org.json.JSONObject;
+
+import java.util.Objects;
 
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
@@ -9,11 +13,9 @@ import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 import de.traveltogether.model.Response;
 
-/**
- * Created by Anna-Lena on 12.05.2016.
- */
+
 public class NewTripInteractor implements INewTripInteractor {
-    INewTripPresenter listener;
+    private INewTripPresenter listener;
 
     @Override
     //public void createTrip(String title, String description, String startdate, String enddate, String place, INewTripPresenter _listener) {public void createTrip(String title, String description, String startdate, String enddate, String place, INewTripPresenter _listener) {
@@ -39,7 +41,7 @@ public class NewTripInteractor implements INewTripInteractor {
             obj.put("tripId", tripId);
         }
         catch(Exception e){
-
+            Log.e(e.getClass().toString(), e.getMessage());
         }
         HttpRequest req = new HttpRequest(DataType.TRIP, ActionType.DETAIL, obj.toString(), this);
 
@@ -47,7 +49,7 @@ public class NewTripInteractor implements INewTripInteractor {
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        if(response.getError()=="false"){
+        if(response.getError().equals("false")){
             if(actionType == ActionType.ADD) {
                 long tripId = ((Trip) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP)).getTripId();
                 listener.onSuccess(response.getMessage(), tripId);

@@ -10,26 +10,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import de.traveltogether.R;
-import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.expense.newexpense.NewExpenseActivity;
-import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
-import de.traveltogether.triplist.newtrip.NewTripActivity;
 
 public class ExpenseActivity extends AppCompatActivity implements View.OnClickListener{
-    long tripId;
-    IExpensePresenter presenter;
-    ProgressDialog progressDialog;
-    ExpenseListFragment fragment;
-    ExpenseParticipantFragment participantsFragment;
+    private long tripId;
+    private IExpensePresenter presenter;
+    private ProgressDialog progressDialog;
+    private ExpenseListFragment fragment;
+    private ExpenseParticipantFragment participantsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

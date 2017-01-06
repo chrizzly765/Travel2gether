@@ -13,12 +13,9 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import de.traveltogether.DataType;
 import de.traveltogether.R;
 import de.traveltogether.model.Notification;
-import de.traveltogether.model.Trip;
 
-/**
- * Created by Anna-Lena on 12.06.2016.
- */
-public class NotificationAdapter extends BaseAdapter {
+
+class NotificationAdapter extends BaseAdapter {
     private Notification[] notificationList;
     private final LayoutInflater inflater;
 

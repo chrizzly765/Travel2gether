@@ -1,11 +1,6 @@
 package de.traveltogether.packinglist;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-import de.traveltogether.R;
 import de.traveltogether.StaticTripData;
-import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.PackingObject;
 
 import android.app.ProgressDialog;
@@ -13,34 +8,28 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import de.traveltogether.packinglist.newpackingitem.NewPackingItemActivity;
 
 import de.traveltogether.R;
-import de.traveltogether.notification.NotificationActivity;
-import de.traveltogether.settings.SettingsActivity;
-
 
 
 public class PackingListActivity extends AppCompatActivity implements View.OnClickListener{
 
-    IPackingListPresenter presenter;
+    private IPackingListPresenter presenter;
     private PackingObject[] packingobjects;
-    PackingListFragment fragment;
+    private PackingListFragment fragment;
     private Menu menu;
-    ProgressDialog progressDialog;
-    long tripId;
+    private ProgressDialog progressDialog;
+    private long tripId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -6,8 +6,8 @@ import de.traveltogether.model.Person;
  * Created by Anna-Lena on 16.05.2016.
  */
 public class InvitePresenter implements IInvitePresenter {
-    InvitationActivity view;
-    IInviteInteractor interactor;
+    private InvitationActivity view;
+    private IInviteInteractor interactor;
 
     public InvitePresenter(InvitationActivity _view) {
         view = _view;

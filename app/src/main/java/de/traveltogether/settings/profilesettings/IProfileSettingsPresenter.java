@@ -2,18 +2,15 @@ package de.traveltogether.settings.profilesettings;
 
 import de.traveltogether.model.Person;
 
-/**
- * Created by Anna-Lena on 27.11.2016.
- */
 
-public interface IProfileSettingsPresenter {
-    public void onGetProfileInfos();
-    public void onUpdateProfileInfos(Person person);
-    public void onUpdatePasswort(String salt, String hash);
-    public void onSuccessGetProfileInfos(Person person);
-    public void onSuccessUpdateProfileInfos();
-    public void onSuccessUpdatePasswort();
-    public void onError(String message);
-    public void onReturnSalt(String salt);
-    public void onGetSalt(String email);
+interface IProfileSettingsPresenter {
+     void onGetProfileInfos();
+     void onUpdateProfileInfos(Person person);
+     void onUpdatePasswort(String salt, String hash);
+     void onSuccessGetProfileInfos(Person person);
+     void onSuccessUpdateProfileInfos();
+     void onSuccessUpdatePasswort();
+     void onError(String message);
+     void onReturnSalt(String salt);
+     void onGetSalt(String email);
 }

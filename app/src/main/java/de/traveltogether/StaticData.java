@@ -1,13 +1,6 @@
 package de.traveltogether;
 
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-
-import java.util.ArrayList;
-
-import de.traveltogether.model.Participant;
-import de.traveltogether.model.Statistic;
-import de.traveltogether.participantlist.ParticipantState;
 
 /**
  * Created by Anna-Lena on 29.05.2016.

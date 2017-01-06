@@ -1,28 +1,18 @@
 package de.traveltogether.dialog;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.app.AlertDialog;
 import android.util.Log;
 
 import de.traveltogether.R;
-import de.traveltogether.model.Activity;
 
 
 public class DeleteDialogFragment extends DialogFragment implements DialogInterface.OnClickListener{
     //public static final String TAG = InvitationDialogFragment.class.getSimpleName();
     public static final String TAG = DeleteDialogFragment.class.getSimpleName();
 
-    DeleteActivity activity;
+    private DeleteActivity activity;
 
     public DeleteDialogFragment() {
         // Required empty public constructor

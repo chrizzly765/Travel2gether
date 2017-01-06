@@ -2,13 +2,11 @@ package de.traveltogether.tasks.newtask;
 
 import de.traveltogether.model.Task;
 
-/**
- * Created by Anna-Lena on 12.05.2016.
- */
+
 public class NewTaskPresenter implements INewTaskPresenter {
 
     private NewTaskActivity view;
-    INewTaskInteractor interactor;
+    private INewTaskInteractor interactor;
     public NewTaskPresenter(NewTaskActivity _view){
         view = _view;
         interactor = new NewTaskInteractor();
