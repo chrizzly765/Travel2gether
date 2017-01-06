@@ -131,9 +131,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             //startActivity(login);
             finish();
         }
+        /*
         if(progressDialog!=null) {
             progressDialog.cancel();
         }
+        */
     }
 
     public void onViewSuccessMessage(String message){
