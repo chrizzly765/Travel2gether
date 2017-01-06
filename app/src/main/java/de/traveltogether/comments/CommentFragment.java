@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
     private ICommentPresenter presenter;
     private Comment[] comments;
     private EditText inputField;
+    private ImageButton send;
     private CommentListFragment fragment;
 
     public CommentFragment() {
@@ -78,9 +80,15 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_comment, container, false);
         inputField = (EditText)view.findViewById(R.id.fragment_comment_editText);
-        ImageButton send = (ImageButton)view.findViewById(R.id.fragment_comment_button_send);
+
+        send = (ImageButton)view.findViewById(R.id.fragment_comment_button_send);
+        send.setVisibility(View.INVISIBLE);
         send.setOnClickListener(this);
+
         return view;
+
+
+
     }
 
     @Override
@@ -91,7 +99,6 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
                 return;
             }
             presenter.onSendCommentForFeature(id, StaticData.getUserId(), text);
-
             //Text löschen wenn Eingabe fertig
             inputField.setText("");
 

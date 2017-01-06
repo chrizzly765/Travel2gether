@@ -66,6 +66,7 @@ public class CommentListFragment extends ListFragment{
             int unbounded = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
             Resources resources = getActivity().getResources();
             DisplayMetrics metrics = resources.getDisplayMetrics();
+            /*
             int px = (int)(80 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
 
             for (int i = 0; i < adapter.getCount(); i++) {
@@ -78,6 +79,7 @@ public class CommentListFragment extends ListFragment{
             par.height = totalHeight + (getListView().getDividerHeight() * (adapter.getCount() - 1));
             getListView().setLayoutParams(par);
             getListView().requestLayout();
+            */
         }
     }
 

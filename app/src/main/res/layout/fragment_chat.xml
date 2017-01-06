@@ -1,33 +1,32 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="de.traveltogether.chat.ChatFragment">
 
     <ScrollView
         android:id = "@+id/fragment_chat_scrollview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="25dp"
+        android:fillViewport="true"
+        android:layout_weight="1">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <RelativeLayout
+        <LinearLayout
             android:id = "@+id/fragment_comment_list_container"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"/>
-        </RelativeLayout>
+            android:orientation="horizontal" />
 
     </ScrollView>
+
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center_horizontal|bottom">
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_weight="0.9">
 
         <EditText
             android:layout_width="fill_parent"
@@ -35,7 +34,8 @@
             android:inputType="textCapSentences"
             android:layout_height="wrap_content"
             android:id="@+id/fragment_comment_editText"
-            android:hint="Nachricht schreiben" />
+            android:hint="Nachricht schreiben"
+            android:layout_gravity="bottom" />
 
         <ImageButton
             android:layout_weight="0.9"
@@ -43,9 +43,11 @@
             android:layout_height="35dp"
             android:src="@mipmap/ic_send"
             android:backgroundTint="@android:color/transparent"
-            android:id="@+id/fragment_comment_button_send" />
+            android:id="@+id/fragment_comment_button_send"
+            android:layout_gravity="bottom" />
     </LinearLayout>
+
     <!--
     android:text="@string/hello_blank_fragment"
 -->
-</FrameLayout>
+</LinearLayout>
