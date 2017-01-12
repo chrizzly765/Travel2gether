@@ -28,6 +28,9 @@ import de.traveltogether.datepicker.DatePickerFragment;
 import de.traveltogether.invitation.InvitationActivity;
 import de.traveltogether.model.Trip;
 
+/**
+ * Activity for creating a new trip
+ */
 public class NewTripActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
     private INewTripPresenter presenter;
     private DatePickerFragment datePicker;
@@ -37,8 +40,6 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     private EditText startDate;
     private EditText endDate;
     private EditText place;
-    private Button cancel;
-    private Button save;
     private long tripId;
     private Trip trip;
     private ProgressDialog progressDialog;
@@ -50,13 +51,12 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
         tripId = getIntent().getLongExtra("tripId", -1);
 
         if(tripId != -1) {
-            getSupportActionBar().setTitle("Reiseinfo bearbeiten");
+            getSupportActionBar().setTitle(getString(R.string.edit_trip));
         }
         else {
-            getSupportActionBar().setTitle("Neue Reise");
+            getSupportActionBar().setTitle(getString(R.string.new_trip));
         }
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -88,10 +88,9 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
         if(tripId != -1){
 
             progressDialog = ProgressDialog.show(this, "",
-                    "Reisen werden geladen...", true);
+                    getString(R.string.trip_load), true);
             presenter.onGetDetailsForTrip(tripId);
         }
-
     }
 
     @Override
@@ -119,13 +118,12 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.action_save:
                 if(!StringEscapeUtils.escapeJava(title.getText().toString()).equals("")){
                     progressDialog = ProgressDialog.show(this, "",
-                            "Bitte warten...", true);
-                    // DEFAULT TEXT IF FIELDS ARE EMPTY
+                            getString(R.string.please_wait), true);
                     if(StringEscapeUtils.escapeJava(description.getText().toString()).equals("")){
-                        description.setText("Keine Beschreibung");
+                        description.setText(getString(R.string.no_description));
                     }
                     if(StringEscapeUtils.escapeJava(place.getText().toString()).equals("")){
-                        place.setText("Kein Ort");
+                        place.setText(getString(R.string.no_destination));
                     }
 
                     if(tripId!=-1){
@@ -154,7 +152,7 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 }
                 else{
-                    onViewErrorMessage("Bitte gib einen Titel für deine Reise ein.", "Pflichtfeld");
+                    onViewErrorMessage(getString(R.string.missing_title, getString(R.string.trip)), getString(R.string.mandatory));
                 }
                 break;
             case android.R.id.home:
@@ -168,7 +166,6 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void onViewErrorMessage(String message, String title){
-        //progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(title);
@@ -183,17 +180,13 @@ public class NewTripActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void onSuccess(String message, long tripId){
-        Context context = getApplicationContext();
-        CharSequence text = getString(R.string.newtrip_success);
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
+        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.newtrip_success), Toast.LENGTH_SHORT);
         toast.show();
 
         Intent invite = new Intent(this, InvitationActivity.class);
         Bundle b = new Bundle();
-        b.putLong("tripId", tripId); //Your id
-        invite.putExtras(b); //Put your id to your next Intent
+        b.putLong("tripId", tripId);
+        invite.putExtras(b);
         startActivity(invite);
         progressDialog.cancel();
         finish();

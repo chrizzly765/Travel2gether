@@ -1,7 +1,7 @@
 package de.traveltogether;
 
 /**
- * Created by Anna-Lena on 16.05.2016.
+ * Enum for the data type of a http request
  */
 public enum DataType {
     TRIP{

@@ -4,9 +4,9 @@ import de.traveltogether.IInteractor;
 
 
 interface IDetailActivityInteractor extends IInteractor {
-    public void getDetailsForActivity(long featureId, IDetailActivityPresenter _listener);
-    public void deleteActivity(long id, IDetailActivityPresenter _listener);
-    public void getParticipantsForTrip(long tripId, IDetailActivityPresenter _listener);
+    void getDetailsForActivity(long featureId, IDetailActivityPresenter _listener);
+    void deleteActivity(long id, IDetailActivityPresenter _listener);
+    void getParticipantsForTrip(long tripId, IDetailActivityPresenter _listener);
 
 }
 

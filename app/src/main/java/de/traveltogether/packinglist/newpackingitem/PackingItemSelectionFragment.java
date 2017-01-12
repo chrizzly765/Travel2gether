@@ -12,7 +12,7 @@ import de.traveltogether.model.PackingItem;
 import java.util.ArrayList;
 
 /**
- * A fragment representing a list of Items.
+ * Fragment representing a list Persons
  */
 public class PackingItemSelectionFragment extends ListFragment {
 
@@ -85,13 +85,9 @@ public class PackingItemSelectionFragment extends ListFragment {
 
     public void onStart(){
         super.onStart();
-        if(packingItems==null || packingItems.length==0 ){
-            //TODO: show new trip listitem
-        }
-        else {
+        if(!(packingItems==null || packingItems.length==0)){
             adapter = new PackingItemSelectionAdapter(getActivity(), packingItems);
             setListAdapter(adapter);
-
 
             ViewGroup vg = getListView();
             int totalHeight = 0;
@@ -107,5 +103,4 @@ public class PackingItemSelectionFragment extends ListFragment {
             getListView().requestLayout();
         }
     }
-
 }

@@ -4,8 +4,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.model.Activity;
@@ -39,14 +37,14 @@ public class ActivityInteractor implements IActivityInteractor {
             Log.e("Error in Interactor", response.getMessage());
             listener.onError(response.getMessage());
         } else {
-            ActivityList activities = (ActivityList)JsonDecode.getInstance().<ActivityList>jsonToArray(response.getData(), ActivityList.class);
+            ActivityList activities = (ActivityList)JsonDecode.getInstance().jsonToClass(response.getData(), ActivityList.class);
             listener.onSuccess(activities.list);
 
         }
 
     }
 
-    //Diese Klasse muss vorhanden sein und an JsonDecode.jsonToArray übergeben werden um ein Array aus dem Json zu erhalten
+    //Diese Klasse muss vorhanden sein und an JsonDecode.jsonToClass übergeben werden um ein Array aus dem Json zu erhalten
     class ActivityList{
         Activity[] list;
     }

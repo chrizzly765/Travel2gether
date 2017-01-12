@@ -7,10 +7,10 @@ import de.traveltogether.model.Expense;
  * Created by Anna-Lena on 12.05.2016.
  */
 public interface INewExpenseInteractor extends IInteractor {
-    public void getParticipantsForTrip(long tripId, INewExpensePresenter listener);
-    public void createExpense(Expense expense, INewExpensePresenter _listener);
-    public void getDetailsForExpense(long featureId, INewExpensePresenter listener);
-    public void updateExpense(Expense expense, INewExpensePresenter listener);
+    void getParticipantsForTrip(long tripId, INewExpensePresenter listener);
+    void createExpense(Expense expense, INewExpensePresenter _listener);
+    void getDetailsForExpense(long featureId, INewExpensePresenter listener);
+    void updateExpense(Expense expense, INewExpensePresenter listener);
 }
 
 

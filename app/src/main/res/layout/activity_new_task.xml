@@ -29,7 +29,8 @@
             android:hint = "@string/description"
             android:layout_below="@+id/activity_new_task_title"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            />
 
         <LinearLayout
             android:layout_width="fill_parent"

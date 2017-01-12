@@ -4,8 +4,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.StaticData;
@@ -15,19 +13,14 @@ import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
 /**
- * Created by Anna-Lena on 16.05.2016.
+ * Interactor for NotificationActivity
  */
 public class NotificationInteractor implements INotificationInteractor {
     private INotificationPresenter listener;
 
-
     @Override
     public void answerInvitation(long tripId, ActionType type, INotificationPresenter _listener) {
         listener = _listener;
-        /*if(type!=ActionType.DECLINE || type!=ActionType.ACCEPT){
-            listener.onError("Internal error");
-            return;
-        }*/
         try {
             JSONObject obj = new JSONObject();
             obj.put("tripId", tripId);
@@ -35,6 +28,7 @@ public class NotificationInteractor implements INotificationInteractor {
             HttpRequest req = new HttpRequest(DataType.INVITATION, type, obj.toString(), this);
         }
         catch(Exception e){
+            listener.onError("Fehler beim Http Request");
             Log.e(e.getClass().toString(), e.getMessage());
         }
     }
@@ -48,9 +42,9 @@ public class NotificationInteractor implements INotificationInteractor {
             HttpRequest req = new HttpRequest(DataType.NOTIFICATION, ActionType.LIST, obj.toString(), this);
         }
         catch(Exception e){
+            listener.onError("Fehler beim Http Request");
             Log.e(e.getClass().toString(), e.getMessage());
         }
-
     }
 
     @Override
@@ -62,6 +56,7 @@ public class NotificationInteractor implements INotificationInteractor {
             HttpRequest req = new HttpRequest(DataType.NOTIFICATION, ActionType.UPDATE, obj.toString(), this);
         }
         catch(Exception e){
+            listener.onError("Fehler beim Http Request");
             Log.e(e.getClass().toString(), e.getMessage());
         }
     }
@@ -74,7 +69,7 @@ public class NotificationInteractor implements INotificationInteractor {
         }
         else{
             if(dataType.equals(DataType.NOTIFICATION) && actionType.equals(ActionType.LIST)) {
-                NotificationList not = ((NotificationList) JsonDecode.getInstance().jsonToArray(response.getData(), NotificationList.class));
+                NotificationList not = ((NotificationList) JsonDecode.getInstance().jsonToClass(response.getData(), NotificationList.class));
                 if(not!=null) {
                     Notification[] list = not.list;
                     listener.onViewNotificationList(list);
@@ -88,6 +83,10 @@ public class NotificationInteractor implements INotificationInteractor {
             }
         }
     }
+
+    /**
+     * Necessary class to get array from json string
+     */
     class NotificationList{
         public Notification[] list;
     }

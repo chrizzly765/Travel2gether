@@ -1,6 +1,8 @@
 package de.traveltogether.model;
 
-
+/**
+ * Model class for Response
+ */
 public class Response {
     private String error;
     private String message;

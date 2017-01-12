@@ -3,7 +3,10 @@ package de.traveltogether.packinglist.packingdetail;
 import de.traveltogether.model.PackingItem;
 import de.traveltogether.model.PackingObject;
 
-
+/**
+ * Presenter for PackingDetailActivity
+ * Implements IPackingDetailPresenter
+ */
 public class PackingDetailPresenter implements IPackingDetailPresenter{
     private PackingDetailActivity view;
     private IPackingDetailInteractor interactor;
@@ -41,7 +44,7 @@ public class PackingDetailPresenter implements IPackingDetailPresenter{
     @Override
     public void onCloseActivity(){
         view.onCloseActivity();
-    };
+    }
 
     public void onUpdatePackingItem(PackingItem item){
         interactor.updatePackingItem(item, this);

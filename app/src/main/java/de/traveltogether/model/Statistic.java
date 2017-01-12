@@ -1,7 +1,7 @@
 package de.traveltogether.model;
 
 /**
- * Created by Isa on 07.10.2016.
+ * Model class for Statistic
  */
 public class Statistic {
     private double group;

@@ -18,6 +18,10 @@ import de.traveltogether.date.DateFormat;
 import de.traveltogether.model.ParticipantShort;
 import de.traveltogether.model.Trip;
 
+/**
+ * Adapter for tripList
+ * Gets trips after calling them from server and fills views with data
+ */
 class TripAdapter extends BaseAdapter {
     private Trip[] tripList;
     private final LayoutInflater inflater;
@@ -63,7 +67,6 @@ class TripAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.fragment_trip_list_item, parent, false);
             holder = new TripViewHolder();
             holder.title = (TextView)convertView.findViewById(R.id.fragment_trip_list_item_title);
-            //holder.description= (TextView)convertView.findViewById(R.id.fragment_trip_list_item_description);
             holder.destination=(TextView)convertView.findViewById(R.id.fragment_trip_list_item_destination);
             holder.date=(TextView)convertView.findViewById(R.id.fragment_trip_list_item_date);
             holder.icon1 = (FrameLayout)convertView.findViewById(R.id.fragment_trip_list_item_icon);
@@ -149,6 +152,9 @@ class TripAdapter extends BaseAdapter {
         return convertView;
     }
 
+    /**
+     * ViewHolder holds all elements one list item has
+     */
     static class TripViewHolder {
         TextView title, destination, date;
         FrameLayout icon1, icon2, icon3, icon4, icon5, icon6, icon7, iconLast;

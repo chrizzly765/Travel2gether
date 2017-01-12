@@ -25,6 +25,9 @@ import de.traveltogether.model.Notification;
 import de.traveltogether.packinglist.packingdetail.PackingDetailActivity;
 import de.traveltogether.tasks.detail.TaskDetailActivity;
 
+/**
+ * Activity for viewing notification list
+ */
 public class NotificationActivity extends AppCompatActivity {
 
     INotificationPresenter presenter;
@@ -62,27 +65,24 @@ public class NotificationActivity extends AppCompatActivity {
         else {
             presenter.onGetNotificationList();
             progressDialog = ProgressDialog.show(this, "",
-                    "Benachrichtigungen werden geladen...", true);
+                    getString(R.string.loading_notifications), true);
         }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Benachrichtigungen");
+        getSupportActionBar().setTitle(getString(R.string.notifications));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         presenter= new NotificationPresenter(this);
         setContentView(R.layout.activity_notification);
-
     }
 
     void onViewNotificationList(Notification[] _notifications){
         this.notifications = _notifications;
-
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragment = NotificationFragment.newInstance(_notifications, this);
@@ -153,7 +153,6 @@ public class NotificationActivity extends AppCompatActivity {
             intent.putExtra("featureId", n.getFeatureOrTripId());
             startActivity(intent);
         }
-
     }
 
 }

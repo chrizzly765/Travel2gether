@@ -3,7 +3,9 @@ package de.traveltogether.notification;
 import de.traveltogether.ActionType;
 import de.traveltogether.model.Notification;
 
-
+/**
+ * Interface for presenter of NotificationActivity
+ */
 interface INotificationPresenter {
     void onAnswerInvitation(long tripId, ActionType type);
     void onGetNotificationList();

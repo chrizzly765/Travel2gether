@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Model class for PackingObject
  */
 public class PackingObject extends AbstractListObject {
 
-    //protected String category = "";
     private int number;
     private int itemsPacked;
     private int[] personsAssigned;
@@ -29,10 +28,7 @@ public class PackingObject extends AbstractListObject {
         number=count;
     }
 
-    //public void addPackingItem(int personAssigned){items.add(new PackingItem(personAssigned));    }
-    //public void addPackingItem(int personAssigned, boolean status, long id, int number){ items.add(new PackingItem(personAssigned, status, id, number));}
     public void addPackingItem(PackingItem _packingItem){
-        //number++;
         items.add(_packingItem);
     }
 }

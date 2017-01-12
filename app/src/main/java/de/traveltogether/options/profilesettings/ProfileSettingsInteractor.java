@@ -1,4 +1,4 @@
-package de.traveltogether.settings.profilesettings;
+package de.traveltogether.options.profilesettings;
 
 import android.util.Log;
 
@@ -12,7 +12,10 @@ import de.traveltogether.model.Response;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
-
+/**
+ * Interactor for ProfileSettingsActivity
+ * implements IProfileSettingsInteractor
+ */
  class ProfileSettingsInteractor implements IProfileSettingsInteractor {
     private IProfileSettingsPresenter listener;
 
@@ -23,7 +26,8 @@ import de.traveltogether.servercommunication.JsonDecode;
             obj.put("personId", StaticData.getUserId());
             HttpRequest request = new HttpRequest(DataType.PERSON, ActionType.DETAIL, obj.toString(), this);
         } catch (Exception e) {
-            //TODO
+            listener.onError("Fehler beim Http Request");
+            Log.e(e.getClass() + "", e.getMessage());
         }
     }
 
@@ -34,7 +38,8 @@ import de.traveltogether.servercommunication.JsonDecode;
 
             HttpRequest request = new HttpRequest(DataType.PERSON, ActionType.UPDATE, json, this);
         } catch (Exception e) {
-            //TODO
+            listener.onError("Fehler beim Http Request");
+            Log.e(e.getClass() + "", e.getMessage());
         }
     }
 
@@ -49,7 +54,8 @@ import de.traveltogether.servercommunication.JsonDecode;
             String s = obj.toString().replace("\\n", "\n").replace("\\/", "/");
             HttpRequest request = new HttpRequest(DataType.PERSON, ActionType.UPDATEPASSWORD, s, this);
         } catch (Exception e) {
-            //TODO
+            listener.onError("Fehler beim Http Request");
+            Log.e(e.getClass() + "", e.getMessage());
         }
     }
 
@@ -61,7 +67,8 @@ import de.traveltogether.servercommunication.JsonDecode;
             HttpRequest request = new HttpRequest(DataType.LOGIN, ActionType.GETSALT, obj.toString(), this);
         }
         catch(Exception e){
-            //TODO
+            listener.onError("Fehler beim Http Request");
+            Log.e(e.getClass() + "", e.getMessage());
         }
 
     }
@@ -69,27 +76,26 @@ import de.traveltogether.servercommunication.JsonDecode;
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if (response.getError().equals("false")) {
             if (actionType == ActionType.DETAIL) {
-                listener.onSuccessGetProfileInfos((Person) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.PERSON));
+                listener.onSuccessGetProfileInfos((Person) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.PERSON));
             } else if (actionType == ActionType.UPDATE) {
                 listener.onSuccessUpdateProfileInfos();
 
             } else if (actionType == ActionType.UPDATEPASSWORD) {
-                listener.onSuccessUpdatePasswort();
+                listener.onSuccessUpdatePassword();
             }else if(actionType == ActionType.GETSALT){
                 String salt = "";
                 try {
                     JSONObject json = new JSONObject(response.getData());
                     salt = json.get("salt").toString().replace("\\u003d", "=").replace("\\n", "");
-                    Log.d("saltParsed", salt);
                 } catch (Exception e) {
                     listener.onError("Error in getting salt");
-                    Log.d("Error: ", "Error in getting salt");
                 }
                 if (!salt.equals("")) {
                     listener.onReturnSalt(salt);
                 } else {
                     listener.onError("Error in getting salt");
-                }            }
+                }
+            }
         }else {
             listener.onError(response.getMessage());
         }

@@ -3,14 +3,14 @@ package de.traveltogether.triplist.newtrip;
 import de.traveltogether.model.Trip;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Interface for presenter of NewTripActivity
  */
 public interface INewTripPresenter {
-    public void onCreateTrip( Trip trip);
-    public void onError(String message, String title);
-    public void onSuccess(String message, long tripId);
-    public void onGetDetailsForTrip(long tripId);
-    public void onSuccessGetDetails(Trip trip);
-    public void onSuccessUpdateTrip(String message);
-    public void onUpdateTrip(Trip trip);
+    void onCreateTrip(Trip trip);
+    void onUpdateTrip(Trip trip);
+    void onGetDetailsForTrip(long tripId);
+    void onError(String message, String title);
+    void onSuccess(String message, long tripId);
+    void onSuccessGetDetails(Trip trip);
+    void onSuccessUpdateTrip(String message);
 }

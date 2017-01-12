@@ -24,16 +24,17 @@ import de.traveltogether.R;
 import de.traveltogether.date.DateFormat;
 import de.traveltogether.model.Trip;
 import de.traveltogether.notification.NotificationActivity;
-import de.traveltogether.settings.SettingsActivity;
+import de.traveltogether.options.OptionsActivity;
 import de.traveltogether.triplist.newtrip.NewTripActivity;
 
+/**
+ * Activity showing the trip list and optionsmenu and notifications in action bar
+ */
 public class TripListActivity extends AppCompatActivity implements View.OnClickListener {
     private ITripListPresenter presenter;
     private Trip[] trips;
     private TripListFragment fragmentUpcoming;
     private TripListFragment fragmentFormer;
-
-    private Menu menu;
     ProgressDialog progressDialog;
     private MenuItem notiItem;
 
@@ -47,8 +48,6 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-        //MenuItem optionsBtn = (MenuItem) findViewById(R.id.open_options);
-        //optionsBtn.setOnClickListener(this);
         ImageButton newTripBtn = (ImageButton) findViewById(R.id.fab_button);
         newTripBtn.setOnClickListener(this);
     }
@@ -118,19 +117,18 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         if (v.getId() == R.id.fab_button){
             Intent set = new Intent(this, NewTripActivity.class);
             startActivity(set);
-            //finish();
         }
     }
 
     public void onViewTrips(Trip[] _trips){
-        Log.e("TripListActivity", "got trips: "+_trips.length);
         trips= _trips;
         List<Trip> formerTrips = new ArrayList<Trip>();
         List<Trip> upcomingTrips = new ArrayList<Trip>();
         Calendar cal = Calendar.getInstance();
         String currentDate = new SimpleDateFormat("dd.MM.yyyy").format(cal.getTime());
 
-        for(Trip t : _trips){
+        //check if trips belong to upcoming or former trip list
+        for(Trip t : trips){
             int comparison= DateFormat.getInstance().compareDates(t.getEndDate(), currentDate);
             if(comparison>=0){
                 upcomingTrips.add(t);
@@ -140,7 +138,7 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
             }
         }
 
-        //Fragment in Activity einbetten
+        //nest fragment into Activity
         if(upcomingTrips.size()>0) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -172,7 +170,6 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
             formerTrips.toArray(arr);
             TripListFragment fragment = TripListFragment.newInstance(arr);
             fragmentTransaction.add(R.id.fragment_trip_list_container_former, fragment);
-            //fragmentTransaction.attach(fragment);
             fragmentTransaction.commit();
             fragmentFormer = fragment;
             findViewById(R.id.activity_trip_list_former_empty).setVisibility(View.INVISIBLE);
@@ -199,12 +196,10 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
             case R.id.action_notification:
                 Intent noti = new Intent(this, NotificationActivity.class);
                 startActivity(noti);
-                //finish();
                 return true;
             case R.id.action_settings:
-                Intent options = new Intent(this, SettingsActivity.class);
+                Intent options = new Intent(this, OptionsActivity.class);
                 startActivity(options);
-                //finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -225,6 +220,4 @@ public class TripListActivity extends AppCompatActivity implements View.OnClickL
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-
 }

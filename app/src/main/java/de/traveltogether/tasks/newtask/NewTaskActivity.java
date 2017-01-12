@@ -21,8 +21,6 @@ import android.widget.Toast;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.util.ArrayList;
-import java.util.Objects;
-
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
@@ -30,6 +28,9 @@ import de.traveltogether.datepicker.DatePickerFragment;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Task;
 
+/**
+ * Activity for creating a new task
+ */
 public class NewTaskActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener, View.OnClickListener {
 
     private INewTaskPresenter presenter;
@@ -54,7 +55,6 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setTitle(R.string.new_task);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -74,7 +74,7 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         datePicker =new DatePickerFragment();
 
         if(featureId != -1) {
-            getSupportActionBar().setTitle("Aufgabe bearbeiten");
+            getSupportActionBar().setTitle(getString(R.string.task_edit));
         }
 
         onViewParticipants(StaticTripData.getActiveParticipants());
@@ -119,13 +119,11 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
             case R.id.action_save:
                 if(!StringEscapeUtils.escapeJava(title.getText().toString()).equals("")){
                     progressDialog = ProgressDialog.show(this, "",
-                            "Bitte warten...", true);
+                            getString(R.string.please_wait), true);
 
-                    // DEFAULT TEXT IF FIELDS ARE EMPTY
                     if(StringEscapeUtils.escapeJava(description.getText().toString()).equals("")){
-                        description.setText("Keine Beschreibung");
+                        description.setText(getString(R.string.no_description));
                     }
-
 
                     if(featureId == -1) {
 
@@ -157,7 +155,7 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
                     return true;
                 }
                 else{
-                    onViewError("Bitte gib einen Titel für deine Aufgabe ein.", "Pflichtfeld");
+                    onViewError(getString(R.string.missing_title, getString(R.string.task)), getString(R.string.mandatory));
                     return false;
                 }
 
@@ -199,8 +197,6 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     }
 
     public void onViewError(String message, String title) {
-
-        //progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(title);
@@ -215,7 +211,6 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     }
 
     private void onViewParticipants(Participant[] _participants){
-
         participants = _participants;
         participantNames = new ArrayList<>();
 
@@ -256,7 +251,6 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     }
 
     public void onViewDetails(Task _task) {
-
         task = _task;
         tripId=task.getTripId();
         title.setText(StringEscapeUtils.unescapeJava(task.getTitle()));

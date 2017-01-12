@@ -21,7 +21,9 @@ import de.traveltogether.packinglist.newpackingitem.NewPackingItemActivity;
 
 import de.traveltogether.R;
 
-
+/**
+ * Activity for list of viewing packing items
+ */
 public class PackingListActivity extends AppCompatActivity implements View.OnClickListener{
 
     private IPackingListPresenter presenter;
@@ -39,18 +41,13 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
-        getSupportActionBar().setTitle("Packliste");
+        getSupportActionBar().setTitle(getString(R.string.packinglist));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         ImageButton button = (ImageButton)findViewById(R.id.activity_packing_list_button_add);
         button.setOnClickListener(this);
-        //MenuItem optionsBtn = (MenuItem) findViewById(R.id.open_options);
-        //optionsBtn.setOnClickListener(this);
-        //ImageButton newTripBtn = (ImageButton) findViewById(R.id.fab_button);
-        //newTripBtn.setOnClickListener(this);
         presenter = new PackingListPresenter(this);
     }
 
@@ -58,7 +55,7 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
     protected void onStart(){
         super.onStart();
         progressDialog = ProgressDialog.show(this, "",
-                "Packliste wird geladen...", true);
+                getString(R.string.packinglist)+ getString(R.string.is_loading), true);
 
         presenter.onGetPackingObjects(tripId);
 
@@ -75,13 +72,11 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void onViewPackingObjects(PackingObject[] _packingobjects){
-        Log.d("PackingListActivity", "got packingobjects: "+_packingobjects.length);
         packingobjects = _packingobjects;
         if(packingobjects.length == 0){
             findViewById(R.id.activity_packing_list_empty_text).setVisibility(View.VISIBLE);
         }
         else {
-
             //Fragment in Activity einbetten
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -89,10 +84,8 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
             fragmentTransaction.add(R.id.fragment_packing_list_container, fragment);
             fragmentTransaction.commit();
             findViewById(R.id.activity_packing_list_empty_text).setVisibility(View.INVISIBLE);
-
         }
         progressDialog.cancel();
-
     }
 
     @Override
@@ -119,6 +112,7 @@ public class PackingListActivity extends AppCompatActivity implements View.OnCli
         dialog.show();
     }
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:

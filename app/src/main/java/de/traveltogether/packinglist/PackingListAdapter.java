@@ -89,7 +89,7 @@ class PackingListAdapter extends BaseAdapter {
                     }else {
                         ((TextView)holder.icon1.findViewById(R.id.fragment_packing_list_item_icon_initial_1))
                                 .setText(StaticTripData.getNameById(packingobject.getPersonsAssigned()[i]).substring(0,1));
-                        ((ImageView) holder.icon1.findViewById(R.id.fragment_packing_list_item_icon_circle_1))
+                        holder.icon1.findViewById(R.id.fragment_packing_list_item_icon_circle_1)
                                 .setBackgroundResource(
                                         StaticData.getIdForColor(StaticTripData.getColorById(packingobject.getPersonsAssigned()[i])
                                         ));
@@ -98,7 +98,7 @@ class PackingListAdapter extends BaseAdapter {
                     holder.icon2.setVisibility(View.VISIBLE);
                     ((TextView)holder.icon2.findViewById(R.id.fragment_packing_list_item_icon_initial_2))
                             .setText(StaticTripData.getNameById(packingobject.getPersonsAssigned()[i]).substring(0,1));
-                    ((ImageView) holder.icon2.findViewById(R.id.fragment_packing_list_item_icon_circle_2))
+                    holder.icon2.findViewById(R.id.fragment_packing_list_item_icon_circle_2)
                             .setBackgroundResource(
                                     StaticData.getIdForColor(StaticTripData.getColorById(packingobject.getPersonsAssigned()[i])
                                     ));
@@ -107,7 +107,7 @@ class PackingListAdapter extends BaseAdapter {
                     holder.icon3.setVisibility(View.VISIBLE);
                     ((TextView)holder.icon3.findViewById(R.id.fragment_packing_list_item_icon_initial_3))
                             .setText(StaticTripData.getNameById(packingobject.getPersonsAssigned()[i]).substring(0,1));
-                    ((ImageView) holder.icon3.findViewById(R.id.fragment_packing_list_item_icon_circle_3))
+                    holder.icon3.findViewById(R.id.fragment_packing_list_item_icon_circle_3)
                             .setBackgroundResource(
                                     StaticData.getIdForColor(StaticTripData.getColorById(packingobject.getPersonsAssigned()[i])
                                     ));
@@ -116,7 +116,7 @@ class PackingListAdapter extends BaseAdapter {
                     holder.icon3.setVisibility(View.VISIBLE);
                     ((TextView)holder.icon3.findViewById(R.id.fragment_packing_list_item_icon_initial_3))
                             .setText(StaticTripData.getNameById(packingobject.getPersonsAssigned()[i]).substring(0,1));
-                    ((ImageView) holder.icon3.findViewById(R.id.fragment_packing_list_item_icon_circle_3))
+                    holder.icon3.findViewById(R.id.fragment_packing_list_item_icon_circle_3)
                             .setBackgroundResource(
                                     StaticData.getIdForColor(StaticTripData.getColorById(packingobject.getPersonsAssigned()[i])
                                     ));

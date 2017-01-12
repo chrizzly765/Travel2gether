@@ -15,9 +15,7 @@ import de.traveltogether.mainmenu.MainActivity;
 import de.traveltogether.model.Trip;
 
 /**
- * A fragment representing a list of Items.
- * <p/>
- * interface.
+ * A fragment representing a list of trips.
  */
 public class TripListFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
@@ -40,8 +38,6 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
 
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static TripListFragment newInstance(Trip[] _trips ) {
         TripListFragment fragment = new TripListFragment();
         fragment.trips = _trips;
@@ -69,6 +65,7 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);
 
+            //meassure neccessary height for trip list and set params
             Resources resources = getActivity().getResources();
             DisplayMetrics metrics = resources.getDisplayMetrics();
             int px = (int)(102 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
@@ -80,7 +77,6 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
                 listItem.measure(unbounded, unbounded);
                 totalHeight += listItem.getMeasuredHeight();
             }
-
             ViewGroup.LayoutParams par = getListView().getLayoutParams();
             par.height = totalHeight + (getListView().getDividerHeight() * (adapter.getCount() - 1));
             getListView().setLayoutParams(par);
@@ -89,18 +85,14 @@ public class TripListFragment extends ListFragment implements AdapterView.OnItem
 
     }
 
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Trip trip = (Trip) adapter.getItem(position);
-
         Intent mainMenu = new Intent(getActivity(), MainActivity.class);
         Bundle b = new Bundle();
-        b.putLong("tripId", trips[position].getTripId()); //Your id
+        b.putLong("tripId", trips[position].getTripId());
         b.putString("title", trips[position].getTitle());
         b.putInt("adminId", trips[position].getAdminId());
-        mainMenu.putExtras(b); //Put your id to your next Intent
+        mainMenu.putExtras(b); //Put your data to your next Intent
         startActivity(mainMenu);
-        //getActivity().finish();
     }
 }

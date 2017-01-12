@@ -21,6 +21,9 @@ import de.traveltogether.StaticTripData;
 import de.traveltogether.model.Task;
 import de.traveltogether.tasks.newtask.NewTaskActivity;
 
+/**
+ * Activity for task list
+ */
 public class TaskListActivity extends AppCompatActivity implements View.OnClickListener {
 
     private long tripId;
@@ -37,7 +40,6 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
 
         getSupportActionBar().setTitle(R.string.tasks);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -80,7 +82,6 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-
         if(v.getId() == R.id.activity_task_list_button_add) {
             Intent intent = new Intent(this, NewTaskActivity.class);
             intent.putExtra("tripId", tripId);
@@ -89,9 +90,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void onViewTasks(Task[] _tasks){
-
-        Log.d("TaskListActivity", "got tasks: "+_tasks.length);
-
+        //adding task to open, progress or done list after checking state of the task
         List<Task> taskListOpen = new ArrayList<Task>();
         List<Task> taskListProgress = new ArrayList<Task>();
         List<Task> taskListDone = new ArrayList<Task>();
@@ -106,15 +105,12 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             else if(t.getState() == 3) {
                taskListDone.add(t);
            }
-
         }
 
         FragmentManager fragmentManager = getFragmentManager();
-
         Task[] arr;
 
         if(taskListOpen.size() > 0) {
-
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             arr = new Task[taskListOpen.size()];
             taskListOpen.toArray(arr);
@@ -126,15 +122,9 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
         }
         else {
             findViewById(R.id.activity_task_list_open_empty).setVisibility(View.VISIBLE);
-            //onEmpty(R.id.activity_task_list_empty_txt_open);
         }
 
         if(taskListProgress.size() > 0) {
-            /*RelativeLayout rel = (RelativeLayout)findViewById(R.id.activity_task_list_divider_progress);
-            RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)rel.getLayoutParams();
-            lp.addRule(RelativeLayout.BELOW, R.id.activity_task_list_container_open);
-            rel.setLayoutParams(lp);*/
-
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             arr = new Task[taskListProgress.size()];
             taskListProgress.toArray(arr);
@@ -142,19 +132,12 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.add(R.id.activity_task_list_container_progress, fragmentProgress);
             fragmentTransaction.commit();
             findViewById(R.id.activity_task_list_progress_empty).setVisibility(View.INVISIBLE);
-
         }
         else {
             findViewById(R.id.activity_task_list_progress_empty).setVisibility(View.VISIBLE);
-            //onEmpty(R.id.activity_task_list_empty_txt_progress);
         }
 
         if(taskListDone.size() > 0) {
-            /*RelativeLayout rel = (RelativeLayout)findViewById(R.id.activity_task_list_divider_done);
-            RelativeLayout.LayoutParams lp =(RelativeLayout.LayoutParams)rel.getLayoutParams();
-            lp.addRule(RelativeLayout.BELOW, R.id.activity_task_list_container_progress);
-            rel.setLayoutParams(lp);*/
-
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             arr = new Task[taskListDone.size()];
             taskListDone.toArray(arr);
@@ -162,24 +145,14 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             fragmentTransaction.add(R.id.activity_task_list_container_done, fragmentDone);
             fragmentTransaction.commit();
             findViewById(R.id.activity_task_list_done_empty).setVisibility(View.INVISIBLE);
-
         }
         else {
             findViewById(R.id.activity_task_list_done_empty).setVisibility(View.VISIBLE);
-            //onEmpty(R.id.activity_task_list_empty_txt_done);
         }
         progressDialog.cancel();
     }
 
-    /*public void onEmpty(int id) {
-        TextView txt = (TextView)findViewById(id);
-        txt.setVisibility(View.VISIBLE);
-        txt.setText(R.string.no_entries);
-        txt.setHeight(20);
-    }*/
-
     public void onViewError(String message) {
-
         progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
@@ -189,7 +162,6 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
                 dialog.cancel();
             }
         });
-
         AlertDialog dialog = builder.create();
         dialog.show();
     }

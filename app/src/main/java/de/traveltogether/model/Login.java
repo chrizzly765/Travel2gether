@@ -1,7 +1,7 @@
 package de.traveltogether.model;
 
 /**
- * Created by Anna-Lena on 27.05.2016.
+ * Model class for Login
  */
 public class Login {
     private String email;

@@ -2,7 +2,7 @@ package de.traveltogether.model;
 
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Model class for Task
  */
 public class Task extends AbstractListObject {
     private String deadline;

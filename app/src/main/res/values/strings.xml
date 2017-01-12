@@ -1,7 +1,7 @@
 <resources>
+    <!-- general -->
     <string name="delete_message">Wirklich löschen?</string>
     <string name="leave_message">Wirklich verlassen?</string>
-    <string name="leave_text">Möchtest du die Reise wirklich verlassen?</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="saved_hash">Saved Hash</string>
@@ -9,6 +9,23 @@
     <string name="saved_user_id">Saved UserId</string>
     <string name="app_name">Travel\nTogether</string>
     <string name="logo_description">TravelTogether Logo</string>
+    <string name="please_wait">Bitte warten ...</string>
+    <string name="please_choose">Bitte wählen ...</string>
+    <string name="is_loading"> wird geladen...</string>
+    <string name="success_change">Erfolgreich geändert.</string>
+    <string name="no_entries">Keine Einträge vorhanden</string>
+    <string name="change_profile">Daten ändern</string>
+    <string name="change_pw">Passwort ändern</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="no_description">Keine Beschreibung</string>
+    <string name="no_destination">Kein Ort</string>
+    <string name="mandatory">Pflichtfeld</string>
+    <string name="missing_title">Bitte gib einen Titel für deine %1$s ein</string>
+    <string name="missing_title_male">Bitte gib einen Titel für dein %1$s ein</string>
+    <string name ="sorry">Sorry</string>
+    <string name="deleting_not_allowed">Nur der Ersteller dieser %1$s darf die %1$s löschen.</string>
+    <string name="deleting_not_allowed_thing">Nur der Ersteller dieses %1$s darf das %1$s löschen.</string>
+
     <!-- LoginActivity -->
     <string name="login">Anmelden</string>
     <string name="e_mail">E-Mail</string>
@@ -23,6 +40,7 @@
     <string name="login_error">Fehler beim anmelden. Bitte versuche es erneut.</string>
     <string name="forgot_pw_title">E-Mail eingeben</string>
     <string name="forgot_pw_text">Gib deine E-Mail Adresse ein und wir senden dir dein neues Passwort zu.</string>
+    <string name="edits_wrong">Benutzername oder Passwort sind nicht korrekt.</string>
 
     <!-- RegistrationActivity -->
     <string name="pw_minimum_length">Das Passwort muss aus mindestens 7 Zeichen bestehen.</string>
@@ -33,16 +51,19 @@
     <string name="register_success">Erfolgreich registriert.</string>
     <string name="mail_was_sent">Eine E-Mail mit dem Bestätigungslink wurde an dich vesendet.</string>
 
-
     <!-- TripListActivity-->
     <string name="my_trips">Meine Reisen</string>
+    <string name="trip">Reise</string>
     <string name="newtrip_success">Reise wurde erstellt.</string>
     <string name="trip_delete">Reise löschen</string>
+    <string name="trip_deleted">Reise gelöscht.</string>
     <string name="trip_delete_warning">Möchtest du die Reise wirklich löschen?</string>
     <string name="change_admin">Administrator ändern</string>
     <string name="leave_trip">Reise verlassen</string>
     <string name="leave_trip_warning">Möchtest du die Reise wirklich verlassen?</string>
     <string name="leave_trip_success">Du hast die Reise erfolgreich verlassen.</string>
+    <string name="trip_load">Reisen werden geladen...</string>
+    <string name="leave_text">Möchtest du die Reise wirklich verlassen?</string>
 
     <!-- OptionsActivity -->
     <string name="options">Optionen</string>
@@ -50,6 +71,7 @@
     <string name="edit">Bearbeiten</string>
     <string name="delete">Löschen</string>
     <string name="notifications">Benachrichtigungen</string>
+    <string name="loading_notifications">Benachrichtigungen werden geladen...</string>
     <string name="on">an</string>
     <string name="off">aus</string>
     <string name="delete_account">Account löschen</string>
@@ -79,6 +101,7 @@
 
     <!-- InfoActivity -->
     <string name="trip_information">Reiseinfo</string>
+    <string name="edit_trip">Reiseinfo bearbeiten</string>
     <string name="start_date">Start</string>
     <string name="end_date">Ende</string>
     <string name="fellow_passengers">Mitreisende</string>
@@ -93,12 +116,22 @@
     <string name="new_expense">Neue Ausgabe</string>
     <string name="account_balances">Kontoübersicht</string>
     <string name="expenses">Ausgaben</string>
+    <string name = "expense">Ausgabe</string>
     <string name="payed">bezahlt von</string>
     <string name="share_with">teilen mit</string>
     <string name="add_expense">Klicke hier, um eine neue Ausgabe hinzuzufügen.</string>
+    <string name="expense_deleted">Diese Ausgabe wurde gelöscht.</string>
+    <string name="expense_deleted_success">Ausgabe erfolgreich gelöscht.</string>
+
+    <!--ActivityActivity -->
+    <string name="activity">Aktivität</string>
+    <string name="deleted_activity">Diese Aktivität wurde gelöscht.</string>
+    <string name="deleted_activity_success">Aktivität erfolgreich gelöscht.</string>
 
     <!-- TasksActivity -->
     <string name="tasks">Aufgaben</string>
+    <string name="task">Aufgabe</string>
+    <string name="task_edit">Aufgabe bearbeiten</string>
     <string name="new_task">Neue Aufgabe</string>
     <string name="add_task">Klicke hier, um eine neue Aufgabe zu erstellen.</string>
     <string name="add_person">Person zuordnen</string>
@@ -113,30 +146,20 @@
 
     <!-- PackingsListActivity -->
     <string name="packinglist">Packliste</string>
+    <string name="packingitem">Packelement</string>
+    <string name="edit_packingitem">Packelement bearbeiten</string>
     <string name="add_packing_object">Klicke hier, um etwas zur Packliste hinzuzufügen.</string>
     <string name="new_category">Neue Kategorie</string>
     <string name="add_to_category">Zu Kategorie hinzufügen</string>
     <string name="comment">Kommentieren</string>
+    <string name="deleted_packingitem">Dieses Packelement wurde gelöscht.</string>
+    <string name="deleted_packingitem_success">Packelement erfolgreich gelöscht.</string>
+    <string name="add_packingitem_success">Packelement erfolgreich hinzugefügt.</string>
+    <string name="who_packs">Wer packt ein?</string>
 
-    <!-- general -->
-    <string name="please_wait">Bitte warten ...</string>
-    <string name="please_choose">Bitte wählen ...</string>
-    <string name="no_entries">Keine Einträge vorhanden</string>
-    <string name="change_profile">Daten ändern</string>
-    <string name="change_pw">Passwort ändern</string>
-    <string name="cancel">Abbrechen</string>
+    <!-- SettingsActivity -->
+    <string name="load_data">Daten werden geladen...</string>
+    <string name="my_profile">Mein Profil</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <!--string name="logoDescription">TravelTogether Logo</string>
-    <string name="email">E-Mail</string>
-    <string name="login">Anmelden</string>
-    <string name="registerText1">Noch nicht angemeldet?</string>
-    <string name="registerText2">Registrieren.</string>
-    <string name="loginText1">Bereits registriert?</string>
-    <string name="loginText2">Anmelden.</string>
-    <string name="register">Registrieren</string>
-    <string name="name">Name</string>
--->
 </resources>

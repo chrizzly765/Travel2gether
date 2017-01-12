@@ -4,7 +4,7 @@ import de.traveltogether.IInteractor;
 
 
 interface IExpenseDetailInteractor extends IInteractor {
-    public void getDetailsForExpense(long featureId, IExpenseDetailPresenter _listener);
-    public void deleteExpense(long id, IExpenseDetailPresenter _listener);
-    public void getParticipantsForTrip(long tripId, IExpenseDetailPresenter listener);
+    void getDetailsForExpense(long featureId, IExpenseDetailPresenter _listener);
+    void deleteExpense(long id, IExpenseDetailPresenter _listener);
+    void getParticipantsForTrip(long tripId, IExpenseDetailPresenter listener);
 }

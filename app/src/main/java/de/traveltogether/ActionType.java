@@ -1,6 +1,30 @@
 package de.traveltogether;
 
-
+/**
+ * Enum for the action type of a http request. Not every action type are combinable with every data type
+ */
 public enum ActionType {
-    LIST, DETAIL, ADD, UPDATE, DELETE, REGISTER, LOGIN, GETSALT, RESIGN, GETPARTICIPANTS, ACCEPT, DECLINE, INVITE, GETSTATISTIC, GETNOTICOUNT, GETTITLE, UPDATEDEVICEID, UPDATEPASSWORD, FORGOTPASSWORD
+    //actions for features and trip
+    LIST,
+    DETAIL,
+    ADD,
+    UPDATE,
+    DELETE,
+    //actions for registration, login and password
+    REGISTER,
+    LOGIN,
+    GETSALT,
+    UPDATEDEVICEID,
+    UPDATEPASSWORD,
+    FORGOTPASSWORD,
+    //actions for invitation
+    GETPARTICIPANTS,
+    RESIGN,
+    ACCEPT,
+    DECLINE,
+    INVITE,
+    //actions for main trip menu
+    GETSTATISTIC,
+    GETNOTICOUNT,
+    GETTITLE
 }

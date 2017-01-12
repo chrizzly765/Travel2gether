@@ -14,8 +14,11 @@ import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.model.PackingItem;
 
+/**
+ * Adapter for list of persons that pack an item
+ * Gets packing items after calling them from server and fills views with data
+ */
 class PackingDetailAdapter extends BaseAdapter {
-
     private PackingItem[] items;
     private LayoutInflater inflater;
 
@@ -48,20 +51,16 @@ class PackingDetailAdapter extends BaseAdapter {
             holder.name = (TextView)convertView.findViewById(R.id.fragment_packing_detail_list_item_name);
             holder.box = (ImageView)convertView.findViewById(R.id.fragment_packing_detail_list_item_checkBox);
             holder.icon = (FrameLayout)convertView.findViewById(R.id.fragment_packing_detail_list_item_icon);
-
             convertView.setTag(holder);
         }
         else{
             holder = (PackingDetailViewHolder) convertView.getTag();
         }
 
-        Context context = parent.getContext();
         PackingItem item = (PackingItem) getItem(position);
         holder.name.setText(StaticTripData.getNameById(item.getAssignedPerson()));
         holder.box.setEnabled(false);
 
-
-        //holder.box.setActivated(item.getStatus());
         if(item.getAssignedPerson() == StaticData.getUserId()){
             if(item.getStatus()==true){
                 holder.box.setBackgroundResource(R.drawable.checkbox_filled);
@@ -71,8 +70,6 @@ class PackingDetailAdapter extends BaseAdapter {
             }
         }
         else{
-            //convertView.setOnClickListener(null);
-
             if(item.getStatus()==true){
                 holder.box.setBackgroundResource(R.drawable.checkbox_filled_grey);
             }
@@ -81,12 +78,13 @@ class PackingDetailAdapter extends BaseAdapter {
             }
         }
         ((TextView)holder.icon.findViewById(R.id.fragment_packing_detail_list_item_initial)).setText(holder.name.getText().toString().substring(0,1));
-        ((ImageView)holder.icon.findViewById(R.id.fragment_packing_detail_list_item_circle)).setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(item.getAssignedPerson())));
-        String amount = "";
-
+        holder.icon.findViewById(R.id.fragment_packing_detail_list_item_circle).setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(item.getAssignedPerson())));
         return convertView;
     }
 
+    /**
+     * Viewholder that contains elements one packer item in packer list
+     */
     public class PackingDetailViewHolder {
         TextView name;
         ImageView box;

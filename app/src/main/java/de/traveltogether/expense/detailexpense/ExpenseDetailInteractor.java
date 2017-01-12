@@ -4,8 +4,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.StaticTripData;
@@ -29,7 +27,7 @@ public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
             }
             else if (actionType == ActionType.DETAIL) {
                 try {
-                    listener.onSuccessGetDetails((Expense) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.EXPENSE));
+                    listener.onSuccessGetDetails((Expense) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.EXPENSE));
                 }
                 catch(Exception e){
                     //listener.onError("Auf diese Ausgabe kann leider nicht mehr zugegriffen werden.");
@@ -37,7 +35,7 @@ public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
                 }
             }
             else if (actionType == ActionType.GETPARTICIPANTS) {
-                Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
+                Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToClass(response.getData(), ParticipantList.class)).list;
                 StaticTripData.setParticipants(participants);
                 listener.onSuccessGetParticipants();
             }

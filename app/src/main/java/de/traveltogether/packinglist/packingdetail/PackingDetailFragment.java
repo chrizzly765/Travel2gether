@@ -15,7 +15,9 @@ import de.traveltogether.model.PackingItem;
 
 import java.util.List;
 
-
+/**
+ * Fragment for Persons that pack an item
+ */
 public class PackingDetailFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
     private List<PackingItem> items;
@@ -37,7 +39,6 @@ public class PackingDetailFragment extends ListFragment implements AdapterView.O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -59,17 +60,15 @@ public class PackingDetailFragment extends ListFragment implements AdapterView.O
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);
         }
-
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(((PackingItem)adapter.getItem(position)).getAssignedPerson() == StaticData.getUserId()) {
             if (((PackingItem) adapter.getItem(position)).getStatus() == true) {
-                ((LinearLayout) view).findViewById(R.id.fragment_packing_detail_list_item_checkBox).setBackgroundResource(R.drawable.checkbox_empty);
+                view.findViewById(R.id.fragment_packing_detail_list_item_checkBox).setBackgroundResource(R.drawable.checkbox_empty);
             } else {
-                ((LinearLayout) view).findViewById(R.id.fragment_packing_detail_list_item_checkBox).setBackgroundResource(R.drawable.checkbox_filled);
+                view.findViewById(R.id.fragment_packing_detail_list_item_checkBox).setBackgroundResource(R.drawable.checkbox_filled);
             }
             ((PackingDetailActivity) getActivity()).setPackingItemClicked(position);
         }

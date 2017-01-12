@@ -23,7 +23,7 @@ public class CommentInteractor implements ICommentInteractor {
             if (dataType == DataType.CHAT) {
                 if (actionType == ActionType.LIST) {
                     String data = response.getData();
-                    CommentList commentList = (CommentList) JsonDecode.getInstance().jsonToArray(data, CommentList.class);
+                    CommentList commentList = (CommentList) JsonDecode.getInstance().jsonToClass(data, CommentList.class);
                     if (listener != null) {
                         listener.onSuccessCommentList(commentList.list);
                     }

@@ -79,14 +79,14 @@ import de.traveltogether.servercommunication.JsonDecode;
         else {
             if (actionType == ActionType.DETAIL) {
                 if(!response.getData().equals("{}")) {
-                    Trip trip = JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP);
-                    listener.onSuccessGetDetail((Trip) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP));
+                    Trip trip = JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.TRIP);
+                    listener.onSuccessGetDetail((Trip) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.TRIP));
                 }
                 else {
                     listener.onError("Kein Zugriff", "Die Reise wurde gelöscht.");
                 }
             } else if (actionType == ActionType.GETPARTICIPANTS) {
-                Participant[] participants = ((ParticipantList)JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
+                Participant[] participants = ((ParticipantList)JsonDecode.getInstance().jsonToClass(response.getData(), ParticipantList.class)).list;
                 StaticTripData.setParticipants(participants);
                 listener.onSuccessGetParticipants(participants);
             }

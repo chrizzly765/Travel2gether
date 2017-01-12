@@ -4,8 +4,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.model.Response;
@@ -14,7 +12,8 @@ import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Interactor for TaskListActivity
+ * Implements ITaskListInteractor
  */
 public class TaskListInteractor implements ITaskListInteractor {
 
@@ -28,6 +27,7 @@ public class TaskListInteractor implements ITaskListInteractor {
             obj.put("tripId", tripId);
         }
         catch(Exception e){
+            listener.onError("Fehler beim Http Request");
             Log.e(e.getClass().toString(), e.getMessage());
         }
         HttpRequest req = new HttpRequest(DataType.TASK, ActionType.LIST, obj.toString(), this);
@@ -40,19 +40,18 @@ public class TaskListInteractor implements ITaskListInteractor {
         }
         else{
             try {
-                TaskList taskList = (TaskList) JsonDecode.getInstance().<TaskList>jsonToArray(response.getData(), TaskList.class);
-
+                TaskList taskList = (TaskList) JsonDecode.getInstance().jsonToClass(response.getData(), TaskList.class);
                 listener.onSuccess(taskList.list);
                 return;
             }
             catch(Exception e){
+                listener.onError("Fehler beim Http Request");
                 Log.e(e.getClass().toString(), e.getMessage());
-                e.printStackTrace();
             }
         }
     }
 
-    //Diese Klasse muss vorhanden sein und an JsonDecode.jsonToArray übergeben werden um ein Array aus dem Json zu erhalten
+    //Neccessary class for getting array from JsonDecode
     class TaskList{
         Task[] list;
     }

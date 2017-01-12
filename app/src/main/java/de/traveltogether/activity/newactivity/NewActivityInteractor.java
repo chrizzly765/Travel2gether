@@ -11,8 +11,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 
 public class NewActivityInteractor implements INewActivityInteractor {
     private  INewActivityPresenter listener;
@@ -63,7 +61,7 @@ public class NewActivityInteractor implements INewActivityInteractor {
             if (dataType == DataType.ACTIVITY && actionType == ActionType.ADD) {
                 listener.onSuccessAddingActivity();
             } else if (dataType == DataType.ACTIVITY && actionType == ActionType.DETAIL) {
-                listener.onSuccessGetDetail((Activity) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.ACTIVITY));
+                listener.onSuccessGetDetail((Activity) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.ACTIVITY));
             } else if (dataType == DataType.ACTIVITY && actionType == ActionType.UPDATE) {
                 listener.onSuccessUpdateActivity();
             }
@@ -72,7 +70,7 @@ public class NewActivityInteractor implements INewActivityInteractor {
         }
         /*
         if(response.getError()=="false"){
-           // long tripId = ((Trip)JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP)).getTripId();
+           // long tripId = ((Trip)JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.TRIP)).getTripId();
             listener.onSuccess(response.getMessage());
         }
         else{

@@ -4,8 +4,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.model.Response;
@@ -14,7 +12,8 @@ import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Interactor for NewTaskActivity
+ * Implements INewTaskInteractor
  */
 public class NewTaskInteractor implements INewTaskInteractor {
 
@@ -22,23 +21,19 @@ public class NewTaskInteractor implements INewTaskInteractor {
 
     @Override
     public void createTask(Task task, INewTaskPresenter _listener) {
-
         listener = _listener;
         HttpRequest request = new HttpRequest(DataType.TASK, ActionType.ADD, JsonDecode.getInstance().classToJson(task), this);
     }
 
     @Override
     public void updateTask(Task task, INewTaskPresenter _listener) {
-
         listener = _listener;
         HttpRequest request = new HttpRequest(DataType.TASK, ActionType.UPDATE, JsonDecode.getInstance().classToJson(task), this);
-
     }
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if(response.getError().equals("false")){
-            //long taskId = ((Task) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TASK)).getId();
             if (actionType == ActionType.ADD) {
                 listener.onSuccessCreate(response.getMessage());
             }
@@ -46,7 +41,7 @@ public class NewTaskInteractor implements INewTaskInteractor {
                 listener.onSuccessUpdate(response.getMessage());
             }
             else if (actionType == ActionType.DETAIL) {
-                listener.onSuccessGetDetails((Task) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TASK));
+                listener.onSuccessGetDetails((Task) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.TASK));
             }
         }
         else{
@@ -63,6 +58,7 @@ public class NewTaskInteractor implements INewTaskInteractor {
             HttpRequest request = new HttpRequest(DataType.TASK, ActionType.DETAIL, obj.toString(), this);
         }
         catch(Exception e){
+            listener.onError("Fehler beim Http Request", "Fehler" );
             Log.e("NewTaskInteractor", e.getMessage());
         }
     }

@@ -4,8 +4,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.model.Expense;
@@ -69,12 +67,12 @@ public class NewExpenseInteractor implements INewExpenseInteractor {
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if (response.getError().equals("false")) {
             if (dataType == DataType.TRIP && actionType == ActionType.GETPARTICIPANTS) {
-                Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
+                Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToClass(response.getData(), ParticipantList.class)).list;
                 listener.onSuccessGetParticipants(participants);
             } else if (dataType == DataType.EXPENSE && actionType == ActionType.ADD) {
                 listener.onSuccessAddingExpense();
             } else if (dataType == DataType.EXPENSE && actionType == ActionType.DETAIL) {
-                listener.onSuccessGetDetail((Expense)JsonDecode.getInstance().jsonToClass(response.getData(), DataType.EXPENSE));
+                listener.onSuccessGetDetail((Expense)JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.EXPENSE));
             } else if (dataType == DataType.EXPENSE && actionType == ActionType.UPDATE) {
                 listener.onSuccessUpdateExpense();
             }

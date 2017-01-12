@@ -18,6 +18,10 @@ import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.model.Task;
 
+/**
+ * Adapter for taskList
+ * Gets tasks after calling them from server and fills views with data
+ */
 class TaskAdapter extends BaseAdapter {
 
     private Task[] taskList;
@@ -76,7 +80,6 @@ class TaskAdapter extends BaseAdapter {
             holder = (TaskViewHolder)convertView.getTag();
         }
 
-        //Context context = parent.getContext();
         Task task = (Task)getItem(position);
         holder.title.setText(StringEscapeUtils.unescapeJava(task.getTitle()));
         Date date = new Date(task.getDueDate());

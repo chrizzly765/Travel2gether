@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Model class for Expense
  */
 public class Expense extends AbstractListObject {
     private double amount;

@@ -14,7 +14,10 @@ import de.traveltogether.DataType;
 import de.traveltogether.R;
 import de.traveltogether.model.Notification;
 
-
+/**
+ * Adapter for notifications
+ * Combines view elements with data called from server
+ */
 class NotificationAdapter extends BaseAdapter {
     private Notification[] notificationList;
     private final LayoutInflater inflater;
@@ -62,14 +65,12 @@ class NotificationAdapter extends BaseAdapter {
             holder.title = (TextView)convertView.findViewById(R.id.fragment_notification_list_item_title);
             holder.date = (TextView)convertView.findViewById(R.id.fragment_notification_list_item_date);
             holder.icon = (ImageView)convertView.findViewById(R.id.fragment_notification_list_item_icon);
-            //holder.description= (TextView)convertView.findViewById(R.id.fragment_trip_list_item_description);
             convertView.setTag(holder);
         }
         else{
             holder = (NotificationViewHolder)convertView.getTag();
         }
 
-        Context context = parent.getContext();
         Notification not = (Notification) getItem(position);
         holder.title.setText(StringEscapeUtils.unescapeJava(not.getMessage()));
         holder.date.setText(not.getReceiveDate());
@@ -116,6 +117,10 @@ class NotificationAdapter extends BaseAdapter {
         return convertView;
     }
 
+    /**
+     * Viewholder for notification
+     * Contains elements of notification list item to fill with data
+     */
     static class NotificationViewHolder {
         TextView title, date;
         ImageView icon;

@@ -4,8 +4,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.model.PackingObject;
@@ -15,7 +13,8 @@ import de.traveltogether.model.Response;
 
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Interactor for PackingListActivity
+ * Implements IPackingListInteractor
  */
 public class PackingListInteractor implements IPackingListInteractor {
 
@@ -29,6 +28,7 @@ public class PackingListInteractor implements IPackingListInteractor {
             obj.put("tripId", tripId);
         }
         catch(Exception e){
+            listener.onError("Fehler beim Http Request");
             Log.e(e.getClass().toString(), e.getMessage());
         }
         HttpRequest req = new HttpRequest(DataType.PACKINGOBJECT, ActionType.LIST, obj.toString(), this);
@@ -41,8 +41,7 @@ public class PackingListInteractor implements IPackingListInteractor {
         }
         else{
             try {
-                PackingList packingList = (PackingList)JsonDecode.getInstance().jsonToArray(response.getData(), PackingList.class);
-
+                PackingList packingList = (PackingList)JsonDecode.getInstance().jsonToClass(response.getData(), PackingList.class);
                 listener.onSuccess(packingList.list);
             }
             catch(Exception e){
@@ -53,7 +52,7 @@ public class PackingListInteractor implements IPackingListInteractor {
         }
     }
 
-    //Diese Klasse muss vorhanden sein und an JsonDecode.jsonToArray übergeben werden um ein Array aus dem Json zu erhalten
+    //Diese Klasse muss vorhanden sein und an JsonDecode.jsonToClass übergeben werden um ein Array aus dem Json zu erhalten
     class PackingList{
         PackingObject[] list;
     }

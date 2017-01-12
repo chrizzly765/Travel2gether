@@ -5,7 +5,10 @@ import android.util.Log;
 
 import de.traveltogether.model.Task;
 
-
+/**
+ * Presenter for TaskListActivity
+ * Implements ITaskListPresenter
+ */
 public class TaskListPresenter implements ITaskListPresenter {
 
     private TaskListActivity view;
@@ -23,8 +26,6 @@ public class TaskListPresenter implements ITaskListPresenter {
 
     @Override
     public void onSuccess(Task[] tasks) {
-
-        Log.d("Success in presenter","");
         view.onViewTasks(tasks);
     }
 

@@ -29,10 +29,10 @@ import de.traveltogether.gcm.GCMRegistrationIntentService;
 
 import static de.traveltogether.servercommunication.HashFactory.hashPassword;
 
+/**
+ * Activty for registering
+ */
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
-
-    //private static final String TAG = RegisterActivity.class.getSimpleName();
-
     private IRegisterPresenter presenter;
     private Button registerBtn;
     private EditText name;
@@ -48,19 +48,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         presenter = new RegisterPresenter(this);
-        registerBtn = (Button)findViewById(R.id.button_register);
+        registerBtn = (Button)findViewById(R.id.activity_register_button_register);
         registerBtn.setOnClickListener(this);
-        TextView loginBtn = (TextView)findViewById(R.id.login_Text2);
+        TextView loginBtn = (TextView)findViewById(R.id.activity_register_button_login);
         loginBtn.setOnClickListener(this);
         name = (EditText)findViewById(R.id.registerName);
         email = (EditText)findViewById(R.id.registerEmail);
         password=(EditText)findViewById(R.id.registerPassword);
         repeatPassword=(EditText)findViewById(R.id.registerPassword_repeat);
-
     }
 
     public void onClick(View v){
-        if(v.getId()==R.id.button_register) {
+        if(v.getId()==R.id.activity_register_button_register) {
             if (!(email.getText().length() > 0 && email.getText().toString().contains("@"))) {
                 onViewErrorMessage(getString(R.string.invalid_mailadress));
                 return;
@@ -75,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 return;
             }
             progressDialog = ProgressDialog.show(this, "",
-                    "Bitte warten...", true);
+                    getString(R.string.please_wait), true);
             v.setEnabled(false);
 
             mRegistrationBroadcastReceiver = new BroadcastReceiver() {
@@ -95,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                     } else if(intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_ERROR)){
                         //Registration error
-                       onViewErrorMessage("Error in receiving token from GCM.");
+                       Log.e("GCM","Error in receiving token from GCM.");
                     }
                 }
             };
@@ -126,9 +125,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     new IntentFilter(GCMRegistrationIntentService.REGISTRATION_ERROR));
 
         }
-        else if (v.getId()== R.id.login_Text2){
-            //Intent login = new Intent(this, LoginActivity.class);
-            //startActivity(login);
+        else if (v.getId()== R.id.activity_register_button_login){
             finish();
         }
         if(progressDialog!=null) {

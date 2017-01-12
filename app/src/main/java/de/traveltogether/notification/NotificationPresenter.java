@@ -4,7 +4,8 @@ import de.traveltogether.ActionType;
 import de.traveltogether.model.Notification;
 
 /**
- * Created by Anna-Lena on 16.05.2016.
+ * Presenter for NotificationActivity
+ * Implements INotificationPresenter
  */
 public class NotificationPresenter implements INotificationPresenter {
 

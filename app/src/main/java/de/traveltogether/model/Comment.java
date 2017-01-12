@@ -1,7 +1,7 @@
 package de.traveltogether.model;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Model class for comment
  */
 public class Comment {
     private long author =-1;

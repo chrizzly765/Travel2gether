@@ -1,6 +1,8 @@
 package de.traveltogether.model;
 
-
+/**
+ * Model class for Registration
+ */
 public class Registration {
     private String name;
     private String email;

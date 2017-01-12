@@ -6,7 +6,7 @@ import de.traveltogether.model.Participant;
 import de.traveltogether.participantlist.ParticipantState;
 
 /**
- * Created by Anna-Lena on 09.10.2016.
+ * Static class that provides data of the current chosen trip
  */
 public class StaticTripData {
     static private Participant[] participants;
@@ -29,6 +29,10 @@ public class StaticTripData {
         }
     }
 
+    /**
+     * Returns all active Participants for current trip
+     * @return array with active participants
+     */
     static public Participant[] getActiveParticipants(){
         ArrayList<Participant> activeParticipants = new ArrayList<Participant>();
         if(participants==null || participants.length==0){
@@ -42,6 +46,10 @@ public class StaticTripData {
         return toArray(activeParticipants);
     }
 
+    /**
+     * Returns all invited Participants for current trip
+     * @return array with invited participants
+     */
     static public Participant[] getInvitedParticipants(){
         ArrayList<Participant> invitedParticipants = new ArrayList<Participant>();
         if(participants==null || participants.length==0){
@@ -55,6 +63,10 @@ public class StaticTripData {
         return toArray(invitedParticipants);
     }
 
+    /**
+     * Returns all resigned Participants for current trip
+     * @return array with resigned participants
+     */
     static public Participant[] getResignedParticipants(){
         ArrayList<Participant> resignedParticipants = new ArrayList<Participant>();
         if(participants==null || participants.length==0){
@@ -70,13 +82,13 @@ public class StaticTripData {
 
     /**
      * returns name if id is available, null else
-     * @param id
-     * @return
+     * @param id: PersonId
+     * @return name
      */
     static public String getNameById(int id) {
         if(participants!=null) {
             for (Participant p : participants) {
-                if ((int) p.getPersonId() == id) {
+                if (p.getPersonId() == id) {
                     return p.getUserName();
                 }
             }
@@ -85,6 +97,11 @@ public class StaticTripData {
     }
 
 
+    /**
+     * Returns color if id is available, empty string else
+     * @param id: PersonId
+     * @return color
+     */
     static public String getColorById(int id){
         if(participants!=null) {
             for (Participant p : participants) {
@@ -96,6 +113,11 @@ public class StaticTripData {
         return "";
     }
 
+    /**
+     * Converts Participant List to Array
+     * @param list
+     * @return array with participants in list
+     */
     static private Participant[] toArray(ArrayList<Participant> list){
         Participant[] array = new Participant[list.size()];
         for(int i = 0; i<list.size(); i++){

@@ -14,6 +14,9 @@ import de.traveltogether.R;
 import de.traveltogether.model.Task;
 import de.traveltogether.tasks.detail.TaskDetailActivity;
 
+/**
+ * Fragment that contains list with tasks
+ */
 public class TaskListFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
     private TaskAdapter adapter;
@@ -27,8 +30,6 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     public TaskListFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static TaskListFragment newInstance(Task[] _tasks ) {
         TaskListFragment fragment = new TaskListFragment();
         fragment.tasks = _tasks;
@@ -44,7 +45,6 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_task_list, container, false);
-
         return view;
     }
 
@@ -86,8 +86,8 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent detail = new Intent(getActivity(), TaskDetailActivity.class);
         Bundle b = new Bundle();
-        b.putLong("featureId", tasks[position].getId()); //Your id
-        detail.putExtras(b); //Put your id to your next Intent
+        b.putLong("featureId", tasks[position].getId());
+        detail.putExtras(b);
         startActivity(detail);
     }
 }

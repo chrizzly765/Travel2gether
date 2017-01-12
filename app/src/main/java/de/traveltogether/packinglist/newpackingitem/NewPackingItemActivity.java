@@ -28,6 +28,9 @@ import de.traveltogether.model.PackingItem;
 import de.traveltogether.model.PackingObject;
 import de.traveltogether.model.Participant;
 
+/**
+ * Activity for creating a new packing item
+ */
 public class NewPackingItemActivity extends AppCompatActivity implements View.OnClickListener {
 
     private INewPackingItemPresenter presenter;
@@ -50,7 +53,6 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_packing_item);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -70,9 +72,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         for(int i = 0; i < StaticTripData.getActiveParticipants().length; i++){
             participantNames[i] = StaticTripData.getActiveParticipants()[i].getUserName();
         }
-
         presenter = new NewPackingItemPresenter(this);
-
         if(chosenParticipants == null){
             chosenParticipants = new ArrayList<PackingItem>();
         }
@@ -87,10 +87,10 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
     protected void onStart(){
         super.onStart();
         if(featureId!=-1){
-            getSupportActionBar().setTitle("Packelement bearbeiten");
+            getSupportActionBar().setTitle(getString(R.string.edit_packingitem));
             presenter.onGetDetailForPackingObject(featureId);
             progressDialog = ProgressDialog.show(this, "",
-                    "Packelement wird geladen...", true);
+                    getString(R.string.packingitem) + getString(R.string.is_loading), true);
         }
         else {
             getSupportActionBar().setTitle("Neues Packelement");
@@ -108,7 +108,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
             case R.id.action_save:
                 if(!StringEscapeUtils.escapeJava(title.getText().toString()).equals("")){
                     progressDialog = ProgressDialog.show(this, "",
-                            "Bitte warten...", true);
+                            getString(R.string.please_wait), true);
 
                     // DEFAULT TEXT IF FIELDS ARE EMPTY
                     if(StringEscapeUtils.escapeJava(description.getText().toString()).equals("")){
@@ -130,7 +130,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
 
                         if(chosenParticipants!=null) {
                             for (PackingItem p : chosenParticipants) {
-                                packingobject.addPackingItem(p);//TODO: add amount in field
+                                packingobject.addPackingItem(p);
                             }
                         }
                         presenter.onUpdatePackingObject(packingobject);
@@ -147,7 +147,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                         if(chosenParticipants!=null) {
                             PackingItem[] array= new PackingItem[chosenParticipants.size()];
                             for (PackingItem p : chosenParticipants) {
-                                packingobject.addPackingItem(p);//TODO: add amount in field
+                                packingobject.addPackingItem(p);
                             }
                         }
                         presenter.onCreatePackingObject(packingobject);
@@ -156,7 +156,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                     return true;
                 }
                 else{
-                    onViewError("Bitte gib einen Titel für dein Packelement ein.","Pflichtfeld");
+                    onViewError(getString(R.string.missing_title_male, getString(R.string.packingitem)),getString(R.string.mandatory));
                     return false;
                 }
 
@@ -170,7 +170,6 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
     }
 
     public void onViewError(String message, String title) {
-        //progressDialog.cancel();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setTitle(title);
@@ -179,7 +178,6 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                 dialog.cancel();
             }
         });
-
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -193,7 +191,6 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         for(PackingItem p: packingObject.getItems()){
             chosenParticipants.add(p);
         }
-        //chosenParticipants = (List<PackingItem>)packingObject.getItems();
         chosenIds = new ArrayList<Integer>();
         for(PackingItem p:chosenParticipants){
             for(int i = 0; i< participants.length; i++) {
@@ -207,7 +204,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
 
     public void onSuccessUpdatePackingObject(){
         Context context = getApplicationContext();
-        CharSequence text = "Erfolgreich geändert.";
+        CharSequence text = getString(R.string.success_change);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
@@ -217,7 +214,7 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
 
     public void onSuccessAddingPackingObject(){
         Context context = getApplicationContext();
-        CharSequence text = "Erfolgreich hinzugefügt.";
+        CharSequence text = getString(R.string.add_packingitem_success);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
@@ -246,10 +243,8 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         for(int i = 0; i<checkedItems.length; i++){
             checkedItems[i] = list.contains(i);
         }
-        // Set the dialog title
-        builder.setTitle("Wer packt ein?");
-        // Specify the list array, the items to be selected by default (null for none),
-        // and the listener through which to receive callbacks when items are selected
+        builder.setTitle(getString(R.string.who_packs));
+
         builder.setMultiChoiceItems(participantNames, checkedItems,
                 new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
@@ -270,14 +265,12 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked OK, so save the mSelectedItems results somewhere
-                // or return them to the component that opened the dialog
                 chosenIds = mSelectedItems;
                 dialog.cancel();
                 updateParticipantList();
             }
         })
-                .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
@@ -286,7 +279,6 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
 
         AlertDialog dialog = builder.create();
         dialog.show();
-
     }
 
     public void updateParticipantList(){
@@ -304,5 +296,4 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
         fragmentTransaction.attach(fragment);
         fragmentTransaction.commit();
     }
-
 }

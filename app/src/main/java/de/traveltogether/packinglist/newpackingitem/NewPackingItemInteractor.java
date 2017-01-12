@@ -4,8 +4,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.model.PackingObject;
@@ -14,7 +12,8 @@ import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Interactor for NewPackingItemActivity
+ * Implements INewPackinItemInteractor
  */
 public class NewPackingItemInteractor implements INewPackingItemInteractor {
     private INewPackingItemPresenter listener;
@@ -57,7 +56,7 @@ public class NewPackingItemInteractor implements INewPackingItemInteractor {
                 listener.onSuccessAddingPackingObject();
             }
             else if(actionType == ActionType.DETAIL){
-                listener.onSuccessGetDetail((PackingObject) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.PACKINGOBJECT));
+                listener.onSuccessGetDetail((PackingObject) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.PACKINGOBJECT));
             }
         }
     }

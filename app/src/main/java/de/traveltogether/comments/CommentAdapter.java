@@ -96,7 +96,7 @@ class CommentAdapter extends BaseAdapter {
         }
 */
         holder.content.setText(StringEscapeUtils.unescapeJava(comment.getText()));
-        ((ImageView)holder.icon.findViewById(R.id.fragment_commentlist_list_item_icon_circle))
+        holder.icon.findViewById(R.id.fragment_commentlist_list_item_icon_circle)
                 .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById((int)comment.getId())));
         ((TextView)holder.icon.findViewById(R.id.fragment_commentlist_list_item_icon_initial))
                 .setText(StaticTripData.getNameById((int)comment.getId()).substring(0,1));

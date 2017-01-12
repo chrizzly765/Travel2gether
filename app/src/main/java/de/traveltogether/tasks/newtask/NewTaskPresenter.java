@@ -2,7 +2,10 @@ package de.traveltogether.tasks.newtask;
 
 import de.traveltogether.model.Task;
 
-
+/**
+ * Presenter for NewTaskActivity
+ * Implements INewTaskPresenter
+ */
 public class NewTaskPresenter implements INewTaskPresenter {
 
     private NewTaskActivity view;
@@ -21,7 +24,6 @@ public class NewTaskPresenter implements INewTaskPresenter {
     public void onSuccessGetDetails(Task task) {
         view.onViewDetails(task);
     }
-
 
     @Override
     public void onCreateTask(Task task) {

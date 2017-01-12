@@ -4,7 +4,8 @@ import de.traveltogether.model.PackingObject;
 import android.util.Log;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Presenter for PackingListActivity
+ * Implements IPackingListPresenter
  */
 public class PackingListPresenter implements IPackingListPresenter {
 
@@ -23,8 +24,6 @@ public class PackingListPresenter implements IPackingListPresenter {
 
     @Override
     public void onSuccess(PackingObject[] packingobjects) {
-
-        Log.d("Success in preseneter","");
         view.onViewPackingObjects(packingobjects);
     }
 

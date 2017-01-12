@@ -13,7 +13,9 @@ import de.traveltogether.R;
 import de.traveltogether.model.PackingObject;
 import de.traveltogether.packinglist.packingdetail.PackingDetailActivity;
 
-
+/**
+ * Fragment that contains list of packingitems
+ */
 public class PackingListFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
     private PackingObject[] packingObjects;
@@ -43,7 +45,6 @@ public class PackingListFragment extends ListFragment implements AdapterView.OnI
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_packing_list, container, false);
-
         return view;
     }
 
@@ -54,33 +55,17 @@ public class PackingListFragment extends ListFragment implements AdapterView.OnI
             adapter = new PackingListAdapter(getActivity(), packingObjects);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);
-
-
-            /*ViewGroup vg = getListView();
-            int totalHeight = 0;
-            for (int i = 0; i < adapter.getCount(); i++) {
-                View listItem = adapter.getView(i, null, vg);
-                listItem.measure(0, 0);
-                totalHeight += 440;//listItem.getMeasuredHeight();
-            }
-
-            ViewGroup.LayoutParams par = getListView().getLayoutParams();
-            par.height = totalHeight + (getListView().getDividerHeight() * (adapter.getCount() - 1));
-            getListView().setLayoutParams(par);
-            getListView().requestLayout();*/
         }
-
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("click", "on item click");
         PackingObject packingObject = (PackingObject) adapter.getItem(position);
 
         Intent intent = new Intent(getActivity(), PackingDetailActivity.class);
         Bundle b = new Bundle();
-        b.putLong("featureId", packingObject.getId()); //Your id
-        intent.putExtras(b); //Put your id to your next Intent
+        b.putLong("featureId", packingObject.getId());
+        intent.putExtras(b);
         startActivity(intent);
     }
 }

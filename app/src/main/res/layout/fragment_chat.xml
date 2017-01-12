@@ -31,11 +31,12 @@
         <EditText
             android:layout_width="fill_parent"
             android:layout_weight="0.1"
-            android:inputType="textCapSentences"
+            android:inputType="textMultiLine"
             android:layout_height="wrap_content"
             android:id="@+id/fragment_comment_editText"
             android:hint="Nachricht schreiben"
-            android:layout_gravity="bottom" />
+            android:layout_gravity="bottom"
+            />
 
         <ImageButton
             android:layout_weight="0.9"
@@ -44,7 +45,7 @@
             android:src="@mipmap/ic_send"
             android:backgroundTint="@android:color/transparent"
             android:id="@+id/fragment_comment_button_send"
-            android:layout_gravity="bottom" />
+            android:layout_gravity="center_horizontal|bottom" />
     </LinearLayout>
 
     <!--

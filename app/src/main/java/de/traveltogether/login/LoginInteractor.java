@@ -18,7 +18,9 @@ import de.traveltogether.model.Response;
 
 import static de.traveltogether.servercommunication.HashFactory.hashPassword;
 
-
+/**
+ * Interactor for LoginActivity
+ */
  class LoginInteractor implements ILoginInteractor {
     private ILoginPresenter listener;
     private String hash;
@@ -27,7 +29,6 @@ import static de.traveltogether.servercommunication.HashFactory.hashPassword;
         listener = _listener;
         hash = _hash;
         Login log = new Login(_email, _hash);
-
         String jsonString = JsonDecode.getInstance().classToJson(log).replace("\\n", "\n");
         HttpRequest request = new HttpRequest(DataType.LOGIN, ActionType.LOGIN, jsonString, this);
     }
@@ -40,7 +41,8 @@ import static de.traveltogether.servercommunication.HashFactory.hashPassword;
             HttpRequest request = new HttpRequest(DataType.LOGIN, ActionType.GETSALT, obj.toString(), this);
         }
         catch(Exception e){
-            //TODO
+            Log.e(e.getClass() + "", e.getMessage());
+            listener.onError("Fehler beim HttpRequest");
         }
 
     }
@@ -52,12 +54,11 @@ import static de.traveltogether.servercommunication.HashFactory.hashPassword;
             JSONObject obj = new JSONObject();
             obj.put("deviceId", token);
             obj.put("personId", StaticData.getUserId());
-
-            //TODO: when server ready
             HttpRequest request = new HttpRequest(DataType.PERSON, ActionType.UPDATEDEVICEID, obj.toString(), this);
         }
         catch(Exception e){
-            //TODO
+            Log.e(e.getClass() + "", e.getMessage());
+            listener.onError("Fehler beim HttpRequest");
         }
     }
 
@@ -73,7 +74,6 @@ import static de.traveltogether.servercommunication.HashFactory.hashPassword;
             newPW.getChars(0, length, newpw, 0);
             String newHash = hashPassword(newpw, salt);
             newHash = newHash.replace("/", "");
-
             JSONObject json = new JSONObject();
             json.put("email", email);
             json.put("plainPassword", newPW);
@@ -84,12 +84,13 @@ import static de.traveltogether.servercommunication.HashFactory.hashPassword;
         }
         catch (Exception e){
             Log.e(e.getClass().toString(),e.getMessage());
+            listener.onError("Fehler beim HttpRequest");
         }
     }
 
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType){
         if(response.getError().equals("true")){
-            listener.onError(response.getMessage());
+            listener.onError("Fahler beim Anmelden. Benutzername oder Passwort ist nicht korrekt.");
         }
         else {
             if (dataType == DataType.LOGIN && actionType == ActionType.GETSALT) {
@@ -117,7 +118,6 @@ import static de.traveltogether.servercommunication.HashFactory.hashPassword;
                 } catch (Exception e) {
                     Log.d("Error: ", e.getMessage());
                 }
-
                 SharedPreferences sharedPref = listener.getView().getSharedPreferences("TravelTogetherPrefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString(listener.getView().getString(R.string.saved_hash), hash);
@@ -129,8 +129,6 @@ import static de.traveltogether.servercommunication.HashFactory.hashPassword;
                 }
                 boolean saved = editor.commit();
                 listener.onSuccess(response.getMessage());
-            } else if (dataType == DataType.PERSON && actionType == ActionType.UPDATEDEVICEID) {
-                Log.d("LoginInteractor", "DeviceId updated");
             }
             else if (dataType == DataType.PERSON && actionType == ActionType.FORGOTPASSWORD){
                 listener.onSuccessForgotPassword();

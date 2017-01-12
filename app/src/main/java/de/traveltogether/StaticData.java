@@ -3,7 +3,7 @@ package de.traveltogether;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by Anna-Lena on 29.05.2016.
+ * Contains static data and functions
  */
 public class StaticData {
     static private int UserId = -1;
@@ -18,6 +18,11 @@ public class StaticData {
         UserId = id;
     }
 
+    /**
+     * Returns id of a circle drawable for a color string
+     * @param color contains color number in hex
+     * @return id of circle drawable in given color
+     */
     static public int getIdForColor(String color){
         switch(color){
             case "#00c9c5":

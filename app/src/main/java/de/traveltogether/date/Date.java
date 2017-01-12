@@ -97,11 +97,6 @@ public class Date {
         setDateInSeconds();
         setCurrentDateInSeconds();
 
-        if(dateInSeconds >= currentDateInSeconds) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return dateInSeconds >= currentDateInSeconds;
     }
 }

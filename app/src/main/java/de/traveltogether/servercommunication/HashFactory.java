@@ -13,7 +13,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 /**
- * Created by Anna-Lena on 29.05.2016.
+ * Factory for creating a hash for password
  */
 public class HashFactory {
     private static Random RANDOM = new SecureRandom();
@@ -26,8 +26,13 @@ public class HashFactory {
         return convertByteToString(salt);
     }
 
+    /**
+     * Create hash for given password and salt
+     * @param password char array
+     * @param salt string
+     * @return hash
+     */
     public static String hashPassword(char[] password, String salt) {
-
         try {
             String s = "";
             for (char c:password) {
@@ -46,22 +51,20 @@ public class HashFactory {
         }
     }
 
+    /**
+     * Helper class. Converts byte array to string
+     * @param b byte array
+     * @return string
+     */
     static String convertByteToString(byte[] b) {
         String s = "";
         try {
             String str = Base64.encodeToString(b, 0);
-            return str;//new String(b);
+            return str;
         } catch (Exception e) {
             Log.e(e.getClass().toString(), e.getMessage());
         }
         return "";
     }
 }
-//        for (int i = 0; i < b.length; i++) {
-//            //s += Byte.toString(b[i]);
-//            s+= new String(new byte[]{b[i]}, "Cp1252");
-//        }
-//        return s;
-
-
 

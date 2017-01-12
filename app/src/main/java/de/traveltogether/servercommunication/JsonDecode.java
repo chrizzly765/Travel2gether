@@ -5,11 +5,18 @@ import com.google.gson.Gson;
 
 import de.traveltogether.DataType;
 
-
+/**
+ * Class for decoding objects to json and reverse using Gson
+ */
 public class JsonDecode {
     private static JsonDecode instance;
-    private Gson gson;
+    private Gson gson; //Gson object used for convertions
 
+    /**
+     * Singelton for JsonDecode class.
+     * Use this static object instead of creating own object of the class.
+     * @return
+     */
     public static JsonDecode getInstance(){
         if(instance ==null){
             instance = new JsonDecode();
@@ -22,13 +29,13 @@ public class JsonDecode {
     }
 
     /**
-     * Converts Json String into class
+     * Converts Json String into class of DataType type
      * @param str json string
-     * @param type DataType which has same name as class in which it should be converted
+     * @param type DataType which has same name as class it should be converted to
      * @param <T> the resulting object type
      * @return object of type t
      */
-    public <T> T jsonToClass(String str, DataType type){
+    public <T> T jsonToClassByType(String str, DataType type){
 
         try {
             T obj = (T)gson.fromJson(str, Class.forName("de.traveltogether.model." + type.toString()));
@@ -43,50 +50,14 @@ public class JsonDecode {
         return null;
     }
 
-//    public Object jsonToClass(String str, DataType type){
-//
-//        try {
-//            Object obj = gson.fromJson(str, Class.forName("de.traveltogether.model." + type.toString()));
-//            return obj;
-//        }
-//        catch(ClassNotFoundException e){
-//            Log.e("Class not found", e.getMessage());
-//        }
-//        catch(Exception e) {
-//            Log.d("Error in json to class", e.getMessage());
-//        }
-//        return null;
-//    }
-
-    /*public <T> ArrayList<T> jsonToArray(String str, DataType type){
-        try {
-            String string = str.replace("[", "").replace("]","");
-            Log.d("jsonToarray",string);
-            String pattern = Pattern.quote("},{");
-            String [] array = string.split(pattern);
-            if (string != "{}") {
-                ArrayList<T> objList = new ArrayList<T>();
-                for (int i = 0; i < array.length; i++) {
-                    if(!array[i].startsWith("{")) {
-                        array[i] = "{" + array[i];
-                    }
-                    if(!array[i].endsWith("}")){
-                        array[i] = array[i] + "}";
-                    }
-                    Log.d("string", array[i]);
-                    objList.add((T)jsonToClass(array[i], type));
-                }
-                Log.d("JsonDecode", "return");
-                return objList;
-            }
-        }
-        catch(Exception e){
-            Log.d("Exception jsontoArray: ", e.getMessage());
-        }
-        return new ArrayList<T>();
-    }*/
-    public <T> Object jsonToArray(String str, Class<T> cl) {
-        //Class<T> arrayclass = (Class<T>)ObjectArray.class;
+    /**
+     * Converts json string to object of class T
+     * @param str json string
+     * @param cl class it should be converted to
+     * @param <T> the resulting object type
+     * @return object of type t
+     */
+    public <T> Object jsonToClass(String str, Class<T> cl) {
         T t = null;
         try {
             t = gson.fromJson(str, cl);
@@ -96,12 +67,21 @@ public class JsonDecode {
         return t;
     }
 
+    /**
+     * Converts an object to a json string
+     * @param obj object that should be converted
+     * @return json string
+     */
     public String classToJson(Object obj){
         String str = gson.toJson(obj);
-        Log.d("class to json", str);
         return str;
     }
 
+    /**
+     * Converts normal String to json string
+     * @param string
+     * @return
+     */
     public String getJson(String string){
         return gson.toJson(string);
     }

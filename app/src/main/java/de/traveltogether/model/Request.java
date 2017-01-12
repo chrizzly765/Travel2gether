@@ -3,7 +3,9 @@ package de.traveltogether.model;
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 
-
+/**
+ * Model class for Request
+ */
 public class Request {
 
     private String type;

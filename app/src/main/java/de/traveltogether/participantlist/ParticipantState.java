@@ -1,8 +1,8 @@
 package de.traveltogether.participantlist;
 
 /**
- * Created by Anna-Lena on 11.08.2016.
+ * Enum that contains different possible states for a participant
  */
 public enum ParticipantState {
-    INVITED, JOINED, RESIGNED;
+    INVITED, JOINED, RESIGNED
 }

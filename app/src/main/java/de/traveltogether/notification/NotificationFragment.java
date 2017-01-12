@@ -14,9 +14,7 @@ import de.traveltogether.model.Notification;
 import de.traveltogether.notification.NotificationAdapter;
 
 /**
- * A fragment representing a list of Items.
- * <p/>
- * interface.
+ * A fragment representing a list of Notifications.
  */
 public class NotificationFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
@@ -50,7 +48,6 @@ public class NotificationFragment extends ListFragment implements AdapterView.On
                 InvitationDialogFragment.createDialog(activity, n);
                 activity.presenter.onSetNotificationRead(n.getId());
             }
-
         }
     }
 
@@ -58,16 +55,12 @@ public class NotificationFragment extends ListFragment implements AdapterView.On
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_trip_list, container, false);
-
         return view;
     }
 
     public void onStart(){
         super.onStart();
-        if(notifications==null || notifications.length==0 ){
-            //do nothing
-        }
-        else {
+        if(!(notifications==null || notifications.length==0 )){
             adapter = new NotificationAdapter(getActivity(), notifications);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);

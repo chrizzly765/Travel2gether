@@ -4,8 +4,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.model.Participant;
@@ -75,7 +73,7 @@ public class MainMenuInteractor implements IMainMenuInteractor {
             }
             /*if(dataType==DataType.TRIP && actionType==ActionType.GETPARTICIPANTS){
                 if(response.getError()!="true") {
-                    Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list;
+                    Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToClass(response.getData(), ParticipantList.class)).list;
                     StaticTripData.setParticipants(participants);
                     listener.onSuccessGetParticipants();
                     return;
@@ -86,8 +84,8 @@ public class MainMenuInteractor implements IMainMenuInteractor {
             }*/
             if(dataType==DataType.TRIP && actionType==ActionType.GETSTATISTIC){
                 if(!response.getError().equals("true")) {
-                    listener.onSuccessGetStatistics((Statistic) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.STATISTIC));
-                    //Statistic statistics = ((Statistic) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.STATISTIC));
+                    listener.onSuccessGetStatistics((Statistic) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.STATISTIC));
+                    //Statistic statistics = ((Statistic) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.STATISTIC));
                     //listener.onSuccessGetStatistics(statistics);
                     return;
                 }

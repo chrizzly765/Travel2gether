@@ -3,7 +3,8 @@ package de.traveltogether.packinglist.newpackingitem;
 import de.traveltogether.model.PackingObject;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Presenter for NewPackingActivity
+ * Implements INewPackingItemPresenter
  */
 public class NewPackingItemPresenter implements INewPackingItemPresenter {
     private NewPackingItemActivity view;

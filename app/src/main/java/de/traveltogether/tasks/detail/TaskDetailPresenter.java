@@ -3,10 +3,9 @@ package de.traveltogether.tasks.detail;
 import de.traveltogether.model.Task;
 
 /**
- * Created by chris on 18.08.2016.
+ * Presenter for TaskDetailActivity
  */
 public class TaskDetailPresenter implements ITaskDetailPresenter {
-
     private TaskDetailActivity view;
     private ITaskDetailInteractor interactor;
 
@@ -48,7 +47,6 @@ public class TaskDetailPresenter implements ITaskDetailPresenter {
     @Override
     public void onGetParticipantsForTrip(long tripId) {
         interactor.getParticipantsForTrip(tripId, this);
-
     }
 
     @Override

@@ -4,8 +4,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.model.Trip;
@@ -13,15 +11,16 @@ import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 import de.traveltogether.model.Response;
 
-
+/**
+ * Interactor for NewTripActivity
+ * Implements INewTripInteractor
+ */
 public class NewTripInteractor implements INewTripInteractor {
     private INewTripPresenter listener;
 
     @Override
-    //public void createTrip(String title, String description, String startdate, String enddate, String place, INewTripPresenter _listener) {public void createTrip(String title, String description, String startdate, String enddate, String place, INewTripPresenter _listener) {
     public void createTrip(Trip trip, INewTripPresenter _listener) {
         listener = _listener;
-        //Trip trip = new Trip(title, description, place, startdate,enddate);
         String json = JsonDecode.getInstance().classToJson(trip);
         HttpRequest request = new HttpRequest(DataType.TRIP, ActionType.ADD, json, this);
     }
@@ -41,21 +40,21 @@ public class NewTripInteractor implements INewTripInteractor {
             obj.put("tripId", tripId);
         }
         catch(Exception e){
+            listener.onError("Fehler", "Fehler beim Http Request");
             Log.e(e.getClass().toString(), e.getMessage());
         }
         HttpRequest req = new HttpRequest(DataType.TRIP, ActionType.DETAIL, obj.toString(), this);
-
     }
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if(response.getError().equals("false")){
             if(actionType == ActionType.ADD) {
-                long tripId = ((Trip) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP)).getTripId();
+                long tripId = ((Trip) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.TRIP)).getTripId();
                 listener.onSuccess(response.getMessage(), tripId);
             }
             else if(actionType==ActionType.DETAIL){
-                listener.onSuccessGetDetails((Trip)JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TRIP));
+                listener.onSuccessGetDetails((Trip)JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.TRIP));
             }
             else if(actionType == ActionType.UPDATE){
                 listener.onSuccessUpdateTrip(response.getMessage());

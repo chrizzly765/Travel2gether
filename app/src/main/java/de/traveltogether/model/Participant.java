@@ -1,7 +1,8 @@
 package de.traveltogether.model;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Model class for Participant
+ * extends Person
  */
 
 public class Participant extends Person {

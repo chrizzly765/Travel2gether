@@ -27,6 +27,9 @@ import de.traveltogether.model.PackingItem;
 import de.traveltogether.model.PackingObject;
 import de.traveltogether.packinglist.newpackingitem.NewPackingItemActivity;
 
+/**
+ * Activity for viewing details of a packingitem
+ */
 public class PackingDetailActivity extends DeleteActivity implements DialogInterface.OnClickListener{
 
     private long featureId =-1;
@@ -41,11 +44,8 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         getSupportActionBar().setHomeButtonEnabled(true);
-
         presenter = new PackingDetailPresenter(this);
         setContentView(R.layout.activity_packing_detail);
         featureId = getIntent().getLongExtra("featureId", -1);
@@ -53,15 +53,9 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
-
-
         title = (TextView) findViewById(R.id.activity_packing_detail_title);
         description = (TextView) findViewById(R.id.activity_packing_detail_description);
         count = (TextView)findViewById(R.id.activity_packing_detail_count);
-        //amount = (TextView) findViewById(R.id.activity_expense_detail_amount);
-        //paidBy = (TextView)findViewById(R.id.activity_expense_detail_paidby);
-
-
     }
 
     @Override
@@ -167,7 +161,7 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
     public void onSuccessDelete(){
         progressDialog.cancel();
         Context context = getApplicationContext();
-        CharSequence text = "Packelement erfolgreich gelöscht.";
+        CharSequence text = getString(R.string.deleted_packingitem_success);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
@@ -177,7 +171,7 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
     public void onCloseActivity(){
         progressDialog.cancel();
         Context context = getApplicationContext();
-        CharSequence text = "Dieses Packelement wurde gelöscht.";
+        CharSequence text =getString(R.string.deleted_packingitem);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
@@ -197,12 +191,11 @@ public class PackingDetailActivity extends DeleteActivity implements DialogInter
             presenter.onDeletePackingObject(packingObject.getId());
         }
         else{
-            onViewError("Nur der Ersteller dieses Packelements darf das Packelement löschen.", "Sorry.");
+            onViewError(getString(R.string.deleting_not_allowed_thing, getString(R.string.packingitem)),getString(R.string.sorry));
         }
     }
 
     public void setPackingItemClicked(int pos){
-        Log.d("packingdetail", "setItemclicked");
         PackingItem item = packingObject.getItems().get(pos);
         item.toggleStatus();
         presenter.onUpdatePackingItem(packingObject.getItems().get(pos));

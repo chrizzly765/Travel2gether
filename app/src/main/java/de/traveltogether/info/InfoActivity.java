@@ -30,6 +30,9 @@ import de.traveltogether.model.Participant;
 import de.traveltogether.model.Trip;
 import de.traveltogether.triplist.newtrip.NewTripActivity;
 
+/**
+ * Activity for viewing trip infos and participants
+ */
 public class InfoActivity extends DeleteActivity implements View.OnClickListener {
     private IInfoPresenter presenter;
     private long tripId;
@@ -43,16 +46,15 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
-        getSupportActionBar().setTitle("Reiseinfo");
+        getSupportActionBar().setTitle(getString(R.string.trip_information));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         presenter = new InfoPresenter(this);
         tripId = this.getIntent().getLongExtra("tripId", -1);
         if(tripId==-1){
-            onViewError("TripId fehlt!", "Etwas ist schiefgelaufen.");
+            onViewError("TripId fehlt!", getString(R.string.error));
         }
         if(StaticTripData.getActiveParticipants().length == 0){
             presenter.onGetParticipantsForTrip(tripId);
@@ -64,7 +66,7 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
     protected void onStart(){
         super.onStart();
         progressDialog = ProgressDialog.show(this, "",
-                "Info wird geladen...", true);
+                getString(R.string.trip_information) +  getString(R.string.is_loading), true);
         presenter.onGetInfoForTrip(tripId);
     }
 
@@ -111,7 +113,6 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
     }
 
     public void onViewParticipants(Participant[] participants){
-        Log.d("info", "view participants");
         Participant[] activeParts = StaticTripData.getActiveParticipants();
         Participant[] invitedParts = StaticTripData.getInvitedParticipants();
         Participant[] resignedParts = StaticTripData.getResignedParticipants();
@@ -131,8 +132,6 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
         }
         else{
             ((LinearLayout)findViewById(R.id.activity_info_devider_active)).removeView(findViewById(R.id.activity_info_devider_active));
-
-            //findViewById(R.id.activity_info_devider_active).setVisibility(View.GONE);
         }
         if(invitedParts.length>0) {
             findViewById(R.id.activity_info_devider_invited).setVisibility(View.VISIBLE);
@@ -148,8 +147,6 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
         }
         else{
             ((LinearLayout)findViewById(R.id.activity_info_devider_invited)).removeView(findViewById(R.id.activity_info_devider_invited));
-
-            //findViewById(R.id.activity_info_devider_invited).setVisibility(View.GONE);
         }
         if(resignedParts.length>0) {
             findViewById(R.id.activity_info_devider_resigned).setVisibility(View.VISIBLE);
@@ -166,12 +163,8 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
 
         else{
             ((LinearLayout)findViewById(R.id.activity_info_devider_resigned)).removeView(findViewById(R.id.activity_info_devider_resigned));
-
-            //findViewById(R.id.activity_info_devider_resigned).setVisibility(View.GONE);
         }
         progressDialog.cancel();
-
-
     }
 
     @Override
@@ -236,12 +229,10 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
 
     public void onSuccessDeleteTrip(){
         Context context = getApplicationContext();
-        CharSequence text = "Reise gelöscht.";
+        CharSequence text = getString(R.string.trip_deleted);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-        //Intent intent = new Intent(this, TripListActivity.class);
-        //startActivity(intent);
         setResult(RESULT_OK, null);
         finish();
 
@@ -252,8 +243,7 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
             presenter.onDeleteTrip(tripId);
         }
         else{
-            onViewError("Nur der Ersteller dieser Reise darf die Reise löschen.", "Sorry.");
-
+            onViewError(getString(R.string.deleting_not_allowed, getString(R.string.trip)), getString(R.string.sorry));
         }
     }
 }

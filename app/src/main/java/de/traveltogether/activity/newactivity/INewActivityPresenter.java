@@ -8,13 +8,13 @@ import de.traveltogether.model.Activity;
 public interface INewActivityPresenter {
     //public void onGetParticipantsForTrip(long tripId);
     //public void onSuccessGetParticipants(Participant[] participants);
-    public void onError(String message, String title);
-    public void onCreateActivity(long tripId, Activity activity);
-    public void onSuccessAddingActivity();
-    public void onUpdateActivity(Activity activity);
-    public void onGetDetailForActivity(long featureId);
-    public void onSuccessGetDetail(Activity activity);
-    public void onSuccessUpdateActivity();
+    void onError(String message, String title);
+    void onCreateActivity(long tripId, Activity activity);
+    void onSuccessAddingActivity();
+    void onUpdateActivity(Activity activity);
+    void onGetDetailForActivity(long featureId);
+    void onSuccessGetDetail(Activity activity);
+    void onSuccessUpdateActivity();
 
     //public void onSuccess(String message);
 }

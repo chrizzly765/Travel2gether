@@ -3,7 +3,7 @@ package de.traveltogether.model;
 import de.traveltogether.StaticData;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Model class for Trip
  */
 public class Trip {
     private Long tripId;
@@ -83,5 +83,4 @@ public class Trip {
         lastUpdateBy = _lastUpdateBy;
         lastUpdate=_lastUpdate;
     }
-
 }

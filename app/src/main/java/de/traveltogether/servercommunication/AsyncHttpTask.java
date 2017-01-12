@@ -1,7 +1,6 @@
 package de.traveltogether.servercommunication;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -13,7 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by Anna-Lena on 28.05.2016.
+ * AsyncTask for processing http request
  */
 class AsyncHttpTask extends AsyncTask<String, String, String> {
     private HttpURLConnection connection;
@@ -24,6 +23,11 @@ class AsyncHttpTask extends AsyncTask<String, String, String> {
         caller= _caller;
     }
 
+    /**
+     * Work the task should do in background
+     * @param strings
+     * @return
+     */
     @Override
     public String doInBackground(String... strings) {
         String response = "UNDEFINED";
@@ -36,7 +40,6 @@ class AsyncHttpTask extends AsyncTask<String, String, String> {
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
             OutputStreamWriter wr = new OutputStreamWriter(connection.getOutputStream());
-            Log.d("send: ", strings[1]);
             wr.write(strings[1]);
             wr.flush();
             wr.close();
@@ -44,7 +47,6 @@ class AsyncHttpTask extends AsyncTask<String, String, String> {
             InputStream stream = new BufferedInputStream(connection.getInputStream());
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream));
             StringBuilder builder = new StringBuilder();
-            //String inputString;
             while ((response = bufferedReader.readLine()) != null) {
                 builder.append(response);
             }
@@ -60,11 +62,12 @@ class AsyncHttpTask extends AsyncTask<String, String, String> {
         return response;
     }
 
+    /**
+     * After executing onPostExecute is called
+     * @param result
+     */
     @Override
     protected void onPostExecute(String result){
-        Log.d("result",result);
         caller.setResponse(result);
     }
-
-
 }

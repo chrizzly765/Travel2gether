@@ -4,8 +4,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.StaticData;
@@ -54,7 +52,7 @@ public class InviteInteractor implements IInviteInteractor {
                 Log.e("Error in Interactor", response.getMessage());
                 listener.onError(response.getMessage());
             } else {
-                PersonList persons = (PersonList)JsonDecode.getInstance().jsonToArray(response.getData(), PersonList.class);
+                PersonList persons = (PersonList)JsonDecode.getInstance().jsonToClass(response.getData(), PersonList.class);
                 if(persons!=null) {
                     listener.onShowParticipants(persons.list);
                 }

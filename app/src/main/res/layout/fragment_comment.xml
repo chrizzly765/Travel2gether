@@ -22,7 +22,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_weight="0.1"
-        android:inputType="textCapSentences"
+        android:inputType="textMultiLine"
         android:layout_height="wrap_content"
         android:id="@+id/fragment_comment_editText"
         android:hint="@string/comment" />
@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_send"
         android:backgroundTint="@android:color/transparent"
-        android:id="@+id/fragment_comment_button_send" />
+        android:id="@+id/fragment_comment_button_send"
+        android:layout_gravity="center_horizontal|bottom"/>
     </LinearLayout>
 </LinearLayout>

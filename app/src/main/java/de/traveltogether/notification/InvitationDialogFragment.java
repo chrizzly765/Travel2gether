@@ -11,11 +11,8 @@ import de.traveltogether.R;
 import de.traveltogether.model.Notification;
 
 /**
- * A DialogFragment Subclass
- * Activities that contain this fragment must
- * implement the DatPickerDialog.OnDateSetListener
- * to handle interaction events.
- * Caution!!! datepicker counts month from ZERO!!!
+ * Fragment for invitation dialog
+ * Dialog for accepting or declining an invitation that pops up in notificationactivity
  */
 public class InvitationDialogFragment extends DialogFragment implements DialogInterface.OnClickListener{
     public static final String TAG = InvitationDialogFragment.class.getSimpleName();

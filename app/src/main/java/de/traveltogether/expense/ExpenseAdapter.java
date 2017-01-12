@@ -72,11 +72,11 @@ class ExpenseAdapter extends BaseAdapter {
         holder.iconLast.setVisibility(View.VISIBLE);
         ((TextView) holder.iconLast.findViewById(R.id.fragment_expense_list_item_icon_initial_last))
                 .setText(StaticTripData.getNameById(expense.getPayer()).substring(0, 1));
-        ((ImageView) holder.iconLast.findViewById(R.id.fragment_expense_list_item_icon_circle_last))
+        holder.iconLast.findViewById(R.id.fragment_expense_list_item_icon_circle_last)
                 .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(expense.getPayer())));
-        ((ImageView)holder.iconLast.findViewById(R.id.fragment_expense_list_item_payer_icon_circle_last))
+        holder.iconLast.findViewById(R.id.fragment_expense_list_item_payer_icon_circle_last)
                 .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(expense.getPayer())));
-        ((FrameLayout)holder.iconLast.findViewById(R.id.fragment_expense_list_item_payer_icon_last))
+        holder.iconLast.findViewById(R.id.fragment_expense_list_item_payer_icon_last)
                 .setVisibility(View.VISIBLE);
 
         if(expense.getAssignedPayers().size()>0){
@@ -101,7 +101,7 @@ class ExpenseAdapter extends BaseAdapter {
                         if (payers.size() > count) {
                             holder.icon1.setVisibility(View.VISIBLE);
                             holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_dotdotdot_1).setVisibility(View.VISIBLE);
-                            ((ImageView) holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_circle_1))
+                            holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_circle_1)
                                     .setBackgroundResource(R.drawable.circle_light_grey);
                             holder.icon1.findViewById(R.id.fragment_expense_list_item_icon_initial_1).setVisibility(View.INVISIBLE);
                         } else {

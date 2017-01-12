@@ -1,13 +1,12 @@
 package de.traveltogether.model;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Model class for PackingItem
  */
 public class PackingItem {
     private long id;
     private int personId;
     private boolean status = false;
-    //private long id = 0;
     private int number = 1;
 
     public boolean getStatus(){
@@ -16,18 +15,14 @@ public class PackingItem {
     public void assignToParticipant(int _person){
         personId = _person;
     }
-    //public long getId(){return id;}
     public int getNumber(){return number;}
     public void setId(long _id){ id=_id; }
-
     public void toggleStatus(){
         status = !status;
     }
-
     public int getAssignedPerson(){
         return personId;
     }
-
 
     public PackingItem(int _personAssigned) {
         personId = _personAssigned;

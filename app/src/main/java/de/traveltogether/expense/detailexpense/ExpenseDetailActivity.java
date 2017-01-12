@@ -29,6 +29,9 @@ import de.traveltogether.expense.newexpense.NewExpenseActivity;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Payer;
 
+/**
+ * Activity viewing details for an expense
+ */
 public class ExpenseDetailActivity extends DeleteActivity{
     private long featureId =-1;
     private long tripId =-1;
@@ -46,7 +49,7 @@ public class ExpenseDetailActivity extends DeleteActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_detail);
 
-        getSupportActionBar().setTitle("Ausgabe");
+        getSupportActionBar().setTitle(getString(R.string.expense));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
@@ -70,7 +73,7 @@ public class ExpenseDetailActivity extends DeleteActivity{
     protected void onStart(){
         super.onStart();
         progressDialog = ProgressDialog.show(this, "",
-                "Bitte warten...", true);
+                getString(R.string.please_wait), true);
         if(featureId!=-1){
             presenter.onGetDetailsForExpense(featureId);
         }
@@ -121,9 +124,9 @@ public class ExpenseDetailActivity extends DeleteActivity{
         paidBy.setText(StaticTripData.getNameById(expense.getPayer()));
 
         FrameLayout icon = (FrameLayout)findViewById(R.id.activity_expense_detail_icon);
-        ((ImageView)icon.findViewById(R.id.activity_expense_detail_icon_circle))
+        icon.findViewById(R.id.activity_expense_detail_icon_circle)
                 .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(expense.getPayer())));
-        ((ImageView)icon.findViewById(R.id.activity_expense_detail_payer_icon_circle))
+        icon.findViewById(R.id.activity_expense_detail_payer_icon_circle)
                 .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(expense.getPayer())));
         ((TextView)icon.findViewById(R.id.activiy_expense_detail_icon_initial))
                 .setText(StaticTripData.getNameById(expense.getPayer()).substring(0,1));
@@ -153,12 +156,6 @@ public class ExpenseDetailActivity extends DeleteActivity{
         switch (item.getItemId()) {
             case R.id.delete:
                 createDeleteDialog();
-                /*if(expense.getAuthor() == StaticData.getUserId()){
-                    presenter.onDeleteExpense(expense.getId());
-                }
-                else{
-                    onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.");
-                }*/
                 break;
             case R.id.edit:
                 Intent intent = new Intent(this, NewExpenseActivity.class);
@@ -180,7 +177,7 @@ public class ExpenseDetailActivity extends DeleteActivity{
 
     public void onSuccessDelete(){
         Context context = getApplicationContext();
-        CharSequence text = "Ausgabe erfolgreich gelöscht.";
+        CharSequence text = getString(R.string.expense_deleted_success);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
@@ -192,7 +189,7 @@ public class ExpenseDetailActivity extends DeleteActivity{
         progressDialog.cancel();
 
         Context context = getApplicationContext();
-        CharSequence text = "Diese Ausgabe wurde gelöscht.";
+        CharSequence text = getString(R.string.expense_deleted);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
@@ -204,7 +201,7 @@ public class ExpenseDetailActivity extends DeleteActivity{
             presenter.onDeleteExpense(expense.getId());
         }
         else{
-            onViewError("Nur der Ersteller dieser Ausgabe darf die Ausgabe löschen.", "Sorry.");
+            onViewError(getString(R.string.deleting_not_allowed, getString(R.string.expense)),getString(R.string.sorry));
         }
     }
 }

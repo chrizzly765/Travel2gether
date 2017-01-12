@@ -4,8 +4,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.StaticTripData;
@@ -16,7 +14,8 @@ import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
 /**
- * Created by chris on 18.08.2016.
+ * Interactor for TaskDetailActivity
+ * Implements ITaskDetailInteractor
  */
 public class TaskDetailInteractor implements ITaskDetailInteractor {
 
@@ -29,7 +28,7 @@ public class TaskDetailInteractor implements ITaskDetailInteractor {
             }
             else if (actionType == ActionType.DETAIL) {
                 try {
-                    listener.onSuccessGetDetails((Task) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.TASK));
+                    listener.onSuccessGetDetails((Task) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.TASK));
                 }
                 catch (Exception e){
                     e.printStackTrace();
@@ -37,7 +36,7 @@ public class TaskDetailInteractor implements ITaskDetailInteractor {
                 }
             }
             else if(actionType == ActionType.GETPARTICIPANTS){
-                StaticTripData.setParticipants(((ParticipantList)JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list);
+                StaticTripData.setParticipants(((ParticipantList)JsonDecode.getInstance().jsonToClass(response.getData(), ParticipantList.class)).list);
                 listener.onSuccessGetParticipants();
             }
         }
@@ -74,6 +73,7 @@ public class TaskDetailInteractor implements ITaskDetailInteractor {
             HttpRequest request = new HttpRequest(DataType.TASK, ActionType.DELETE, obj.toString(), this);
         }
         catch(Exception e){
+            listener.onError("Fehler beim Http Request", "Fehler" );
             Log.e("DetailTaskInteractor", e.getMessage());
         }
     }
@@ -87,10 +87,12 @@ public class TaskDetailInteractor implements ITaskDetailInteractor {
             HttpRequest request = new HttpRequest(DataType.TRIP, ActionType.GETPARTICIPANTS, jsonObject.toString(), this);
         }
         catch(Exception e){
+            listener.onError("Fehler beim Http Request", "Fehler" );
             Log.e(e.getClass().toString(), e.getMessage());
         }
     }
 
+    //Neccessary class for getting array from JsonDecode
     class ParticipantList {
         public Participant[] list;
     }

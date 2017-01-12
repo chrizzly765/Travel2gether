@@ -1,4 +1,4 @@
-package de.traveltogether.settings;
+package de.traveltogether.options;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,11 +11,12 @@ import android.widget.LinearLayout;
 
 import de.traveltogether.R;
 import de.traveltogether.login.LoginActivity;
-import de.traveltogether.settings.profilesettings.ProfileSettingsActivity;
+import de.traveltogether.options.profilesettings.ProfileSettingsActivity;
 
-public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
-
-
+/**
+ * Activity for options e.g. logout and profile settings
+ */
+public class OptionsActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

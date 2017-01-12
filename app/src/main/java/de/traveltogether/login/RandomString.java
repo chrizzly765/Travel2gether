@@ -2,7 +2,9 @@ package de.traveltogether.login;
 
 import java.util.Random;
 
-
+/**
+ * Helper class to create a random string for password reset
+ */
 class RandomString {
 
     private static final char[] symbols;

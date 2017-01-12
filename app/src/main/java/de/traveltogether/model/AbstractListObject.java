@@ -4,7 +4,7 @@ import de.traveltogether.DataType;
 import de.traveltogether.StaticData;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Abstract Base Class for feature
  */
 public abstract class AbstractListObject {
     private String title;
@@ -59,7 +59,6 @@ public abstract class AbstractListObject {
 
     public void setLastUpdateBy(int _lastUpdateBy){ lastUpdateBy = _lastUpdateBy; }
 
-    //TODO: implement description as optional
     AbstractListObject(String _title, long _id, long _tripId, String _description, int _author){
         title = _title;
         id = _id;
@@ -67,11 +66,5 @@ public abstract class AbstractListObject {
         description = _description;
         author = _author;
         lastUpdateBy = StaticData.getUserId();
-    }
-
-    public DataType getTypeById(int id){
-        DataType type = DataType.TRIP;
-        //TODO :get datatype by id
-        return type;
     }
 }

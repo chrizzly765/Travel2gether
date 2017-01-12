@@ -2,7 +2,9 @@ package de.traveltogether.login;
 
 import android.support.v7.app.AppCompatActivity;
 
-
+/**
+ * Presenter for LoginActivity
+ */
 public class LoginPresenter implements ILoginPresenter {
     private  LoginActivity view;
     private  ILoginInteractor interactor;

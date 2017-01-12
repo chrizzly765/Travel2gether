@@ -15,6 +15,9 @@ import de.traveltogether.model.PackingItem;
 
 import java.text.DecimalFormat;
 
+/**
+ * Adapter for selecting persons who pack items
+ */
 class PackingItemSelectionAdapter extends BaseAdapter {
     private PackingItem[] packingItems;
     private final LayoutInflater inflater;
@@ -60,23 +63,18 @@ class PackingItemSelectionAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.fragment_packingitem_list_item, parent, false);
             holder = new PackingItemSelectionViewHolder();
             holder.name = (TextView)convertView.findViewById(R.id.fragment_packingitem_list_item_name);
-            //holder.description= (TextView)convertView.findViewById(R.id.fragment_trip_list_item_description);
             holder.initial=(TextView)convertView.findViewById(R.id.fragment_packingitem_list_item_initial);
             holder.icon=(ImageView)convertView.findViewById(R.id.fragment_packingitem_list_item_icon);
-            //holder.amount=(EditText) convertView.findViewById(R.id.fragment_participant_selection_list_amount);
             convertView.setTag(holder);
         }
         else{
             holder = (PackingItemSelectionViewHolder) convertView.getTag();
         }
 
-        Context context = parent.getContext();
         PackingItem packingItem = (PackingItem) getItem(position);
         holder.name.setText(StaticTripData.getNameById(packingItem.getAssignedPerson()));
         holder.initial.setText(StaticTripData.getNameById(packingItem.getAssignedPerson()).substring(0,1));
         holder.icon.setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(packingItem.getAssignedPerson()))); // TODO: set color!
-        DecimalFormat df = new DecimalFormat("#0.00");
-        //holder.amount.setText(String.valueOf(df.format(payer.getAmount()))); //TODO: set amount
         return convertView;
     }
 
@@ -85,6 +83,5 @@ class PackingItemSelectionAdapter extends BaseAdapter {
         public TextView name;
         public TextView initial;
         public ImageView icon;
-        //public EditText count;
     }
 }

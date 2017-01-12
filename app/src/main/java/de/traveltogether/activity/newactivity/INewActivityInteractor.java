@@ -8,7 +8,7 @@ import de.traveltogether.model.Activity;
  */
 public interface INewActivityInteractor extends IInteractor {
     //public void getParticipantsForTrip(long tripId, INewExpensePresenter listener);
-    public void createActivity(long tripId, Activity activity, INewActivityPresenter listener);
-    public void getDetailsForActivity(long featureId, INewActivityPresenter listener);
-    public void updateActivity(Activity activity, INewActivityPresenter listener);
+    void createActivity(long tripId, Activity activity, INewActivityPresenter listener);
+    void getDetailsForActivity(long featureId, INewActivityPresenter listener);
+    void updateActivity(Activity activity, INewActivityPresenter listener);
 }

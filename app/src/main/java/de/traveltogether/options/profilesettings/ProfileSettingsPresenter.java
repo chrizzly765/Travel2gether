@@ -1,18 +1,20 @@
-package de.traveltogether.settings.profilesettings;
+package de.traveltogether.options.profilesettings;
 
 import de.traveltogether.model.Person;
 
 /**
- * Created by Anna-Lena on 27.11.2016.
+ * Presenter for ProfileSettingsActivity
+ * implements IProfileSettingsPresenter
  */
-
 public class ProfileSettingsPresenter implements IProfileSettingsPresenter {
     private ProfileSettingsActivity view;
     private IProfileSettingsInteractor interactor;
+
     public ProfileSettingsPresenter(ProfileSettingsActivity activity){
         view=activity;
         interactor = new ProfileSettingsInteractor();
     }
+
     @Override
     public void onGetProfileInfos() {
         interactor.getProfileInfos(this);
@@ -24,7 +26,7 @@ public class ProfileSettingsPresenter implements IProfileSettingsPresenter {
     }
 
     @Override
-    public void onUpdatePasswort(String salt, String hash) {
+    public void onUpdatePassword(String salt, String hash) {
         interactor.changePasswort(salt, hash, this);
     }
 
@@ -39,7 +41,7 @@ public class ProfileSettingsPresenter implements IProfileSettingsPresenter {
     }
 
     @Override
-    public void onSuccessUpdatePasswort() {
+    public void onSuccessUpdatePassword() {
         view.onSuccessUpdatePasswort();
     }
 

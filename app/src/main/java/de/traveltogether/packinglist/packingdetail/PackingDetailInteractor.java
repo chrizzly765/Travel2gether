@@ -4,8 +4,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.StaticTripData;
@@ -16,7 +14,10 @@ import de.traveltogether.model.Response;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
-
+/**
+ * Interactor for PackingDetailActivity
+ * Implements IPackingDetailInteractor
+ */
 public class PackingDetailInteractor implements IPackingDetailInteractor {
     private IPackingDetailPresenter listener;
 
@@ -29,6 +30,7 @@ public class PackingDetailInteractor implements IPackingDetailInteractor {
             HttpRequest request = new HttpRequest(DataType.PACKINGOBJECT, ActionType.DETAIL, obj.toString(), this);
         }
         catch(Exception e){
+            listener.onError("Fehler beim Http Request", "Fehler" );
             Log.e("DetailPackingInteractor", e.getMessage());
         }
     }
@@ -42,6 +44,7 @@ public class PackingDetailInteractor implements IPackingDetailInteractor {
             HttpRequest request = new HttpRequest(DataType.PACKINGOBJECT, ActionType.DELETE, obj.toString(), this);
         }
         catch(Exception e){
+            listener.onError("Fehler beim Http Request", "Fehler" );
             Log.e("DetailPackingInteractor", e.getMessage());
         }
     }
@@ -54,8 +57,8 @@ public class PackingDetailInteractor implements IPackingDetailInteractor {
             }
             else if (actionType == ActionType.DETAIL) {
                 try {
-                    PackingObject obj = (PackingObject) JsonDecode.getInstance().jsonToArray(response.getData(), PackingObject.class);
-                    listener.onSuccessGetDetails(obj);//(PackingObject) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.PACKINGOBJECT));
+                    PackingObject obj = (PackingObject) JsonDecode.getInstance().jsonToClass(response.getData(), PackingObject.class);
+                    listener.onSuccessGetDetails(obj);
                 }
                 catch(Exception e){
                     e.printStackTrace();
@@ -63,7 +66,7 @@ public class PackingDetailInteractor implements IPackingDetailInteractor {
                 }
             }
             else if(actionType == ActionType.GETPARTICIPANTS){
-                StaticTripData.setParticipants(((ParticipantList)JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list);
+                StaticTripData.setParticipants(((ParticipantList)JsonDecode.getInstance().jsonToClass(response.getData(), ParticipantList.class)).list);
                 listener.onSuccessGetParticipants();
             }
         }
@@ -81,6 +84,7 @@ public class PackingDetailInteractor implements IPackingDetailInteractor {
             String s = JsonDecode.getInstance().classToJson(item);
             HttpRequest request = new HttpRequest(DataType.PACKINGITEM, ActionType.UPDATE, s, this);
         } catch (Exception e) {
+            listener.onError("Fehler beim Http Request", "Fehler" );
             Log.e("DetailPackingInteractor", e.getMessage());
         }
     }
@@ -94,9 +98,14 @@ public class PackingDetailInteractor implements IPackingDetailInteractor {
             HttpRequest request = new HttpRequest(DataType.TRIP, ActionType.GETPARTICIPANTS, jsonObject.toString(), this);
         }
         catch(Exception e){
+            listener.onError("Fehler beim Http Request", "Fehler" );
             Log.e(e.getClass().toString(), e.getMessage());
         }
     }
+
+    /**
+     * Neccessary class to convert json string to array
+     */
     class ParticipantList {
         public Participant[] list;
     }

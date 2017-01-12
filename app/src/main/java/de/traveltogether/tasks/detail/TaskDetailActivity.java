@@ -25,6 +25,9 @@ import de.traveltogether.dialog.DeleteActivity;
 import de.traveltogether.model.Task;
 import de.traveltogether.tasks.newtask.NewTaskActivity;
 
+/**
+ * Activity for viewing details of a task
+ */
 public class TaskDetailActivity extends DeleteActivity {
 
     private TextView title;
@@ -35,14 +38,12 @@ public class TaskDetailActivity extends DeleteActivity {
     private TextView initial;
     private ImageView icon;
     private ImageView watch;
-
     private Task task;
     private long featureId;
     private int colorStatus;
     private int colorDeadline;
     private int colorIcon;
     private long tripId;
-
     private ITaskDetailPresenter presenter;
     private ProgressDialog progressDialog;
 
@@ -50,9 +51,8 @@ public class TaskDetailActivity extends DeleteActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail);
-        getSupportActionBar().setTitle("Aufgabe");
+        getSupportActionBar().setTitle(getString(R.string.task));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -81,7 +81,7 @@ public class TaskDetailActivity extends DeleteActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        progressDialog = ProgressDialog.show(this, "", "Aufgabe wird geladen...", true);
+        progressDialog = ProgressDialog.show(this, "", getString(R.string.task) + getString(R.string.is_loading), true);
         if(featureId!=-1){
             presenter.onGetDetailsForTask(featureId);
         }
@@ -196,7 +196,7 @@ public class TaskDetailActivity extends DeleteActivity {
     public void onCloseActivity(){
         progressDialog.cancel();
         Context context = getApplicationContext();
-        CharSequence text = "Diese Aufgabe wurde gelöscht.";
+        CharSequence text = getString(R.string.task_deleted);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
@@ -208,7 +208,7 @@ public class TaskDetailActivity extends DeleteActivity {
             presenter.onDeleteTask(task);
         }
         else {
-            onViewError("Nur der Ersteller dieser Aufgabe darf die Aufgabe löschen.", "Sorry.");
+            onViewError(getString(R.string.deleting_not_allowed, getString(R.string.task)),getString(R.string.sorry));
         }
     }
 

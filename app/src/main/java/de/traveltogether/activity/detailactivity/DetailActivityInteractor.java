@@ -4,8 +4,6 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 import de.traveltogether.ActionType;
 import de.traveltogether.DataType;
 import de.traveltogether.StaticTripData;
@@ -26,7 +24,7 @@ public class DetailActivityInteractor implements IDetailActivityInteractor {
             }
             else if (actionType == ActionType.DETAIL) {
                 try {
-                    listener.onSuccessGetDetails((Activity) JsonDecode.getInstance().jsonToClass(response.getData(), DataType.ACTIVITY));
+                    listener.onSuccessGetDetails((Activity) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.ACTIVITY));
 
                 }
                 catch(Exception e){
@@ -35,7 +33,7 @@ public class DetailActivityInteractor implements IDetailActivityInteractor {
                 }
             }
             else if(actionType == ActionType.GETPARTICIPANTS){
-                StaticTripData.setParticipants(((ParticipantList)JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list);
+                StaticTripData.setParticipants(((ParticipantList)JsonDecode.getInstance().jsonToClass(response.getData(), ParticipantList.class)).list);
             }
         }
         else{

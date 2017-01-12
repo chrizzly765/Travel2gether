@@ -1,14 +1,14 @@
 package de.traveltogether.model;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Model class for Notification
  */
 public class Notification {
     private String message;
     private String type;
     private long id;
     private long tripOrFeatureId;
-    private String /*SimpleDateFormat*/ added;// = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
+    private String added;// = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
     private Boolean opened = false;
 
     public String getMessage(){

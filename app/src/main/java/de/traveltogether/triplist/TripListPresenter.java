@@ -4,7 +4,10 @@ import android.util.Log;
 
 import de.traveltogether.model.Trip;
 
-
+/**
+ * Presenter for TripListActivity
+ * Implements ITripListPresenter
+ */
 public class TripListPresenter implements ITripListPresenter {
     private TripListActivity view;
     private  ITripListInteractor interactor;
@@ -21,8 +24,6 @@ public class TripListPresenter implements ITripListPresenter {
 
     @Override
     public void onSuccess(Trip[] trips) {
-
-        Log.d("Success in preseneter","");
         view.onViewTrips(trips);
     }
 

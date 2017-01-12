@@ -3,7 +3,8 @@ package de.traveltogether.triplist.newtrip;
 import de.traveltogether.model.Trip;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Presenter for NewTripActivity
+ * Implements INewTripPresenter
  */
 public class NewTripPresenter implements INewTripPresenter {
     private NewTripActivity view;
@@ -14,9 +15,7 @@ public class NewTripPresenter implements INewTripPresenter {
     }
 
     @Override
-    //public void onCreateTrip(String title, String description, String startdate, String enddate, String place) {
     public void onCreateTrip( Trip trip) {
-        //interactor.createTrip(title,description,startdate,enddate,place,this);
         interactor.createTrip(trip, this);
     }
 

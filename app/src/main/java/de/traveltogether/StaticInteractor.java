@@ -3,21 +3,19 @@ package de.traveltogether;
 import android.util.Log;
 
 import org.json.JSONObject;
-
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Response;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
 /**
- * Created by Anna-Lena on 09.10.2016.
+ * Interactor for getting the participants for a trip
+ * Doesn't belong to an activity
  */
 public class StaticInteractor implements IInteractor {
-
-
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-        StaticTripData.setParticipants(((ParticipantList)JsonDecode.getInstance().jsonToArray(response.getData(), ParticipantList.class)).list);
+        StaticTripData.setParticipants(((ParticipantList)JsonDecode.getInstance().jsonToClass(response.getData(), ParticipantList.class)).list);
     }
 
     public void getParticipantsForTrip(long tripId){
