@@ -128,9 +128,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         else if (v.getId()== R.id.activity_register_button_login){
             finish();
         }
+        /*
         if(progressDialog!=null) {
             progressDialog.cancel();
         }
+        */
     }
 
     public void onViewSuccessMessage(String message){
