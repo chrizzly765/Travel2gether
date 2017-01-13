@@ -4,7 +4,7 @@ import de.traveltogether.IInteractor;
 import de.traveltogether.model.Expense;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Interface for interactor of NewExpenseActivity
  */
 public interface INewExpenseInteractor extends IInteractor {
     void getParticipantsForTrip(long tripId, INewExpensePresenter listener);

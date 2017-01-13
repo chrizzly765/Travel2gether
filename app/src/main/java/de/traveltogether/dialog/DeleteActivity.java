@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by Maria Dreher on 26.11.2016.
+ * Abstract Activity
+ * If DeleteActivity is extended, delete has to be implemented
  */
 
 public abstract class DeleteActivity extends AppCompatActivity {
@@ -14,7 +15,7 @@ public abstract class DeleteActivity extends AppCompatActivity {
             delete();
         }
         /*if(resultCode == -2){
-
+            //nothing happens
         }*/
     }
 

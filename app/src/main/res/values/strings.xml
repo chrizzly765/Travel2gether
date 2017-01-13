@@ -23,8 +23,16 @@
     <string name="missing_title">Bitte gib einen Titel für deine %1$s ein</string>
     <string name="missing_title_male">Bitte gib einen Titel für dein %1$s ein</string>
     <string name ="sorry">Sorry</string>
+    <string name="error">Etwas ist schiefgelaufen.</string>
+    <string name="ok">OK</string>
     <string name="deleting_not_allowed">Nur der Ersteller dieser %1$s darf die %1$s löschen.</string>
     <string name="deleting_not_allowed_thing">Nur der Ersteller dieses %1$s darf das %1$s löschen.</string>
+
+
+    <!-- ChatActivity -->
+    <string name="comment">Kommentieren</string>
+    <string name="chat">Chat</string>
+    <string name="load_comments">Nachrichten werden geladen</string>
 
     <!-- LoginActivity -->
     <string name="login">Anmelden</string>
@@ -46,8 +54,6 @@
     <string name="pw_minimum_length">Das Passwort muss aus mindestens 7 Zeichen bestehen.</string>
     <string name="pw_repeat_error">Die eingegebenen Passwörter stimmen nicht überein.</string>
     <string name="invalid_mailadress">Bitte gib eine gültige Mail Adresse ein um dich zu registrieren.</string>
-    <string name="error">Etwas ist schiefgelaufen.</string>
-    <string name="ok">OK</string>
     <string name="register_success">Erfolgreich registriert.</string>
     <string name="mail_was_sent">Eine E-Mail mit dem Bestätigungslink wurde an dich vesendet.</string>
 
@@ -117,10 +123,15 @@
     <string name="account_balances">Kontoübersicht</string>
     <string name="expenses">Ausgaben</string>
     <string name = "expense">Ausgabe</string>
+    <string name = "edit_expense">Ausgabe bearbeiten</string>
     <string name="payed">bezahlt von</string>
     <string name="share_with">teilen mit</string>
+    <string name="title_expense">Wer bezahlt mit?</string>
     <string name="add_expense">Klicke hier, um eine neue Ausgabe hinzuzufügen.</string>
+    <string name="mandatory_expense">Bitte gib einen Titel und Betrag für deine Ausgabe ein.</string>
     <string name="expense_deleted">Diese Ausgabe wurde gelöscht.</string>
+    <string name="added_expense">Ausgabe erfolgreich hinzugefüft.</string>
+    <string name="updated_expense">Ausgabe geändert.</string>
     <string name="expense_deleted_success">Ausgabe erfolgreich gelöscht.</string>
 
     <!--ActivityActivity -->
@@ -151,7 +162,6 @@
     <string name="add_packing_object">Klicke hier, um etwas zur Packliste hinzuzufügen.</string>
     <string name="new_category">Neue Kategorie</string>
     <string name="add_to_category">Zu Kategorie hinzufügen</string>
-    <string name="comment">Kommentieren</string>
     <string name="deleted_packingitem">Dieses Packelement wurde gelöscht.</string>
     <string name="deleted_packingitem_success">Packelement erfolgreich gelöscht.</string>
     <string name="add_packingitem_success">Packelement erfolgreich hinzugefügt.</string>

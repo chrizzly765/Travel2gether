@@ -17,7 +17,7 @@ import de.traveltogether.model.Person;
 import static android.content.Intent.createChooser;
 
 /**
-*Fragment, dass die Liste der ehemaligen Mitreisenden anzeigt
+* Fragment holding a list of suggestions for participants
 */
 public class InvitationFragment extends ListFragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
@@ -43,9 +43,7 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         super.onCreateView(inflater, container,savedInstanceState);
-
         view = inflater.inflate(de.traveltogether.R.layout.fragment_invitation, container, false);
         ImageButton button = (ImageButton)view.findViewById(de.traveltogether.R.id.fragment_button_invite);
         TextView text = (TextView)view.findViewById(de.traveltogether.R.id.fragment_text_invite);
@@ -67,7 +65,6 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
                 listItem.measure(0, 0);
                 totalHeight += listItem.getMeasuredHeight();
             }
-
             ViewGroup.LayoutParams par = getListView().getLayoutParams();
             par.height = totalHeight + (getListView().getDividerHeight() * (adapter.getCount() - 1));
             getListView().setLayoutParams(par);
@@ -94,7 +91,6 @@ public class InvitationFragment extends ListFragment implements View.OnClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //bei click auf eine Person
         Person person = (Person) adapter.getItem(position);
         int receiverId = person.getPersonId();
         presenter.onInvite(receiverId, tripId);

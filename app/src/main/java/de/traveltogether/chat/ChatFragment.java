@@ -28,7 +28,7 @@ import de.traveltogether.comments.ICommentPresenter;
 import de.traveltogether.model.Comment;
 
 /**
- * A simple {@link android.app.Fragment} subclass.
+ * Fragment representing a list of comments
  */
 public class ChatFragment extends Fragment implements View.OnClickListener, ICommentView {
     private long id;
@@ -39,11 +39,10 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
     private CommentListFragment chatFragment;
     private View view;
     private ImageButton send;
+
     public ChatFragment () {
         // Required empty public constructor
-
     }
-
 
     public static ChatFragment newInstance(long _id){
         ChatFragment fragment = new ChatFragment();
@@ -58,7 +57,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
         presenter = new CommentPresenter(this);
         presenter.onGetCommentsForTrip(id);
         progressDialog = ProgressDialog.show(getActivity(), "",
-                "Nachrichten werden geladen...", true);
+                getString(R.string.load_comments), true);
     }
 
     public void onRefresh(){
@@ -79,9 +78,6 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
         chatFragment = CommentListFragment.newInstance(comments);
         fragmentTransaction.add(R.id.fragment_comment_list_container, chatFragment);
         fragmentTransaction.commit();
-
-        //ScrollView scrollView = (ScrollView)(view.findViewById(R.id.fragment_comment_scrollview));
-        //scrollView.fullScroll(ScrollView.FOCUS_DOWN);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,11 +86,11 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
         view = inflater.inflate(R.layout.fragment_comment, container, false);
 
         send = (ImageButton)view.findViewById(R.id.fragment_comment_button_send);
-        send.setVisibility(View.INVISIBLE);
+        //send.setVisibility(View.INVISIBLE);
         send.setOnClickListener(this);
 
         inputField = (EditText)view.findViewById(R.id.fragment_comment_editText);
-        inputField.addTextChangedListener(new TextWatcher() {
+        /*inputField.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {}
 
@@ -102,15 +98,12 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().equals("")) {
-                    send.setVisibility(View.INVISIBLE);
+                    //send.setVisibility(View.INVISIBLE);
                 } else {
-                    send.setVisibility(View.VISIBLE);
+                    //send.setVisibility(View.VISIBLE);
                 }
             }
-        });
-
-
-
+        });*/
         return view;
     }
 
@@ -118,6 +111,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
     public void onClick(View v) {
         if(v.getId()==R.id.fragment_comment_button_send){
             String text = StringEscapeUtils.escapeJava(inputField.getText().toString());
+            if(text.equals(""))
+                return;
             presenter.onSendCommentForTrip(id, StaticData.getUserId(), text);
 
             //Text löschen wenn Eingabe fertig

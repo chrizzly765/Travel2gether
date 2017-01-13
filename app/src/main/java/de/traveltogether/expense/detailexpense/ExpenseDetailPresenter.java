@@ -3,7 +3,8 @@ package de.traveltogether.expense.detailexpense;
 import de.traveltogether.model.Expense;
 
 /**
- * Created by Anna-Lena on 15.09.2016.
+ * Presenter for ExpenseDetailActivity
+ * Implements IExpenseDetailPresenter
  */
 public class ExpenseDetailPresenter implements IExpenseDetailPresenter {
     private ExpenseDetailActivity view;

@@ -13,7 +13,10 @@ import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.model.Participant;
 
-
+/**
+ * Adapter for participant list in InfoActivity
+ * Brings together views and data called from server
+ */
 class InfoParticipantAdapter extends BaseAdapter {
     private Participant[] participants;
     private final LayoutInflater inflater;
@@ -79,6 +82,10 @@ class InfoParticipantAdapter extends BaseAdapter {
 
     }
 
+    /**
+     * ViewHolder for item of participant list
+     * Holds all elements of a participant that need to be transformed
+     */
     static class ParticipantViewHolder {
         TextView name;
         FrameLayout icon;

@@ -204,7 +204,7 @@
         </service>
 
         <activity
-            android:name=".activity.ActivitiesActivity"
+            android:name=".activity.ActivityActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -218,7 +218,7 @@
                 android:value=".mainmenu.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.detailactivity.DetailActivityActivity"
+            android:name=".activity.detailactivity.ActivityDetailActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

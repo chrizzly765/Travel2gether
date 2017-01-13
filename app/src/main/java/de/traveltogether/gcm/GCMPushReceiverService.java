@@ -24,7 +24,8 @@ import de.traveltogether.notification.NotificationActivity;
 import de.traveltogether.servercommunication.HttpRequest;
 
 /**
- * Created by NgocTri on 4/9/2016.
+ * GcmListenerService to receive Notifications
+ * Extends GcmListenerService
  */
 public class GCMPushReceiverService extends GcmListenerService{
     Notification notification;
@@ -56,12 +57,8 @@ public class GCMPushReceiverService extends GcmListenerService{
     private void sendNotification(String message) {
         Intent intent = new Intent(this, NotificationActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        int requestCode = 0;//Your request code
+        int requestCode = 0;
         PendingIntent pendingIntent = PendingIntent.getActivity(this, requestCode, intent, PendingIntent.FLAG_ONE_SHOT);
-        //Setup notification
-        //Sound
-        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        //Build notification
         NotificationCompat.Builder noBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle("TravelTogether")
@@ -70,6 +67,6 @@ public class GCMPushReceiverService extends GcmListenerService{
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, noBuilder.build()); //0 = ID of notification
+        notificationManager.notify(0, noBuilder.build());
     }
 }

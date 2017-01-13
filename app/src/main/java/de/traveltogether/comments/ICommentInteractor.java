@@ -2,7 +2,9 @@ package de.traveltogether.comments;
 
 import de.traveltogether.IInteractor;
 
-
+/**
+ * Interface for interactor of ICommentView
+ */
 interface ICommentInteractor extends IInteractor {
     void getCommentsForFeature(long id, ICommentPresenter commentPresenter);
     void getCommentsForTrip(long id, ICommentPresenter commentPresenter);

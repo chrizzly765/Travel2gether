@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import de.traveltogether.R;
 import de.traveltogether.model.Participant;
 
-
+/**
+ * Fragment for list of acountbalances for all participants
+ */
 public class ExpenseParticipantFragment extends ListFragment{
     private Participant[] participants;
     private ExpenseParticipantAdapter adapter;
@@ -21,8 +23,6 @@ public class ExpenseParticipantFragment extends ListFragment{
     public ExpenseParticipantFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static ExpenseParticipantFragment newInstance(Participant[] _participants) {
         ExpenseParticipantFragment fragment = new ExpenseParticipantFragment();
         fragment.participants = _participants;

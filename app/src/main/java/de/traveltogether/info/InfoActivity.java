@@ -113,6 +113,9 @@ public class InfoActivity extends DeleteActivity implements View.OnClickListener
     }
 
     public void onViewParticipants(Participant[] participants){
+        //check state of participants and put every participant in the right list
+        //state can be either active, invited or resigned
+
         Participant[] activeParts = StaticTripData.getActiveParticipants();
         Participant[] invitedParts = StaticTripData.getInvitedParticipants();
         Participant[] resignedParts = StaticTripData.getResignedParticipants();

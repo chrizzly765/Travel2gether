@@ -3,6 +3,9 @@ package de.traveltogether.info;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Trip;
 
+/**
+ * Interface for Presenter of InfoActivity
+ */
 interface IInfoPresenter {
      void onGetInfoForTrip(long tripId);
      void onError(String message, String Title);

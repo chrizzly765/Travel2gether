@@ -19,6 +19,9 @@ import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.model.Comment;
 
+/**
+ * Fragment representing a list of comments and an input field to wright a comment
+ */
 public class CommentFragment extends Fragment implements View.OnClickListener, ICommentView {
     private long id;
     private ICommentPresenter presenter;
@@ -29,9 +32,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
 
     public CommentFragment() {
         // Required empty public constructor
-
     }
-
 
     public static CommentFragment newInstance(long _id){
         CommentFragment fragment = new CommentFragment();
@@ -53,26 +54,16 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
     }
 
     public void onViewComments(Comment[] _comments){
-
         comments = _comments;
-        //if(fragment == null) {
-            //Fragment in Activity einbetten
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            if(fragment!=null) {
-                fragmentTransaction.remove(fragment);
-            }
-            fragment = CommentListFragment.newInstance(comments);
-            fragmentTransaction.add(R.id.fragment_comment_list_container, fragment);
-            fragmentTransaction.commit();
-        /*}
-        else{
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.detach(fragment);
-            fragmentTransaction.attach(fragment);
-            fragmentTransaction.commit();
-        }*/
+        //Fragment in Activity einbetten
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if(fragment!=null) {
+            fragmentTransaction.remove(fragment);
+        }
+        fragment = CommentListFragment.newInstance(comments);
+        fragmentTransaction.add(R.id.fragment_comment_list_container, fragment);
+        fragmentTransaction.commit();
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,11 +75,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener, I
         send = (ImageButton)view.findViewById(R.id.fragment_comment_button_send);
         send.setVisibility(View.INVISIBLE);
         send.setOnClickListener(this);
-
         return view;
-
-
-
     }
 
     @Override

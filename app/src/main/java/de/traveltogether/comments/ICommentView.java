@@ -3,7 +3,8 @@ package de.traveltogether.comments;
 import de.traveltogether.model.Comment;
 
 /**
- * Created by Anna-Lena on 04.08.2016.
+ * Inferface for CommentView
+ * Can either be a fragment or an activity
  */
 public interface ICommentView {
     void onSuccessAddComment();

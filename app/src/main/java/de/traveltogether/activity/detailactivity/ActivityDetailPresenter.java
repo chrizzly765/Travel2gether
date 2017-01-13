@@ -2,13 +2,13 @@ package de.traveltogether.activity.detailactivity;
 
 import de.traveltogether.model.Activity;
 
-public class DetailActivityPresenter implements IDetailActivityPresenter {
-    private DetailActivityActivity view;
-    private IDetailActivityInteractor interactor;
+public class ActivityDetailPresenter implements IActivityDetailPresenter {
+    private ActivityDetailActivity view;
+    private IActivityDetailInteractor interactor;
 
-    public DetailActivityPresenter(DetailActivityActivity _view){
+    public ActivityDetailPresenter(ActivityDetailActivity _view){
         view= _view;
-        interactor= new DetailActivityInteractor();
+        interactor= new ActivityDetailInteractor();
     }
 
     @Override

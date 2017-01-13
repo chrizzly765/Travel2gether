@@ -20,6 +20,10 @@ import de.traveltogether.model.Payer;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * Adapter for list of expenses
+ * Brings together views and data called from server
+ */
 class ExpenseAdapter extends BaseAdapter {
     private Expense[] expenses;
     private LayoutInflater inflater;
@@ -89,6 +93,8 @@ class ExpenseAdapter extends BaseAdapter {
                 }
             }
 
+            //view at maximum 4 participant icons
+            //if more, view only 3 and a plus sign
             int counter = 0;
             for(int i = 0; i<payers.size(); i++){
                 if(payers.get(i).getId() != expense.getPayer()){
@@ -135,6 +141,10 @@ class ExpenseAdapter extends BaseAdapter {
         return convertView;
     }
 
+    /**
+     * ViewHolder for an item of expense list
+     * Holds all elements needed to be transformed
+     */
     public class ExpenseViewHolder {
         TextView title, amount;
         FrameLayout icon1, icon2, icon3, iconLast;

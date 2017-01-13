@@ -13,7 +13,8 @@ import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Interactor for ExpenseActivity
+ * Implements IExpenseInteractor
  */
 public class ExpenseInteractor implements IExpenseInteractor {
     private IExpensePresenter listener;
@@ -21,13 +22,8 @@ public class ExpenseInteractor implements IExpenseInteractor {
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if (dataType == DataType.TRIP && actionType == ActionType.GETPARTICIPANTS) {
             if (response.getError().equals("false")) {
-                try {
-                    Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToClass(response.getData(), ParticipantList.class)).list;
-                    listener.onSuccessGetParticipants(participants);
-                }
-                catch(Exception e){
-                    //TODO
-                }
+                Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToClass(response.getData(), ParticipantList.class)).list;
+                listener.onSuccessGetParticipants(participants);
             } else {
                 listener.onError(response.getMessage());
             }
@@ -53,6 +49,7 @@ public class ExpenseInteractor implements IExpenseInteractor {
         }
         catch(Exception e){
             Log.e("NewExpenseInteractor", e.getMessage());
+            listener.onError("Fehler beim HttpRequest");
         }
     }
 
@@ -66,11 +63,20 @@ public class ExpenseInteractor implements IExpenseInteractor {
         }
         catch(Exception e){
             Log.e("NewExpenseInteractor", e.getMessage());
+            listener.onError("Fehler beim HttpRequest");
         }
     }
+
+    /**
+     * Necessary class for getting Participant array from json string
+     */
     class ParticipantList {
         Participant[] list;
     }
+
+    /**
+     * Necessary class for getting Expense array from json string
+     */
     class ExpenseList {
         Expense[] list;
     }

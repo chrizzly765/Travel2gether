@@ -22,10 +22,10 @@ import de.traveltogether.StaticTripData;
 import de.traveltogether.activity.newactivity.NewActivityActivity;
 import de.traveltogether.model.Activity;
 
-public class DetailActivityActivity extends DeleteActivity {
+public class ActivityDetailActivity extends DeleteActivity {
     private long featureId =-1;
     private long tripId =-1;
-    private IDetailActivityPresenter presenter;
+    private IActivityDetailPresenter presenter;
     private TextView title;
     private TextView description;
     private TextView date;
@@ -38,7 +38,7 @@ public class DetailActivityActivity extends DeleteActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new DetailActivityPresenter(this);
+        presenter = new ActivityDetailPresenter(this);
 
         getSupportActionBar().setTitle(getString(R.string.activity));
         getSupportActionBar().setDisplayShowHomeEnabled(true);

@@ -32,6 +32,9 @@ import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Payer;
 
+/**
+ * Activity for creating a new expense
+ */
 public class NewExpenseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener{
 
     private INewExpensePresenter presenter;
@@ -59,7 +62,6 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         setContentView(R.layout.activity_new_expense);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -70,9 +72,6 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         }
 
         presenter= new NewExpensePresenter(this);
-        if(tripId!=-1) {
-            //presenter.onGetParticipantsForTrip(tripId);
-        }
         onViewParticipants(StaticTripData.getActiveParticipants());
 
 
@@ -105,13 +104,13 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
     protected void onStart(){
         super.onStart();
         if(featureId!=-1){
-            getSupportActionBar().setTitle("Ausgabe bearbeiten");
+            getSupportActionBar().setTitle(getString(R.string.edit_expense));
             presenter.onGetDetailForExpense(featureId);
             progressDialog = ProgressDialog.show(this, "",
-                    "Bitte warten...", true);
+                    getString(R.string.please_wait), true);
         }
         else {
-            getSupportActionBar().setTitle("Neue Ausgabe");
+            getSupportActionBar().setTitle(getString(R.string.new_expense));
         }
     }
 
@@ -129,7 +128,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                         && !StringEscapeUtils.escapeJava(amount.getText().toString()).equals("")){
 
                     progressDialog = ProgressDialog.show(this, "",
-                            "Bitte warten...", true);
+                            getString(R.string.please_wait), true);
 
                     // DEFAULT TEXT IF FIELDS ARE EMPTY
                     if(StringEscapeUtils.escapeJava(description.getText().toString()).equals("")){
@@ -155,10 +154,6 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                         presenter.onUpdateExpense(expense);
                     }
                     else {
-                        //int currency = currencySpinner.getSelectedItemPosition();
-                    /*if(currencySpinner.getSelectedItem() == null){
-                        currency = currencySpinner.getSelectedItem().toString();
-                    }*/
                         Expense expense = new Expense(
                                 StringEscapeUtils.escapeJava(title.getText().toString()),
                                 0,
@@ -178,7 +173,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
                     return true;
                 }
                 else{
-                    onViewError("Bitte gib einen Titel und Betrag für deine Ausgabe ein.", "Pflichtfeld");
+                    onViewError(getString(R.string.mandatory_expense),getString(R.string.mandatory));
                     return false;
                 }
 
@@ -194,10 +189,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         parent.getItemAtPosition(position);
-        Log.d("Set payerId ",Integer.toString(participants[position].getPersonId()));
-        //if(view.getId() == R.id.spinner_paid_by){
-            currentPayerId = participants[position].getPersonId();
-        //}
+        currentPayerId = participants[position].getPersonId();
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
@@ -206,7 +198,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
 
     public void onSuccessAddingExpense(){
         Context context = getApplicationContext();
-        CharSequence text = "Ausgabe hinzugefügt.";
+        CharSequence text = getString(R.string.added_expense);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
@@ -270,31 +262,23 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
         for(int i = 0; i<checkedItems.length; i++){
             checkedItems[i] = list.contains(i);
         }
-        // Set the dialog title
-        builder.setTitle("Wer bezahlt mit?");
-                // Specify the list array, the items to be selected by default (null for none),
-                // and the listener through which to receive callbacks when items are selected
+        builder.setTitle(getString(R.string.title_expense));
         builder.setMultiChoiceItems(participantNames, checkedItems,
                 new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which,
                                         boolean isChecked) {
                         if (isChecked) {
-                            // If the user checked the item, add it to the selected items
                             mSelectedItems.add(which);
                         } else if (mSelectedItems.contains(which)) {
-                            // Else, if the item is already in the array, remove it
                             mSelectedItems.remove(which);
                         }
                     }
                 });
 
-        // Set the action buttons
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        // User clicked OK, so save the mSelectedItems results somewhere
-                        // or return them to the component that opened the dialog
                         chosenIds = mSelectedItems;
                         dialog.cancel();
                         updateParticipantList();
@@ -329,7 +313,7 @@ public class NewExpenseActivity extends AppCompatActivity implements AdapterView
 
     public void onSuccessUpdateExpense(){
         Context context = getApplicationContext();
-        CharSequence text = "Ausgabe geändert.";
+        CharSequence text = getString(R.string.updated_expense);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();

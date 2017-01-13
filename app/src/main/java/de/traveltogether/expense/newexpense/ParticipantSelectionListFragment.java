@@ -12,7 +12,7 @@ import de.traveltogether.model.Payer;
 import java.util.ArrayList;
 
 /**
- * A fragment representing a list of Items.
+ * A fragment representing a list of participants chosen
  */
 public class ParticipantSelectionListFragment extends ListFragment {
 
@@ -28,8 +28,6 @@ public class ParticipantSelectionListFragment extends ListFragment {
 
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static ParticipantSelectionListFragment newInstance(ArrayList<Payer> _payer ) {
         ParticipantSelectionListFragment fragment = new ParticipantSelectionListFragment();
         Payer[] array = new Payer[_payer.size()];
@@ -78,7 +76,6 @@ public class ParticipantSelectionListFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_participant_selection_list, container, false);
-
         return view;
     }
 

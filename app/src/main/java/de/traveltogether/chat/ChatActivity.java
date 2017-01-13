@@ -9,6 +9,9 @@ import android.view.MenuItem;
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 
+/**
+ * Activity for chat
+ */
 public class ChatActivity extends AppCompatActivity {
     private long tripId;
     private ChatFragment fragment;
@@ -16,9 +19,8 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Chat");
+        getSupportActionBar().setTitle(getString(R.string.chat));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         setContentView(R.layout.activity_chat);
@@ -27,7 +29,6 @@ public class ChatActivity extends AppCompatActivity {
         if (b != null) {
             tripId = b.getLong("tripId");
         }
-
     }
 
     @Override

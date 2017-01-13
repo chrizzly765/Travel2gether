@@ -13,7 +13,7 @@ import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Interactor for NewExpenseActivity
  */
 public class NewExpenseInteractor implements INewExpenseInteractor {
     private INewExpensePresenter listener;
@@ -28,6 +28,7 @@ public class NewExpenseInteractor implements INewExpenseInteractor {
         }
         catch(Exception e){
             Log.e("NewExpenseInteractor", e.getMessage());
+            listener.onError("Fehler beim HttpRequest", "Fehler");
         }
 
     }
@@ -48,6 +49,7 @@ public class NewExpenseInteractor implements INewExpenseInteractor {
         }
         catch(Exception e){
             Log.e("NewExpenseInteractor", e.getMessage());
+            listener.onError("Fehler beim HttpRequest", "Fehler");
         }
     }
 
@@ -60,6 +62,7 @@ public class NewExpenseInteractor implements INewExpenseInteractor {
         }
         catch(Exception e){
             Log.e("NewExpenseInteractor", e.getMessage());
+            listener.onError("Fehler beim HttpRequest", "Fehler");
         }
     }
 
@@ -81,6 +84,9 @@ public class NewExpenseInteractor implements INewExpenseInteractor {
         }
     }
 
+    /**
+     * Necessary class for getting array of participants from json string
+     */
     class ParticipantList {
         Participant[] list;
     }

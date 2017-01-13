@@ -51,7 +51,6 @@ public class ExpenseDetailActivity extends DeleteActivity{
 
         getSupportActionBar().setTitle(getString(R.string.expense));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 

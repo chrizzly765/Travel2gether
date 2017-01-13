@@ -3,7 +3,10 @@ package de.traveltogether.info;
 import de.traveltogether.model.Participant;
 import de.traveltogether.model.Trip;
 
-
+/**
+ * Presenter for InfoActivity
+ * Implements IInfoPresenter
+ */
 class InfoPresenter implements  IInfoPresenter {
     private InfoActivity view;
     private IInfoInteractor interactor;
@@ -12,7 +15,6 @@ class InfoPresenter implements  IInfoPresenter {
         view= activity;
         interactor = new InfoInteractor();
     }
-
 
     @Override
     public void onGetInfoForTrip(long tripId) {

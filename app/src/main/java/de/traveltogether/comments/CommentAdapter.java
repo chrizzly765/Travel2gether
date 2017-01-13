@@ -18,7 +18,10 @@ import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.model.Comment;
 
-
+/**
+ * Adapter for comments
+ * Brings together views and data
+ */
 class CommentAdapter extends BaseAdapter {
     private Comment[] comments;
     private final LayoutInflater inflater;
@@ -68,33 +71,12 @@ class CommentAdapter extends BaseAdapter {
             holder = (CommentViewHolder)convertView.getTag();
         }
 
-        Log.d("holder", holder.toString());
-        Context context = parent.getContext();
         Comment comment = (Comment)getItem(position);
         if(StaticTripData.getNameById((int)comment.getId())!=null){
             holder.name.setText(StaticTripData.getNameById((int)comment.getId()));
         }
-        else{
-            //TODO: Problem!!
-        }
-
         holder.date.setText(comment.getDate());
-/*
-        if(!(StringEscapeUtils.unescapeJava(comment.getText().toString()) == "")){
-            holder.content.setText(StringEscapeUtils.unescapeJava(comment.getText()));
-        }
-*/
 
-/*
-        if(StringEscapeUtils.unescapeJava(comment.getText().toString()) == ""){
-            //holder.content.setText("Leer");
-            btnSend.findViewById(R.id.fragment_comment_button_send).setVisibility(View.INVISIBLE);
-        }
-        else {
-            btnSend.findViewById(R.id.fragment_comment_button_send).setVisibility(View.VISIBLE);
-            holder.content.setText(StringEscapeUtils.unescapeJava(comment.getText()));
-        }
-*/
         holder.content.setText(StringEscapeUtils.unescapeJava(comment.getText()));
         holder.icon.findViewById(R.id.fragment_commentlist_list_item_icon_circle)
                 .setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById((int)comment.getId())));
@@ -103,6 +85,10 @@ class CommentAdapter extends BaseAdapter {
         return convertView;
     }
 
+    /**
+     * ViewHolder for item of comment list
+     * Holds all elements of an item needed to be transformed
+     */
     static class CommentViewHolder {
         TextView name, date, content;
         FrameLayout icon;

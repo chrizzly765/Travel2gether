@@ -1,15 +1,15 @@
 package de.traveltogether.launcher;
 
 /**
- * Created by Anna-Lena on 25.11.2016.
+ * Presenter for LauncherActivity
+ * Implements ILauncherPresenter
  */
-
-public class GCMPresenter implements IGCMPresenter {
+public class LauncherPresenter implements ILauncherPresenter {
     private LauncherActivity view;
-    private IGCMInteractor interactor;
-    public GCMPresenter (LauncherActivity activity) {
+    private ILauncherInteractor interactor;
+    public LauncherPresenter(LauncherActivity activity) {
         view = activity;
-        interactor = new GCMInteractor();
+        interactor = new LauncherInteractor();
     }
 
     @Override

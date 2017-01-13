@@ -16,7 +16,7 @@ import de.traveltogether.DataType;
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
-import de.traveltogether.activity.detailactivity.DetailActivityActivity;
+import de.traveltogether.activity.detailactivity.ActivityDetailActivity;
 import de.traveltogether.chat.ChatActivity;
 import de.traveltogether.expense.detailexpense.ExpenseDetailActivity;
 import de.traveltogether.info.InfoActivity;
@@ -133,7 +133,7 @@ public class NotificationActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else if (n.getType().equals(DataType.ACTIVITY.toString())){
-            Intent intent = new Intent(this, DetailActivityActivity.class);
+            Intent intent = new Intent(this, ActivityDetailActivity.class);
             intent.putExtra("featureId", n.getFeatureOrTripId());
             startActivity(intent);
         }

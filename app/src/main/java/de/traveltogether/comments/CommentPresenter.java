@@ -3,7 +3,8 @@ package de.traveltogether.comments;
 import de.traveltogether.model.Comment;
 
 /**
- * Created by Anna-Lena on 15.06.2016.
+ * Presenter for ICommentView
+ * Implements ICommentPresenter
  */
 public class CommentPresenter implements ICommentPresenter {
     private ICommentInteractor interactor;

@@ -18,6 +18,9 @@ import de.traveltogether.expense.newexpense.NewExpenseActivity;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
 
+/**
+ * Activity viewing a list of expenses
+ */
 public class ExpenseActivity extends AppCompatActivity implements View.OnClickListener{
     private long tripId;
     private IExpensePresenter presenter;
@@ -28,9 +31,8 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Ausgaben");
+        getSupportActionBar().setTitle(getString(R.string.expenses));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -39,19 +41,17 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         add.setOnClickListener(this);
 
         tripId = getIntent().getLongExtra("tripId", -1);
-
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
         presenter = new ExpensePresenter(this);
-
     }
 
     @Override
     protected void onStart(){
         super.onStart();
         progressDialog = ProgressDialog.show(this, "",
-                "Bitte warten...", true);
+                getString(R.string.please_wait), true);
         presenter.onGetParticipantList(tripId);
         presenter.onGetExpenseList(tripId);
     }
@@ -99,10 +99,6 @@ public class ExpenseActivity extends AppCompatActivity implements View.OnClickLi
         participantsFragment = ExpenseParticipantFragment.newInstance(activeParts);
         fragmentTransaction.add(R.id.activity_expense_participants_container, participantsFragment);
         fragmentTransaction.commit();
-
-        //RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_expense_participants_container);
-        //ViewGroup.LayoutParams params = layout.getLayoutParams();
-        //params.height = participants.length * 50;
     }
 
     public void onViewExpenses(Expense[] expenses){

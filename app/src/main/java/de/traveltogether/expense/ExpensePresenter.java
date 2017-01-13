@@ -4,7 +4,8 @@ import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Presenter for ExpenseActivity
+ * Implements IExpensePresenter
  */
 public class ExpensePresenter implements IExpensePresenter{
     private ExpenseActivity view;

@@ -14,6 +14,9 @@ import android.widget.Toast;
 import de.traveltogether.R;
 import de.traveltogether.model.Person;
 
+/**
+ * Activity for inviting others to a trip
+ */
 public class InvitationActivity extends AppCompatActivity{
 
     private IInvitePresenter presenter;
@@ -27,13 +30,12 @@ public class InvitationActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
 
-        getSupportActionBar().setTitle("Mitreisende hinzufügen");
+        getSupportActionBar().setTitle(getString(R.string.title_invititation_choose));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        tripId = -1; // or other values
+        tripId = -1;
         if (b != null) {
             tripId = b.getLong("tripId");
             formerActivity = b.getString("formerActivity", "newTrip");
@@ -105,10 +107,7 @@ public class InvitationActivity extends AppCompatActivity{
     }
 
     public void onInviteSuccess(){
-        Context context = getApplicationContext();
-        CharSequence text = getString(R.string.invite_success);
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
+        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.invite_success), Toast.LENGTH_SHORT);
         toast.show();
     }
 }

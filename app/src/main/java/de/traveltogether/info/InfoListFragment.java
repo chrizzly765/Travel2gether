@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import de.traveltogether.R;
 import de.traveltogether.model.Participant;
 
+/**
+ * Fragment for list of participants
+ */
 public class InfoListFragment extends ListFragment {
     private InfoParticipantAdapter adapter;
     private Participant[] participants;
@@ -17,9 +20,9 @@ public class InfoListFragment extends ListFragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public InfoListFragment() {
+    public InfoListFragment()
+    {
     }
-
 
     public static InfoListFragment newInstance(Participant[] _participants) {
         InfoListFragment fragment = new InfoListFragment();
@@ -40,10 +43,7 @@ public class InfoListFragment extends ListFragment {
 
     public void onStart(){
         super.onStart();
-        if(participants==null || participants.length==0 ){
-            //TODO: Error
-        }
-        else {
+        if(!(participants==null || participants.length==0 )){
             adapter = new InfoParticipantAdapter(getActivity(), participants);
             setListAdapter(adapter);
 

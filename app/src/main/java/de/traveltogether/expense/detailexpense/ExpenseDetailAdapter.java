@@ -18,6 +18,10 @@ package de.traveltogether.expense.detailexpense;
 
         import java.text.DecimalFormat;
 
+/**
+ * Adapter for a list of participants in ExpenseDetailActivity
+ * Brings together views and data called from server
+ */
 class ExpenseDetailAdapter extends BaseAdapter {
     private Payer[] payers;
     private LayoutInflater inflater;
@@ -49,7 +53,6 @@ class ExpenseDetailAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.fragment_expense_detail_item, parent, false);
             holder = new ExpenseDetailViewHolder();
             holder.name = (TextView)convertView.findViewById(R.id.fragment_expense_detail_item_name);
-            //holder.description= (TextView)convertView.findViewById(R.id.fragment_trip_list_item_description);
             holder.amount=(TextView)convertView.findViewById(R.id.fragment_expense_detail_item_amount);
             holder.icon = (FrameLayout)convertView.findViewById(R.id.fragment_expense_detail_item_icon);
             convertView.setTag(holder);
@@ -60,7 +63,6 @@ class ExpenseDetailAdapter extends BaseAdapter {
 
         Context context = parent.getContext();
         Payer payer = (Payer) getItem(position);
-        Log.d("payer id", String.valueOf(payer.getId()) + " " + StaticTripData.getNameById(payer.getId()));
         holder.name.setText(StaticTripData.getNameById(payer.getId()));
         String amount = "";
         DecimalFormat df = new DecimalFormat(StaticData.currencyFormatDE);

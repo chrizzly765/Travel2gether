@@ -7,9 +7,10 @@ import android.util.Log;
 
 import de.traveltogether.R;
 
-
+/**
+ * DialogFragment for DeleteDialog
+ */
 public class DeleteDialogFragment extends DialogFragment implements DialogInterface.OnClickListener{
-    //public static final String TAG = InvitationDialogFragment.class.getSimpleName();
     public static final String TAG = DeleteDialogFragment.class.getSimpleName();
 
     private DeleteActivity activity;
@@ -17,8 +18,6 @@ public class DeleteDialogFragment extends DialogFragment implements DialogInterf
     public DeleteDialogFragment() {
         // Required empty public constructor
     }
-
-
 
     public static void createDialog(DeleteActivity _activity){
         DeleteDialogFragment dialog = new DeleteDialogFragment();
@@ -33,14 +32,10 @@ public class DeleteDialogFragment extends DialogFragment implements DialogInterf
         ad.show();
     }
 
-
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        Log.d("onclick", Integer.toString(which));
-
         activity.onActivityResult(getTargetRequestCode(), which, activity.getIntent());
         dialog.cancel();
-
     }
 }
 

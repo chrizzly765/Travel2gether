@@ -3,7 +3,7 @@ package de.traveltogether.activity.detailactivity;
 import de.traveltogether.model.Activity;
 
 
-public interface IDetailActivityPresenter {
+public interface IActivityDetailPresenter {
     void onGetDetailsForActivity(long featureId);
     void onSuccessGetDetails(Activity activity);
     void onError(String message, String title);

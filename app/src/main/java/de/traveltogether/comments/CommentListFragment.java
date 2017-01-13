@@ -12,7 +12,7 @@ import de.traveltogether.R;
 import de.traveltogether.model.Comment;
 
 /**
- * A fragment representing a list of Items.
+ * A fragment representing a list of comments.
  */
 public class CommentListFragment extends ListFragment{
 
@@ -27,8 +27,6 @@ public class CommentListFragment extends ListFragment{
     public CommentListFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static CommentListFragment newInstance(Comment[] _comments) {
         CommentListFragment fragment = new CommentListFragment();
         fragment.comments = _comments;
@@ -51,35 +49,13 @@ public class CommentListFragment extends ListFragment{
 
     public void onStart(){
         super.onStart();
-        if(comments==null || comments.length==0 ){
-            //TODO: show new trip listitem
-        }
-        else {
+        if(!(comments==null || comments.length==0)){
             adapter = new CommentAdapter(getActivity(), comments);
             setListAdapter(adapter);
 
             if (adapter == null) {
                 return;
             }
-            ViewGroup vg = getListView();
-            int totalHeight = 0;
-            int unbounded = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-            Resources resources = getActivity().getResources();
-            DisplayMetrics metrics = resources.getDisplayMetrics();
-            /*
-            int px = (int)(80 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
-
-            for (int i = 0; i < adapter.getCount(); i++) {
-                View listItem = adapter.getView(i, null, vg);
-                listItem.measure(unbounded, unbounded);
-                totalHeight += listItem.getMeasuredHeight();
-            }
-            totalHeight = totalHeight + px;
-            ViewGroup.LayoutParams par = getListView().getLayoutParams();
-            par.height = totalHeight + (getListView().getDividerHeight() * (adapter.getCount() - 1));
-            getListView().setLayoutParams(par);
-            getListView().requestLayout();
-            */
         }
     }
 

@@ -17,7 +17,10 @@ import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.model.PackingObject;
 
-
+/**
+ * Adapter for packing list
+ * Combines view and data after calling information from server
+ */
 class PackingListAdapter extends BaseAdapter {
 
     private PackingObject[] packingobjectList;

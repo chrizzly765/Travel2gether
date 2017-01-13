@@ -3,7 +3,8 @@ package de.traveltogether.invitation;
 import de.traveltogether.model.Person;
 
 /**
- * Created by Anna-Lena on 16.05.2016.
+ * Presenter for InvitationActivity
+ * Implements IInvitePresenter
  */
 public class InvitePresenter implements IInvitePresenter {
     private InvitationActivity view;
@@ -38,6 +39,4 @@ public class InvitePresenter implements IInvitePresenter {
     public void onInviteSuccess(){
         view.onInviteSuccess();
     }
-
-
 }

@@ -4,7 +4,7 @@ import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Interface for Presenter of NewExpenseActivity
  */
 public interface INewExpensePresenter {
     void onGetParticipantsForTrip(long tripId);

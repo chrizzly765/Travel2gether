@@ -12,7 +12,9 @@ import de.traveltogether.model.Payer;
 
 import java.util.List;
 
-
+/**
+ * Fragment representing a list of participants in ExpenseDetailActivity
+ */
 public class ExpenseDetailFragment extends ListFragment {
     private List<Payer> payers;
     private ExpenseDetailAdapter adapter;
@@ -33,7 +35,6 @@ public class ExpenseDetailFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -45,10 +46,7 @@ public class ExpenseDetailFragment extends ListFragment {
 
     public void onStart(){
         super.onStart();
-        if(payers==null || payers.size()==0 ){
-            //TODO: show new trip listitem
-        }
-        else {
+        if(!(payers==null || payers.size()==0)){
             Payer[] payerArray = new Payer[payers.size()];
             for(int i = 0; i < payers.size(); i++){
                 payerArray[i] = payers.get(i);

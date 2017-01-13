@@ -16,6 +16,9 @@ import de.traveltogether.model.Participant;
 
 import java.text.DecimalFormat;
 
+/**
+ * Adapter for overview of the acountbalances for all participants
+ */
 class ExpenseParticipantAdapter extends BaseAdapter {
     private Participant[] participants;
     private LayoutInflater inflater;
@@ -54,8 +57,6 @@ class ExpenseParticipantAdapter extends BaseAdapter {
         else{
             holder = (ParticipantViewHolder) convertView.getTag();
         }
-
-        Context context = parent.getContext();
         Participant participant = (Participant) getItem(position);
         holder.name.setText(participant.getUserName());
         String amount ="";
@@ -74,6 +75,10 @@ class ExpenseParticipantAdapter extends BaseAdapter {
         return convertView;
     }
 
+    /**
+     * ViewHolder for Participants
+     * Holds all element of an item needed to transform
+     */
     public class ParticipantViewHolder {
         TextView name, amount;
         ImageView dot;

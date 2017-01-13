@@ -376,7 +376,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
 
-        Intent activity = new Intent(this, ActivitiesActivity.class);
+        Intent activity = new Intent(this, ActivityActivity.class);
         Bundle b = new Bundle();
         b.putLong("tripId", tripId); //Your id
         activity.putExtras(b); //Put your id to your next Intent

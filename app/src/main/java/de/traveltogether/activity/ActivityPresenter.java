@@ -6,10 +6,10 @@ import de.traveltogether.model.Activity;
  * Created by Anna-Lena on 28.07.2016.
  */
 public class ActivityPresenter implements IActivityPresenter {
-    private ActivitiesActivity view;
+    private ActivityActivity view;
     private IActivityInteractor interactor;
 
-    public ActivityPresenter(ActivitiesActivity _view){
+    public ActivityPresenter(ActivityActivity _view){
         view = _view;
         interactor = new ActivityInteractor();
     }

@@ -118,6 +118,9 @@ public class NewPackingItemActivity extends AppCompatActivity implements View.On
                     if(StringEscapeUtils.escapeJava(number.getText().toString()).equals("")){
                         number.setText("1");
                     }
+                    else if(Integer.parseInt(number.getText().toString()) > 99){
+                        number.setText("99");
+                    }
                     if(chosenParticipants.size() > Integer.parseInt(number.getText().toString())){
                         number.setText(String.valueOf(chosenParticipants.size()));
                     }

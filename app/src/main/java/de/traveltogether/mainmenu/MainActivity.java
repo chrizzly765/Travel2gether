@@ -24,7 +24,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
-import de.traveltogether.activity.ActivitiesActivity;
+import de.traveltogether.activity.ActivityActivity;
 import de.traveltogether.chat.ChatActivity;
 import de.traveltogether.expense.ExpenseActivity;
 import de.traveltogether.info.InfoActivity;
@@ -35,7 +35,6 @@ import de.traveltogether.tasks.TaskListActivity;
 
 import 	java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private long tripId;
@@ -366,7 +365,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         else if(v.getId()==R.id.main_menu_activities){
-            Intent intent = new Intent(this, ActivitiesActivity.class);
+            Intent intent = new Intent(this, ActivityActivity.class);
             Bundle bundle = new Bundle();
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);

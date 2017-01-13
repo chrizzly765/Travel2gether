@@ -3,7 +3,7 @@ package de.traveltogether.comments;
 import de.traveltogether.model.Comment;
 
 /**
- * Created by Anna-Lena on 15.06.2016.
+ * Interface for presenter of ICommentView
  */
 public interface ICommentPresenter {
     void onGetCommentsForFeature(long id);

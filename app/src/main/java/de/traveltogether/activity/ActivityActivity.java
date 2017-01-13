@@ -17,7 +17,7 @@ import de.traveltogether.StaticTripData;
 import de.traveltogether.activity.newactivity.NewActivityActivity;
 import de.traveltogether.model.Activity;
 
-public class ActivitiesActivity extends AppCompatActivity implements View.OnClickListener{
+public class ActivityActivity extends AppCompatActivity implements View.OnClickListener{
     private IActivityPresenter presenter;
     private Activity[] formerActivities;
     private ActivityFragment fragment;

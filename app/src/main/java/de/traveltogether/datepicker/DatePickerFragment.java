@@ -41,7 +41,6 @@ public class DatePickerFragment extends DialogFragment {
         listener = null;
     }
 
-
     public Dialog onCreateDialog(Bundle savedInstanceState){
         //current Date is default
         int year = date.get(Calendar.YEAR);

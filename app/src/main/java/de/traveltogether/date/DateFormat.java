@@ -3,7 +3,7 @@ package de.traveltogether.date;
 import java.util.Calendar;
 
 /**
- * Created by Anna-Lena on 22.09.2016.
+ * Class for formatting one date or two dates
  */
 public class DateFormat {
     private static DateFormat instance;
@@ -48,8 +48,6 @@ public class DateFormat {
         }
         else{
             s = String.valueOf(b.day) + "." + String.valueOf(b.month) + "." + String.valueOf(b.year) + " bis " + String.valueOf(e.day) + "." + String.valueOf(e.month) + "." + String.valueOf(e.year);
-            //Alternativ falls nicht zu lange:
-            // s = String .valueOf(b.day)+ ". " + b.monthAsWord + " "+ String.valueOf(b.year) + " bis " + String .valueOf(e.day)+ ". " + e.monthAsWord + " "+ String.valueOf(e.year);
         }
 
         return s;
@@ -65,7 +63,15 @@ public class DateFormat {
         return String.valueOf(d.day) + ". " + d.monthAsWord;
     }
 
-
+    /**
+     * Compares two dates
+     * @param date1
+     * @param date2
+     * @return int
+     * 1 if date1 > date2
+     * -1 if date1< date2
+     * 0 if date1 = date2
+     */
     public int compareDates(String date1, String date2){
         Date d1 = new Date(date1);
         Date d2 = new Date(date2);
@@ -94,12 +100,10 @@ public class DateFormat {
     public String getDateAsCountdown(String startDate){
         Date d = new Date(startDate);
         String s = "";
-
         Calendar calander = Calendar.getInstance();
         int cDay = calander.get(Calendar.DAY_OF_MONTH);
         int cMonth = calander.get(Calendar.MONTH) + 1;
         int cYear = calander.get(Calendar.YEAR);
-
         s = String.valueOf(d.month - cMonth) + " : " + String.valueOf(d.day - cDay);
         return s;
     }

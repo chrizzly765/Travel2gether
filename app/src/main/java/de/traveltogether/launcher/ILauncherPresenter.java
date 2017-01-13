@@ -1,10 +1,9 @@
 package de.traveltogether.launcher;
 
 /**
- * Created by Anna-Lena on 25.11.2016.
+ * Interface for Presenter of LauncherActivity
  */
-
-interface IGCMPresenter {
+interface ILauncherPresenter {
      void onUpdateToken(String token);
      void onSendInvitation(long tripId, int author);
 }

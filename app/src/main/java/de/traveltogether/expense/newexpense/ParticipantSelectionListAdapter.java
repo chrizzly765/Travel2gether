@@ -14,6 +14,10 @@ import de.traveltogether.StaticData;
 import de.traveltogether.StaticTripData;
 import de.traveltogether.model.Payer;
 
+/**
+ * Adapter for list of selected participants in NewExpenseActivity
+ * Brings together views and data
+ */
 class ParticipantSelectionListAdapter extends BaseAdapter {
     private Payer[] payer;
     private final LayoutInflater inflater;
@@ -59,10 +63,8 @@ class ParticipantSelectionListAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.fragment_participant_selection_list_item, parent, false);
             holder = new ParticipantSelectionListViewHolder();
             holder.name = (TextView)convertView.findViewById(R.id.fragment_participant_selection_list_item_name);
-            //holder.description= (TextView)convertView.findViewById(R.id.fragment_trip_list_item_description);
             holder.initial=(TextView)convertView.findViewById(R.id.fragment_participant_selection_list_item_initial);
             holder.icon=(ImageView)convertView.findViewById(R.id.fragment_participant_selection_list_item_icon);
-            //holder.amount=(EditText) convertView.findViewById(R.id.fragment_participant_selection_list_amount);
             convertView.setTag(holder);
         }
         else{
@@ -73,15 +75,17 @@ class ParticipantSelectionListAdapter extends BaseAdapter {
         Payer payer = (Payer) getItem(position);
         holder.name.setText(StaticTripData.getNameById(payer.getId()));
         holder.initial.setText(StaticTripData.getNameById(payer.getId()).substring(0,1));
-        holder.icon.setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(payer.getId()))); // TODO: set color!
+        holder.icon.setBackgroundResource(StaticData.getIdForColor(StaticTripData.getColorById(payer.getId())));
         return convertView;
     }
 
-
-    public class ParticipantSelectionListViewHolder {
+    /**
+     * ViewHolder for participant list
+     * Holds all elements of an item needed to transform
+     */
+    class ParticipantSelectionListViewHolder {
         public TextView name;
         public TextView initial;
         public ImageView icon;
-        //public EditText amount;
     }
 }

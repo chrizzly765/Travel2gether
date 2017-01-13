@@ -9,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.util.Objects;
-
 import de.traveltogether.R;
 import de.traveltogether.StaticData;
 import de.traveltogether.gcm.GCMRegistrationIntentService;
@@ -18,15 +16,18 @@ import de.traveltogether.login.LoginActivity;
 import de.traveltogether.notification.NotificationActivity;
 import de.traveltogether.triplist.TripListActivity;
 
+/**
+ * Activity for launching the app.
+ * Checks if user is already logged in or new login is necessary.
+ */
 public class LauncherActivity extends AppCompatActivity {
-
     private BroadcastReceiver mRegistrationBroadcastReceiver;
-    private IGCMPresenter presenter;
+    private ILauncherPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new GCMPresenter(this);
+        presenter = new LauncherPresenter(this);
         setContentView(R.layout.activity_launcher);
         Log.d("Launcher","start");
 
@@ -52,7 +53,7 @@ public class LauncherActivity extends AppCompatActivity {
                             presenter.onUpdateToken(token);
                         } else if(intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_ERROR)){
                             //Registration error
-                            Log.d("Error", "Error in receiving token from GCM.");
+                            Log.e("Error", "Error in receiving token from GCM.");
                         }
                     }
                 };
@@ -64,26 +65,22 @@ public class LauncherActivity extends AppCompatActivity {
                     Intent intent = new Intent(this, NotificationActivity.class);
                     startActivity(intent);
                     finish();
-                    Log.d("launcher", "sent invitation");
                     return;
                 }
                 catch (Exception e){
-                    Log.d("Launcher", "No intent data");
+                    Log.e("Launcher", "No intent data");
                 }
                 Intent tl = new Intent(this, TripListActivity.class);
                 startActivity(tl);
             }
             else{
-                Log.d("no userid available", "");
                 Intent login = new Intent(this, LoginActivity.class);
                 startActivity(login);
             }
         }
         else{
-            Log.d("no hash available", hash);
             Intent login = new Intent(this, LoginActivity.class);
             startActivity(login);
         }
-        //progressDialog.cancel();
     }
 }

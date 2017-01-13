@@ -12,8 +12,8 @@ import de.traveltogether.R;
 import de.traveltogether.model.Person;
 
 /**
- * Created by Anna-Lena on 12.06.2016.
- * Schnittstelle zwischen UI und Daten des Invitationfrag
+ * Adapter for invitation suggestions.
+ * Putting together view and data that was called from server.
  */
  class InvitationAdapter extends BaseAdapter {
     private final Person[] formerParticipants;
@@ -51,20 +51,19 @@ import de.traveltogether.model.Person;
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TripViewHolder holder;
+        ParticipantViewHolder holder;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.fragment_invitation_list_item, parent, false);
-            holder = new TripViewHolder();
+            holder = new ParticipantViewHolder();
             holder.name = (TextView)convertView.findViewById(R.id.fragment_invitation_list_item_name);
             holder.grayIcon = (ImageView)convertView.findViewById(R.id.fragment_invitation_list_item_icon);
             holder.initial = (TextView) convertView.findViewById(R.id.fragment_invitation_list_item_initial);
             convertView.setTag(holder);
         }
         else{
-            holder = (TripViewHolder)convertView.getTag();
+            holder = (ParticipantViewHolder)convertView.getTag();
         }
 
-        Context context = parent.getContext();
         Person person = (Person)getItem(position);
         if(person.getUserName()!=null) {
             holder.name.setText(person.getUserName());
@@ -73,7 +72,11 @@ import de.traveltogether.model.Person;
         return convertView;
     }
 
-    private static class TripViewHolder {
+    /**
+     * ViewHolder for participant.
+     * Holds all elements of one participant from the list that are transformed later.
+     */
+    private static class ParticipantViewHolder {
         ImageView grayIcon;
         TextView name, initial;
     }

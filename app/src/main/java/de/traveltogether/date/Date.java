@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 /**
- * Created by Anna-Lena on 22.09.2016.
+ * Class representing a date
  */
 public class Date {
     int month;
@@ -87,12 +87,12 @@ public class Date {
     }
 
     /**
+     * Compares the date with the current date
+     * @return boolean
      * true if date >= current date
      * false if date < current date
-     * @return boolean
      */
     public boolean compareDateWithCurrent() {
-
         setDateFormat("dd.MM.yyyy");
         setDateInSeconds();
         setCurrentDateInSeconds();

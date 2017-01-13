@@ -13,7 +13,8 @@ import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
 /**
- * Created by Anna-Lena on 16.05.2016.
+ * Interactor for InvitationFragment
+ * Implements IInviteInteractor
  */
 public class InviteInteractor implements IInviteInteractor {
     private IInvitePresenter listener;

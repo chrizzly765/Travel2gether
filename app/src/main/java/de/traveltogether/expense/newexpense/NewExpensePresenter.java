@@ -3,6 +3,9 @@ package de.traveltogether.expense.newexpense;
 import de.traveltogether.model.Expense;
 import de.traveltogether.model.Participant;
 
+/**
+ * Presenter for NewExpenseActivity
+ */
 public class NewExpensePresenter implements INewExpensePresenter {
     private NewExpenseActivity view;
     private INewExpenseInteractor interactor;

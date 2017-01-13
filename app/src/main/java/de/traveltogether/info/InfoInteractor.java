@@ -14,7 +14,10 @@ import de.traveltogether.model.Trip;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
-
+/**
+ * Interactor for InfoActivity
+ * Implements IInfoInteractor
+ */
  class InfoInteractor implements IInfoInteractor{
     private IInfoPresenter listener;
 
@@ -27,9 +30,9 @@ import de.traveltogether.servercommunication.JsonDecode;
         }
         catch(Exception e){
             Log.e(e.getClass().toString(),e.getMessage());
+            listener.onError("Fehler beim Http Request", "Fehler");
         }
         HttpRequest req = new HttpRequest(DataType.TRIP, ActionType.DETAIL, obj.toString(), this);
-
     }
 
     @Override
@@ -41,6 +44,7 @@ import de.traveltogether.servercommunication.JsonDecode;
         }
         catch(Exception e){
             Log.e(e.getClass().toString(),e.getMessage());
+            listener.onError("Fehler beim Http Request", "Fehler");
         }
         HttpRequest req = new HttpRequest(DataType.TRIP, ActionType.GETPARTICIPANTS, obj.toString(), this);
     }
@@ -55,6 +59,7 @@ import de.traveltogether.servercommunication.JsonDecode;
         }
         catch(Exception e){
             Log.e(e.getClass().toString(), e.getMessage());
+            listener.onError("Fehler beim Http Request", "Fehler");
         }
     }
 
@@ -68,13 +73,14 @@ import de.traveltogether.servercommunication.JsonDecode;
         }
         catch (Exception e){
             Log.e(e.getClass().toString(), e.getMessage());
+            listener.onError("Fehler beim Http Request", "Fehler");
         }
     }
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
         if(response.getError().equals("true")){
-            listener.onError("Kein Zugriff", response.getMessage());
+            listener.onError(response.getMessage(), "Kein Zugriff");
         }
         else {
             if (actionType == ActionType.DETAIL) {
@@ -83,7 +89,7 @@ import de.traveltogether.servercommunication.JsonDecode;
                     listener.onSuccessGetDetail((Trip) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.TRIP));
                 }
                 else {
-                    listener.onError("Kein Zugriff", "Die Reise wurde gelöscht.");
+                    listener.onError("Die Reise wurde gelöscht.", "Kein Zugriff");
                 }
             } else if (actionType == ActionType.GETPARTICIPANTS) {
                 Participant[] participants = ((ParticipantList)JsonDecode.getInstance().jsonToClass(response.getData(), ParticipantList.class)).list;
@@ -96,6 +102,9 @@ import de.traveltogether.servercommunication.JsonDecode;
         }
     }
 
+    /**
+     * Necessary class for getting array from json string
+     */
     private class ParticipantList{
         public Participant[] list;
     }

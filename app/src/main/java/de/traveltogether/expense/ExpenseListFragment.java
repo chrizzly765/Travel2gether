@@ -12,7 +12,9 @@ import de.traveltogether.R;
 import de.traveltogether.expense.detailexpense.ExpenseDetailActivity;
 import de.traveltogether.model.Expense;
 
-
+/**
+ * Fragment holding a list of expenses
+ */
 public class ExpenseListFragment extends ListFragment implements AdapterView.OnItemClickListener {
     private Expense[] expenses;
     private ExpenseAdapter adapter;
@@ -24,8 +26,6 @@ public class ExpenseListFragment extends ListFragment implements AdapterView.OnI
     public ExpenseListFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static ExpenseListFragment newInstance(Expense[] _expenses) {
         ExpenseListFragment fragment = new ExpenseListFragment();
         fragment.expenses=_expenses;
@@ -55,8 +55,6 @@ public class ExpenseListFragment extends ListFragment implements AdapterView.OnI
             adapter = new ExpenseAdapter(getActivity(),expenses);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);
-
-
             if (adapter == null) {
                 return;
             }
@@ -73,7 +71,6 @@ public class ExpenseListFragment extends ListFragment implements AdapterView.OnI
             getListView().setLayoutParams(par);
             getListView().requestLayout();
         }
-
     }
 
 

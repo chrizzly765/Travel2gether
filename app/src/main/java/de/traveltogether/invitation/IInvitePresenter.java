@@ -2,7 +2,9 @@ package de.traveltogether.invitation;
 
 import de.traveltogether.model.Person;
 
-
+/**
+ * Interface for presenter of InvitationActivity
+ */
 public interface IInvitePresenter {
      void onGetFormerParticipants(long tripId);
      void onError(String message);

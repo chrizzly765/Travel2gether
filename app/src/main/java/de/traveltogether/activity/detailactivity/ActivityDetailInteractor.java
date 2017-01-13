@@ -13,8 +13,8 @@ import de.traveltogether.model.Response;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
-public class DetailActivityInteractor implements IDetailActivityInteractor {
-    private IDetailActivityPresenter listener;
+public class ActivityDetailInteractor implements IActivityDetailInteractor {
+    private IActivityDetailPresenter listener;
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
@@ -45,7 +45,7 @@ public class DetailActivityInteractor implements IDetailActivityInteractor {
     }
 
     @Override
-    public void getDetailsForActivity(long featureId, IDetailActivityPresenter _listener) {
+    public void getDetailsForActivity(long featureId, IActivityDetailPresenter _listener) {
         listener = _listener;
         try{
             JSONObject obj = new JSONObject();
@@ -59,7 +59,7 @@ public class DetailActivityInteractor implements IDetailActivityInteractor {
 
 
     @Override
-    public void deleteActivity(long id, IDetailActivityPresenter _listener) {
+    public void deleteActivity(long id, IActivityDetailPresenter _listener) {
         listener = _listener;
         try{
             JSONObject obj = new JSONObject();
@@ -71,7 +71,7 @@ public class DetailActivityInteractor implements IDetailActivityInteractor {
         }
     }
 
-    public void getParticipantsForTrip(long tripId, IDetailActivityPresenter _listener) {
+    public void getParticipantsForTrip(long tripId, IActivityDetailPresenter _listener) {
         listener = _listener;
         try {
             JSONObject jsonObject = new JSONObject();

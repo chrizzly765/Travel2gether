@@ -14,7 +14,8 @@ import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
 /**
- * Created by Anna-Lena on 15.09.2016.
+ * Interactor for ExpenseDetailActivity
+ * Implements IExpenseDetailInteractor
  */
 public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
     private IExpenseDetailPresenter listener;
@@ -30,7 +31,6 @@ public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
                     listener.onSuccessGetDetails((Expense) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.EXPENSE));
                 }
                 catch(Exception e){
-                    //listener.onError("Auf diese Ausgabe kann leider nicht mehr zugegriffen werden.");
                     listener.onCloseActivity();
                 }
             }
@@ -57,6 +57,7 @@ public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
             HttpRequest request = new HttpRequest(DataType.EXPENSE, ActionType.DETAIL, obj.toString(), this);
         }
         catch(Exception e){
+            listener.onError("Fehler beim HttpRequest", "Fehler");
             Log.e("DetailExpenseInteractor", e.getMessage());
         }
     }
@@ -70,6 +71,7 @@ public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
             HttpRequest request = new HttpRequest(DataType.EXPENSE, ActionType.DELETE, obj.toString(), this);
         }
         catch(Exception e){
+            listener.onError("Fehler beim HttpRequest", "Fehler");
             Log.e("DetailExpenseInteractor", e.getMessage());
         }
     }
@@ -82,11 +84,16 @@ public class ExpenseDetailInteractor implements IExpenseDetailInteractor {
             obj.put("tripId", tripId);
         }
         catch(Exception e){
+            listener.onError("Fehler beim HttpRequest", "Fehler");
             Log.e(e.getClass().toString(), e.getMessage());
         }
         HttpRequest req = new HttpRequest(DataType.TRIP, ActionType.GETPARTICIPANTS, obj.toString(), this);
 
     }
+
+    /**
+     * Necessary helper class for getting participant array from json string
+     */
     class ParticipantList{
         public Participant[] list;
     }

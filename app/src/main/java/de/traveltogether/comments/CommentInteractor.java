@@ -12,7 +12,8 @@ import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
 /**
- * Created by Anna-Lena on 15.06.2016.
+ * Interactor for ICommentView
+ * Implements ICommentInteractor
  */
 public class CommentInteractor implements ICommentInteractor {
     private ICommentPresenter listener;
@@ -91,6 +92,9 @@ public class CommentInteractor implements ICommentInteractor {
         }
     }
 
+    /**
+     * Necessary helper class for getting comment array from json string
+     */
     class CommentList{
         Comment[] list;
     }
