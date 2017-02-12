@@ -3,7 +3,8 @@ package de.traveltogether.mainmenu;
 import de.traveltogether.model.Statistic;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Presenter for MainActivity
+ * Implements IMainMenuPresenter
  */
 public class MainMenuPresenter implements IMainMenuPresenter {
     private MainActivity view;

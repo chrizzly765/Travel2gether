@@ -1,7 +1,7 @@
 package de.traveltogether.time;
 
 /**
- * Created by Isa on 07.10.2016.
+ * Class for formatting time
  */
 public class TimeFormat {
     private static TimeFormat instance;
@@ -20,6 +20,9 @@ public class TimeFormat {
         instance = this;
     }
 
+    /**
+     * @return String that represents a time of structure "mm:hh Uhr"
+     */
     public String getTimeWithoutSecondsWithWord(String time){
         Time t = new Time(time);
         String stringMinute= "";
@@ -39,6 +42,9 @@ public class TimeFormat {
         return stringHour + ":" + stringMinute + " Uhr";
     }
 
+    /**
+     * @return String that represents a time of structure "mm:hh"
+     */
     public String getTimeWithoutSecondsWithoutWord(String time){
         Time t = new Time(time);
         String stringMinute= "";
@@ -57,6 +63,4 @@ public class TimeFormat {
         }
         return stringHour + ":" + stringMinute;
     }
-
-
 }

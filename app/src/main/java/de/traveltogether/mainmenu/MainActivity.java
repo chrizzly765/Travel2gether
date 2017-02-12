@@ -36,31 +36,30 @@ import de.traveltogether.tasks.TaskListActivity;
 import 	java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Activity showing the countdown, progress indicator and all features
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private long tripId;
     private String title;
-    //TextView groupText;
-    private TextView personalText;
-    private TextView startDateText;
     private int adminId;
     private IMainMenuPresenter presenter;
     private ProgressDialog progressDialog;
     private AnimationDrawable groupStatisticAnimation;
     private AnimationDrawable personalStatisticAnimation;
     private Statistic statistic;
-    private Trip trip;
     private ImageView groupAnimationContainer;
     private ImageView personalAnimationContainer;
     private static int SECONDS_IN_A_DAY = 24 * 60 * 60;
-    //TextView startDateText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new MainMenuPresenter(this);
         setContentView(R.layout.activity_main_menu);
+
         Bundle b = getIntent().getExtras();
-        tripId = -1; // or other values
+        tripId = -1;
         if (b != null) {
             tripId = b.getLong("tripId",-1);
             title = b.getString("title", "");
@@ -80,14 +79,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         personalAnimationContainer.setBackgroundResource(R.drawable.personal_animation);
         personalStatisticAnimation = (AnimationDrawable) personalAnimationContainer.getBackground();
 
-
         presenter.onGetParticipantsForTrip(tripId);
 
-        //groupText = (TextView) findViewById(R.id.main_menu_group_text);
-        //startDateText = (TextView) findViewById(R.id.main_menu_countdown);
         LinearLayout progressInfo = (LinearLayout)findViewById(R.id.main_menu_progress_info);
         progressInfo.setOnClickListener(this);
-
         ImageButton info = (ImageButton)findViewById(R.id.main_menu_info);
         info.setOnClickListener(this);
         ImageButton expences = (ImageButton)findViewById(R.id.main_menu_expences);
@@ -100,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         activities.setOnClickListener(this);
         ImageButton chat = (ImageButton)findViewById(R.id.main_menu_chat);
         chat.setOnClickListener(this);
+
         progressDialog = ProgressDialog.show(this, "",
                 "Bitte warten...", true);
     }
@@ -107,43 +103,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart(){
         super.onStart();
-
-        //progressDialog = ProgressDialog.show(this, "",
-        //        "Bitte warten...", true);
-
         presenter.onGetStatistics(tripId,StaticData.getUserId());
     }
 
     private  void setActionBar(String heading) {
         ActionBar actionBar = getSupportActionBar();
-        //actionBar.setHomeButtonEnabled(true);
         actionBar.setTitle(StringEscapeUtils.unescapeJava(heading));
         actionBar.show();
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
     }
 
-    public void onSuccessGetParticipants(){
-        //progressDialog.cancel();
-        //groupStatisticAnimation.start();
-        //personalStatisticAnimation.start();
-    }
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.optionsmenu_trip, menu);
+    public void onSuccessGetParticipants(){}
 
-        if(StaticData.getUserId().equals(adminId)){
-            menu.getItem(0).setEnabled(true);
-            menu.getItem(1).setEnabled(true);
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
@@ -152,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-
         }
     }
 
@@ -192,13 +164,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String stringGroup = Long.toString(Math.round(statistic.getGroup() * 100)) + "%";
         String stringPersonal = Long.toString(Math.round(statistic.getPersonal() * 100)) + "%";
 
-
-
         TextView groupText = (TextView) findViewById(R.id.main_menu_group_text);
         groupText.setText(stringGroup);
         TextView personalText = (TextView) findViewById(R.id.main_menu_personal_text);
         personalText.setText(stringPersonal);
-
 
         TextView startDateDays = (TextView) findViewById(R.id.main_menu_countdown_days);
         startDateDays.setText(getCountdownDays(getCountdown(statistic.getStartDate())));
@@ -207,14 +176,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView startDateMinutes = (TextView) findViewById(R.id.main_menu_countdown_minutes);
         startDateMinutes.setText(getCountdownMinutes(getCountdown(statistic.getStartDate())));
 
-        Log.d("startDateLog","statsitcLog1: " + statistic.getStartDate());
-        Log.d("startDateLog","statsitcLog2: " + statistic.getGroup());
-        Log.d("startDateLog","statsitcLog3: " + statistic.getPersonal());
-
         long timeoutGroup = Math.round(statistic.getGroup() * 2100) ;
         long timeoutPersonal = Math.round(statistic.getPersonal() * 2100);
-
-        Log.d("startDateLog","statsitcLog4: " + timeoutGroup);
 
         groupStatisticAnimation.start();
         new Handler().postDelayed(new Runnable() {
@@ -255,8 +218,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             thatDay.set(Calendar.MONTH, _month - 1); // 0-11 so 1 less
             thatDay.set(Calendar.YEAR, _year);
 
-            //Log.d("CountdownTest", "Countdown: " + thatDay);
-
             Calendar today = Calendar.getInstance();
             long diff = thatDay.getTimeInMillis() - today.getTimeInMillis();
             long diffSec = diff / 1000;
@@ -278,7 +239,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 minutesString = String.valueOf(minutes);
             }
-            // Log.d("hoursTest", "hours: " + hours);
 
             if (hours - 1 < 0) {
                 if (Math.abs(hours - 1) >= 0 && Math.abs(hours - 1) <= 9) {
@@ -319,12 +279,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 TextView minutesCountdown = (TextView) findViewById(R.id.main_menu_countdown_minutes);
                 minutesCountdown.setTextColor(0xFFFF0000);
             }
-
-            //System.out.printf("%d days, %d hours, %d minutes and %d seconds\n", days, hours, minutes, seconds);
             countdown = daysString + ":" + hoursString + ":" + minutesString;
-
         }
-
         return countdown;
     }
 
@@ -345,8 +301,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String minutes = parts[2];
         return minutes;
     }
-
-
 
     @Override
     public void onClick(View v) {
@@ -398,11 +352,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bundle.putLong("tripId", tripId);
             intent.putExtras(bundle);
             startActivity(intent);
-            /*
-            FragmentManager fm = getFragmentManager();
-            ProgressDialogFragment dialogFragment = new ProgressDialogFragment();
-            dialogFragment.show(fm, "Sample Fragment");
-            */
         }
     }
 
@@ -414,7 +363,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
     public void onSuccessGetTitle(String _title){
         title = _title;

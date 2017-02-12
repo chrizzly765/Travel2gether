@@ -3,11 +3,9 @@ package de.traveltogether.activity.newactivity;
 import de.traveltogether.model.Activity;
 
 /**
- * Created by Isa on 13.08.2016.
+ * Interface for Presenter of NewActivityActivity
  */
 public interface INewActivityPresenter {
-    //public void onGetParticipantsForTrip(long tripId);
-    //public void onSuccessGetParticipants(Participant[] participants);
     void onError(String message, String title);
     void onCreateActivity(long tripId, Activity activity);
     void onSuccessAddingActivity();
@@ -15,6 +13,4 @@ public interface INewActivityPresenter {
     void onGetDetailForActivity(long featureId);
     void onSuccessGetDetail(Activity activity);
     void onSuccessUpdateActivity();
-
-    //public void onSuccess(String message);
 }

@@ -13,7 +13,8 @@ import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
 /**
- * Created by Anna-Lena on 12.05.2016.
+ * Interactor for MainActivity
+ * Implements IMainInteractor
  */
 public class MainMenuInteractor implements IMainMenuInteractor {
     private IMainMenuPresenter listener;
@@ -29,7 +30,6 @@ public class MainMenuInteractor implements IMainMenuInteractor {
         catch(Exception e){
             Log.e(e.getClass().toString(), e.getMessage());
         }
-
     }
 
     @Override
@@ -57,7 +57,6 @@ public class MainMenuInteractor implements IMainMenuInteractor {
         catch(Exception e){
             Log.e(e.getClass().toString(), e.getMessage());
         }
-
     }
 
     @Override
@@ -71,22 +70,9 @@ public class MainMenuInteractor implements IMainMenuInteractor {
                 listener.onSuccessLeavingTrip();
                 return;
             }
-            /*if(dataType==DataType.TRIP && actionType==ActionType.GETPARTICIPANTS){
-                if(response.getError()!="true") {
-                    Participant[] participants = ((ParticipantList) JsonDecode.getInstance().jsonToClass(response.getData(), ParticipantList.class)).list;
-                    StaticTripData.setParticipants(participants);
-                    listener.onSuccessGetParticipants();
-                    return;
-                }
-                else{
-                    listener.onError(response.getMessage());
-                }
-            }*/
             if(dataType==DataType.TRIP && actionType==ActionType.GETSTATISTIC){
                 if(!response.getError().equals("true")) {
                     listener.onSuccessGetStatistics((Statistic) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.STATISTIC));
-                    //Statistic statistics = ((Statistic) JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.STATISTIC));
-                    //listener.onSuccessGetStatistics(statistics);
                     return;
                 }
                 else{
@@ -100,7 +86,6 @@ public class MainMenuInteractor implements IMainMenuInteractor {
         else{
             listener.onError(response.getMessage());
         }
-
     }
 
     @Override
@@ -128,7 +113,6 @@ public class MainMenuInteractor implements IMainMenuInteractor {
             Log.e(e.getClass().toString(), e.getMessage());
         }
     }
-
 
     private class ParticipantList {
         public Participant[] list;

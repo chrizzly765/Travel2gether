@@ -17,48 +17,45 @@ import de.traveltogether.StaticTripData;
 import de.traveltogether.activity.newactivity.NewActivityActivity;
 import de.traveltogether.model.Activity;
 
+/**
+ * Activity viewing a list of activities
+ */
 public class ActivityActivity extends AppCompatActivity implements View.OnClickListener{
     private IActivityPresenter presenter;
     private Activity[] formerActivities;
-    private ActivityFragment fragment;
+    private ActivityListFragment fragment;
     private long tripId;
     private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("Aktivitäten");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        setContentView(R.layout.activity_activities);
+        ImageButton newTripBtn = (ImageButton) findViewById(R.id.fab_button);
+        newTripBtn.setOnClickListener(this);
 
         Bundle b = getIntent().getExtras();
-        tripId = -1; // or other values
+        tripId = -1;
         if (b != null) {
             tripId = b.getLong("tripId", -1);
         }
         if(tripId!=-1){
             StaticTripData.setCurrentTripId(tripId);
         }
-
-        setContentView(R.layout.activity_activities);
-
-        getSupportActionBar().setTitle("Aktivitäten");
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-        ImageButton newTripBtn = (ImageButton) findViewById(R.id.fab_button);
-        newTripBtn.setOnClickListener(this);
-
-
         presenter = new ActivityPresenter(this);
+    }
 
-
-/*
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        ActivityFragment fragment = ActivityFragment.newInstance(formerActivities, presenter, tripId);
-        fragmentTransaction.add(R.id.fragment_activity_list_container, fragment);
-        fragmentTransaction.commit();
-*/
+    @Override
+    protected void onStart(){
+        super.onStart();
+        progressDialog = ProgressDialog.show(this, "",
+                "Aktivitäten werden geladen...", true);
+        presenter.onGetFormerActivities(tripId);
     }
 
     @Override
@@ -72,15 +69,6 @@ public class ActivityActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    protected void onStart(){
-        super.onStart();
-        progressDialog = ProgressDialog.show(this, "",
-                "Aktivitäten werden geladen...", true);
-        presenter.onGetFormerActivities(tripId);
-
-    }
-
-    @Override
     public void onClick(View v) {
         if (v.getId() == R.id.fab_button){
             Intent set = new Intent(this, NewActivityActivity.class);
@@ -90,27 +78,6 @@ public class ActivityActivity extends AppCompatActivity implements View.OnClickL
             startActivity(set);
         }
     }
-
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.optionsmenu_detail, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-*/
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                super.onOptionsItemSelected(item);
-        }
-        return  true;
-    }
-
 
     public void onViewError(String message) {
         progressDialog.cancel();
@@ -130,18 +97,24 @@ public class ActivityActivity extends AppCompatActivity implements View.OnClickL
     public void onViewFormerActivities(Activity[] activities){
 
         formerActivities = activities;
-        /*
-        if(formerActivities== null){
-            formerActivities= new Activity[0];
-        }
-        */
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragment = ActivityFragment.newInstance(activities, presenter, tripId);
+        fragment = ActivityListFragment.newInstance(activities, presenter, tripId);
         fragmentTransaction.add(R.id.fragment_activity_list_container, fragment);
         fragmentTransaction.commit();
         progressDialog.cancel();
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                super.onOptionsItemSelected(item);
+        }
+        return  true;
     }
 
 }

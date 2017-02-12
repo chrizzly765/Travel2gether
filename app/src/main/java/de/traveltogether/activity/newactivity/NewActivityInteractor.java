@@ -11,7 +11,9 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-
+/**
+ * Interactor for NewActivityActivity
+ */
 public class NewActivityInteractor implements INewActivityInteractor {
     private  INewActivityPresenter listener;
 
@@ -56,7 +58,6 @@ public class NewActivityInteractor implements INewActivityInteractor {
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-
         if (response.getError().equals("false")) {
             if (dataType == DataType.ACTIVITY && actionType == ActionType.ADD) {
                 listener.onSuccessAddingActivity();
@@ -68,16 +69,5 @@ public class NewActivityInteractor implements INewActivityInteractor {
         } else {
             listener.onError(response.getMessage(), response.getMessage());
         }
-        /*
-        if(response.getError()=="false"){
-           // long tripId = ((Trip)JsonDecode.getInstance().jsonToClassByType(response.getData(), DataType.TRIP)).getTripId();
-            listener.onSuccess(response.getMessage());
-        }
-        else{
-            listener.onError(response.getMessage());
-        }
-        */
     }
-
-
 }

@@ -8,6 +8,12 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import java.util.Calendar;
 
+/**
+ * A DialogFragment Subclass
+ * Activities that contain this fragment must
+ * implement the TimePickerDialog.OnTimeSetListener
+ * to handle interaction events.
+ */
 public class TimePickerFragment extends DialogFragment {
     public static final String ZEIT = TimePickerFragment.class.getSimpleName();
     private TimePickerDialog.OnTimeSetListener listener;
@@ -37,7 +43,6 @@ public class TimePickerFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState){
         int hour = date.get(Calendar.HOUR_OF_DAY);
         int minute = date.get(Calendar.MINUTE);
-
         return new TimePickerDialog(getActivity(), listener, hour, minute, true);
     }
 

@@ -12,19 +12,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import org.apache.commons.lang3.StringEscapeUtils;
-
-import java.util.Objects;
-
 import de.traveltogether.StaticData;
 import de.traveltogether.model.Activity;
 import de.traveltogether.R;
@@ -33,28 +27,22 @@ import de.traveltogether.time.TimeFormat;
 import de.traveltogether.timepicker.TimePickerFragment;
 
 /**
- * Created by Isa on 13.08.2016.
+ * Activity for creating a new activity
  */
 public class NewActivityActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private INewActivityPresenter presenter;
     private DatePickerFragment datePicker;
     private TimePickerFragment timePicker;
-    private ImageView iconBtn;
     private EditText title;
     private int id;
     private long tripId = -1;
     private EditText description;
     private EditText destination;
     private int iconTag;
-    private ImageView icon;
     private EditText startDate;
     private EditText time;
-    private int participant;
-    private Button cancel;
-    private Button save;
     private Activity activity;
     private long featureId = -1;
-    private Spinner currencySpinner;
     private ProgressDialog progressDialog;
     private ImageButton currentImgBtn;
 
@@ -66,7 +54,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
 
         getSupportActionBar().setTitle("Neue Aktivität");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.logo_ohne_schrift);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -75,11 +62,10 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
             tripId = b.getLong("tripId", -1);
             featureId = b.getLong("featureId", -1);
         }
+
         presenter = new NewActivityPresenter(this);
-
-        datePicker =new DatePickerFragment();
-        timePicker =new TimePickerFragment();
-
+        datePicker = new DatePickerFragment();
+        timePicker = new TimePickerFragment();
         title = (EditText) findViewById(R.id.newActivity_title);
         id = 0;
         description = (EditText)findViewById(R.id.newActivity_description);
@@ -103,7 +89,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         clickedTimePickerBtn.setOnClickListener(this);
         EditText datePickerTimeText = (EditText) findViewById(R.id.newActivity_time);
         datePickerTimeText.setOnClickListener(this);
-
 
         ImageButton iconBtnEmpty = (ImageButton) findViewById(R.id.icon_empty);
         iconBtnEmpty.setOnClickListener(this);
@@ -149,7 +134,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         iconTag = R.mipmap.ic_leer;
     }
 
-
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.edit, menu);
         return super.onCreateOptionsMenu(menu);
@@ -178,20 +162,12 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
                         activity.setIcon(iconTag);
                         activity.setLastUpdateBy(StaticData.getUserId());
 
-
                         presenter.onUpdateActivity(activity);
                     }
                     else {
-
-                    /*
-                    int currency = currencySpinner.getSelectedItemPosition();
-                    if(currencySpinner.getSelectedItem() == null){
-                        currencySpinner.getSelectedItem().toString();
-                    }
-                    */
                         Activity activity = new Activity(
                                 StringEscapeUtils.escapeJava(title.getText().toString()),
-                                id,//Integer.parseInt(id.getText().toString()),
+                                id,
                                 tripId,
                                 StringEscapeUtils.escapeJava(description.getText().toString()),
                                 StaticData.getUserId(),
@@ -208,7 +184,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
                     onViewError("Bitte gib einen Titel für deine Aktivität ein.", "Pflichtfeld");
                     return false;
                 }
-
             case android.R.id.home:
                 finish();
                 return true;
@@ -241,14 +216,11 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         dialog.show();
     }
 
-
     @Override
     public void onClick(View v) {
-
         if (v.getId() == R.id.button_datepicker_start || v.getId()==R.id.newActivity_startDate){
             datePicker.show(getFragmentManager(), DatePickerFragment.TAG);
         }
-
         else if (v.getId() == R.id.button_timepicker || v.getId() == R.id.newActivity_time){
             timePicker.show(getFragmentManager(), TimePickerFragment.ZEIT);
         }
@@ -258,7 +230,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
             if (currentImgBtn != null) {
                 currentImgBtn.setSelected(false);
             }
-
             if (v.getId() == R.id.icon_empty){
                 iconTag = R.mipmap.ic_leer;
             }
@@ -318,22 +289,6 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
             imgBtn.setSelected(true);
             currentImgBtn = imgBtn;
         }
-
-    }
-
-    public void onViewErrorMessage(String message, String title){
-        progressDialog.cancel();
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(message);
-        builder.setTitle(title);
-        builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 
     public void onSuccessUpdateActivity(){
@@ -365,38 +320,13 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         progressDialog.cancel();
     }
 
-
-
-/*
-    public void onSuccess(String message){
-        Context context = getApplicationContext();
-        CharSequence text = getString(R.string.newtrip_success);
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-
-        Intent activity = new Intent(this, ActivityActivity.class);
-        Bundle b = new Bundle();
-        b.putLong("tripId", tripId); //Your id
-        activity.putExtras(b); //Put your id to your next Intent
-        startActivity(activity);
-        finish();
-    }
-*/
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            int month = monthOfYear + 1;
-            startDate.setText(dayOfMonth + "." + month+"." + year);
-            datePicker.setDate(year, monthOfYear, dayOfMonth+1);
-
-        /*
-        else if(clickedDatePickerBtn.getId() == R.id.button_datepicker_end){
-            int month = monthOfYear + 1;
-            endDate.setText(dayOfMonth + "." + month +"." + year);
-        }
-        */
+        int month = monthOfYear + 1;
+        startDate.setText(dayOfMonth + "." + month+"." + year);
+        datePicker.setDate(year, monthOfYear, dayOfMonth+1);
     }
+
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
         String stringHour = "";
@@ -411,9 +341,7 @@ public class NewActivityActivity extends AppCompatActivity implements View.OnCli
         } else {
             stringMinute = Integer.toString(minute);
         }
-
         time.setText(stringHour + ":" + stringMinute);
-        Log.d("TimeTest", "Test: " + hour + " " + minute);
         timePicker.setTime(hour, minute);
     }
 }

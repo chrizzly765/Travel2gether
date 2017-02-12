@@ -3,7 +3,8 @@ package de.traveltogether.activity;
 import de.traveltogether.model.Activity;
 
 /**
- * Created by Anna-Lena on 28.07.2016.
+ * Presenter for ActivityActivity
+ * Implements IActivityPresenter
  */
 public class ActivityPresenter implements IActivityPresenter {
     private ActivityActivity view;

@@ -12,9 +12,11 @@ import de.traveltogether.servercommunication.JsonDecode;
 import de.traveltogether.model.Response;
 
 /**
- * Created by Anna-Lena on 28.07.2016.
+ * Interactor for ActivityActivity
+ * Implements IActivityInteractor
  */
 public class ActivityInteractor implements IActivityInteractor {
+
     private IActivityPresenter listener;
 
     @Override
@@ -25,26 +27,26 @@ public class ActivityInteractor implements IActivityInteractor {
             obj.put("tripId", tripId);
         }
         catch(Exception e){
-
+            listener.onError("Fehler beim Http Request");
+            Log.e(e.getClass().toString(), e.getMessage());
         }
         HttpRequest req = new HttpRequest(DataType.ACTIVITY, ActionType.LIST, obj.toString(), this);
     }
 
     @Override
     public void onRequestFinished(Response response, DataType dataType, ActionType actionType) {
-
         if (response.getError().equals("true")) {
             Log.e("Error in Interactor", response.getMessage());
             listener.onError(response.getMessage());
         } else {
             ActivityList activities = (ActivityList)JsonDecode.getInstance().jsonToClass(response.getData(), ActivityList.class);
             listener.onSuccess(activities.list);
-
         }
-
     }
 
-    //Diese Klasse muss vorhanden sein und an JsonDecode.jsonToClass übergeben werden um ein Array aus dem Json zu erhalten
+    /**
+     * Necessary class for getting array from json string
+     */
     class ActivityList{
         Activity[] list;
     }

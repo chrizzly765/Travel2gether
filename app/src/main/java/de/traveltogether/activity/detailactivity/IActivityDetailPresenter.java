@@ -2,7 +2,9 @@ package de.traveltogether.activity.detailactivity;
 
 import de.traveltogether.model.Activity;
 
-
+/**
+ * Interface for presenter of ActivityDetailActivity
+ */
 public interface IActivityDetailPresenter {
     void onGetDetailsForActivity(long featureId);
     void onSuccessGetDetails(Activity activity);
@@ -11,5 +13,4 @@ public interface IActivityDetailPresenter {
     void onSuccessDelete();
     void onCloseActivity();
     void onGetParticipantsForTrip(long tripId);
-
 }

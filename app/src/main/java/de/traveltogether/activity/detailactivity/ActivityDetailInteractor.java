@@ -13,6 +13,10 @@ import de.traveltogether.model.Response;
 import de.traveltogether.servercommunication.HttpRequest;
 import de.traveltogether.servercommunication.JsonDecode;
 
+/**
+ * Interactor for ActivityDetailActivity
+ * Implements IActivityDetailInteractor
+ */
 public class ActivityDetailInteractor implements IActivityDetailInteractor {
     private IActivityDetailPresenter listener;
 
@@ -57,7 +61,6 @@ public class ActivityDetailInteractor implements IActivityDetailInteractor {
         }
     }
 
-
     @Override
     public void deleteActivity(long id, IActivityDetailPresenter _listener) {
         listener = _listener;
@@ -82,6 +85,10 @@ public class ActivityDetailInteractor implements IActivityDetailInteractor {
             Log.e(e.getClass().toString(), e.getMessage());
         }
     }
+
+    /**
+     * Necessary helper class for getting participant array from json string
+     */
     class ParticipantList {
         public Participant[] list;
     }

@@ -2,6 +2,10 @@ package de.traveltogether.activity.detailactivity;
 
 import de.traveltogether.model.Activity;
 
+/**
+ * Presenter for ActivityDetailActivity
+ * Implements IActivityDetailPresenter
+ */
 public class ActivityDetailPresenter implements IActivityDetailPresenter {
     private ActivityDetailActivity view;
     private IActivityDetailInteractor interactor;

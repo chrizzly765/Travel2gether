@@ -12,24 +12,27 @@ import de.traveltogether.R;
 import de.traveltogether.activity.detailactivity.ActivityDetailActivity;
 import de.traveltogether.model.Activity;
 
-
-public class ActivityFragment extends ListFragment implements AdapterView.OnItemClickListener {
+/**
+ * Fragment that contains list with tasks
+ */
+public class ActivityListFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
     private ActivityAdapter adapter;
     private Activity[] formerActivities;
     private View view;
     private IActivityPresenter presenter;
     private long tripId;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ActivityFragment() {
+    public ActivityListFragment() {
 
     }
 
-    public static ActivityFragment newInstance(Activity[] activities, IActivityPresenter _presenter, long _tripId) {
-        ActivityFragment fragment = new ActivityFragment();
+    public static ActivityListFragment newInstance(Activity[] activities, IActivityPresenter _presenter, long _tripId) {
+        ActivityListFragment fragment = new ActivityListFragment();
         fragment.formerActivities = activities;
         fragment.presenter=_presenter;
         fragment.tripId = _tripId;
@@ -39,18 +42,14 @@ public class ActivityFragment extends ListFragment implements AdapterView.OnItem
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container,savedInstanceState);
         view = inflater.inflate(R.layout.fragment_activity_list, container, false);
-
         return view;
-
     }
 
     public void onStart(){
@@ -60,14 +59,11 @@ public class ActivityFragment extends ListFragment implements AdapterView.OnItem
         }
         else {
             getActivity().findViewById(R.id.activity_activities_empty).setVisibility(View.INVISIBLE);
-
             adapter = new ActivityAdapter(getActivity(), formerActivities);
             setListAdapter(adapter);
             getListView().setOnItemClickListener(this);
         }
-
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -76,12 +72,7 @@ public class ActivityFragment extends ListFragment implements AdapterView.OnItem
         Bundle b = new Bundle();
         b.putLong("featureId", activity.getId());
         b.putLong("tripId", activity.getTripId());
-        intent.putExtras(b);        /*
-        Bundle b = new Bundle();
-        b.putString("title", formerActivities[position].getTitle());
-        detailActivity.putExtras(b); //Put your id to your next Intent
-        */
+        intent.putExtras(b);
         startActivity(intent);
-
     }
 }

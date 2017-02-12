@@ -3,7 +3,8 @@ package de.traveltogether.activity.newactivity;
 import de.traveltogether.model.Activity;
 
 /**
- * Created by Isa on 13.08.2016.
+ * Presenter for NewActivityActivity
+ * Implements INewActivityPresenter
  */
 public class NewActivityPresenter implements INewActivityPresenter {
     private NewActivityActivity view;
@@ -16,7 +17,7 @@ public class NewActivityPresenter implements INewActivityPresenter {
 
     @Override
     public void onError(String message, String title) {
-        view.onViewErrorMessage(message, title);
+        view.onViewError(message, title);
     }
 
     @Override

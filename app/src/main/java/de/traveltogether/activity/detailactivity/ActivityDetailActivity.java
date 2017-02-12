@@ -22,6 +22,9 @@ import de.traveltogether.StaticTripData;
 import de.traveltogether.activity.newactivity.NewActivityActivity;
 import de.traveltogether.model.Activity;
 
+/**
+ * Activity viewing details for an activity
+ */
 public class ActivityDetailActivity extends DeleteActivity {
     private long featureId =-1;
     private long tripId =-1;
@@ -38,14 +41,14 @@ public class ActivityDetailActivity extends DeleteActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new ActivityDetailPresenter(this);
+        setContentView(R.layout.activity_detail_activity);
 
         getSupportActionBar().setTitle(getString(R.string.activity));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        setContentView(R.layout.activity_detail_activity);
+        presenter = new ActivityDetailPresenter(this);
         featureId = getIntent().getLongExtra("featureId", -1);
         tripId = getIntent().getLongExtra("tripId", -1);
         if(tripId>0){

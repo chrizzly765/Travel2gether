@@ -2,7 +2,9 @@ package de.traveltogether.mainmenu;
 
 import de.traveltogether.IInteractor;
 
-
+/**
+ * Interface for interactor of MainActivity
+ */
  interface IMainMenuInteractor extends IInteractor {
      void deleteTrip(IMainMenuPresenter listener, Long tripId);
      void leaveTrip(long tripId, String userId, IMainMenuPresenter listener);
