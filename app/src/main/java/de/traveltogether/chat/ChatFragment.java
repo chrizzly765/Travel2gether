@@ -28,7 +28,7 @@ import de.traveltogether.comments.ICommentPresenter;
 import de.traveltogether.model.Comment;
 
 /**
- * Fragment representing a list of comments
+ * Fragment representing a list of chat messages
  */
 public class ChatFragment extends Fragment implements View.OnClickListener, ICommentView {
     private long id;
@@ -84,26 +84,9 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICom
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_comment, container, false);
-
         send = (ImageButton)view.findViewById(R.id.fragment_comment_button_send);
-        //send.setVisibility(View.INVISIBLE);
         send.setOnClickListener(this);
-
         inputField = (EditText)view.findViewById(R.id.fragment_comment_editText);
-        /*inputField.addTextChangedListener(new TextWatcher() {
-
-            public void afterTextChanged(Editable s) {}
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().equals("")) {
-                    //send.setVisibility(View.INVISIBLE);
-                } else {
-                    //send.setVisibility(View.VISIBLE);
-                }
-            }
-        });*/
         return view;
     }
 
